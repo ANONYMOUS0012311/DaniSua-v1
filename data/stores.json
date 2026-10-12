@@ -1,0 +1,124 @@
+[
+  {
+    "id": "amazon-it",
+    "name": "Amazon",
+    "aliases": [
+      "Amazon.it",
+      "Amazon IT"
+    ],
+    "country": "IT",
+    "type": "marketplace",
+    "verifiedByDaniSua": true,
+    "trustTier": "A",
+    "betaEligible": true,
+    "domains": [
+      "amazon.it",
+      "www.amazon.it"
+    ],
+    "notes": "Le offerte vendute direttamente da Amazon sono idonee. I venditori terzi richiedono verifica separata."
+  },
+  {
+    "id": "mediaworld-it",
+    "name": "MediaWorld",
+    "aliases": [
+      "Media World"
+    ],
+    "country": "IT",
+    "type": "retailer",
+    "verifiedByDaniSua": true,
+    "trustTier": "A",
+    "betaEligible": true,
+    "domains": [
+      "mediaworld.it",
+      "www.mediaworld.it"
+    ],
+    "notes": "Retailer di elettronica utilizzato nella beta DaniSua."
+  },
+  {
+    "id": "unieuro-it",
+    "name": "Unieuro",
+    "aliases": [],
+    "country": "IT",
+    "type": "retailer",
+    "verifiedByDaniSua": true,
+    "trustTier": "A",
+    "betaEligible": true,
+    "domains": [
+      "unieuro.it",
+      "www.unieuro.it"
+    ],
+    "notes": "Retailer di elettronica utilizzato nella beta DaniSua."
+  },
+  {
+    "id": "gamestop-it",
+    "name": "GameStop",
+    "aliases": [
+      "GameStop Italia"
+    ],
+    "country": "IT",
+    "type": "retailer",
+    "verifiedByDaniSua": true,
+    "trustTier": "A",
+    "betaEligible": true,
+    "domains": [
+      "gamestop.it",
+      "www.gamestop.it"
+    ],
+    "notes": "Retailer specializzato in gaming."
+  },
+  {
+    "id": "apple-it",
+    "name": "Apple",
+    "aliases": [
+      "Apple Store",
+      "Apple Italia",
+      "Apple Online Store"
+    ],
+    "country": "IT",
+    "type": "official_brand_store",
+    "verifiedByDaniSua": true,
+    "trustTier": "A",
+    "betaEligible": true,
+    "domains": [
+      "apple.com",
+      "www.apple.com"
+    ],
+    "notes": "Store ufficiale Apple."
+  },
+  {
+    "id": "samsung-it",
+    "name": "Samsung",
+    "aliases": [
+      "Samsung Shop",
+      "Samsung Italia"
+    ],
+    "country": "IT",
+    "type": "official_brand_store",
+    "verifiedByDaniSua": true,
+    "trustTier": "A",
+    "betaEligible": true,
+    "domains": [
+      "samsung.com",
+      "www.samsung.com"
+    ],
+    "notes": "Store ufficiale Samsung."
+  },
+  {
+    "id": "ebay-it",
+    "name": "eBay",
+    "aliases": [
+      "eBay.it",
+      "eBay Italia"
+    ],
+    "country": "IT",
+    "type": "marketplace",
+    "verifiedByDaniSua": true,
+    "trustTier": "B",
+    "betaEligible": true,
+    "domains": [
+      "ebay.it",
+      "www.ebay.it"
+    ],
+    "notes": "Marketplace riconosciuto. I venditori terzi richiedono verifica separata."
+  }
+]

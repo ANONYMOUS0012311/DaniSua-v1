@@ -1,0 +1,187 @@
+{
+  "schemaVersion": 1,
+  "items": [
+    {
+      "productId": "apple-iphone-15-pro-128",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": 154,
+        "battery": null,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "evidence": [
+        {
+          "criterion": "camera",
+          "type": "independent_test",
+          "sourceId": "dxomark-iphone-15-pro-camera-v5",
+          "score": 154,
+          "protocol": "DXOMARK Camera v5",
+          "publishedAt": "2023-10-09"
+        }
+      ],
+      "sources": [
+        {
+          "id": "dxomark-iphone-15-pro-camera-v5",
+          "name": "DXOMARK",
+          "type": "independent_test",
+          "title": "Apple iPhone 15 Pro Camera test",
+          "url": "https://www.dxomark.com/apple-iphone-15-pro-camera-test/",
+          "protocol": "Camera v5"
+        }
+      ],
+      "updatedAt": "2026-09-16"
+    },
+    {
+      "productId": "apple-iphone-15-pro-256",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": 154,
+        "battery": null,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "evidence": [
+        {
+          "criterion": "camera",
+          "type": "independent_test",
+          "sourceId": "dxomark-iphone-15-pro-camera-v5",
+          "score": 154,
+          "protocol": "DXOMARK Camera v5",
+          "publishedAt": "2023-10-09"
+        }
+      ],
+      "sources": [
+        {
+          "id": "dxomark-iphone-15-pro-camera-v5",
+          "name": "DXOMARK",
+          "type": "independent_test",
+          "title": "Apple iPhone 15 Pro Camera test",
+          "url": "https://www.dxomark.com/apple-iphone-15-pro-camera-test/",
+          "protocol": "Camera v5"
+        }
+      ],
+      "updatedAt": "2026-09-16"
+    },
+    {
+      "productId": "apple-iphone-15-128",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": 145,
+        "battery": null,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "evidence": [
+        {
+          "criterion": "camera",
+          "type": "independent_test",
+          "sourceId": "dxomark-iphone-15-camera-v5",
+          "score": 145,
+          "protocol": "DXOMARK Camera v5",
+          "publishedAt": "2023-10-13"
+        }
+      ],
+      "sources": [
+        {
+          "id": "dxomark-iphone-15-camera-v5",
+          "name": "DXOMARK",
+          "type": "independent_test",
+          "title": "Apple iPhone 15 Camera test",
+          "url": "https://www.dxomark.com/apple-iphone-15-camera-test/",
+          "protocol": "Camera v5"
+        }
+      ],
+      "updatedAt": "2026-09-16"
+    },
+    {
+      "productId": "samsung-galaxy-s24-ultra-256",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": 144,
+        "battery": null,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "evidence": [
+        {
+          "criterion": "camera",
+          "type": "independent_test",
+          "sourceId": "dxomark-s24-ultra-camera-v5",
+          "score": 144,
+          "protocol": "DXOMARK Camera v5",
+          "publishedAt": "2024-01-31"
+        }
+      ],
+      "sources": [
+        {
+          "id": "dxomark-s24-ultra-camera-v5",
+          "name": "DXOMARK",
+          "type": "independent_test",
+          "title": "Samsung Galaxy S24 Ultra Camera test",
+          "url": "https://www.dxomark.com/samsung-galaxy-s24-ultra-camera-test/",
+          "protocol": "Camera v5"
+        }
+      ],
+      "updatedAt": "2026-09-16"
+    },
+    {
+      "productId": "sony-wh-1000xm5",
+      "category": "auriculares",
+      "scores": {
+        "overall": null,
+        "sound": null,
+        "anc": null,
+        "battery": null,
+        "comfort": null,
+        "microphone": null,
+        "value": null
+      },
+      "evidence": [],
+      "sources": [],
+      "updatedAt": null
+    },
+    {
+      "productId": "sony-playstation-5-slim-bundle-2-controller",
+      "category": "consola",
+      "scores": {
+        "overall": null,
+        "performance": null,
+        "catalog": null,
+        "features": null,
+        "value": null
+      },
+      "evidence": [],
+      "sources": [],
+      "updatedAt": null
+    },
+    {
+      "productId": "apple-macbook-air-15-m2-16-512",
+      "category": "portatil",
+      "scores": {
+        "overall": null,
+        "performance": null,
+        "battery": null,
+        "display": null,
+        "portability": null,
+        "build": null,
+        "value": null
+      },
+      "evidence": [],
+      "sources": [],
+      "updatedAt": null
+    }
+  ]
+}

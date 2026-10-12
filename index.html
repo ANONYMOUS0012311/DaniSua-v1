@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>DaniSua IA – Trova la migliore offerta</title>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- ========================================
+       HEADER
+  ========================================= -->
+
+  <header class="header">
+
+    <div class="header-inner">
+
+      <div class="logo-box">
+        <span class="logo-d">D</span>
+      </div>
+
+      <div class="brand">
+        DaniSua
+        <span class="brand-ia">IA</span>
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- ========================================
+       MAIN
+  ========================================= -->
+
+  <main class="main">
+
+    <section class="hero">
+
+      <!-- TITOLO -->
+
+      <h1>
+        Trova la migliore offerta per te
+      </h1>
+
+      <p class="subtitle">
+        La tua IA che cerca offerte e trova il miglior prezzo per te.
+      </p>
+
+
+      <!-- ========================================
+           RICERCA
+      ========================================= -->
+
+      <div class="search-area">
+
+        <input
+          id="buscador-input"
+          type="text"
+          placeholder="Es.: iPhone 15, cuffie Sony..."
+          autocomplete="off"
+        />
+
+        <button id="buscador-btn">
+          Cerca con DaniSua IA
+        </button>
+
+      </div>
+
+
+      <!-- ========================================
+           INTERPRETAZIONE IA
+      ========================================= -->
+
+      <p
+        id="ai-hint"
+        class="ai-hint"
+      ></p>
+
+
+      <!-- ========================================
+           DANISUA IA — MIGLIORE OFFERTA
+      ========================================= -->
+
+      <div
+        id="ai-best-offer"
+        class="ai-best-offer"
+        style="display: none;"
+      >
+
+        <div class="ai-best-header">
+
+          <span class="ai-best-icon">
+            ✨
+          </span>
+
+          <span class="ai-best-title">
+            DaniSua IA consiglia
+          </span>
+
+        </div>
+
+        <div
+          id="ai-best-content"
+          class="ai-best-content"
+        ></div>
+
+      </div>
+
+
+      <!-- ========================================
+           RISULTATI
+      ========================================= -->
+
+      <div class="results-head">
+
+        <div
+          id="resultados-contador"
+          class="results-count"
+        >
+          0 risultati
+        </div>
+
+      </div>
+
+
+      <!-- ========================================
+           PRODOTTI
+      ========================================= -->
+
+      <div
+        id="productos-container"
+        class="products-grid"
+        aria-live="polite"
+      ></div>
+
+    </section>
+
+  </main>
+
+
+  <!-- ========================================
+       FOOTER
+  ========================================= -->
+
+  <footer class="footer">
+
+    <small>
+      Versione 1 · Prototipo ·
+      Alcuni link potrebbero essere affiliati
+    </small>
+
+  </footer>
+
+
+  <!-- ========================================
+       JAVASCRIPT
+
+       IMPORTANTE:
+       normalize.js deve essere caricato
+       prima di app.js
+  ========================================= -->
+
+  <script src="normalize.js"></script>
+  <script src="app.js"></script>
+
+</body>
+
+</html>

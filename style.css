@@ -1,0 +1,649 @@
+:root {
+  --primary: #E63946;
+  --primary-dark: #C62828;
+  --secondary: #1D1D1F;
+  --bg-body: #F5F5F7;
+  --bg-card: #FFFFFF;
+  --text-muted: #86868B;
+  --border: #E0E0E0;
+}
+
+/* ========================================
+   RESET
+======================================== */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", Arial, sans-serif;
+  background: var(--bg-body);
+  color: var(--secondary);
+  -webkit-font-smoothing: antialiased;
+}
+
+
+/* ========================================
+   HEADER
+======================================== */
+
+.header {
+  background: var(--primary);
+  color: #fff;
+}
+
+.header-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-box {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  border: 2px solid #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 18px;
+}
+
+.logo-d {
+  display: inline-block;
+}
+
+.brand {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.brand-ia {
+  font-size: 14px;
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+
+/* ========================================
+   MAIN
+======================================== */
+
+.main {
+  min-height: 100vh;
+}
+
+.hero {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 16px 32px;
+}
+
+.hero h1 {
+  font-size: 24px;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+
+/* ========================================
+   SEARCH
+======================================== */
+
+.search-area {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+
+  padding: 10px 12px;
+  margin: 0 -16px 16px;
+
+  background: rgba(245, 245, 247, 0.92);
+  backdrop-filter: blur(10px);
+
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+
+  border-bottom: 1px solid var(--border);
+}
+
+.search-area input {
+  flex: 1;
+  min-width: 220px;
+
+  padding: 12px 16px;
+
+  border-radius: 999px;
+  border: 1px solid var(--border);
+
+  font-size: 14px;
+  background: #fff;
+  outline: none;
+
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.search-area input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.10);
+}
+
+.search-area button {
+  padding: 12px 20px;
+
+  border-radius: 999px;
+  border: none;
+
+  background: var(--primary);
+  color: #fff;
+
+  cursor: pointer;
+
+  font-weight: 600;
+  font-size: 14px;
+
+  transition:
+    background 0.15s ease,
+    transform 0.15s ease;
+}
+
+.search-area button:hover {
+  background: var(--primary-dark);
+}
+
+.search-area button:active {
+  transform: scale(0.98);
+}
+
+.search-area button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+
+/* ========================================
+   INTERPRETAZIONE IA
+======================================== */
+
+.ai-hint {
+  margin-top: 10px;
+  margin-bottom: 12px;
+
+  color: var(--text-muted);
+
+  font-size: 13px;
+  line-height: 1.5;
+
+  text-align: left;
+
+  max-width: 900px;
+}
+
+
+/* ========================================
+   DANISUA IA CONSIGLIA
+======================================== */
+
+.ai-best-offer {
+  width: 100%;
+
+  margin: 18px 0 22px;
+  padding: 18px 20px;
+
+  background: #FFFFFF;
+
+  border: 1px solid rgba(230, 57, 70, 0.25);
+  border-left: 4px solid var(--primary);
+
+  border-radius: 14px;
+
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+.ai-best-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  margin-bottom: 10px;
+}
+
+.ai-best-icon {
+  font-size: 18px;
+}
+
+.ai-best-title {
+  font-size: 14px;
+  font-weight: 800;
+
+  color: var(--primary);
+
+  letter-spacing: -0.1px;
+}
+
+.ai-best-content {
+  font-size: 14px;
+  line-height: 1.6;
+
+  color: var(--secondary);
+}
+
+.ai-best-content strong {
+  display: inline-block;
+
+  margin-bottom: 3px;
+
+  font-size: 16px;
+  font-weight: 700;
+
+  color: var(--secondary);
+}
+
+
+/* ========================================
+   RESULTADOS
+======================================== */
+
+.results-head {
+  margin-top: 8px;
+  margin-bottom: 10px;
+}
+
+.results-count,
+.resultados-contador {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+
+/* ========================================
+   GRID DE PRODUCTOS
+======================================== */
+
+#productos-container {
+  width: 100%;
+
+  margin: 0 auto 40px;
+  padding: 0 0 24px;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+
+/* Tablet */
+
+@media (min-width: 700px) {
+
+  #productos-container {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+}
+
+
+/* Escritorio */
+
+@media (min-width: 1024px) {
+
+  #productos-container {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+}
+
+
+/* ========================================
+   TARJETA PRODUCTO
+======================================== */
+
+.producto-card {
+  background: var(--bg-card);
+
+  border-radius: 14px;
+  border: 1px solid var(--border);
+
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.producto-card:hover {
+  transform: translateY(-5px);
+
+  box-shadow:
+    0 10px 18px rgba(0, 0, 0, 0.08);
+}
+
+
+/* Mejor oferta */
+
+.producto-card.mejor-oferta {
+  border-color: var(--primary);
+
+  box-shadow:
+    0 0 0 1px rgba(230, 57, 70, 0.30),
+    0 10px 18px rgba(0, 0, 0, 0.08);
+}
+
+
+/* ========================================
+   IMAGEN PRODUCTO
+======================================== */
+
+.producto-imagen-wrapper {
+  position: relative;
+
+  padding: 36px 12px 12px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-bottom: 10px;
+}
+
+.producto-imagen-wrapper img {
+  display: block;
+
+  max-width: 100%;
+  width: 100%;
+
+  height: 200px;
+
+  border-radius: 10px;
+
+  object-fit: contain;
+
+  background: #fff;
+}
+
+
+/* ========================================
+   BADGE DESCUENTO
+======================================== */
+
+.producto-badges-bar {
+  position: absolute;
+
+  top: 8px;
+  left: 10px;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.badge-descuento {
+  background: var(--primary);
+  color: #fff;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  padding: 4px 9px;
+
+  border-radius: 999px;
+
+  box-shadow:
+    0 3px 6px rgba(0, 0, 0, 0.18);
+}
+
+
+/* ========================================
+   INFORMACIÓN PRODUCTO
+======================================== */
+
+.producto-info {
+  padding: 14px 14px 14px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+
+  flex: 1;
+
+  position: relative;
+}
+
+.producto-titulo {
+  margin: 4px 0 2px;
+
+  font-size: 14px;
+  line-height: 1.4;
+
+  font-weight: 650;
+
+  color: var(--secondary);
+}
+
+.producto-marca,
+.producto-tienda {
+  margin: 0;
+
+  font-size: 12px;
+
+  color: var(--text-muted);
+}
+
+.producto-meta-actualizacion {
+  margin: 0;
+
+  font-size: 12px;
+
+  color: var(--text-muted);
+}
+
+
+/* ========================================
+   BADGE MIGLIOR PREZZO
+======================================== */
+
+.badge-best-body {
+  align-self: flex-start;
+
+  background: #FFF8E1;
+  color: #9A7800;
+
+  border: 1px solid #FFE082;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  padding: 5px 9px;
+
+  border-radius: 999px;
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 6px;
+
+  margin-top: 2px;
+  margin-bottom: 4px;
+}
+
+.producto-info .badge-best-body {
+  position: static;
+  transform: none;
+}
+
+
+/* ========================================
+   PRECIOS
+======================================== */
+
+.producto-precios {
+  margin-top: 5px;
+
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  align-items: baseline;
+}
+
+.producto-precio-antiguo {
+  text-decoration: line-through;
+
+  font-size: 12px;
+
+  color: var(--text-muted);
+
+  white-space: nowrap;
+}
+
+.producto-precio-oferta {
+  font-size: 18px;
+  font-weight: 750;
+
+  color: var(--primary);
+
+  letter-spacing: -0.4px;
+
+  white-space: nowrap;
+}
+
+
+/* ========================================
+   BOTÓN OFERTA
+======================================== */
+
+.producto-btn-ver {
+  margin-top: auto;
+  padding: 10px 14px;
+
+  width: 100%;
+
+  border-radius: 999px;
+
+  background: var(--primary);
+  color: #fff;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  text-align: center;
+
+  text-decoration: none;
+
+  border: none;
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    transform 0.15s ease;
+}
+
+.producto-btn-ver:hover {
+  background: var(--primary-dark);
+}
+
+.producto-btn-ver:active {
+  transform: scale(0.98);
+}
+
+
+/* ========================================
+   ESTADOS
+======================================== */
+
+.no-resultados,
+.error,
+.loading {
+  grid-column: 1 / -1;
+
+  text-align: center;
+
+  color: var(--text-muted);
+
+  font-size: 14px;
+
+  padding: 18px 0;
+}
+
+.error {
+  color: var(--primary);
+}
+
+
+/* ========================================
+   FOOTER
+======================================== */
+
+.footer {
+  padding: 12px 16px 20px;
+
+  text-align: center;
+
+  font-size: 12px;
+
+  color: var(--text-muted);
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 600px) {
+
+  .hero {
+    padding-top: 18px;
+  }
+
+  .hero h1 {
+    font-size: 21px;
+  }
+
+  .search-area {
+    align-items: stretch;
+  }
+
+  .search-area input {
+    width: 100%;
+  }
+
+  .search-area button {
+    width: 100%;
+  }
+
+  .ai-best-offer {
+    padding: 16px;
+    margin-top: 14px;
+  }
+
+  .producto-imagen-wrapper img {
+    height: 180px;
+  }
+}

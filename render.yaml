@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: danisua-api
+    runtime: node
+    plan: 0.5c-512mb
+    branch: master
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /health
+
+    disk:
+      name: danisua-data
+      mountPath: /var/data
+      sizeGB: 1
+
+    envVars:
+      - key: NODE_ENV
+        value: production
+
+      - key: HOST
+        value: 0.0.0.0
+
+      - key: DANISUA_DB_PATH
+        value: /var/data/danisua.sqlite
+
+      - key: CORS_ORIGINS
+        value: https://danisua.netlify.app
+
+      - key: NODE_VERSION
+        value: 24.21.0
