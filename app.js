@@ -1,7 +1,7 @@
-﻿// app.js â€” DaniSua IT
+// app.js â€” DaniSua IT
 console.log("DaniSua app.js loaded");
 
-const API_BASE = "http://localhost:3000";
+const API_BASE = "https://danisuai.onrender.com";
 
 const inputRicerca =
   document.getElementById("buscador-input");

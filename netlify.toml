@@ -1,0 +1,4 @@
+[build]
+  base = "."
+  command = "rm -rf dist && mkdir -p dist && cp index.html app.js normalize.js style.css dist/"
+  publish = "dist"
