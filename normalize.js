@@ -20,7 +20,7 @@ const CATEGORY_MAP = [
 
 // parole “rumore” (non aiutano la ricerca del prodotto)
 const STOP_WORDS = new Set([
-  "miglior","migliore","piu","più","meno","costo","costare"
+  "miglior","migliore","piu","più","meno","costo","costare",
   "offerta","offerte","sconto","sconti","ribasso","saldi",
   "economico","economica","piu","più","migliore","prezzo","prezzi",
   "spedizione","gratis","gratuita","consegna","oggi","subito",

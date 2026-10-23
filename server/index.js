@@ -216,6 +216,47 @@ function queryContains(query, value) {
 }
 
 
+function matchSpecificModels(
+  query,
+  models
+) {
+  const normalizedQuery =
+    normalizeText(query);
+
+  const exact =
+    models.filter(
+      model =>
+        normalizedQuery ===
+        normalizeText(model)
+    );
+
+  if (exact.length > 0) {
+    return exact;
+  }
+
+  const partial =
+    matchSpecificModels(query, models);
+
+  if (partial.length <= 1) {
+    return partial;
+  }
+
+  const longest =
+    Math.max(
+      ...partial.map(
+        model =>
+          normalizeText(model).length
+      )
+    );
+
+  return partial.filter(
+    model =>
+      normalizeText(model).length ===
+      longest
+  );
+}
+
+
 // ========================================
 // OBIETTIVO PREZZO
 // ========================================
@@ -312,7 +353,7 @@ function detectCategory(query) {
 
 
 // ========================================
-// OBIETTIVI QUALITÃ€
+// OBIETTIVI QUALITÀ
 // ========================================
 
 function detectQualityObjectives(query) {
@@ -655,7 +696,7 @@ function buildCatalogQuery(
 
 
 // ========================================
-// IDENTITÃ€ VARIANTE
+// IDENTITÀ VARIANTE
 // ========================================
 
 function getProductKey(product) {
@@ -764,13 +805,7 @@ function analyzeProductSearch(
     );
 
   const matchingModels =
-    models.filter(
-      model =>
-        queryContains(
-          query,
-          model
-        )
-    );
+    matchSpecificModels(query, models);
 
   if (
     matchingModels.length !== 1
@@ -780,7 +815,7 @@ function analyzeProductSearch(
         "needs_clarification",
       canRecommend: false,
       message:
-        "La ricerca Ã¨ troppo generica. Specifica il modello che stai cercando.",
+        "La ricerca è troppo generica. Specifica il modello che stai cercando.",
       missing: [
         "model"
       ],
@@ -902,7 +937,7 @@ function analyzeProductSearch(
       "needs_clarification",
     canRecommend: false,
     message:
-      "Ho trovato piÃ¹ versioni del prodotto. Specifica meglio la configurazione.",
+      "Ho trovato più versioni del prodotto. Specifica meglio la configurazione.",
     missing: [
       "configuration"
     ],
@@ -946,13 +981,7 @@ function analyzeBestOffer(
 
   if (models.length > 1) {
     const matchingModels =
-      models.filter(
-        model =>
-          queryContains(
-            query,
-            model
-          )
-      );
+      matchSpecificModels(query, models);
 
     if (
       matchingModels.length !== 1
@@ -993,7 +1022,7 @@ function analyzeBestOffer(
       "best_offer_ready",
     canRecommend: true,
     message:
-      "Ho identificato il prodotto e posso cercare l'offerta piÃ¹ economica tra le varianti disponibili.",
+      "Ho identificato il prodotto e posso cercare l'offerta più economica tra le varianti disponibili.",
     missing: [],
     options: {},
     selectedProducts,
@@ -1113,7 +1142,7 @@ function analyzeBestProduct(
       canRecommend: false,
       message:
         budget !== null
-          ? `Non ho trovato prodotti disponibili entro ${budget} â‚¬.`
+          ? `Non ho trovato prodotti disponibili entro ${budget} €.`
           : "Non ho trovato prodotti compatibili.",
       selectedOffers: [],
       ranking: {
@@ -1243,7 +1272,7 @@ function analyzeBestProduct(
     canRecommend:
       Boolean(bestOffer),
     message:
-      "Ho confrontato i modelli utilizzando i criteri disponibili e ho poi cercato la variante con l'offerta piÃ¹ conveniente.",
+      "Ho confrontato i modelli utilizzando i criteri disponibili e ho poi cercato la variante con l'offerta più conveniente.",
     selectedOffers,
     winner,
     bestOffer,
@@ -1312,7 +1341,7 @@ function analyzeBestProduct(
 // comparabile per quel criterio.
 //
 // In questo modo non eliminiamo in
-// silenzio prodotti solo perchÃ© mancano
+// silenzio prodotti solo perché mancano
 // dati.
 // ========================================
 
@@ -1470,7 +1499,7 @@ function analyzeRecommendation(
       canRecommend: false,
       message:
         budget !== null
-          ? `Ho capito cosa ti serve, ma non ho trovato prodotti disponibili entro ${budget} â‚¬.`
+          ? `Ho capito cosa ti serve, ma non ho trovato prodotti disponibili entro ${budget} €.`
           : "Non ho trovato prodotti compatibili.",
       need,
       dataCoverage: {
@@ -1563,7 +1592,7 @@ function analyzeRecommendation(
 
 
 // ========================================
-// PREZZO PIÃ™ BASSO
+// PREZZO PIÙ BASSO
 // ========================================
 
 function pickBestOffer(
@@ -1668,7 +1697,7 @@ function buildEquivalentRecommendation(
         : 0,
     message:
       comparableOffers.length > 1
-        ? `Questa Ã¨ l'offerta con il prezzo piÃ¹ basso tra ${comparableOffers.length} offerte equivalenti trovate.`
+        ? `Questa è l'offerta con il prezzo più basso tra ${comparableOffers.length} offerte equivalenti trovate.`
         : "Ho trovato una sola offerta per questo prodotto.",
   };
 }
@@ -1762,7 +1791,7 @@ function buildBestOfferRecommendation(
 
     message:
       offers.length > 1
-        ? `Ho confrontato ${offers.length} offerte e varianti disponibili e ho trovato il prezzo indicato piÃ¹ basso.`
+        ? `Ho confrontato ${offers.length} offerte e varianti disponibili e ho trovato il prezzo indicato più basso.`
         : "Ho trovato una sola offerta disponibile per questa ricerca.",
   };
 }
@@ -1821,7 +1850,7 @@ function buildBestProductRecommendation(
       "EUR",
 
     message:
-      "Questo modello risulta il piÃ¹ adatto secondo i criteri disponibili. Ho poi selezionato la variante con l'offerta piÃ¹ conveniente trovata.",
+      "Questo modello risulta il più adatto secondo i criteri disponibili. Ho poi selezionato la variante con l'offerta più conveniente trovata.",
   };
 }
 
@@ -1865,7 +1894,7 @@ function buildNeedRecommendation(
       ) || [];
 
   let message =
-    `Per l'uso "${analysis.need?.useCase?.label || "generale"}", questo Ã¨ il modello che risulta piÃ¹ adatto usando i dati comparabili disponibili.`;
+    `Per l'uso "${analysis.need?.useCase?.label || "generale"}", questo è il modello che risulta più adatto usando i dati comparabili disponibili.`;
 
   if (
     missingCriteria.length > 0

@@ -1,4 +1,4 @@
-// app.js â€” DaniSua IT
+// app.js — DaniSua IT
 console.log("DaniSua app.js loaded");
 
 const API_BASE = "https://danisuai.onrender.com";
@@ -25,6 +25,13 @@ const BTN_TEXT_DEFAULT =
 
 let debounceTimer = null;
 let requestId = 0;
+
+let pendingClarification = null;
+
+const SEARCH_PLACEHOLDER_DEFAULT =
+  inputRicerca
+    ? inputRicerca.getAttribute("placeholder") || ""
+    : "";
 
 
 // ========================================
@@ -81,7 +88,7 @@ function setLoading(state) {
 
   btnRicerca.textContent =
     state
-      ? "Ricercaâ€¦"
+      ? "Ricerca…"
       : BTN_TEXT_DEFAULT;
 }
 
@@ -95,7 +102,7 @@ function showInlineLoading(rawQuery) {
       : "";
 
   containerProdotti.innerHTML =
-    `<p class="loading">Ricerca${q}â€¦</p>`;
+    `<p class="loading">Ricerca${q}…</p>`;
 }
 
 
@@ -181,23 +188,23 @@ function updateAiHint(raw) {
       ? escapeHtml(
           info.brand_guess
         )
-      : "â€”";
+      : "—";
 
   const category =
     info.category_guess
       ? escapeHtml(
           info.category_guess
         )
-      : "â€”";
+      : "—";
 
   const intentLabel =
     info.filters?.intent === "deal"
-      ? " Â· offerta"
+      ? " · offerta"
       : "";
 
   aiHint.innerHTML = `
     <strong>Capito:</strong>
-    ${brand} Â· ${category}${intentLabel}
+    ${brand} · ${category}${intentLabel}
     <br>
     <strong>Ricerca:</strong>
     ${escapeHtml(
@@ -227,6 +234,83 @@ function hideBestOffer() {
 // CHIARIMENTO DANISUA
 // ========================================
 
+function getClarificationPrompt(
+  clarification
+) {
+  const missing =
+    clarification?.missing || [];
+
+  const options =
+    clarification?.options || {};
+
+  if (missing.includes("storage")) {
+    const storages =
+      Array.isArray(options.storages)
+        ? options.storages
+        : [];
+
+    const example =
+      storages.length > 0
+        ? storages.slice(0, 2).join(" o ")
+        : "128 GB o 256 GB";
+
+    return {
+      message:
+        `Per consigliarti bene mi serve solo una cosa: quale capacità preferisci? Puoi scrivere, per esempio, "${example}".`,
+      placeholder:
+        storages[0]
+          ? `Scrivi qui, es. ${storages[0]}`
+          : "Scrivi qui, es. 256 GB",
+    };
+  }
+
+  if (missing.includes("model")) {
+    return {
+      message:
+        'Dimmi il modello preciso che stai cercando. Se non ne hai già uno in mente, puoi anche descrivere cosa ti serve, per esempio: "Consigliami uno smartphone sotto 800 euro per fotografia".',
+      placeholder:
+        "Scrivi il modello oppure budget e utilizzo",
+    };
+  }
+
+  if (missing.includes("category")) {
+    return {
+      message:
+        'Che tipo di prodotto stai cercando? Puoi scrivere, per esempio, "smartphone", "cuffie", "laptop" o "console". Se vuoi, aggiungi anche il budget e per cosa ti serve.',
+      placeholder:
+        "Es. laptop sotto 1000 euro per università",
+    };
+  }
+
+  if (missing.includes("configuration")) {
+    return {
+      message:
+        "Ho trovato più versioni. Dimmi qualcosa in più sulla configurazione che vuoi, per esempio capacità o variante.",
+      placeholder:
+        "Descrivi la configurazione che preferisci",
+    };
+  }
+
+  return {
+    message:
+      clarification?.message ||
+      "Dimmi qualcosa in più: modello, capacità, budget oppure per cosa ti serve.",
+    placeholder:
+      "Aggiungi un dettaglio per DaniSua",
+  };
+}
+
+
+function clearPendingClarification() {
+  pendingClarification = null;
+
+  if (inputRicerca) {
+    inputRicerca.placeholder =
+      SEARCH_PLACEHOLDER_DEFAULT;
+  }
+}
+
+
 function renderClarification(
   clarification,
   originalQuery
@@ -245,131 +329,108 @@ function renderClarification(
     return;
   }
 
+  pendingClarification = {
+    originalQuery:
+      (originalQuery || "").trim(),
+    clarification,
+  };
+
+  const prompt =
+    getClarificationPrompt(
+      clarification
+    );
+
   box.style.display = "block";
-
-  const message =
-    clarification?.message ||
-    "Ho bisogno di qualche dettaglio in piÃ¹.";
-
-  const options =
-    clarification?.options || {};
-
-  let choices = [];
-
-  if (
-    Array.isArray(options.models)
-  ) {
-    choices = options.models;
-  } else if (
-    Array.isArray(options.storages)
-  ) {
-    choices = options.storages;
-  }
-
-  let buttonsHtml = "";
-
-  if (choices.length > 0) {
-    buttonsHtml = `
-      <div class="danisua-choices">
-        ${choices
-          .map(
-            choice => `
-              <button
-                type="button"
-                class="danisua-choice-btn"
-                data-choice="${escapeHtml(choice)}"
-              >
-                ${escapeHtml(choice)}
-              </button>
-            `
-          )
-          .join("")}
-      </div>
-    `;
-  }
 
   content.innerHTML = `
     <div class="danisua-clarification">
+
       <strong>
-        Ho bisogno di un dettaglio in piÃ¹
+        Dimmi una cosa in più
       </strong>
 
       <p>
-        ${escapeHtml(message)}
+        ${escapeHtml(prompt.message)}
       </p>
 
-      ${buttonsHtml}
+      <p class="danisua-rule-note">
+        Scrivi la risposta nella barra di ricerca
+        e premi Invio.
+      </p>
+
     </div>
   `;
 
-  content
-    .querySelectorAll(
-      ".danisua-choice-btn"
-    )
-    .forEach(button => {
-      button.addEventListener(
-        "click",
-        () => {
-          const choice =
-            button.dataset.choice || "";
+  if (inputRicerca) {
+    inputRicerca.value = "";
+    inputRicerca.placeholder =
+      prompt.placeholder;
 
-          applyClarificationChoice(
-            originalQuery,
-            choice,
-            clarification
-          );
-        }
-      );
-    });
+    inputRicerca.focus();
+  }
+
+  if (aiHint) {
+    aiHint.textContent =
+      "DaniSua sta aspettando la tua risposta.";
+  }
 }
 
 
-// ========================================
-// APPLICARE RISPOSTA UTENTE
-// ========================================
-
-function applyClarificationChoice(
-  originalQuery,
-  choice,
-  clarification
+function resolveConversationQuery(
+  answer
 ) {
-  if (!choice) {
-    return;
+  const cleanAnswer =
+    (answer || "").trim();
+
+  if (!pendingClarification) {
+    return cleanAnswer;
   }
+
+  if (!cleanAnswer) {
+    return "";
+  }
+
+  const originalQuery =
+    pendingClarification
+      .originalQuery || "";
 
   const missing =
-    clarification?.missing || [];
+    pendingClarification
+      .clarification
+      ?.missing || [];
 
-  let nextQuery =
-    (originalQuery || "").trim();
+  let nextQuery = "";
 
-  // Se stiamo scegliendo un modello,
-  // sostituiamo la ricerca generica
-  // con il modello scelto.
-  if (
-    missing.includes("model")
-  ) {
-    nextQuery = choice;
-  } else {
-    // Per storage / configurazioni
-    // aggiungiamo la scelta alla ricerca.
+  if (missing.includes("model")) {
+    const base =
+      originalQuery
+        .toLowerCase()
+        .trim();
+
+    const response =
+      cleanAnswer
+        .toLowerCase()
+        .trim();
+
     nextQuery =
-      `${nextQuery} ${choice}`.trim();
+      base &&
+      !response.includes(base)
+        ? `${originalQuery} ${cleanAnswer}`.trim()
+        : cleanAnswer;
+  } else {
+    nextQuery =
+      `${originalQuery} ${cleanAnswer}`
+        .trim();
   }
+
+  clearPendingClarification();
 
   if (inputRicerca) {
     inputRicerca.value =
       nextQuery;
   }
 
-  updateAiHint(nextQuery);
-
-  runSearchWithNormalize(
-    nextQuery,
-    {
-      showLoadingIfSlow: true,
-    }
-  );
+  return nextQuery;
 }
 
 
@@ -440,7 +501,7 @@ function renderBestOffer(
             product.currency || "EUR"
           )}
         </strong>
-        rispetto alla seconda offerta piÃ¹ economica.
+        rispetto alla seconda offerta più economica.
       </p>
     `;
   }
@@ -463,7 +524,7 @@ function renderBestOffer(
         <strong>
           ${price}
         </strong>
-        Â· ${store}
+        · ${store}
       </p>
 
       ${
@@ -581,6 +642,8 @@ async function runSearchWithNormalize(
 
       return;
     }
+
+    clearPendingClarification();
 
     // ------------------------------------
     // PRODOTTO IDENTIFICATO
@@ -787,7 +850,7 @@ function renderProducts(
                 ${brand}
                 ${
                   category
-                    ? " Â· " + category
+                    ? " · " + category
                     : ""
                 }
               </p>
@@ -834,7 +897,7 @@ function renderProducts(
                 class="producto-btn-ver"
                 data-url="${url}"
               >
-                Vedi offerta âž
+                Vedi offerta →
               </button>
 
             </div>
@@ -980,11 +1043,22 @@ if (inputRicerca) {
       const raw =
         inputRicerca.value;
 
-      updateAiHint(raw);
-
       clearTimeout(
         debounceTimer
       );
+
+      if (pendingClarification) {
+        if (aiHint) {
+          aiHint.textContent =
+            raw.trim()
+              ? "Premi Invio per continuare con DaniSua."
+              : "DaniSua sta aspettando la tua risposta.";
+        }
+
+        return;
+      }
+
+      updateAiHint(raw);
 
       debounceTimer =
         setTimeout(
@@ -1003,12 +1077,20 @@ if (inputRicerca) {
       if (
         event.key === "Enter"
       ) {
+        event.preventDefault();
+
         clearTimeout(
           debounceTimer
         );
 
         const raw =
-          inputRicerca.value;
+          resolveConversationQuery(
+            inputRicerca.value
+          );
+
+        if (!raw) {
+          return;
+        }
 
         updateAiHint(raw);
 
@@ -1034,7 +1116,13 @@ if (btnRicerca) {
       );
 
       const raw =
-        inputRicerca?.value || "";
+        resolveConversationQuery(
+          inputRicerca?.value || ""
+        );
+
+      if (!raw) {
+        return;
+      }
 
       updateAiHint(raw);
 
