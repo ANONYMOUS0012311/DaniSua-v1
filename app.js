@@ -354,7 +354,7 @@ function renderClarification(
       </p>
 
       <p class="danisua-rule-note">
-        Scrivi la risposta nella barra di ricerca
+        Aggiungi il dettaglio alla ricerca
         e premi Invio.
       </p>
 
@@ -362,11 +362,33 @@ function renderClarification(
   `;
 
   if (inputRicerca) {
-    inputRicerca.value = "";
+    const preservedQuery =
+      (originalQuery ||
+       inputRicerca.value ||
+       "").trim();
+
+    inputRicerca.value =
+      preservedQuery
+        ? preservedQuery + " "
+        : "";
+
     inputRicerca.placeholder =
       prompt.placeholder;
 
     inputRicerca.focus();
+
+    const end =
+      inputRicerca.value.length;
+
+    if (
+      typeof inputRicerca.setSelectionRange ===
+      "function"
+    ) {
+      inputRicerca.setSelectionRange(
+        end,
+        end
+      );
+    }
   }
 
   if (aiHint) {
@@ -399,28 +421,33 @@ function resolveConversationQuery(
       .clarification
       ?.missing || [];
 
+  const normalizedOriginal =
+    originalQuery
+      .toLowerCase()
+      .trim();
+
+  const normalizedAnswer =
+    cleanAnswer
+      .toLowerCase()
+      .trim();
+
+  const alreadyContainsOriginal =
+    normalizedOriginal &&
+    normalizedAnswer.includes(
+      normalizedOriginal
+    );
+
   let nextQuery = "";
 
   if (missing.includes("model")) {
-    const base =
-      originalQuery
-        .toLowerCase()
-        .trim();
-
-    const response =
-      cleanAnswer
-        .toLowerCase()
-        .trim();
-
     nextQuery =
-      base &&
-      !response.includes(base)
-        ? `${originalQuery} ${cleanAnswer}`.trim()
-        : cleanAnswer;
+      cleanAnswer;
   } else {
     nextQuery =
-      `${originalQuery} ${cleanAnswer}`
-        .trim();
+      alreadyContainsOriginal
+        ? cleanAnswer
+        : `${originalQuery} ${cleanAnswer}`
+            .trim();
   }
 
   clearPendingClarification();
@@ -1059,15 +1086,6 @@ if (inputRicerca) {
       }
 
       updateAiHint(raw);
-
-      debounceTimer =
-        setTimeout(
-          () =>
-            runSearchWithNormalize(
-              raw
-            ),
-          350
-        );
     }
   );
 
