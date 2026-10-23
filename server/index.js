@@ -235,7 +235,13 @@ function matchSpecificModels(
   }
 
   const partial =
-    matchSpecificModels(query, models);
+    models.filter(
+      model =>
+        queryContains(
+          query,
+          model
+        )
+    );
 
   if (partial.length <= 1) {
     return partial;
