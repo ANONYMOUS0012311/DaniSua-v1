@@ -120,5 +120,23 @@
       "www.ebay.it"
     ],
     "notes": "Marketplace riconosciuto. I venditori terzi richiedono verifica separata."
+  },
+  {
+    "id": "sony-it",
+    "name": "Sony",
+    "aliases": [
+      "Sony Store",
+      "Sony Italia"
+    ],
+    "country": "IT",
+    "type": "official_brand_store",
+    "verifiedByDaniSua": true,
+    "trustTier": "A",
+    "betaEligible": true,
+    "domains": [
+      "sony.it",
+      "www.sony.it"
+    ],
+    "notes": "Store ufficiale Sony utilizzato nella beta DaniSua."
   }
 ]

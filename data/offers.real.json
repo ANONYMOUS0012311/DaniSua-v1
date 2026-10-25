@@ -1,0 +1,32 @@
+[
+  {
+    "id": "real-unieuro-iphone15-128",
+    "productId": "apple-iphone-15-128",
+    "store": "Unieuro",
+    "seller": "Unieuro",
+    "old_price": 809.00,
+    "offer_price": 699.00,
+    "currency": "EUR",
+    "shipping_price": 0,
+    "stock": true,
+    "url": "https://www.unieuro.it/online/iPhone/iPhone-15-128GB-Nero-pidAPLIPHONE15128",
+    "image": "",
+    "updatedAt": null,
+    "verifiedAt": "2026-10-23"
+  },
+  {
+    "id": "real-sony-wh1000xm5",
+    "productId": "sony-wh-1000xm5",
+    "store": "Sony",
+    "seller": "Sony",
+    "old_price": null,
+    "offer_price": 299.00,
+    "currency": "EUR",
+    "shipping_price": 0,
+    "stock": true,
+    "url": "https://www.sony.it/headphones/headband",
+    "image": "",
+    "updatedAt": null,
+    "verifiedAt": "2026-10-23"
+  }
+]
