@@ -40,8 +40,16 @@ function loadProducts() {
 // ========================================
 
 function loadOffers() {
+  const fileName =
+    process.env.DANISUA_OFFERS_FILE ||
+    (
+      process.env.NODE_ENV === "production"
+        ? "offers.real.json"
+        : "offers.json"
+    );
+
   return readJsonFile(
-    "offers.json"
+    fileName
   );
 }
 
