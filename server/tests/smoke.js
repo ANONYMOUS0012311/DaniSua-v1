@@ -336,6 +336,46 @@ async function testBestProduct() {
 
 
 // ========================================
+// TEST 3B
+// QUERY NATURALE + TYPO
+// ========================================
+
+async function testNaturalCameraQuery() {
+  const queries = [
+    "iPhone 15 con la migliore telecamera",
+    "iPhone 15 con la miglore telecamera",
+  ];
+
+  for (const query of queries) {
+    const data = await search(query);
+
+    assert(
+      data.intent === "BEST_PRODUCT",
+      `BEST_PRODUCT atteso per "${query}", ricevuto ${data.intent}`
+    );
+
+    assert(
+      String(data.productQuery || "").toLowerCase() === "iphone 15",
+      `productQuery inattesa per "${query}": ${data.productQuery}`
+    );
+
+    assert(
+      Array.isArray(data.context?.objectives) &&
+        data.context.objectives.some(
+          objective => objective.criterion === "camera"
+        ),
+      `Obiettivo camera non rilevato per "${query}"`
+    );
+
+    assert(
+      data.bestOffer,
+      `Nessuna bestOffer per "${query}"`
+    );
+  }
+}
+
+
+// ========================================
 // TEST 4
 // RECOMMENDATION SOTTO 1000
 // ========================================
@@ -650,6 +690,14 @@ const tests = [
 
     run:
       testBestProduct,
+  },
+
+  {
+    name:
+      "NATURAL QUERY — migliore telecamera + typo",
+
+    run:
+      testNaturalCameraQuery,
   },
 
   {

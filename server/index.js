@@ -181,7 +181,10 @@ function normalizeText(value) {
     .replace(/[\u0300-\u036f]/g, "")
     .replace(/[^a-z0-9]+/g, " ")
     .replace(/\s+/g, " ")
-    .trim();
+    .trim()
+    .replace(/\bmiglore\b/g, "migliore")
+    .replace(/\bmigliroe\b/g, "migliore")
+    .replace(/\bmiglor\b/g, "miglior");
 }
 
 
@@ -371,6 +374,8 @@ function detectQualityObjectives(query) {
       signals: [
         "fotocamera",
         "fotocamere",
+        "telecamera",
+        "telecamere",
         "camera",
         "foto",
         "fotografia",
@@ -626,6 +631,17 @@ function cleanProductQuery(query) {
     );
   }
 
+  // DANISUA_QUALITY_QUERY_CLEANER
+  q = q.replace(
+    /\b(?:con\s+)?(?:(?:il|lo|la|i|gli|le)\s+)?(?:miglior|migliore|migliori|best|mejor)\s+(?:telecamera|telecamere|fotocamera|fotocamere|camera|foto|fotografia|fotografie|batteria|autonomia|prestazioni|performance|display|schermo|audio|suono|comfort|comodita|portabilita|peso)\b/g,
+    " "
+  );
+
+  q = q.replace(
+    /\b(?:telecamera|telecamere|fotocamera|fotocamere|camera|foto|fotografia|fotografie|batteria|autonomia|prestazioni|performance|display|schermo|audio|suono|comfort|comodita|portabilita|peso)\s+(?:miglior|migliore|migliori|best|mejor)\b/g,
+    " "
+  );
+
   q = q.replace(
     /\b(?:sotto|entro|massimo|max)\s+\d+(?:[.,]\d+)?\s*(?:euro|eur)?\b/g,
     " "
@@ -662,6 +678,7 @@ function cleanProductQuery(query) {
       "dei",
       "delle",
       "di",
+      "con",
     ]);
 
   return q
