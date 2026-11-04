@@ -966,6 +966,43 @@ function queryTargetsCommonFamily(
 
 
 // ========================================
+// FAMIGLIA UNICA
+// ========================================
+
+function hasSingleFamily(
+  products
+) {
+  return (
+    Array.isArray(products) &&
+    products.length > 0 &&
+    uniqueValues(
+      products,
+      "familyId"
+    ).length === 1
+  );
+}
+
+
+function buildFamilyPriceReady(
+  products
+) {
+  return {
+    status:
+      "family_price_ready",
+    canRecommend: true,
+    scope:
+      "family",
+    message:
+      "Ho trovato più varianti compatibili dello stesso modello. Se non hai specificato una preferenza come il colore, privilegio il prezzo totale.",
+    missing: [],
+    options: {},
+    selectedProducts:
+      products,
+  };
+}
+
+
+// ========================================
 // PRODUCT SEARCH
 // ========================================
 
@@ -1164,6 +1201,7 @@ function analyzeProductSearch(
       return {
         status: "specific",
         canRecommend: true,
+        scope: "exact_product",
         message:
           "Ho identificato il prodotto. Posso confrontare le offerte disponibili.",
         missing: [],
@@ -1171,6 +1209,16 @@ function analyzeProductSearch(
         selectedProducts:
           finalGroups[0],
       };
+    }
+
+    if (
+      hasSingleFamily(
+        storageProducts
+      )
+    ) {
+      return buildFamilyPriceReady(
+        storageProducts
+      );
     }
   }
 
@@ -1185,6 +1233,7 @@ function analyzeProductSearch(
     return {
       status: "specific",
       canRecommend: true,
+      scope: "exact_product",
       message:
         "Ho identificato il prodotto. Posso confrontare le offerte disponibili.",
       missing: [],
@@ -1192,6 +1241,16 @@ function analyzeProductSearch(
       selectedProducts:
         finalGroups[0],
     };
+  }
+
+  if (
+    hasSingleFamily(
+      modelProducts
+    )
+  ) {
+    return buildFamilyPriceReady(
+      modelProducts
+    );
   }
 
   return {
@@ -2013,10 +2072,10 @@ function buildGenericPriceRecommendation(
     return null;
   }
 
-  const scopeLabel =
+  const scopePhrase =
     scope === "product_line"
-      ? "linea"
-      : "modello";
+      ? "sulla linea"
+      : "sul modello";
 
   return {
     reason:
@@ -2050,8 +2109,8 @@ function buildGenericPriceRecommendation(
         null,
     },
     message:
-      "Richiesta generica sulla " +
-      scopeLabel +
+      "Richiesta generica " +
+      scopePhrase +
       ": ho privilegiato il prezzo totale tra le opzioni compatibili e le offerte verificate disponibili.",
   };
 }
