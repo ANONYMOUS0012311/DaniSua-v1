@@ -988,8 +988,22 @@ async function testIPhone17ExplicitColor() {
   assert(
     data.bestOffer
       ?.offer_price ===
-      999.49,
+      989.49,
     `Prezzo Salvia inatteso: ${data.bestOffer?.offer_price}`
+  );
+
+  assert(
+    data.bestOffer
+      ?.shipping_price ===
+      3.99,
+    `Spedizione Salvia inattesa: ${data.bestOffer?.shipping_price}`
+  );
+
+  assert(
+    data.recommendation
+      ?.finalCost ===
+      993.48,
+    `Costo finale Salvia inatteso: ${data.recommendation?.finalCost}`
   );
 }
 
@@ -1025,7 +1039,7 @@ async function testGalaxyS26UltraMultiStore() {
   assert(
     data.bestOffer
       ?.offer_price ===
-      1274.49,
+      1199.49,
     `Prezzo Galaxy inatteso: ${data.bestOffer?.offer_price}`
   );
 }
@@ -1101,15 +1115,15 @@ async function testSonyXM6() {
   assert(
     data.bestOffer
       ?.shipping_price ===
-      null,
-    "La spedizione Sony deve restare sconosciuta finché non è verificata"
+      0,
+    "Sony deve usare la spedizione gratuita verificata dello store ufficiale"
   );
 
   assert(
     data.recommendation
       ?.finalCost ===
-      null,
-    "Sony non deve dichiarare un costo finale senza spedizione verificata"
+      379,
+    `Costo finale Sony inatteso: ${data.recommendation?.finalCost}`
   );
 }
 
@@ -1507,14 +1521,14 @@ async function testGalaxyFinalCostMetadata() {
     data.bestOffer
       ?.costComparison
       ?.finalCost ===
-      1278.48,
+      1203.48,
     `Costo finale Galaxy inatteso: ${data.bestOffer?.costComparison?.finalCost}`
   );
 
   assert(
     data.recommendation
       ?.finalCost ===
-      1278.48,
+      1203.48,
     `Costo finale recommendation inatteso: ${data.recommendation?.finalCost}`
   );
 }
