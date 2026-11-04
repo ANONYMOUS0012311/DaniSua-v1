@@ -493,5 +493,217 @@
         }
       ]
     }
+  },
+  {
+    "id": "test-sony-wh1000xm6-olive-gray",
+    "productId": "sony-wh-1000xm6-olive-gray",
+    "store": "Sony",
+    "seller": "Sony",
+    "old_price": 449,
+    "offer_price": 379,
+    "currency": "EUR",
+    "shipping_price": 0,
+    "stock": true,
+    "url": "https://www.sony.it/headphones/products/wh-1000xm6",
+    "updatedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 379
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-apple-ipad-air-m4-128-space-gray",
+    "productId": "apple-ipad-air-11-m4-128-space-gray",
+    "store": "Apple",
+    "seller": "Apple",
+    "old_price": null,
+    "offer_price": 829,
+    "currency": "EUR",
+    "shipping_price": 0,
+    "stock": true,
+    "url": "https://www.apple.com/it/shop/buy-ipad/ipad-air/display-da-11%22-128gb-grigio-siderale-wifi",
+    "updatedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 829
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-mediaworld-ipad-air-m4-128-space-gray",
+    "productId": "apple-ipad-air-11-m4-128-space-gray",
+    "store": "MediaWorld",
+    "seller": "MediaWorld",
+    "old_price": 829,
+    "offer_price": 769,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.mediaworld.it/it/product/_tablet-apple-ipadair-wifi-128gb-sg-space-grey-425907.html",
+    "updatedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 769
+        },
+        {
+          "type": "installment",
+          "installments": 10,
+          "installment_amount": 76.9,
+          "displayed_total": 769,
+          "financing_cost": 0,
+          "tan": 0,
+          "taeg": 0,
+          "provider": null,
+          "note": "Piano rateale mostrato da MediaWorld al momento della verifica."
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-apple-macbook-neo-indigo-256",
+    "productId": "apple-macbook-neo-13-a18pro-8-256-indigo",
+    "store": "Apple",
+    "seller": "Apple",
+    "old_price": null,
+    "offer_price": 799,
+    "currency": "EUR",
+    "shipping_price": 0,
+    "stock": true,
+    "url": "https://www.apple.com/it/shop/buy-mac/macbook-neo/indaco-256gb",
+    "updatedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 799
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-mediaworld-macbook-neo-indigo-256",
+    "productId": "apple-macbook-neo-13-a18pro-8-256-indigo",
+    "store": "MediaWorld",
+    "seller": "MediaWorld",
+    "old_price": 799,
+    "offer_price": 799,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.mediaworld.it/it/product/_apple-macbook-neo-13-chip-a18-pro-6-cpu-5-gpu-8gb-256gb-magic-keyboard-indaco-566925.html",
+    "updatedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 799
+        },
+        {
+          "type": "installment",
+          "installments": 10,
+          "installment_amount": 79.9,
+          "displayed_total": 799,
+          "financing_cost": 0,
+          "tan": 0,
+          "taeg": 0,
+          "provider": null,
+          "note": "Piano rateale mostrato da MediaWorld al momento della verifica."
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-mediaworld-switch2-base",
+    "productId": "nintendo-switch-2-256",
+    "store": "MediaWorld",
+    "seller": "MediaWorld",
+    "old_price": 499.99,
+    "offer_price": 499,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.mediaworld.it/it/product/_nintendo-nintendo-switch-2-nero-430529.html",
+    "updatedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 499
+        },
+        {
+          "type": "installment",
+          "installments": 10,
+          "installment_amount": 49.9,
+          "displayed_total": 499,
+          "financing_cost": 0,
+          "tan": 0,
+          "taeg": 0,
+          "provider": null,
+          "note": "Piano rateale mostrato da MediaWorld al momento della verifica."
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-mediaworld-switch2-mario-kart",
+    "productId": "nintendo-switch-2-mario-kart-world-256",
+    "store": "MediaWorld",
+    "seller": "MediaWorld",
+    "old_price": null,
+    "offer_price": 519,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.mediaworld.it/it/product/_nintendo-bundle-mkworld-con-ns2-nero-blu-rosso-760360.html",
+    "updatedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 519
+        },
+        {
+          "type": "installment",
+          "installments": 10,
+          "installment_amount": 51.9,
+          "displayed_total": 519,
+          "financing_cost": 0,
+          "tan": 0,
+          "taeg": 0,
+          "provider": null,
+          "note": "Piano rateale mostrato da MediaWorld al momento della verifica."
+        }
+      ]
+    }
   }
 ]
