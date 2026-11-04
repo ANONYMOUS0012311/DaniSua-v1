@@ -48,7 +48,9 @@
     "attributes": {
       "storage": "128 GB",
       "color": "Nero"
-    }
+    },
+    "image": null,
+    "imageSourcePage": "https://www.unieuro.it/online/iPhone/iPhone-15-128GB-Nero-pidAPLIPHONE15128"
   },
   {
     "id": "samsung-galaxy-s24-ultra-256",
@@ -81,7 +83,9 @@
     "title": "Sony WH-1000XM5",
     "attributes": {
       "color": "Nero"
-    }
+    },
+    "image": null,
+    "imageSourcePage": "https://www.sony.it/store/product/wh1000xm5b.ce7/WH-1000XM5-Wireless-Noise-Cancelling-Headphones"
   },
   {
     "id": "sony-playstation-5-slim-bundle-2-controller",

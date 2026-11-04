@@ -10,24 +10,72 @@
     "shipping_price": null,
     "stock": true,
     "url": "https://www.unieuro.it/online/iPhone/iPhone-15-128GB-Nero-pidAPLIPHONE15128",
-    "image": "",
     "updatedAt": null,
-    "verifiedAt": "2026-11-02"
+    "verifiedAt": "2026-11-04",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 699
+        },
+        {
+          "type": "installment",
+          "installments": 3,
+          "installment_amount": 233,
+          "displayed_total": 699,
+          "financing_cost": null,
+          "apr": null,
+          "provider": null,
+          "note": "Unieuro mostra 3 rate da 233 €; eventuali condizioni complete vanno verificate al checkout."
+        }
+      ]
+    }
   },
   {
     "id": "real-sony-wh1000xm5",
     "productId": "sony-wh-1000xm5",
     "store": "Sony",
     "seller": "Sony",
-    "old_price": 299,
-    "offer_price": 259,
+    "old_price": null,
+    "offer_price": 299,
     "currency": "EUR",
-    "shipping_price": null,
+    "shipping_price": 0,
     "stock": true,
-    "url": "https://www.sony.it/headphones/headband",
-    "image": "",
+    "url": "https://www.sony.it/store/product/wh1000xm5b.ce7/WH-1000XM5-Wireless-Noise-Cancelling-Headphones",
     "updatedAt": null,
-    "verifiedAt": "2026-11-02",
-    "price_note": "Promo Sony HALLOWEEN26 verificata il 2026-11-02"
+    "verifiedAt": "2026-11-04",
+    "price_note": "Prezzo standard 299 €. Promo con codice separata: 259 €, non usata nel ranking standard.",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [
+        {
+          "type": "promo_code",
+          "code": "HALLOWEEN26",
+          "description": "Sony indica una promozione con codice HALLOWEEN26.",
+          "affects_price": true,
+          "conditional_offer_price": 259
+        }
+      ],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 299
+        },
+        {
+          "type": "installment",
+          "installments": null,
+          "installment_amount": null,
+          "displayed_total": null,
+          "financing_cost": null,
+          "apr": null,
+          "provider": null,
+          "note": "Sony indica opzioni di finanziamento disponibili; termini non ancora acquisiti."
+        }
+      ]
+    }
   }
 ]

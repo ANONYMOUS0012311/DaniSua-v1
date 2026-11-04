@@ -766,7 +766,7 @@ function renderProducts(
   }
 
   const imgFallback =
-    "https://via.placeholder.com/300x200/eeeeee/aaaaaa?text=Prodotto";
+    "data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%23f3f4f6'/%3E%3Ctext x='300' y='190' text-anchor='middle' font-family='Arial,sans-serif' font-size='24' fill='%236b7280'%3EFoto non disponibile%3C/text%3E%3Ctext x='300' y='225' text-anchor='middle' font-family='Arial,sans-serif' font-size='16' fill='%239ca3af'%3EDaniSuai mostrerà solo immagini verificate%3C/text%3E%3C/svg%3E";
 
   containerProdotti.innerHTML =
     list
@@ -887,10 +887,45 @@ function renderProducts(
               </p>
 
               <p class="producto-meta-actualizacion">
-                ${formatUpdated(
+                ${formatVerified(
+                  product.verifiedAt,
                   product.updatedAt
                 )}
               </p>
+
+              ${
+                product.color
+                  ? `
+                    <p class="producto-meta-actualizacion">
+                      Colore: ${escapeHtml(product.color)}
+                    </p>
+                  `
+                  : ""
+              }
+
+              ${
+                getPaymentText(product)
+                  ? `
+                    <p class="producto-meta-actualizacion">
+                      ${escapeHtml(
+                        getPaymentText(product)
+                      )}
+                    </p>
+                  `
+                  : ""
+              }
+
+              ${
+                getConditionText(product)
+                  ? `
+                    <p class="producto-meta-actualizacion">
+                      ${escapeHtml(
+                        getConditionText(product)
+                      )}
+                    </p>
+                  `
+                  : ""
+              }
 
               ${
                 isBest
@@ -976,6 +1011,99 @@ function updateCounter(n) {
         ? "risultato"
         : "risultati"
     }`;
+}
+
+
+// ========================================
+// DATA VERIFICA OFFERTA
+// ========================================
+
+function formatVerified(
+  verifiedAt,
+  updatedAt
+) {
+  const value =
+    verifiedAt ||
+    updatedAt;
+
+  if (!value) {
+    return "Data di verifica non disponibile";
+  }
+
+  const time =
+    new Date(value).getTime();
+
+  if (!Number.isFinite(time)) {
+    return "Data di verifica non disponibile";
+  }
+
+  return `Prezzo verificato il ${new Date(
+    time
+  ).toLocaleDateString("it-IT")}`;
+}
+
+
+function getPaymentText(product) {
+  const options =
+    product?.pricing
+      ?.paymentOptions;
+
+  if (!Array.isArray(options)) {
+    return "";
+  }
+
+  const installment =
+    options.find(
+      option =>
+        option?.type ===
+        "installment"
+    );
+
+  if (!installment) {
+    return "";
+  }
+
+  if (
+    Number.isInteger(
+      installment.installments
+    ) &&
+    typeof installment.installment_amount ===
+      "number"
+  ) {
+    return `${installment.installments} rate da ${formatPrice(
+      installment.installment_amount,
+      product.currency || "EUR"
+    )}`;
+  }
+
+  return "Finanziamento disponibile: verifica le condizioni nel negozio.";
+}
+
+
+function getConditionText(product) {
+  const conditions =
+    product?.pricing
+      ?.conditions;
+
+  if (!Array.isArray(conditions)) {
+    return "";
+  }
+
+  const active =
+    conditions.find(
+      condition =>
+        condition &&
+        condition.affects_price ===
+          true
+    );
+
+  if (!active) {
+    return "";
+  }
+
+  return active.code
+    ? `Promozione con codice ${active.code}: non inclusa nel ranking finché non verificata al checkout.`
+    : "Offerta con condizioni: verifica i requisiti prima dell'acquisto.";
 }
 
 
