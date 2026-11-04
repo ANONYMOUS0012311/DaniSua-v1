@@ -15,6 +15,14 @@ const {
   getOfferSelection,
 } = require("../utils/rankProducts");
 
+const {
+  evaluateOfferFreshness,
+} = require("../utils/freshness");
+
+const {
+  importFeedContent,
+} = require("../ingestion/feedImporter");
+
 
 const BASE_URL =
   process.env.DANISUA_BASE_URL ||
@@ -1487,6 +1495,214 @@ async function testIPadUnknownShippingIsHonest() {
 
 
 // ========================================
+// TEST 26
+// FRESHNESS — STALE NON VINCE
+// ========================================
+
+async function testFreshnessGuard() {
+  const now =
+    Date.parse(
+      "2026-11-04T12:00:00Z"
+    );
+
+  const fresh =
+    evaluateOfferFreshness(
+      {
+        verifiedAt:
+          "2026-11-04T10:00:00Z",
+      },
+      {
+        now,
+        maxAgeHours: 72,
+        allowUnknown: false,
+      }
+    );
+
+  const stale =
+    evaluateOfferFreshness(
+      {
+        verifiedAt:
+          "2026-10-30T10:00:00Z",
+      },
+      {
+        now,
+        maxAgeHours: 72,
+        allowUnknown: false,
+      }
+    );
+
+  const unknown =
+    evaluateOfferFreshness(
+      {},
+      {
+        now,
+        maxAgeHours: 72,
+        allowUnknown: false,
+      }
+    );
+
+  assert(
+    fresh.status === "fresh" &&
+    fresh.eligibleForRecommendation === true,
+    "Un'offerta recente dovrebbe essere fresh"
+  );
+
+  assert(
+    stale.status === "stale" &&
+    stale.eligibleForRecommendation === false,
+    "Un'offerta vecchia dovrebbe essere stale e non raccomandabile"
+  );
+
+  assert(
+    unknown.status === "unknown" &&
+    unknown.eligibleForRecommendation === false,
+    "In produzione una data sconosciuta non deve essere raccomandabile"
+  );
+
+  const selection =
+    getOfferSelection([
+      {
+        id: "stale-cheap",
+        offer_price: 50,
+        shipping_price: 0,
+        pricing: {
+          conditional: false,
+        },
+        freshness: stale,
+      },
+      {
+        id: "fresh-expensive",
+        offer_price: 60,
+        shipping_price: 0,
+        pricing: {
+          conditional: false,
+        },
+        freshness: fresh,
+      },
+    ]);
+
+  assert(
+    selection.bestOffer?.id ===
+      "fresh-expensive",
+    `L'offerta stale non deve vincere: ${selection.bestOffer?.id}`
+  );
+}
+
+
+// ========================================
+// TEST 27
+// FEED JSON — MATCH ESATTO
+// ========================================
+
+async function testFeedImporterExactMatch() {
+  const content =
+    JSON.stringify([
+      {
+        id:
+          "feed-airpods5",
+        productId:
+          "apple-airpods-5-usbc",
+        title:
+          "Apple AirPods 5",
+        store:
+          "Apple",
+        seller:
+          "Apple",
+        price:
+          "149,00 €",
+        currency:
+          "EUR",
+        shipping:
+          "0",
+        stock:
+          "disponibile",
+        url:
+          "https://www.apple.com/it/shop/buy-airpods/airpods-5",
+        verified_at:
+          "2026-11-04T10:00:00Z",
+      },
+    ]);
+
+  const result =
+    importFeedContent({
+      content,
+      format: "json",
+      sourceName:
+        "partner-test",
+      betaOnly: true,
+    });
+
+  assert(
+    result.ready.length === 1,
+    `Feed esatto dovrebbe produrre 1 ready, ricevuti ${result.ready.length}`
+  );
+
+  assert(
+    result.needsReview.length === 0,
+    "Feed esatto non dovrebbe richiedere review"
+  );
+
+  assert(
+    result.ready[0]
+      ?.productId ===
+      "apple-airpods-5-usbc",
+    `Product match feed inatteso: ${result.ready[0]?.productId}`
+  );
+
+  assert(
+    result.ready[0]
+      ?.offer_price ===
+      149,
+    `Prezzo feed normalizzato inatteso: ${result.ready[0]?.offer_price}`
+  );
+}
+
+
+// ========================================
+// TEST 28
+// FEED CSV — VARIANTE AMBIGUA IN REVIEW
+// ========================================
+
+async function testFeedImporterAmbiguousVariant() {
+  const content = [
+    "id,title,brand,model,storage,store,seller,price,currency,stock,url,verified_at",
+    "feed-iphone17,Apple iPhone 17 256 GB,Apple,iPhone 17,256 GB,MediaWorld,MediaWorld,989.49,EUR,true,https://www.mediaworld.it/it/product/_apple-iphone-17-256gb-nero-389194.html,2026-11-04T10:00:00Z",
+  ].join("\n");
+
+  const result =
+    importFeedContent({
+      content,
+      format: "csv",
+      sourceName:
+        "partner-test",
+      betaOnly: true,
+    });
+
+  assert(
+    result.ready.length === 0,
+    "Una variante senza colore non deve essere associata automaticamente"
+  );
+
+  assert(
+    result.needsReview.length === 1,
+    `Variante ambigua dovrebbe andare in review, ricevute ${result.needsReview.length}`
+  );
+
+  assert(
+    result.needsReview[0]
+      ?.match
+      ?.reason ===
+      "variant_not_disambiguated" ||
+    result.needsReview[0]
+      ?.match
+      ?.reason ===
+      "multiple_variant_candidates",
+    `Motivo review inatteso: ${result.needsReview[0]?.match?.reason}`
+  );
+}
+
+
+// ========================================
 // TESTS
 // ========================================
 
@@ -1697,6 +1913,30 @@ const tests = [
 
     run:
       testIPadUnknownShippingIsHonest,
+  },
+
+  {
+    name:
+      "FRESHNESS — stale non può vincere",
+
+    run:
+      testFreshnessGuard,
+  },
+
+  {
+    name:
+      "FEED — JSON exact product match",
+
+    run:
+      testFeedImporterExactMatch,
+  },
+
+  {
+    name:
+      "FEED — CSV ambiguous variant review",
+
+    run:
+      testFeedImporterAmbiguousVariant,
   },
 ];
 
