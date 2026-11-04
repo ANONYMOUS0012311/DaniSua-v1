@@ -1072,6 +1072,7 @@ async function testMacBookAirM5FlexibleColor() {
 // SONY WH-1000XM6
 // ========================================
 
+
 async function testSonyXM6() {
   const data =
     await search(
@@ -1096,13 +1097,27 @@ async function testSonyXM6() {
       379,
     `Prezzo WH-1000XM6 inatteso: ${data.bestOffer?.offer_price}`
   );
-}
 
+  assert(
+    data.bestOffer
+      ?.shipping_price ===
+      null,
+    "La spedizione Sony deve restare sconosciuta finché non è verificata"
+  );
+
+  assert(
+    data.recommendation
+      ?.finalCost ===
+      null,
+    "Sony non deve dichiarare un costo finale senza spedizione verificata"
+  );
+}
 
 // ========================================
 // TEST 17
 // IPAD AIR M4 — MULTI STORE + TABLET
 // ========================================
+
 
 async function testIPadAirM4() {
   const data =
@@ -1136,13 +1151,27 @@ async function testIPadAirM4() {
       769,
     `Prezzo iPad inatteso: ${data.bestOffer?.offer_price}`
   );
-}
 
+  assert(
+    data.bestOffer
+      ?.shipping_price ===
+      4.99,
+    `Spedizione iPad inattesa: ${data.bestOffer?.shipping_price}`
+  );
+
+  assert(
+    data.recommendation
+      ?.finalCost ===
+      773.99,
+    `Costo finale iPad inatteso: ${data.recommendation?.finalCost}`
+  );
+}
 
 // ========================================
 // TEST 18
 // MACBOOK NEO — MULTI STORE
 // ========================================
+
 
 async function testMacBookNeo() {
   const data =
@@ -1163,17 +1192,31 @@ async function testMacBookNeo() {
 
   assert(
     data.bestOffer
+      ?.id ===
+      "test-apple-macbook-neo-indigo-256",
+    `Il costo finale deve favorire Apple: ${data.bestOffer?.id}`
+  );
+
+  assert(
+    data.bestOffer
       ?.offer_price ===
       799,
     `Prezzo MacBook Neo inatteso: ${data.bestOffer?.offer_price}`
   );
-}
 
+  assert(
+    data.recommendation
+      ?.finalCost ===
+      799,
+    `Costo finale MacBook Neo inatteso: ${data.recommendation?.finalCost}`
+  );
+}
 
 // ========================================
 // TEST 19
 // SWITCH 2 — BASE PRIMA DEL BUNDLE
 // ========================================
+
 
 async function testSwitch2PriceFirst() {
   const data =
@@ -1207,13 +1250,27 @@ async function testSwitch2PriceFirst() {
       499,
     `Prezzo Switch 2 inatteso: ${data.bestOffer?.offer_price}`
   );
-}
 
+  assert(
+    data.bestOffer
+      ?.shipping_price ===
+      null,
+    "La spedizione della Switch 2 base deve restare sconosciuta"
+  );
+
+  assert(
+    data.recommendation
+      ?.finalCost ===
+      null,
+    "La Switch 2 base non deve dichiarare costo finale senza spedizione verificata"
+  );
+}
 
 // ========================================
 // TEST 20
 // SWITCH 2 — BUNDLE ESATTO
 // ========================================
+
 
 async function testSwitch2MarioKartBundle() {
   const data =
@@ -1245,8 +1302,21 @@ async function testSwitch2MarioKartBundle() {
       519,
     `Prezzo bundle Switch 2 inatteso: ${data.bestOffer?.offer_price}`
   );
-}
 
+  assert(
+    data.bestOffer
+      ?.shipping_price ===
+      4.99,
+    `Spedizione bundle Switch 2 inattesa: ${data.bestOffer?.shipping_price}`
+  );
+
+  assert(
+    data.recommendation
+      ?.finalCost ===
+      523.99,
+    `Costo finale bundle Switch 2 inatteso: ${data.recommendation?.finalCost}`
+  );
+}
 
 // ========================================
 // TEST 21
@@ -1452,8 +1522,9 @@ async function testGalaxyFinalCostMetadata() {
 
 // ========================================
 // TEST 25
-// IPAD AIR — PREZZO PROVVISORIO SE SPEDIZIONE MANCA
+// IPAD AIR — COSTO FINALE VERIFICATO
 // ========================================
+
 
 async function testIPadUnknownShippingIsHonest() {
   const data =
@@ -1472,27 +1543,24 @@ async function testIPadUnknownShippingIsHonest() {
     data.bestOffer
       ?.costComparison
       ?.confirmedFinalCost ===
-      false,
-    "L'iPad MediaWorld non deve avere costo finale confermato con spedizione null"
+      true,
+    "L'iPad MediaWorld deve avere costo finale confermato con spedizione verificata"
   );
 
   assert(
     data.recommendation
       ?.finalCost ===
-      null,
-    `Il costo finale iPad dovrebbe essere null, ricevuto ${data.recommendation?.finalCost}`
+      773.99,
+    `Il costo finale iPad dovrebbe essere 773.99, ricevuto ${data.recommendation?.finalCost}`
   );
 
   assert(
     data.recommendation
-      ?.message
-      ?.includes(
-        "non posso confermare il costo finale"
-      ),
-    "La recommendation iPad deve dichiarare l'incertezza della spedizione"
+      ?.shippingPrice ===
+      4.99,
+    `La spedizione iPad dovrebbe essere 4.99, ricevuto ${data.recommendation?.shippingPrice}`
   );
 }
-
 
 // ========================================
 // TEST 26
@@ -2053,7 +2121,7 @@ const tests = [
 
   {
     name:
-      "FINAL COST — iPad shipping unknown disclosure",
+      "FINAL COST — iPad verified shipping",
 
     run:
       testIPadUnknownShippingIsHonest,
