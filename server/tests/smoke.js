@@ -418,6 +418,34 @@ async function testRecommendationBudget() {
       1000,
     `L'offerta supera il budget: ${data.bestOffer?.offer_price}`
   );
+
+  assert(
+    data.context
+      ?.dataCoverage
+      ?.partialObjectives
+      ?.some(
+        item =>
+          item.criterion ===
+          "camera"
+      ),
+    "La copertura camera dovrebbe essere dichiarata parziale"
+  );
+
+  assert(
+    data.context
+      ?.dataCoverage
+      ?.excludedFamilies >= 1,
+    "Dovrebbe essere dichiarata almeno una famiglia esclusa dal ranking"
+  );
+
+  assert(
+    data.recommendation
+      ?.message
+      ?.includes(
+        "dati verificati comparabili"
+      ),
+    "La raccomandazione deve spiegare la copertura parziale"
+  );
 }
 
 
