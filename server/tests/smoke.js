@@ -735,8 +735,15 @@ async function testAirPodsProductLine() {
   assert(
     data.bestOffer
       ?.productId ===
-      "apple-airpods-4",
-    `Variante più economica inattesa: ${data.bestOffer?.productId}`
+      "apple-airpods-5-usbc",
+    `Variante disponibile più economica inattesa: ${data.bestOffer?.productId}`
+  );
+
+  assert(
+    data.bestOffer
+      ?.offer_price ===
+      149,
+    `Prezzo AirPods generico inatteso: ${data.bestOffer?.offer_price}`
   );
 }
 
