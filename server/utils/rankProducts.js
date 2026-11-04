@@ -278,6 +278,35 @@ function getUniqueFamilies(offers) {
 
 
 // ========================================
+// OFFERTA COMPARABILE DI DEFAULT
+//
+// Un prezzo condizionato (permuta,
+// abbonamento, finanziamento obbligatorio,
+// coupon non verificato al checkout, ecc.)
+// non deve battere un prezzo standard
+// nella classifica normale.
+// ========================================
+
+function isDefaultComparableOffer(offer) {
+  if (!offer || typeof offer !== "object") {
+    return false;
+  }
+
+  if (
+    offer.pricing &&
+    typeof offer.pricing === "object" &&
+    offer.pricing.conditional === true
+  ) {
+    return false;
+  }
+
+  return isFiniteNumber(
+    offer.offer_price
+  );
+}
+
+
+// ========================================
 // MIGLIORE OFFERTA
 //
 // Funziona sia con:
@@ -298,8 +327,8 @@ function getLowestOffer(entity) {
   const validOffers =
     entity.offers.filter(
       offer =>
-        isFiniteNumber(
-          offer.offer_price
+        isDefaultComparableOffer(
+          offer
         )
     );
 
@@ -1041,6 +1070,8 @@ function rankQualityAndPrice(
 
 module.exports = {
   getEntityKey,
+
+  isDefaultComparableOffer,
 
   getUniqueProducts,
 
