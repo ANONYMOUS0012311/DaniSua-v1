@@ -540,6 +540,20 @@ function renderBestOffer(
         )
       : "";
 
+  const isGenericPriceFirst =
+    recommendation?.reason ===
+      "generic_price_first";
+
+  const comparisonLabel =
+    isGenericPriceFirst
+      ? "opzioni compatibili"
+      : "offerte equivalenti";
+
+  const ruleNote =
+    isGenericPriceFirst
+      ? "Richiesta generica: DaniSuai privilegia il prezzo totale tra le opzioni compatibili disponibili."
+      : "La raccomandazione attuale considera il prezzo delle offerte equivalenti.";
+
   content.innerHTML = `
     <div class="danisua-recommendation">
 
@@ -572,7 +586,7 @@ function renderBestOffer(
               <strong>
                 ${comparedOffers}
               </strong>
-              offerte equivalenti.
+              ${escapeHtml(comparisonLabel)}.
             </p>
           `
           : ""
@@ -581,8 +595,7 @@ function renderBestOffer(
       ${savingsText}
 
       <p class="danisua-rule-note">
-        La raccomandazione attuale considera
-        il prezzo delle offerte equivalenti.
+        ${escapeHtml(ruleNote)}
       </p>
 
     </div>
