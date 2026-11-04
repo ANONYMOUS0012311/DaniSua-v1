@@ -333,6 +333,16 @@ function validateOffer(offer) {
     );
   }
 
+  if (
+    !isValidTimestamp(
+      offer.verifiedAt
+    )
+  ) {
+    errors.push(
+      "invalid_verified_at"
+    );
+  }
+
 
   return {
     valid:
