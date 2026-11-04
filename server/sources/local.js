@@ -7,6 +7,18 @@ const {
 
 
 // ========================================
+// CACHE JSON
+//
+// Il catalogo locale cambia solo con un
+// deploy/import. Evitiamo quindi I/O
+// sincrono e JSON.parse su ogni request.
+// ========================================
+
+const JSON_CACHE =
+  new Map();
+
+
+// ========================================
 // LEER JSON
 // ========================================
 
@@ -19,12 +31,30 @@ function readJsonFile(fileName) {
     fileName
   );
 
+  if (
+    JSON_CACHE.has(
+      filePath
+    )
+  ) {
+    return JSON_CACHE.get(
+      filePath
+    );
+  }
+
   const raw = fs.readFileSync(
     filePath,
     "utf-8"
   );
 
-  return JSON.parse(raw);
+  const parsed =
+    JSON.parse(raw);
+
+  JSON_CACHE.set(
+    filePath,
+    parsed
+  );
+
+  return parsed;
 }
 
 
