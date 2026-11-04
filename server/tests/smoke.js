@@ -1703,6 +1703,150 @@ async function testFeedImporterAmbiguousVariant() {
 
 
 // ========================================
+// TEST 29
+// REQUEST ID + HEALTH
+// ========================================
+
+async function testRequestTracing() {
+  const response =
+    await fetch(
+      `${BASE_URL}/health`
+    );
+
+  assert(
+    response.ok,
+    `Health HTTP inatteso: ${response.status}`
+  );
+
+  const requestId =
+    response.headers.get(
+      "x-request-id"
+    );
+
+  assert(
+    typeof requestId ===
+      "string" &&
+    requestId.length > 0,
+    "X-Request-Id mancante"
+  );
+
+  const data =
+    await response.json();
+
+  assert(
+    data.requestId ===
+      requestId,
+    "requestId body/header non coincidono"
+  );
+
+  assert(
+    typeof data.runtime
+      ?.uptimeSeconds ===
+      "number",
+    "Runtime health mancante"
+  );
+}
+
+
+// ========================================
+// TEST 30
+// 404 SAFE
+// ========================================
+
+async function testSafeNotFound() {
+  const response =
+    await fetch(
+      `${BASE_URL}/route-that-does-not-exist`
+    );
+
+  assert(
+    response.status === 404,
+    `404 atteso, ricevuto ${response.status}`
+  );
+
+  const requestId =
+    response.headers.get(
+      "x-request-id"
+    );
+
+  const data =
+    await response.json();
+
+  assert(
+    data.error ===
+      "Risorsa non trovata.",
+    `Messaggio 404 inatteso: ${data.error}`
+  );
+
+  assert(
+    data.requestId ===
+      requestId,
+    "404 deve includere lo stesso requestId"
+  );
+
+  assert(
+    !Object.prototype
+      .hasOwnProperty
+      .call(
+        data,
+        "details"
+      ),
+    "404 non deve esporre details"
+  );
+}
+
+
+// ========================================
+// TEST 31
+// CORS ERROR SAFE
+// ========================================
+
+async function testSafeCorsError() {
+  const response =
+    await fetch(
+      `${BASE_URL}/health`,
+      {
+        headers: {
+          Origin:
+            "https://evil.example",
+        },
+      }
+    );
+
+  assert(
+    response.status === 403,
+    `CORS dovrebbe restituire 403, ricevuto ${response.status}`
+  );
+
+  const data =
+    await response.json();
+
+  assert(
+    data.error ===
+      "Richiesta non autorizzata.",
+    `Messaggio CORS inatteso: ${data.error}`
+  );
+
+  assert(
+    typeof data.requestId ===
+      "string" &&
+    data.requestId.length > 0,
+    "Errore CORS deve includere requestId"
+  );
+
+  assert(
+    !Object.prototype
+      .hasOwnProperty
+      .call(
+        data,
+        "details"
+      ),
+    "Errore CORS non deve esporre details"
+  );
+}
+
+
+// ========================================
 // TESTS
 // ========================================
 
@@ -1937,6 +2081,30 @@ const tests = [
 
     run:
       testFeedImporterAmbiguousVariant,
+  },
+
+  {
+    name:
+      "OBSERVABILITY — request ID e health",
+
+    run:
+      testRequestTracing,
+  },
+
+  {
+    name:
+      "OBSERVABILITY — 404 safe",
+
+    run:
+      testSafeNotFound,
+  },
+
+  {
+    name:
+      "OBSERVABILITY — CORS error safe",
+
+    run:
+      testSafeCorsError,
   },
 ];
 
