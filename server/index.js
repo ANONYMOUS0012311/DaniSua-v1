@@ -1,7 +1,13 @@
 const express = require("express");
 const cors = require("cors");
+const crypto = require("crypto");
 
 const sourceRegistry = require("./sources/registry");
+
+const {
+  logInfo,
+  logError,
+} = require("./utils/logger");
 
 const {
   getUniqueFamilies,
@@ -37,6 +43,90 @@ const PORT =
 const HOST =
   process.env.HOST ||
   "0.0.0.0";
+
+
+const REQUEST_ID_PATTERN =
+  /^[A-Za-z0-9._:-]{1,80}$/;
+
+
+function getRequestId(req) {
+  const incoming =
+    req.get(
+      "x-request-id"
+    );
+
+  if (
+    incoming &&
+    REQUEST_ID_PATTERN.test(
+      incoming
+    )
+  ) {
+    return incoming;
+  }
+
+  return crypto
+    .randomUUID();
+}
+
+
+app.use(
+  (
+    req,
+    res,
+    next
+  ) => {
+    const requestId =
+      getRequestId(
+        req
+      );
+
+    const startedAt =
+      process
+        .hrtime
+        .bigint();
+
+    req.requestId =
+      requestId;
+
+    res.setHeader(
+      "X-Request-Id",
+      requestId
+    );
+
+    res.on(
+      "finish",
+      () => {
+        const durationNs =
+          process
+            .hrtime
+            .bigint() -
+          startedAt;
+
+        const durationMs =
+          Number(
+            durationNs /
+            1000000n
+          );
+
+        logInfo(
+          "http_request",
+          {
+            requestId,
+            method:
+              req.method,
+            path:
+              req.path,
+            status:
+              res.statusCode,
+            durationMs,
+          }
+        );
+      }
+    );
+
+    next();
+  }
+);
 
 
 // ========================================
@@ -145,10 +235,19 @@ app.use(
         }
 
 
-        return callback(
+        const error =
           new Error(
             "Origin not allowed by DaniSua CORS policy"
-          )
+          );
+
+        error.status =
+          403;
+
+        error.code =
+          "cors_origin_denied";
+
+        return callback(
+          error
         );
       },
 
@@ -2646,7 +2745,23 @@ app.get(
   (req, res) => {
     res.json({
       ok: true,
-      sources: sourceRegistry.getSourcesStatus(),
+      requestId:
+        req.requestId ||
+        null,
+      sources:
+        sourceRegistry
+          .getSourcesStatus(),
+      runtime: {
+        node:
+          process.version,
+        environment:
+          process.env.NODE_ENV ||
+          "development",
+        uptimeSeconds:
+          Math.floor(
+            process.uptime()
+          ),
+      },
       time:
         new Date()
           .toISOString(),
@@ -2664,7 +2779,8 @@ app.get(
 
   async (
     req,
-    res
+    res,
+    next
   ) => {
     try {
       const rawQuery =
@@ -3181,21 +3297,93 @@ app.get(
       });
 
     } catch (error) {
-      console.error(
-        "Error en /search:",
+      return next(
         error
       );
-
-      res
-        .status(500)
-        .json({
-          error:
-            "No se pudo completar la bÃºsqueda.",
-
-          details:
-            error.message,
-        });
     }
+  }
+);
+
+
+// ========================================
+// 404
+// ========================================
+
+app.use(
+  (
+    req,
+    res
+  ) => {
+    res
+      .status(404)
+      .json({
+        error:
+          "Risorsa non trovata.",
+        requestId:
+          req.requestId ||
+          null,
+      });
+  }
+);
+
+
+// ========================================
+// ERROR HANDLER
+// ========================================
+
+app.use(
+  (
+    error,
+    req,
+    res,
+    next
+  ) => {
+    if (
+      res.headersSent
+    ) {
+      return next(
+        error
+      );
+    }
+
+    const status =
+      Number.isInteger(
+        error?.status
+      ) &&
+      error.status >= 400 &&
+      error.status <= 599
+        ? error.status
+        : 500;
+
+    logError(
+      "http_error",
+      error,
+      {
+        requestId:
+          req.requestId ||
+          null,
+        method:
+          req.method,
+        path:
+          req.path,
+        status,
+      }
+    );
+
+    const message =
+      status === 403
+        ? "Richiesta non autorizzata."
+        : "Errore interno del server.";
+
+    return res
+      .status(status)
+      .json({
+        error:
+          message,
+        requestId:
+          req.requestId ||
+          null,
+      });
   }
 );
 
@@ -3209,8 +3397,19 @@ app.listen(
   HOST,
 
   () => {
-    console.log(
-      `Servidor DaniSua corriendo en ${HOST}:${PORT}`
+    logInfo(
+      "server_started",
+      {
+        host:
+          HOST,
+        port:
+          PORT,
+        environment:
+          process.env.NODE_ENV ||
+          "development",
+        node:
+          process.version,
+      }
     );
   }
 );
