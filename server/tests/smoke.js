@@ -9,6 +9,10 @@ const {
   validateOffer,
 } = require("../utils/offerContract");
 
+const {
+  getLowestOffer,
+} = require("../utils/rankProducts");
+
 
 const BASE_URL =
   process.env.DANISUA_BASE_URL ||
@@ -664,6 +668,41 @@ async function testOfferContract() {
 
 
 // ========================================
+// TEST 8
+// PREZZI CONDIZIONATI
+// ========================================
+
+async function testConditionalPricingRanking() {
+  const entity = {
+    offers: [
+      {
+        id: "conditional-cheap",
+        offer_price: 499,
+        pricing: {
+          conditional: true,
+        },
+      },
+      {
+        id: "standard-real",
+        offer_price: 699,
+        pricing: {
+          conditional: false,
+        },
+      },
+    ],
+  };
+
+  const best =
+    getLowestOffer(entity);
+
+  assert(
+    best?.id === "standard-real",
+    `Un prezzo condizionato non deve vincere il ranking standard: ${best?.id}`
+  );
+}
+
+
+// ========================================
 // TESTS
 // ========================================
 
@@ -730,6 +769,14 @@ const tests = [
 
     run:
       testOfferContract,
+  },
+
+  {
+    name:
+      "PRICING — offerte condizionate escluse dal ranking standard",
+
+    run:
+      testConditionalPricingRanking,
   },
 ];
 
