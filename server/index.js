@@ -2001,6 +2001,63 @@ function buildEquivalentRecommendation(
 
 
 // ========================================
+// RACCOMANDAZIONE GENERICA PRICE-FIRST
+// ========================================
+
+function buildGenericPriceRecommendation(
+  bestOffer,
+  offers,
+  scope
+) {
+  if (!bestOffer) {
+    return null;
+  }
+
+  const scopeLabel =
+    scope === "product_line"
+      ? "linea"
+      : "modello";
+
+  return {
+    reason:
+      "generic_price_first",
+    comparisonScope:
+      scope,
+    store:
+      bestOffer.store,
+    price:
+      bestOffer.offer_price,
+    currency:
+      bestOffer.currency ||
+      "EUR",
+    comparedOffers:
+      offers.length,
+    selectedVariant: {
+      productId:
+        bestOffer.productId ||
+        null,
+      familyId:
+        bestOffer.familyId ||
+        null,
+      productLineId:
+        bestOffer.productLineId ||
+        null,
+      model:
+        bestOffer.model ||
+        null,
+      color:
+        bestOffer.color ||
+        null,
+    },
+    message:
+      "Richiesta generica sulla " +
+      scopeLabel +
+      ": ho privilegiato il prezzo totale tra le opzioni compatibili e le offerte verificate disponibili.",
+  };
+}
+
+
+// ========================================
 // RACCOMANDAZIONE BEST OFFER
 // ========================================
 
@@ -2318,6 +2375,11 @@ app.get(
           rawQuery
         );
 
+      const hardRequirements =
+        detectHardRequirements(
+          rawQuery
+        );
+
       const productQuery =
         buildCatalogQuery(
           rawQuery,
@@ -2335,8 +2397,14 @@ app.get(
           }
         );
 
-      const results =
+      const rawResults =
         sourceSearch.results;
+
+      const results =
+        filterOffersByHardRequirements(
+          rawResults,
+          hardRequirements
+        );
 
       const sourceDiagnostics =
         sourceSearch.diagnostics;
@@ -2383,10 +2451,21 @@ app.get(
             );
 
           recommendation =
-            buildEquivalentRecommendation(
-              bestOffer,
-              comparableResults
-            );
+            (
+              analysis.scope ===
+                "product_line" ||
+              analysis.scope ===
+                "family"
+            )
+              ? buildGenericPriceRecommendation(
+                  bestOffer,
+                  comparableResults,
+                  analysis.scope
+                )
+              : buildEquivalentRecommendation(
+                  bestOffer,
+                  comparableResults
+                );
         }
 
         return res.json({
@@ -2402,6 +2481,7 @@ app.get(
             category,
             objectives,
             priceObjective,
+            hardRequirements,
           },
 
           status:
@@ -2502,6 +2582,7 @@ app.get(
             category,
             objectives,
             priceObjective,
+            hardRequirements,
           },
 
           status:
@@ -2586,6 +2667,7 @@ app.get(
             category,
             objectives,
             priceObjective,
+            hardRequirements,
           },
 
           status:
