@@ -307,6 +307,297 @@ function isDefaultComparableOffer(offer) {
 
 
 // ========================================
+// COSTO FINALE / SPEDIZIONE
+// ========================================
+
+function roundMoney(value) {
+  return Number(
+    value.toFixed(2)
+  );
+}
+
+
+function getKnownFinalCost(offer) {
+  if (
+    !isDefaultComparableOffer(
+      offer
+    )
+  ) {
+    return null;
+  }
+
+  if (
+    !isFiniteNumber(
+      offer.shipping_price
+    ) ||
+    offer.shipping_price < 0
+  ) {
+    return null;
+  }
+
+  return roundMoney(
+    offer.offer_price +
+    offer.shipping_price
+  );
+}
+
+
+function getOfferDecisionCost(offer) {
+  if (!offer) {
+    return null;
+  }
+
+  const finalCost =
+    offer
+      ?.costComparison
+      ?.finalCost;
+
+  if (
+    isFiniteNumber(
+      finalCost
+    )
+  ) {
+    return finalCost;
+  }
+
+  const directFinalCost =
+    getKnownFinalCost(
+      offer
+    );
+
+  if (
+    isFiniteNumber(
+      directFinalCost
+    )
+  ) {
+    return directFinalCost;
+  }
+
+  return isFiniteNumber(
+    offer.offer_price
+  )
+    ? offer.offer_price
+    : null;
+}
+
+
+function decorateSelectedOffer(
+  offer,
+  comparison
+) {
+  if (!offer) {
+    return null;
+  }
+
+  return {
+    ...offer,
+
+    costComparison: {
+      mode:
+        comparison.mode,
+
+      finalCost:
+        comparison.finalCost,
+
+      shippingKnown:
+        comparison.shippingKnown,
+
+      confirmedFinalCost:
+        comparison.confirmedFinalCost,
+
+      comparedOffers:
+        comparison.comparedOffers,
+
+      unknownShippingOffers:
+        comparison
+          .unknownShippingOffers,
+    },
+  };
+}
+
+
+function getOfferSelection(offers) {
+  const validOffers =
+    Array.isArray(offers)
+      ? offers.filter(
+          offer =>
+            isDefaultComparableOffer(
+              offer
+            )
+        )
+      : [];
+
+  if (
+    validOffers.length === 0
+  ) {
+    return {
+      bestOffer: null,
+      mode:
+        "no_comparable_offer",
+      finalCost: null,
+      shippingKnown: false,
+      confirmedFinalCost: false,
+      comparedOffers: 0,
+      unknownShippingOffers: 0,
+    };
+  }
+
+  const known = [];
+  const unknown = [];
+
+  for (
+    const offer of
+    validOffers
+  ) {
+    const finalCost =
+      getKnownFinalCost(
+        offer
+      );
+
+    if (
+      isFiniteNumber(
+        finalCost
+      )
+    ) {
+      known.push({
+        offer,
+        finalCost,
+      });
+    } else {
+      unknown.push(
+        offer
+      );
+    }
+  }
+
+  const lowestListed =
+    validOffers.reduce(
+      (best, offer) =>
+        offer.offer_price <
+        best.offer_price
+          ? offer
+          : best
+    );
+
+  if (
+    known.length === 0
+  ) {
+    const comparison = {
+      mode:
+        "listed_price_shipping_unknown",
+      finalCost: null,
+      shippingKnown: false,
+      confirmedFinalCost: false,
+      comparedOffers:
+        validOffers.length,
+      unknownShippingOffers:
+        unknown.length,
+    };
+
+    return {
+      ...comparison,
+      bestOffer:
+        decorateSelectedOffer(
+          lowestListed,
+          comparison
+        ),
+    };
+  }
+
+  const lowestKnown =
+    known.reduce(
+      (best, item) =>
+        item.finalCost <
+        best.finalCost
+          ? item
+          : best
+    );
+
+  if (
+    unknown.length === 0
+  ) {
+    const comparison = {
+      mode:
+        "final_cost_confirmed",
+      finalCost:
+        lowestKnown.finalCost,
+      shippingKnown: true,
+      confirmedFinalCost: true,
+      comparedOffers:
+        validOffers.length,
+      unknownShippingOffers: 0,
+    };
+
+    return {
+      ...comparison,
+      bestOffer:
+        decorateSelectedOffer(
+          lowestKnown.offer,
+          comparison
+        ),
+    };
+  }
+
+  const lowestUnknown =
+    unknown.reduce(
+      (best, offer) =>
+        offer.offer_price <
+        best.offer_price
+          ? offer
+          : best
+    );
+
+  if (
+    lowestKnown.finalCost <=
+    lowestUnknown.offer_price
+  ) {
+    const comparison = {
+      mode:
+        "final_cost_confirmed_with_unknown_shipping",
+      finalCost:
+        lowestKnown.finalCost,
+      shippingKnown: true,
+      confirmedFinalCost: true,
+      comparedOffers:
+        validOffers.length,
+      unknownShippingOffers:
+        unknown.length,
+    };
+
+    return {
+      ...comparison,
+      bestOffer:
+        decorateSelectedOffer(
+          lowestKnown.offer,
+          comparison
+        ),
+    };
+  }
+
+  const comparison = {
+    mode:
+      "listed_price_provisional",
+    finalCost: null,
+    shippingKnown: false,
+    confirmedFinalCost: false,
+    comparedOffers:
+      validOffers.length,
+    unknownShippingOffers:
+      unknown.length,
+  };
+
+  return {
+    ...comparison,
+    bestOffer:
+      decorateSelectedOffer(
+        lowestUnknown,
+        comparison
+      ),
+  };
+}
+
+
+// ========================================
 // MIGLIORE OFFERTA
 //
 // Funziona sia con:
@@ -324,27 +615,9 @@ function getLowestOffer(entity) {
     return null;
   }
 
-  const validOffers =
-    entity.offers.filter(
-      offer =>
-        isDefaultComparableOffer(
-          offer
-        )
-    );
-
-  if (
-    validOffers.length === 0
-  ) {
-    return null;
-  }
-
-  return validOffers.reduce(
-    (best, offer) =>
-      offer.offer_price <
-      best.offer_price
-        ? offer
-        : best
-  );
+  return getOfferSelection(
+    entity.offers
+  ).bestOffer;
 }
 
 
@@ -644,8 +917,12 @@ function rankByCriterion(
         }
 
         return (
-          aOffer.offer_price -
-          bOffer.offer_price
+          getOfferDecisionCost(
+            aOffer
+          ) -
+          getOfferDecisionCost(
+            bOffer
+          )
         );
       }
     );
@@ -829,8 +1106,12 @@ function rankByObjectives(
         }
 
         return (
-          aOffer.offer_price -
-          bOffer.offer_price
+          getOfferDecisionCost(
+            aOffer
+          ) -
+          getOfferDecisionCost(
+            bOffer
+          )
         );
       }
     );
@@ -864,9 +1145,9 @@ function calculatePriceScores(
         item =>
           item.bestOffer &&
           isFiniteNumber(
-            item
-              .bestOffer
-              .offer_price
+            getOfferDecisionCost(
+              item.bestOffer
+            )
           )
       );
 
@@ -879,9 +1160,9 @@ function calculatePriceScores(
   const prices =
     entitiesWithPrice.map(
       item =>
-        item
-          .bestOffer
-          .offer_price
+        getOfferDecisionCost(
+          item.bestOffer
+        )
     );
 
   const minPrice =
@@ -902,9 +1183,9 @@ function calculatePriceScores(
     entitiesWithPrice
   ) {
     const price =
-      item
-        .bestOffer
-        .offer_price;
+      getOfferDecisionCost(
+        item.bestOffer
+      );
 
     let score = 100;
 
@@ -1056,8 +1337,12 @@ function rankQualityAndPrice(
         }
 
         return (
-          aOffer.offer_price -
-          bOffer.offer_price
+          getOfferDecisionCost(
+            aOffer
+          ) -
+          getOfferDecisionCost(
+            bOffer
+          )
         );
       }
     );
@@ -1072,6 +1357,12 @@ module.exports = {
   getEntityKey,
 
   isDefaultComparableOffer,
+
+  getKnownFinalCost,
+
+  getOfferDecisionCost,
+
+  getOfferSelection,
 
   getUniqueProducts,
 
