@@ -1,0 +1,51 @@
+name: Regenerate secure npm lockfile
+
+on:
+  pull_request:
+    branches:
+      - master
+
+permissions:
+  contents: write
+
+jobs:
+  fix-lock:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+
+    steps:
+      - name: Checkout PR branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+
+      - name: Regenerate secure lockfile
+        run: npm audit fix --package-lock-only
+
+      - name: Ensure package manifest did not change
+        run: git diff --exit-code -- package.json
+
+      - name: Install fixed dependency graph
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
+      - name: Verify audit is clean
+        run: npm audit --audit-level=moderate
+
+      - name: Remove one-time workflow and commit lockfile
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/security-fix-lock.yml
+          git add package-lock.json
+          git commit -m "Fix npm transitive vulnerabilities"
+          git push origin HEAD:${{ github.head_ref }}
