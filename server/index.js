@@ -417,6 +417,8 @@ function detectCategory(query) {
         "telefoni",
         "cellulare",
         "cellulari",
+        "iphone",
+        "galaxy",
       ],
     },
 
@@ -427,6 +429,10 @@ function detectCategory(query) {
         "auricolari",
         "headphone",
         "headphones",
+        "airpods",
+        "xm5",
+        "xm6",
+        "wh 1000xm",
       ],
     },
 
@@ -437,6 +443,7 @@ function detectCategory(query) {
         "portatili",
         "laptop",
         "notebook",
+        "macbook",
       ],
     },
 
@@ -732,6 +739,9 @@ function detectIntent(query) {
   const priceObjective =
     hasPriceObjective(query);
 
+  const budget =
+    extractBudget(query);
+
   const qualityObjectives =
     detectQualityObjectives(query);
 
@@ -798,14 +808,28 @@ function detectIntent(query) {
     "per me",
   ];
 
-  if (
+  const explicitRecommendation =
     recommendationSignals.some(
       signal => q.includes(signal)
-    ) ||
-    useCase ||
-    qualityObjectives.length > 0
+    );
+
+  if (explicitRecommendation) {
+    return "RECOMMENDATION";
+  }
+
+  if (
+    genericCategoryRequest &&
+    (
+      useCase ||
+      qualityObjectives.length > 0 ||
+      budget !== null
+    )
   ) {
     return "RECOMMENDATION";
+  }
+
+  if (budget !== null) {
+    return "BEST_OFFER";
   }
 
   return "PRODUCT_SEARCH";
@@ -967,6 +991,24 @@ function cleanProductQuery(query) {
     "tutti i giorni",
     "uso normale",
     "quotidiano",
+    "batteria",
+    "autonomia",
+    "prestazioni",
+    "performance",
+    "potente",
+    "potenza",
+    "veloce",
+    "velocita",
+    "display",
+    "schermo",
+    "audio",
+    "suono",
+    "comfort",
+    "comodita",
+    "portabilita",
+    "peso",
+    "aggiornamenti",
+    "software",
   ];
 
   for (const phrase of needPhrases) {
@@ -1004,6 +1046,12 @@ function cleanProductQuery(query) {
       "delle",
       "di",
       "con",
+      "l",
+      "d",
+      "buona",
+      "buono",
+      "ottima",
+      "ottimo",
     ]);
 
   return q
@@ -3339,6 +3387,7 @@ app.get(
             category,
             objectives,
             priceObjective,
+            hardRequirements,
 
             recommendationNeed:
               analysis.need ||
