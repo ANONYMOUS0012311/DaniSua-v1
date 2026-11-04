@@ -11,6 +11,8 @@ const {
 
 const {
   getLowestOffer,
+  getKnownFinalCost,
+  getOfferSelection,
 } = require("../utils/rankProducts");
 
 
@@ -1239,6 +1241,252 @@ async function testSwitch2MarioKartBundle() {
 
 
 // ========================================
+// TEST 21
+// COSTO FINALE — SPEDIZIONE CAMBIA IL VINCITORE
+// ========================================
+
+async function testFinalCostCanChangeWinner() {
+  assert(
+    getKnownFinalCost({
+      offer_price: 100,
+      shipping_price: 5,
+      pricing: {
+        conditional: false,
+      },
+    }) === 105,
+    "getKnownFinalCost dovrebbe sommare prezzo e spedizione"
+  );
+
+
+  const selection =
+    getOfferSelection([
+      {
+        id: "cheap-sticker-expensive-shipping",
+        offer_price: 100,
+        shipping_price: 20,
+        pricing: {
+          conditional: false,
+        },
+      },
+      {
+        id: "higher-sticker-free-shipping",
+        offer_price: 110,
+        shipping_price: 0,
+        pricing: {
+          conditional: false,
+        },
+      },
+    ]);
+
+  assert(
+    selection.bestOffer?.id ===
+      "higher-sticker-free-shipping",
+    `Il costo finale dovrebbe cambiare il vincitore: ${selection.bestOffer?.id}`
+  );
+
+  assert(
+    selection.finalCost === 110,
+    `Costo finale atteso 110, ricevuto ${selection.finalCost}`
+  );
+
+  assert(
+    selection.confirmedFinalCost ===
+      true,
+    "Il costo finale dovrebbe essere confermato"
+  );
+}
+
+
+// ========================================
+// TEST 22
+// SPEDIZIONE SCONOSCIUTA — RISULTATO PROVVISORIO
+// ========================================
+
+async function testUnknownShippingIsProvisional() {
+  const selection =
+    getOfferSelection([
+      {
+        id: "known-total",
+        offer_price: 100,
+        shipping_price: 0,
+        pricing: {
+          conditional: false,
+        },
+      },
+      {
+        id: "unknown-shipping",
+        offer_price: 90,
+        shipping_price: null,
+        pricing: {
+          conditional: false,
+        },
+      },
+    ]);
+
+  assert(
+    selection.bestOffer?.id ===
+      "unknown-shipping",
+    `Il prezzo base più basso dovrebbe restare candidato provvisorio: ${selection.bestOffer?.id}`
+  );
+
+  assert(
+    selection.confirmedFinalCost ===
+      false,
+    "Una spedizione sconosciuta non deve produrre un costo finale confermato"
+  );
+
+  assert(
+    selection.finalCost === null,
+    `Il costo finale dovrebbe essere null, ricevuto ${selection.finalCost}`
+  );
+
+  assert(
+    selection.mode ===
+      "listed_price_provisional",
+    `Modalità provvisoria inattesa: ${selection.mode}`
+  );
+}
+
+
+// ========================================
+// TEST 23
+// VINCITORE GARANTITO CON SPEDIZIONE SCONOSCIUTA ALTROVE
+// ========================================
+
+async function testKnownFinalCostCanStillBeGuaranteed() {
+  const selection =
+    getOfferSelection([
+      {
+        id: "known-winner",
+        offer_price: 100,
+        shipping_price: 5,
+        pricing: {
+          conditional: false,
+        },
+      },
+      {
+        id: "unknown-but-higher-base",
+        offer_price: 120,
+        shipping_price: null,
+        pricing: {
+          conditional: false,
+        },
+      },
+    ]);
+
+  assert(
+    selection.bestOffer?.id ===
+      "known-winner",
+    `Vincitore finale inatteso: ${selection.bestOffer?.id}`
+  );
+
+  assert(
+    selection.finalCost === 105,
+    `Costo finale atteso 105, ricevuto ${selection.finalCost}`
+  );
+
+  assert(
+    selection.confirmedFinalCost ===
+      true,
+    "Il vincitore dovrebbe essere matematicamente garantito"
+  );
+
+  assert(
+    selection.mode ===
+      "final_cost_confirmed_with_unknown_shipping",
+    `Modalità finale inattesa: ${selection.mode}`
+  );
+}
+
+
+// ========================================
+// TEST 24
+// GALAXY S26 ULTRA — COSTO FINALE REALE
+// ========================================
+
+async function testGalaxyFinalCostMetadata() {
+  const data =
+    await search(
+      "Galaxy S26 Ultra 256 GB White"
+    );
+
+  assert(
+    data.bestOffer
+      ?.id ===
+      "test-mediaworld-s26ultra-256-white",
+    `Migliore offerta Galaxy inattesa: ${data.bestOffer?.id}`
+  );
+
+  assert(
+    data.bestOffer
+      ?.costComparison
+      ?.confirmedFinalCost ===
+      true,
+    "Il Galaxy MediaWorld dovrebbe avere un costo finale confermato"
+  );
+
+  assert(
+    data.bestOffer
+      ?.costComparison
+      ?.finalCost ===
+      1278.48,
+    `Costo finale Galaxy inatteso: ${data.bestOffer?.costComparison?.finalCost}`
+  );
+
+  assert(
+    data.recommendation
+      ?.finalCost ===
+      1278.48,
+    `Costo finale recommendation inatteso: ${data.recommendation?.finalCost}`
+  );
+}
+
+
+// ========================================
+// TEST 25
+// IPAD AIR — PREZZO PROVVISORIO SE SPEDIZIONE MANCA
+// ========================================
+
+async function testIPadUnknownShippingIsHonest() {
+  const data =
+    await search(
+      "iPad Air 11 M4 128 GB Grigio Siderale"
+    );
+
+  assert(
+    data.bestOffer
+      ?.id ===
+      "test-mediaworld-ipad-air-m4-128-space-gray",
+    `Offerta iPad inattesa: ${data.bestOffer?.id}`
+  );
+
+  assert(
+    data.bestOffer
+      ?.costComparison
+      ?.confirmedFinalCost ===
+      false,
+    "L'iPad MediaWorld non deve avere costo finale confermato con spedizione null"
+  );
+
+  assert(
+    data.recommendation
+      ?.finalCost ===
+      null,
+    `Il costo finale iPad dovrebbe essere null, ricevuto ${data.recommendation?.finalCost}`
+  );
+
+  assert(
+    data.recommendation
+      ?.message
+      ?.includes(
+        "non posso confermare il costo finale"
+      ),
+    "La recommendation iPad deve dichiarare l'incertezza della spedizione"
+  );
+}
+
+
+// ========================================
 // TESTS
 // ========================================
 
@@ -1409,6 +1657,46 @@ const tests = [
 
     run:
       testSwitch2MarioKartBundle,
+  },
+
+  {
+    name:
+      "FINAL COST — spedizione cambia il vincitore",
+
+    run:
+      testFinalCostCanChangeWinner,
+  },
+
+  {
+    name:
+      "FINAL COST — spedizione sconosciuta resta provvisoria",
+
+    run:
+      testUnknownShippingIsProvisional,
+  },
+
+  {
+    name:
+      "FINAL COST — vincitore garantito con shipping parziale",
+
+    run:
+      testKnownFinalCostCanStillBeGuaranteed,
+  },
+
+  {
+    name:
+      "FINAL COST — Galaxy S26 Ultra metadata",
+
+    run:
+      testGalaxyFinalCostMetadata,
+  },
+
+  {
+    name:
+      "FINAL COST — iPad shipping unknown disclosure",
+
+    run:
+      testIPadUnknownShippingIsHonest,
   },
 ];
 

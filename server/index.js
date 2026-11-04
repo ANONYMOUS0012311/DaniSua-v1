@@ -7,6 +7,9 @@ const {
   getUniqueFamilies,
   getLowestOffer,
   isDefaultComparableOffer,
+  getKnownFinalCost,
+  getOfferDecisionCost,
+  getOfferSelection,
   getFamilyScore,
   rankByCriterion,
   rankByObjectives,
@@ -1422,11 +1425,19 @@ function filterFamiliesByBudget(
           family
         );
 
+      const decisionCost =
+        getOfferDecisionCost(
+          bestOffer
+        );
+
       return (
         bestOffer &&
-        typeof bestOffer
-          .offer_price === "number" &&
-        bestOffer.offer_price <=
+        typeof decisionCost ===
+          "number" &&
+        Number.isFinite(
+          decisionCost
+        ) &&
+        decisionCost <=
           budget
       );
     }
@@ -2056,27 +2067,178 @@ function pickBestOffer(
     return null;
   }
 
-  const validProducts =
-    products.filter(
-      product =>
-        isDefaultComparableOffer(
-          product
+  return getOfferSelection(
+    products
+  ).bestOffer;
+}
+
+
+// ========================================
+// METADATI COSTO FINALE
+// ========================================
+
+function buildCostRecommendationMeta(
+  bestOffer,
+  offers
+) {
+  const comparableOffers =
+    Array.isArray(offers)
+      ? offers.filter(
+          offer =>
+            isDefaultComparableOffer(
+              offer
+            )
         )
+      : [];
+
+  const selection =
+    getOfferSelection(
+      comparableOffers
     );
 
+  const selected =
+    bestOffer ||
+    selection.bestOffer;
+
+  const finalCost =
+    selected
+      ?.costComparison
+      ?.finalCost ??
+    getKnownFinalCost(
+      selected
+    );
+
+  const confirmedFinalCost =
+    selected
+      ?.costComparison
+      ?.confirmedFinalCost ===
+        true;
+
+  const shippingKnown =
+    typeof selected
+      ?.shipping_price ===
+      "number" &&
+    Number.isFinite(
+      selected.shipping_price
+    );
+
+  const unknownShippingOffers =
+    comparableOffers.filter(
+      offer =>
+        getKnownFinalCost(
+          offer
+        ) === null
+    ).length;
+
+  let savingsVsNextOffer = 0;
+
   if (
-    validProducts.length === 0
+    confirmedFinalCost &&
+    comparableOffers.length > 1 &&
+    unknownShippingOffers === 0
   ) {
-    return null;
+    const totals =
+      comparableOffers
+        .map(
+          offer =>
+            getKnownFinalCost(
+              offer
+            )
+        )
+        .filter(
+          value =>
+            typeof value ===
+              "number" &&
+            Number.isFinite(
+              value
+            )
+        )
+        .sort(
+          (a, b) =>
+            a - b
+        );
+
+    if (
+      totals.length > 1
+    ) {
+      savingsVsNextOffer =
+        Number(
+          (
+            totals[1] -
+            totals[0]
+          ).toFixed(2)
+        );
+    }
   }
 
-  return validProducts.reduce(
-    (best, product) =>
-      product.offer_price <
-      best.offer_price
-        ? product
-        : best
-  );
+  return {
+    price:
+      selected
+        ?.offer_price ??
+      null,
+
+    shippingPrice:
+      shippingKnown
+        ? selected
+            .shipping_price
+        : null,
+
+    finalCost:
+      confirmedFinalCost &&
+      typeof finalCost ===
+        "number"
+        ? finalCost
+        : null,
+
+    shippingKnown,
+
+    finalCostConfirmed:
+      confirmedFinalCost,
+
+    comparisonMode:
+      selected
+        ?.costComparison
+        ?.mode ||
+      selection.mode,
+
+    unknownShippingOffers,
+
+    savingsVsNextOffer:
+      savingsVsNextOffer > 0
+        ? savingsVsNextOffer
+        : 0,
+  };
+}
+
+
+function buildCostComparisonMessage(
+  meta,
+  comparedOffers
+) {
+  if (
+    comparedOffers <= 1
+  ) {
+    return meta
+      .finalCostConfirmed
+        ? "Ho trovato una sola offerta: il costo finale verificato include anche la spedizione."
+        : "Ho trovato una sola offerta, ma la spedizione non è ancora disponibile: il costo finale resta da verificare.";
+  }
+
+  if (
+    meta.finalCostConfirmed &&
+    meta.unknownShippingOffers ===
+      0
+  ) {
+    return `Questa è l'offerta con il costo finale più basso tra ${comparedOffers} offerte comparabili, includendo la spedizione.`;
+  }
+
+  if (
+    meta.finalCostConfirmed
+  ) {
+    return "Questa offerta ha un costo finale verificato che resta più basso anche rispetto al prezzo base delle offerte con spedizione non disponibile.";
+  }
+
+  return "Questa offerta ha il prezzo indicato più basso, ma non posso confermare il costo finale perché la spedizione non è disponibile per tutte le offerte.";
 }
 
 
@@ -2092,37 +2254,11 @@ function buildEquivalentRecommendation(
     return null;
   }
 
-  const otherPrices =
-    comparableOffers
-      .filter(
-        product =>
-          product.id !==
-          bestOffer.id
-      )
-      .map(
-        product =>
-          product.offer_price
-      )
-      .filter(
-        price =>
-          typeof price ===
-            "number"
-      );
-
-  let savings = null;
-
-  if (
-    otherPrices.length > 0
-  ) {
-    const nextPrice =
-      Math.min(
-        ...otherPrices
-      );
-
-    savings =
-      nextPrice -
-      bestOffer.offer_price;
-  }
+  const cost =
+    buildCostRecommendationMeta(
+      bestOffer,
+      comparableOffers
+    );
 
   return {
     reason:
@@ -2136,17 +2272,12 @@ function buildEquivalentRecommendation(
       "EUR",
     comparedOffers:
       comparableOffers.length,
-    savingsVsNextOffer:
-      savings !== null &&
-      savings > 0
-        ? Number(
-            savings.toFixed(2)
-          )
-        : 0,
+    ...cost,
     message:
-      comparableOffers.length > 1
-        ? `Questa è l'offerta con il prezzo più basso tra ${comparableOffers.length} offerte equivalenti trovate.`
-        : "Ho trovato una sola offerta per questo prodotto.",
+      buildCostComparisonMessage(
+        cost,
+        comparableOffers.length
+      ),
   };
 }
 
@@ -2168,6 +2299,12 @@ function buildGenericPriceRecommendation(
     scope === "product_line"
       ? "sulla linea"
       : "sul modello";
+
+  const cost =
+    buildCostRecommendationMeta(
+      bestOffer,
+      offers
+    );
 
   return {
     reason:
@@ -2200,10 +2337,15 @@ function buildGenericPriceRecommendation(
         bestOffer.color ||
         null,
     },
+    ...cost,
     message:
       "Richiesta generica " +
       scopePhrase +
-      ": ho privilegiato il prezzo totale tra le opzioni compatibili e le offerte verificate disponibili.",
+      ". " +
+      buildCostComparisonMessage(
+        cost,
+        offers.length
+      ),
   };
 }
 
@@ -2220,37 +2362,11 @@ function buildBestOfferRecommendation(
     return null;
   }
 
-  const otherPrices =
-    offers
-      .filter(
-        offer =>
-          offer.id !==
-          bestOffer.id
-      )
-      .map(
-        offer =>
-          offer.offer_price
-      )
-      .filter(
-        price =>
-          typeof price ===
-            "number"
-      );
-
-  let savings = null;
-
-  if (
-    otherPrices.length > 0
-  ) {
-    const nextPrice =
-      Math.min(
-        ...otherPrices
-      );
-
-    savings =
-      nextPrice -
-      bestOffer.offer_price;
-  }
+  const cost =
+    buildCostRecommendationMeta(
+      bestOffer,
+      offers
+    );
 
   return {
     reason:
@@ -2286,18 +2402,13 @@ function buildBestOfferRecommendation(
         null,
     },
 
-    savingsVsNextOffer:
-      savings !== null &&
-      savings > 0
-        ? Number(
-            savings.toFixed(2)
-          )
-        : 0,
+    ...cost,
 
     message:
-      offers.length > 1
-        ? `Ho confrontato ${offers.length} offerte e varianti disponibili e ho trovato il prezzo indicato più basso.`
-        : "Ho trovato una sola offerta disponibile per questa ricerca.",
+      buildCostComparisonMessage(
+        cost,
+        offers.length
+      ),
   };
 }
 
@@ -2317,6 +2428,15 @@ function buildBestProductRecommendation(
   ) {
     return null;
   }
+
+  const cost =
+    buildCostRecommendationMeta(
+      bestOffer,
+      winner.offers ||
+        [
+          bestOffer,
+        ]
+    );
 
   return {
     reason:
@@ -2354,8 +2474,16 @@ function buildBestProductRecommendation(
       bestOffer.currency ||
       "EUR",
 
+    ...cost,
+
     message:
-      "Questo modello risulta il più adatto secondo i criteri disponibili. Ho poi selezionato la variante con l'offerta più conveniente trovata.",
+      "Questo modello risulta il più adatto secondo i criteri disponibili. " +
+      buildCostComparisonMessage(
+        cost,
+        winner.offers
+          ?.length ||
+        1
+      ),
   };
 }
 
@@ -2412,6 +2540,15 @@ function buildNeedRecommendation(
       ?.dataCoverage
       ?.excludedFamilies ||
     0;
+
+  const offerCost =
+    buildCostRecommendationMeta(
+      bestOffer,
+      winner.offers ||
+        [
+          bestOffer,
+        ]
+    );
 
   let message =
     `Per l'uso "${analysis.need?.useCase?.label || "generale"}", questo è il modello che risulta più adatto usando i dati comparabili disponibili.`;
@@ -2471,7 +2608,17 @@ function buildNeedRecommendation(
       bestOffer.currency ||
       "EUR",
 
-    message,
+    ...offerCost,
+
+    message:
+      message +
+      " " +
+      buildCostComparisonMessage(
+        offerCost,
+        winner.offers
+          ?.length ||
+        1
+      ),
   };
 }
 
