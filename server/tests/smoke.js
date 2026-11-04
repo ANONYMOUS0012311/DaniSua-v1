@@ -451,10 +451,10 @@ async function testRecommendationBudget() {
 
 // ========================================
 // TEST 5
-// NESSUN LAPTOP SOTTO 1000
+// LAPTOP SOTTO 1000 — DATI INSUFFICIENTI
 // ========================================
 
-async function testNoLaptopInBudget() {
+async function testLaptopUnder1000KnowledgeInsufficient() {
   const data =
     await search(
       "Mi serve un portatile per l'università sotto 1000 euro"
@@ -470,8 +470,8 @@ async function testNoLaptopInBudget() {
 
   assert(
     data.status ===
-      "no_products_in_budget",
-    `Status atteso no_products_in_budget, ricevuto ${data.status}`
+      "knowledge_insufficient",
+    `Status atteso knowledge_insufficient, ricevuto ${data.status}`
   );
 
 
@@ -484,7 +484,39 @@ async function testNoLaptopInBudget() {
 
   assert(
     !data.bestOffer,
-    "Non dovrebbe esserci una bestOffer"
+    "Non dovrebbe esserci una bestOffer senza dati comparabili sufficienti"
+  );
+
+
+  const compatibleOffers =
+    Array.isArray(
+      data.results
+    )
+      ? data.results
+      : [];
+
+
+  assert(
+    compatibleOffers.some(
+      offer =>
+        offer.productId ===
+          "apple-macbook-neo-13-a18pro-8-256-indigo" &&
+        offer.offer_price <=
+          1000
+    ),
+    "MacBook Neo sotto 1000 € dovrebbe essere riconosciuto come compatibile"
+  );
+
+
+  assert(
+    String(
+      data.clarification
+        ?.message ||
+      ""
+    ).includes(
+      "dati verificati sufficienti"
+    ),
+    "La risposta deve spiegare che mancano dati verificati sufficienti"
   );
 }
 
@@ -1253,10 +1285,10 @@ const tests = [
 
   {
     name:
-      "RECOMMENDATION — nessun laptop sotto 1000 €",
+      "RECOMMENDATION — laptop sotto 1000 € senza dati comparabili",
 
     run:
-      testNoLaptopInBudget,
+      testLaptopUnder1000KnowledgeInsufficient,
   },
 
   {
