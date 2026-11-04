@@ -229,7 +229,7 @@
     "store": "Apple",
     "seller": "Apple",
     "old_price": null,
-    "offer_price": 979,
+    "offer_price": 1129,
     "currency": "EUR",
     "shipping_price": 0,
     "stock": true,
@@ -242,7 +242,7 @@
       "paymentOptions": [
         {
           "type": "one_time",
-          "total_price": 979
+          "total_price": 1129
         }
       ]
     }
