@@ -34,3 +34,6 @@ jobs:
 
       - name: Check offer freshness
         run: npm run check:freshness
+
+      - name: Audit production dependencies
+        run: npm audit --audit-level=moderate
