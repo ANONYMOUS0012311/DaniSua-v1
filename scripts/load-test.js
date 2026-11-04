@@ -1,3 +1,6 @@
+// DaniSuai reusable load tester
+// Measures controlled concurrency without retrying failed requests.
+
 const { performance } = require("perf_hooks");
 
 function getArg(name, fallback = null) {
