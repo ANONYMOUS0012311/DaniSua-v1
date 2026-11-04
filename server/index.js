@@ -1695,13 +1695,15 @@ function analyzeBestProduct(
 // ========================================
 // COPERTURA DATI RECOMMENDATION
 //
-// Usiamo un criterio solo se tutte le
-// famiglie candidate hanno uno score
-// comparabile per quel criterio.
+// Un criterio può avere copertura:
+// - completa: tutte le famiglie hanno dati
+// - parziale: alcune famiglie hanno dati
+// - assente: nessuna famiglia ha dati
 //
-// In questo modo non eliminiamo in
-// silenzio prodotti solo perché mancano
-// dati.
+// La copertura parziale NON trasforma i
+// prodotti senza dati in prodotti peggiori.
+// Vengono esclusi solo dal ranking e la
+// risposta lo dichiara esplicitamente.
 // ========================================
 
 function analyzeRecommendationCoverage(
@@ -1715,6 +1717,7 @@ function analyzeRecommendationCoverage(
 
   const supportedObjectives = [];
   const unsupportedObjectives = [];
+  const partialObjectives = [];
 
   for (
     const objective of
@@ -1746,18 +1749,27 @@ function analyzeRecommendationCoverage(
       scoredFamilies,
       totalFamilies:
         families.length,
+      partial:
+        scoredFamilies > 0 &&
+        scoredFamilies <
+          families.length,
     };
 
-    if (
-      families.length > 0 &&
-      scoredFamilies ===
-        families.length
-    ) {
+    if (scoredFamilies > 0) {
       supportedObjectives.push({
         criterion,
         weight:
           objective.weight || 1,
       });
+
+      if (
+        scoredFamilies <
+        families.length
+      ) {
+        partialObjectives.push(
+          coverage
+        );
+      }
     } else {
       unsupportedObjectives.push(
         coverage
@@ -1770,7 +1782,44 @@ function analyzeRecommendationCoverage(
       families.length,
     supportedObjectives,
     unsupportedObjectives,
+    partialObjectives,
   };
+}
+
+
+function getRankableFamiliesForObjectives(
+  families,
+  objectives
+) {
+  if (
+    !Array.isArray(families) ||
+    families.length === 0
+  ) {
+    return [];
+  }
+
+  const criteria =
+    (objectives || [])
+      .map(
+        objective =>
+          objective?.criterion
+      )
+      .filter(Boolean);
+
+  if (criteria.length === 0) {
+    return [];
+  }
+
+  return families.filter(
+    family =>
+      criteria.every(
+        criterion =>
+          getFamilyScore(
+            family,
+            criterion
+          ) !== null
+      )
+  );
 }
 
 
@@ -1896,10 +1945,36 @@ function analyzeRecommendation(
       need.objectives
     );
 
+  const rankableFamilies =
+    getRankableFamiliesForObjectives(
+      families,
+      dataCoverage
+        .supportedObjectives
+    );
+
+  const rankableOffers =
+    offersForFamilies(
+      eligibleOffers,
+      rankableFamilies
+    );
+
+  const enrichedCoverage = {
+    ...dataCoverage,
+    rankableFamilies:
+      rankableFamilies.length,
+    excludedFamilies:
+      Math.max(
+        0,
+        families.length -
+          rankableFamilies.length
+      ),
+  };
+
   if (
-    dataCoverage
+    enrichedCoverage
       .supportedObjectives
-      .length === 0
+      .length === 0 ||
+    rankableFamilies.length === 0
   ) {
     return {
       status:
@@ -1908,8 +1983,11 @@ function analyzeRecommendation(
       message:
         "Ho capito le tue esigenze e ho trovato prodotti compatibili, ma non ho ancora dati verificati sufficienti per confrontarli in modo affidabile.",
       need,
-      dataCoverage,
+      dataCoverage:
+        enrichedCoverage,
       selectedOffers:
+        eligibleOffers,
+      compatibleOffers:
         eligibleOffers,
       winner: null,
       bestOffer: null,
@@ -1931,11 +2009,11 @@ function analyzeRecommendation(
 
   const productAnalysis =
     analyzeBestProduct(
-      eligibleOffers,
+      rankableOffers,
       {
         budget: null,
         objectives:
-          dataCoverage
+          enrichedCoverage
             .supportedObjectives,
         priceObjective:
           false,
@@ -1944,8 +2022,11 @@ function analyzeRecommendation(
 
   return {
     ...productAnalysis,
+    compatibleOffers:
+      eligibleOffers,
     need,
-    dataCoverage,
+    dataCoverage:
+      enrichedCoverage,
   };
 }
 
@@ -2306,8 +2387,31 @@ function buildNeedRecommendation(
           item.criterion
       ) || [];
 
+  const partialCriteria =
+    analysis
+      ?.dataCoverage
+      ?.partialObjectives
+      ?.map(
+        item =>
+          item.criterion
+      ) || [];
+
+  const excludedFamilies =
+    analysis
+      ?.dataCoverage
+      ?.excludedFamilies ||
+    0;
+
   let message =
     `Per l'uso "${analysis.need?.useCase?.label || "generale"}", questo è il modello che risulta più adatto usando i dati comparabili disponibili.`;
+
+  if (
+    partialCriteria.length > 0 &&
+    excludedFamilies > 0
+  ) {
+    message +=
+      ` Per ${partialCriteria.join(", ")}, ho classificato solo i modelli con dati verificati comparabili; ${excludedFamilies} ${excludedFamilies === 1 ? "famiglia compatibile non è stata classificata" : "famiglie compatibili non sono state classificate"} per mancanza di dati sufficienti.`;
+  }
 
   if (
     missingCriteria.length > 0
@@ -2336,6 +2440,10 @@ function buildNeedRecommendation(
     usedCriteria,
 
     missingCriteria,
+
+    partialCriteria,
+
+    excludedFamilies,
 
     rankingScore:
       winner.ranking
