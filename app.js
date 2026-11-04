@@ -501,11 +501,29 @@ function renderBestOffer(
       product.store || ""
     );
 
+  const finalCostConfirmed =
+    recommendation
+      ?.finalCostConfirmed ===
+      true;
+
+  const displayAmount =
+    finalCostConfirmed &&
+    typeof recommendation
+      ?.finalCost ===
+      "number"
+      ? recommendation.finalCost
+      : product.offer_price;
+
   const price =
     formatPrice(
-      product.offer_price,
+      displayAmount,
       product.currency || "EUR"
     );
+
+  const priceLabel =
+    finalCostConfirmed
+      ? "Costo finale"
+      : "Prezzo";
 
   const comparedOffers =
     recommendation?.comparedOffers || 1;
@@ -540,6 +558,21 @@ function renderBestOffer(
         )
       : "";
 
+  const shippingText =
+    typeof product
+      .shipping_price ===
+      "number"
+      ? (
+          product.shipping_price ===
+            0
+            ? "Spedizione inclusa"
+            : `Spedizione: ${formatPrice(
+                product.shipping_price,
+                product.currency || "EUR"
+              )}`
+        )
+      : "Spedizione da verificare";
+
   const isGenericPriceFirst =
     recommendation?.reason ===
       "generic_price_first";
@@ -550,9 +583,9 @@ function renderBestOffer(
       : "offerte equivalenti";
 
   const ruleNote =
-    isGenericPriceFirst
-      ? "Richiesta generica: DaniSuai privilegia il prezzo totale tra le opzioni compatibili disponibili."
-      : "La raccomandazione attuale considera il prezzo delle offerte equivalenti.";
+    finalCostConfirmed
+      ? "DaniSuai ha potuto confrontare il costo finale del vincitore includendo la spedizione."
+      : "Il prezzo indicato è utile per il confronto, ma il costo finale non è ancora confermato perché manca almeno un dato di spedizione.";
 
   content.innerHTML = `
     <div class="danisua-recommendation">
@@ -562,10 +595,15 @@ function renderBestOffer(
       </strong>
 
       <p>
+        ${escapeHtml(priceLabel)}:
         <strong>
           ${price}
         </strong>
         · ${store}
+      </p>
+
+      <p class="danisua-rule-note">
+        ${escapeHtml(shippingText)}
       </p>
 
       ${
@@ -811,6 +849,45 @@ function renderProducts(
             product.currency || "EUR"
           );
 
+        const shippingKnown =
+          typeof product
+            .shipping_price ===
+            "number" &&
+          Number.isFinite(
+            product.shipping_price
+          );
+
+        const shippingText =
+          shippingKnown
+            ? (
+                product.shipping_price ===
+                  0
+                  ? "Spedizione: gratuita"
+                  : `Spedizione: ${formatPrice(
+                      product.shipping_price,
+                      product.currency || "EUR"
+                    )}`
+              )
+            : "Spedizione: da verificare";
+
+        const finalCost =
+          shippingKnown &&
+          typeof product
+            .offer_price ===
+            "number"
+            ? product.offer_price +
+              product.shipping_price
+            : null;
+
+        const finalCostText =
+          typeof finalCost ===
+            "number"
+            ? `Costo finale: ${formatPrice(
+                finalCost,
+                product.currency || "EUR"
+              )}`
+            : "";
+
         // IMPORTANTE:
         // solo marcamos ganador si el backend
         // realmente ha elegido bestOffer.
@@ -944,7 +1021,14 @@ function renderProducts(
                 isBest
                   ? `
                     <span class="badge-best-body">
-                      Migliore offerta trovata
+                      ${
+                        bestOffer
+                          ?.costComparison
+                          ?.confirmedFinalCost ===
+                            true
+                          ? "Migliore costo finale verificato"
+                          : "Prezzo più basso · spedizione da verificare"
+                      }
                     </span>
                   `
                   : ""
@@ -967,6 +1051,20 @@ function renderProducts(
                 </span>
 
               </div>
+
+              <p class="producto-meta-actualizacion">
+                ${escapeHtml(shippingText)}
+              </p>
+
+              ${
+                finalCostText
+                  ? `
+                    <p class="producto-meta-actualizacion">
+                      ${escapeHtml(finalCostText)}
+                    </p>
+                  `
+                  : ""
+              }
 
               <button
                 class="producto-btn-ver"
