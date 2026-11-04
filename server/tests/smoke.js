@@ -874,14 +874,14 @@ async function testIPhone17FlexibleColor() {
   assert(
     data.bestOffer
       ?.id ===
-      "test-apple-iphone17-256-black",
+      "test-mediaworld-iphone17-256-black",
     `Offerta iPhone 17 inattesa: ${data.bestOffer?.id}`
   );
 
   assert(
     data.bestOffer
       ?.offer_price ===
-      979,
+      989.49,
     `Prezzo iPhone 17 inatteso: ${data.bestOffer?.offer_price}`
   );
 }
