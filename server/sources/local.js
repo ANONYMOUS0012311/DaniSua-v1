@@ -144,6 +144,9 @@ function buildProductSearchText(
       product.brand,
       product.model,
       product.familyId,
+      product.familyName,
+      product.productLineId,
+      product.productLineName,
       product.storage,
       product.ram,
       product.color,
@@ -221,6 +224,19 @@ function joinProductData(
     familyId:
       product.familyId ||
       product.id,
+
+    familyName:
+      product.familyName ||
+      product.model ||
+      null,
+
+    productLineId:
+      product.productLineId ||
+      null,
+
+    productLineName:
+      product.productLineName ||
+      null,
 
 
     // ------------------------------------

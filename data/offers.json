@@ -115,5 +115,88 @@
     "stock": true,
     "url": "https://www.apple.com/it",
     "image": ""
+  },
+  {
+    "id": "test-apple-airpods5-usbc",
+    "productId": "apple-airpods-5-usbc",
+    "store": "Apple",
+    "seller": "Apple",
+    "old_price": null,
+    "offer_price": 149,
+    "currency": "EUR",
+    "shipping_price": 0,
+    "stock": true,
+    "url": "https://www.apple.com/it/shop/buy-airpods/airpods-5",
+    "updatedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 149
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-apple-airpods5-wireless",
+    "productId": "apple-airpods-5-wireless",
+    "store": "Apple",
+    "seller": "Apple",
+    "old_price": null,
+    "offer_price": 169,
+    "currency": "EUR",
+    "shipping_price": 0,
+    "stock": true,
+    "url": "https://www.apple.com/it/shop/buy-airpods/airpods-5/con-custodia-di-ricarica-wireless",
+    "updatedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 169
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-apple-airpods-pro-3",
+    "productId": "apple-airpods-pro-3",
+    "store": "Apple",
+    "seller": "Apple",
+    "old_price": null,
+    "offer_price": 249,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.apple.com/it/shop/buy-airpods/airpods-pro-3",
+    "updatedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 249
+        },
+        {
+          "type": "installment",
+          "installments": 12,
+          "installment_amount": 22.01,
+          "displayed_total": 264.12,
+          "financing_cost": 15.12,
+          "tan": 11.02,
+          "taeg": null,
+          "provider": "Findomestic",
+          "note": "Finanziamento mostrato da Apple Italia; il ranking standard usa il prezzo totale di acquisto di 249 €."
+        }
+      ]
+    }
   }
 ]

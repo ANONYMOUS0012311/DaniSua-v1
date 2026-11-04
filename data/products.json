@@ -120,5 +120,102 @@
       "storage": "512 GB",
       "ram": "16 GB"
     }
+  },
+  {
+    "id": "apple-airpods-4",
+    "familyId": "apple-airpods-4",
+    "familyName": "AirPods 4",
+    "productLineId": "apple-airpods",
+    "productLineName": "AirPods",
+    "category": "auriculares",
+    "brand": "Apple",
+    "model": "AirPods 4",
+    "storage": null,
+    "ram": null,
+    "color": "Bianco",
+    "condition": "new",
+    "gtin": null,
+    "title": "Apple AirPods 4",
+    "attributes": {
+      "anc": false,
+      "wirelessCharging": false,
+      "case": "Custodia di ricarica USB-C",
+      "formFactor": "earbuds"
+    },
+    "image": null,
+    "imageSourcePage": "https://www.apple.com/it/airpods-4/"
+  },
+  {
+    "id": "apple-airpods-5-usbc",
+    "familyId": "apple-airpods-5",
+    "familyName": "AirPods 5",
+    "productLineId": "apple-airpods",
+    "productLineName": "AirPods",
+    "category": "auriculares",
+    "brand": "Apple",
+    "model": "AirPods 5",
+    "storage": null,
+    "ram": null,
+    "color": "Bianco",
+    "condition": "new",
+    "gtin": null,
+    "title": "Apple AirPods 5",
+    "attributes": {
+      "anc": true,
+      "wirelessCharging": false,
+      "case": "Custodia di ricarica USB-C",
+      "formFactor": "earbuds"
+    },
+    "image": null,
+    "imageSourcePage": "https://www.apple.com/it/shop/buy-airpods/airpods-5"
+  },
+  {
+    "id": "apple-airpods-5-wireless",
+    "familyId": "apple-airpods-5",
+    "familyName": "AirPods 5",
+    "productLineId": "apple-airpods",
+    "productLineName": "AirPods",
+    "category": "auriculares",
+    "brand": "Apple",
+    "model": "AirPods 5",
+    "storage": null,
+    "ram": null,
+    "color": "Bianco",
+    "condition": "new",
+    "gtin": null,
+    "title": "Apple AirPods 5 con custodia di ricarica wireless",
+    "attributes": {
+      "anc": true,
+      "wirelessCharging": true,
+      "case": "Custodia di ricarica wireless USB-C",
+      "formFactor": "earbuds"
+    },
+    "image": null,
+    "imageSourcePage": "https://www.apple.com/it/shop/buy-airpods/airpods-5/con-custodia-di-ricarica-wireless"
+  },
+  {
+    "id": "apple-airpods-pro-3",
+    "familyId": "apple-airpods-pro-3",
+    "familyName": "AirPods Pro 3",
+    "productLineId": "apple-airpods",
+    "productLineName": "AirPods",
+    "category": "auriculares",
+    "brand": "Apple",
+    "model": "AirPods Pro 3",
+    "storage": null,
+    "ram": null,
+    "color": "Bianco",
+    "condition": "new",
+    "gtin": null,
+    "title": "Apple AirPods Pro 3",
+    "attributes": {
+      "anc": true,
+      "wirelessCharging": true,
+      "pro": true,
+      "case": "Custodia di ricarica MagSafe USB-C",
+      "formFactor": "in-ear"
+    },
+    "image": null,
+    "imageSourcePage": "https://www.apple.com/it/shop/buy-airpods/airpods-pro-3"
   }
 ]

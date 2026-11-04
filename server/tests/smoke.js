@@ -703,6 +703,141 @@ async function testConditionalPricingRanking() {
 
 
 // ========================================
+// TEST 9
+// PRODUCT LINE — PREZZO DOMINA
+// ========================================
+
+async function testAirPodsProductLine() {
+  const data =
+    await search(
+      "AirPods"
+    );
+
+  assert(
+    data.intent ===
+      "PRODUCT_SEARCH",
+    `Intent AirPods inatteso: ${data.intent}`
+  );
+
+  assert(
+    data.status ===
+      "product_line_ready",
+    `Status AirPods inatteso: ${data.status}`
+  );
+
+  assert(
+    data.recommendation
+      ?.reason ===
+      "generic_price_first",
+    "La linea AirPods deve usare la regola price-first"
+  );
+
+  assert(
+    data.bestOffer
+      ?.productId ===
+      "apple-airpods-5-usbc",
+    `Variante disponibile più economica inattesa: ${data.bestOffer?.productId}`
+  );
+
+  assert(
+    data.bestOffer
+      ?.offer_price ===
+      149,
+    `Prezzo AirPods generico inatteso: ${data.bestOffer?.offer_price}`
+  );
+}
+
+
+// ========================================
+// TEST 10
+// HARD REQUIREMENT — ANC
+// ========================================
+
+async function testAirPodsAncRequirement() {
+  const data =
+    await search(
+      "AirPods con cancellazione del rumore"
+    );
+
+  assert(
+    data.productQuery ===
+      "airpods",
+    `productQuery ANC inattesa: ${data.productQuery}`
+  );
+
+  assert(
+    data.context
+      ?.hardRequirements
+      ?.anc === true,
+    "Requisito ANC non rilevato"
+  );
+
+  assert(
+    Array.isArray(
+      data.results
+    ) &&
+    data.results.length > 0,
+    "Nessun AirPods compatibile con ANC"
+  );
+
+  assert(
+    data.results.every(
+      offer =>
+        offer.attributes
+          ?.anc === true
+    ),
+    "È rimasta una variante senza ANC"
+  );
+
+  assert(
+    data.bestOffer
+      ?.productId ===
+      "apple-airpods-5-usbc",
+    `Migliore AirPods ANC inatteso: ${data.bestOffer?.productId}`
+  );
+
+  assert(
+    data.bestOffer
+      ?.offer_price ===
+      149,
+    `Prezzo AirPods ANC inatteso: ${data.bestOffer?.offer_price}`
+  );
+}
+
+
+// ========================================
+// TEST 11
+// FAMILY — VARIANTE PIÙ ECONOMICA
+// ========================================
+
+async function testAirPodsFamilyPriceFirst() {
+  const data =
+    await search(
+      "AirPods 5"
+    );
+
+  assert(
+    data.status ===
+      "family_price_ready",
+    `Status AirPods 5 inatteso: ${data.status}`
+  );
+
+  assert(
+    data.bestOffer
+      ?.productId ===
+      "apple-airpods-5-usbc",
+    `Variante AirPods 5 inattesa: ${data.bestOffer?.productId}`
+  );
+
+  assert(
+    data.results.length ===
+      2,
+    `Attese 2 varianti AirPods 5, ricevute ${data.results.length}`
+  );
+}
+
+
+// ========================================
 // TESTS
 // ========================================
 
@@ -777,6 +912,30 @@ const tests = [
 
     run:
       testConditionalPricingRanking,
+  },
+
+  {
+    name:
+      "PRODUCT LINE — AirPods generici price-first",
+
+    run:
+      testAirPodsProductLine,
+  },
+
+  {
+    name:
+      "HARD REQUIREMENT — AirPods con ANC",
+
+    run:
+      testAirPodsAncRequirement,
+  },
+
+  {
+    name:
+      "FAMILY — AirPods 5 variante più economica",
+
+    run:
+      testAirPodsFamilyPriceFirst,
   },
 ];
 

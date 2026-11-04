@@ -6,6 +6,7 @@ const sourceRegistry = require("./sources/registry");
 const {
   getUniqueFamilies,
   getLowestOffer,
+  isDefaultComparableOffer,
   getFamilyScore,
   rankByCriterion,
   rankByObjectives,
@@ -487,6 +488,58 @@ function detectQualityObjectives(query) {
 
 
 // ========================================
+// REQUISITI HARD
+// ========================================
+
+function detectHardRequirements(query) {
+  const q =
+    normalizeText(query);
+
+  const requirements = {};
+
+  const ancSignals = [
+    "anc",
+    "cancellazione rumore",
+    "cancellazione del rumore",
+    "cancellazione attiva del rumore",
+  ];
+
+  if (
+    ancSignals.some(
+      signal => q.includes(signal)
+    )
+  ) {
+    requirements.anc = true;
+  }
+
+  return requirements;
+}
+
+
+function filterOffersByHardRequirements(
+  offers,
+  hardRequirements
+) {
+  if (!Array.isArray(offers)) {
+    return [];
+  }
+
+  return offers.filter(
+    offer => {
+      if (
+        hardRequirements?.anc === true &&
+        offer?.attributes?.anc !== true
+      ) {
+        return false;
+      }
+
+      return true;
+    }
+  );
+}
+
+
+// ========================================
 // INTENZIONE
 // ========================================
 
@@ -631,6 +684,26 @@ function cleanProductQuery(query) {
     );
   }
 
+  // DANISUA_HARD_REQUIREMENT_QUERY_CLEANER
+  const hardRequirementPhrases = [
+    "cancellazione attiva del rumore",
+    "cancellazione del rumore",
+    "cancellazione rumore",
+  ];
+
+  for (const phrase of hardRequirementPhrases) {
+    q = q.replaceAll(
+      phrase,
+      " "
+    );
+  }
+
+  q = q.replace(
+    /\banc\b/g,
+    " "
+  );
+
+
   // DANISUA_QUALITY_QUERY_CLEANER
   q = q.replace(
     /\b(?:con\s+)?(?:(?:il|lo|la|i|gli|le)\s+)?(?:miglior|migliore|migliori|best|mejor)\s+(?:telecamera|telecamere|fotocamera|fotocamere|camera|foto|fotografia|fotografie|batteria|autonomia|prestazioni|performance|display|schermo|audio|suono|comfort|comodita|portabilita|peso)\b/g,
@@ -723,6 +796,10 @@ function buildCatalogQuery(
 // ========================================
 
 function getProductKey(product) {
+  if (product?.productId) {
+    return String(product.productId);
+  }
+
   return [
     normalizeText(product.brand),
     normalizeText(product.model),
@@ -762,6 +839,129 @@ function groupEquivalentProducts(
   return Array.from(
     groups.values()
   );
+}
+
+
+// ========================================
+// LINEA / FAMIGLIA GENERICA
+// ========================================
+
+function queryTargetsProductLine(
+  query,
+  products
+) {
+  if (
+    !Array.isArray(products) ||
+    products.length === 0
+  ) {
+    return false;
+  }
+
+  const lineIds =
+    uniqueValues(
+      products,
+      "productLineId"
+    );
+
+  if (lineIds.length !== 1) {
+    return false;
+  }
+
+  const lineNames =
+    uniqueValues(
+      products,
+      "productLineName"
+    );
+
+  const brands =
+    uniqueValues(
+      products,
+      "brand"
+    );
+
+  const q =
+    normalizeText(query);
+
+  const candidates = [
+    lineIds[0],
+    lineNames[0] || null,
+    brands.length === 1 &&
+    lineNames.length === 1
+      ? brands[0] + " " + lineNames[0]
+      : null,
+  ]
+    .filter(Boolean)
+    .map(normalizeText);
+
+  return candidates.includes(q);
+}
+
+
+function queryTargetsCommonFamily(
+  query,
+  products
+) {
+  if (
+    !Array.isArray(products) ||
+    products.length === 0
+  ) {
+    return false;
+  }
+
+  const familyIds =
+    uniqueValues(
+      products,
+      "familyId"
+    );
+
+  if (familyIds.length !== 1) {
+    return false;
+  }
+
+  const familyNames =
+    uniqueValues(
+      products,
+      "familyName"
+    );
+
+  const models =
+    uniqueValues(
+      products,
+      "model"
+    );
+
+  const brands =
+    uniqueValues(
+      products,
+      "brand"
+    );
+
+  const name =
+    familyNames.length === 1
+      ? familyNames[0]
+      : (
+          models.length === 1
+            ? models[0]
+            : null
+        );
+
+  if (!name) {
+    return false;
+  }
+
+  const q =
+    normalizeText(query);
+
+  const candidates = [
+    name,
+    brands.length === 1
+      ? brands[0] + " " + name
+      : null,
+  ]
+    .filter(Boolean)
+    .map(normalizeText);
+
+  return candidates.includes(q);
 }
 
 
@@ -812,12 +1012,51 @@ function analyzeProductSearch(
     return {
       status: "specific",
       canRecommend: true,
+      scope: "exact_product",
       message:
         "Ho identificato il prodotto. Posso confrontare le offerte disponibili.",
       missing: [],
       options: {},
       selectedProducts:
         groups[0],
+    };
+  }
+
+  if (
+    queryTargetsProductLine(
+      query,
+      products
+    )
+  ) {
+    return {
+      status: "product_line_ready",
+      canRecommend: true,
+      scope: "product_line",
+      message:
+        "Richiesta generica sulla linea: confronto le opzioni compatibili e privilegio il prezzo totale.",
+      missing: [],
+      options: {},
+      selectedProducts:
+        products,
+    };
+  }
+
+  if (
+    queryTargetsCommonFamily(
+      query,
+      products
+    )
+  ) {
+    return {
+      status: "family_price_ready",
+      canRecommend: true,
+      scope: "family",
+      message:
+        "Hai indicato il modello ma non una variante precisa: confronto le varianti compatibili e privilegio il prezzo.",
+      missing: [],
+      options: {},
+      selectedProducts:
+        products,
     };
   }
 
@@ -990,6 +1229,44 @@ function analyzeBestOffer(
       missing: [],
       options: {},
       selectedProducts: [],
+    };
+  }
+
+  if (
+    queryTargetsProductLine(
+      query,
+      products
+    )
+  ) {
+    return {
+      status: "best_offer_ready",
+      canRecommend: true,
+      scope: "product_line",
+      message:
+        "Confronto i modelli compatibili della linea e cerco il prezzo totale più basso.",
+      missing: [],
+      options: {},
+      selectedProducts:
+        products,
+    };
+  }
+
+  if (
+    queryTargetsCommonFamily(
+      query,
+      products
+    )
+  ) {
+    return {
+      status: "best_offer_ready",
+      canRecommend: true,
+      scope: "family",
+      message:
+        "Confronto le varianti compatibili del modello e cerco il prezzo totale più basso.",
+      missing: [],
+      options: {},
+      selectedProducts:
+        products,
     };
   }
 
@@ -1631,11 +1908,8 @@ function pickBestOffer(
   const validProducts =
     products.filter(
       product =>
-        typeof product
-          .offer_price ===
-          "number" &&
-        Number.isFinite(
-          product.offer_price
+        isDefaultComparableOffer(
+          product
         )
     );
 
@@ -1722,6 +1996,63 @@ function buildEquivalentRecommendation(
       comparableOffers.length > 1
         ? `Questa è l'offerta con il prezzo più basso tra ${comparableOffers.length} offerte equivalenti trovate.`
         : "Ho trovato una sola offerta per questo prodotto.",
+  };
+}
+
+
+// ========================================
+// RACCOMANDAZIONE GENERICA PRICE-FIRST
+// ========================================
+
+function buildGenericPriceRecommendation(
+  bestOffer,
+  offers,
+  scope
+) {
+  if (!bestOffer) {
+    return null;
+  }
+
+  const scopeLabel =
+    scope === "product_line"
+      ? "linea"
+      : "modello";
+
+  return {
+    reason:
+      "generic_price_first",
+    comparisonScope:
+      scope,
+    store:
+      bestOffer.store,
+    price:
+      bestOffer.offer_price,
+    currency:
+      bestOffer.currency ||
+      "EUR",
+    comparedOffers:
+      offers.length,
+    selectedVariant: {
+      productId:
+        bestOffer.productId ||
+        null,
+      familyId:
+        bestOffer.familyId ||
+        null,
+      productLineId:
+        bestOffer.productLineId ||
+        null,
+      model:
+        bestOffer.model ||
+        null,
+      color:
+        bestOffer.color ||
+        null,
+    },
+    message:
+      "Richiesta generica sulla " +
+      scopeLabel +
+      ": ho privilegiato il prezzo totale tra le opzioni compatibili e le offerte verificate disponibili.",
   };
 }
 
@@ -2044,6 +2375,11 @@ app.get(
           rawQuery
         );
 
+      const hardRequirements =
+        detectHardRequirements(
+          rawQuery
+        );
+
       const productQuery =
         buildCatalogQuery(
           rawQuery,
@@ -2061,8 +2397,14 @@ app.get(
           }
         );
 
-      const results =
+      const rawResults =
         sourceSearch.results;
+
+      const results =
+        filterOffersByHardRequirements(
+          rawResults,
+          hardRequirements
+        );
 
       const sourceDiagnostics =
         sourceSearch.diagnostics;
@@ -2109,10 +2451,21 @@ app.get(
             );
 
           recommendation =
-            buildEquivalentRecommendation(
-              bestOffer,
-              comparableResults
-            );
+            (
+              analysis.scope ===
+                "product_line" ||
+              analysis.scope ===
+                "family"
+            )
+              ? buildGenericPriceRecommendation(
+                  bestOffer,
+                  comparableResults,
+                  analysis.scope
+                )
+              : buildEquivalentRecommendation(
+                  bestOffer,
+                  comparableResults
+                );
         }
 
         return res.json({
@@ -2128,6 +2481,7 @@ app.get(
             category,
             objectives,
             priceObjective,
+            hardRequirements,
           },
 
           status:
@@ -2228,6 +2582,7 @@ app.get(
             category,
             objectives,
             priceObjective,
+            hardRequirements,
           },
 
           status:
@@ -2312,6 +2667,7 @@ app.get(
             category,
             objectives,
             priceObjective,
+            hardRequirements,
           },
 
           status:
