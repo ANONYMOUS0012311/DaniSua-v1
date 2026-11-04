@@ -338,12 +338,23 @@ function detectCategory(query) {
     },
 
     {
+      value: "tablet",
+      aliases: [
+        "tablet",
+        "tablets",
+        "ipad",
+      ],
+    },
+
+    {
       value: "consola",
       aliases: [
         "console",
         "playstation",
         "ps5",
         "xbox",
+        "nintendo",
+        "switch",
       ],
     },
   ];
