@@ -979,7 +979,8 @@ function renderProducts(
               <p class="producto-meta-actualizacion">
                 ${formatVerified(
                   product.verifiedAt,
-                  product.updatedAt
+                  product.updatedAt,
+                  product.freshness
                 )}
               </p>
 
@@ -1131,11 +1132,21 @@ function updateCounter(n) {
 
 function formatVerified(
   verifiedAt,
-  updatedAt
+  updatedAt,
+  freshness = null
 ) {
   const value =
     verifiedAt ||
     updatedAt;
+
+  if (
+    freshness?.status ===
+      "future" ||
+    freshness?.status ===
+      "invalid"
+  ) {
+    return "Data di verifica non affidabile";
+  }
 
   if (!value) {
     return "Data di verifica non disponibile";
@@ -1148,9 +1159,22 @@ function formatVerified(
     return "Data di verifica non disponibile";
   }
 
-  return `Prezzo verificato il ${new Date(
-    time
-  ).toLocaleDateString("it-IT")}`;
+  const base =
+    `Prezzo verificato il ${new Date(
+      time
+    ).toLocaleDateString("it-IT")}`;
+
+  if (
+    freshness?.status ===
+      "stale"
+  ) {
+    return (
+      base +
+      " · da ricontrollare"
+    );
+  }
+
+  return base;
 }
 
 

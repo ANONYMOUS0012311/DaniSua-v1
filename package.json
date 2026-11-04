@@ -5,7 +5,9 @@
   "main": "server/index.js",
   "scripts": {
     "start": "node server/index.js",
-    "test": "node server/tests/smoke.js"
+    "test": "node server/tests/smoke.js",
+    "check:freshness": "node scripts/check-freshness.js",
+    "import:offers": "node scripts/import-offers.js"
   },
   "keywords": [],
   "author": "",

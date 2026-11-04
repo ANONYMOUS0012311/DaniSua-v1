@@ -300,6 +300,15 @@ function isDefaultComparableOffer(offer) {
     return false;
   }
 
+  if (
+    offer.freshness &&
+    offer.freshness
+      .eligibleForRecommendation ===
+      false
+  ) {
+    return false;
+  }
+
   return isFiniteNumber(
     offer.offer_price
   );
