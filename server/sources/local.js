@@ -345,8 +345,29 @@ function joinProductData(
       "",
 
     image:
+      product.image ||
       offer.image ||
       "",
+
+    imageSourcePage:
+      product.imageSourcePage ||
+      null,
+
+    pricing:
+      offer.pricing &&
+      typeof offer.pricing ===
+        "object"
+        ? offer.pricing
+        : {
+            type: "standard",
+            conditional: false,
+            conditions: [],
+            paymentOptions: [],
+          },
+
+    verifiedAt:
+      offer.verifiedAt ??
+      null,
 
     updatedAt:
       offer.updatedAt ??
