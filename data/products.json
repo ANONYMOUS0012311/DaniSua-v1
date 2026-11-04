@@ -376,5 +376,129 @@
     },
     "image": null,
     "imageSourcePage": "https://www.mediaworld.it/it/product/_apple-macbook-air-13-chip-m5-10-cpu-8-gpu-16gb-512gb-galassia-566911.html"
+  },
+  {
+    "id": "sony-wh-1000xm6-olive-gray",
+    "familyId": "sony-wh-1000xm6",
+    "familyName": "WH-1000XM6",
+    "productLineId": "sony-wh-1000x",
+    "productLineName": "WH-1000X",
+    "category": "auriculares",
+    "brand": "Sony",
+    "model": "WH-1000XM6",
+    "storage": null,
+    "ram": null,
+    "color": "Olive Gray",
+    "condition": "new",
+    "gtin": null,
+    "title": "Sony WH-1000XM6 Olive Gray",
+    "attributes": {
+      "anc": true,
+      "wireless": true,
+      "formFactor": "over-ear",
+      "color": "Olive Gray"
+    },
+    "image": null,
+    "imageSourcePage": "https://www.sony.it/headphones/products/wh-1000xm6"
+  },
+  {
+    "id": "apple-ipad-air-11-m4-128-space-gray",
+    "familyId": "apple-ipad-air-11-m4",
+    "familyName": "iPad Air 11 M4",
+    "productLineId": "apple-ipad-air",
+    "productLineName": "iPad Air",
+    "category": "tablet",
+    "brand": "Apple",
+    "model": "iPad Air 11 M4",
+    "storage": "128 GB",
+    "ram": null,
+    "color": "Grigio Siderale",
+    "condition": "new",
+    "gtin": null,
+    "title": "Apple iPad Air 11 M4 Wi-Fi 128 GB Grigio Siderale",
+    "attributes": {
+      "chip": "M4",
+      "display": "11",
+      "connectivity": "Wi-Fi",
+      "storage": "128 GB",
+      "color": "Grigio Siderale"
+    },
+    "image": null,
+    "imageSourcePage": "https://www.apple.com/it/shop/buy-ipad/ipad-air/display-da-11%22-128gb-grigio-siderale-wifi"
+  },
+  {
+    "id": "apple-macbook-neo-13-a18pro-8-256-indigo",
+    "familyId": "apple-macbook-neo-13-a18pro",
+    "familyName": "MacBook Neo 13 A18 Pro",
+    "productLineId": "apple-macbook-neo",
+    "productLineName": "MacBook Neo",
+    "category": "portatil",
+    "brand": "Apple",
+    "model": "MacBook Neo 13 A18 Pro",
+    "storage": "256 GB",
+    "ram": "8 GB",
+    "color": "Indaco",
+    "condition": "new",
+    "gtin": null,
+    "title": "Apple MacBook Neo 13 A18 Pro 8 GB 256 GB Indaco",
+    "attributes": {
+      "chip": "A18 Pro",
+      "display": "13",
+      "storage": "256 GB",
+      "ram": "8 GB",
+      "color": "Indaco"
+    },
+    "image": null,
+    "imageSourcePage": "https://www.apple.com/it/shop/buy-mac/macbook-neo/indaco-256gb"
+  },
+  {
+    "id": "nintendo-switch-2-256",
+    "familyId": "nintendo-switch-2",
+    "familyName": "Nintendo Switch 2",
+    "productLineId": "nintendo-switch",
+    "productLineName": "Nintendo Switch",
+    "category": "consola",
+    "brand": "Nintendo",
+    "model": "Nintendo Switch 2",
+    "storage": "256 GB",
+    "ram": null,
+    "color": "Nero",
+    "condition": "new",
+    "gtin": null,
+    "title": "Nintendo Switch 2 256 GB",
+    "attributes": {
+      "storage": "256 GB",
+      "bundle": false,
+      "gamesIncluded": [],
+      "color": "Nero"
+    },
+    "image": null,
+    "imageSourcePage": "https://www.mediaworld.it/it/product/_nintendo-nintendo-switch-2-nero-430529.html"
+  },
+  {
+    "id": "nintendo-switch-2-mario-kart-world-256",
+    "familyId": "nintendo-switch-2",
+    "familyName": "Nintendo Switch 2",
+    "productLineId": "nintendo-switch",
+    "productLineName": "Nintendo Switch",
+    "category": "consola",
+    "brand": "Nintendo",
+    "model": "Nintendo Switch 2 + Mario Kart World",
+    "storage": "256 GB",
+    "ram": null,
+    "color": "Nero / Blu / Rosso",
+    "condition": "new",
+    "gtin": null,
+    "title": "Nintendo Switch 2 256 GB + Mario Kart World",
+    "attributes": {
+      "storage": "256 GB",
+      "bundle": true,
+      "gamesIncluded": [
+        "Mario Kart World"
+      ],
+      "color": "Nero / Blu / Rosso"
+    },
+    "image": null,
+    "imageSourcePage": "https://www.mediaworld.it/it/product/_nintendo-bundle-mkworld-con-ns2-nero-blu-rosso-760360.html"
   }
 ]
