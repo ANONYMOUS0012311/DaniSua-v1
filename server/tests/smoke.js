@@ -451,10 +451,10 @@ async function testRecommendationBudget() {
 
 // ========================================
 // TEST 5
-// NESSUN LAPTOP SOTTO 1000
+// LAPTOP SOTTO 1000 — DATI INSUFFICIENTI
 // ========================================
 
-async function testNoLaptopInBudget() {
+async function testLaptopUnder1000KnowledgeInsufficient() {
   const data =
     await search(
       "Mi serve un portatile per l'università sotto 1000 euro"
@@ -470,8 +470,8 @@ async function testNoLaptopInBudget() {
 
   assert(
     data.status ===
-      "no_products_in_budget",
-    `Status atteso no_products_in_budget, ricevuto ${data.status}`
+      "knowledge_insufficient",
+    `Status atteso knowledge_insufficient, ricevuto ${data.status}`
   );
 
 
@@ -484,7 +484,39 @@ async function testNoLaptopInBudget() {
 
   assert(
     !data.bestOffer,
-    "Non dovrebbe esserci una bestOffer"
+    "Non dovrebbe esserci una bestOffer senza dati comparabili sufficienti"
+  );
+
+
+  const compatibleOffers =
+    Array.isArray(
+      data.results
+    )
+      ? data.results
+      : [];
+
+
+  assert(
+    compatibleOffers.some(
+      offer =>
+        offer.productId ===
+          "apple-macbook-neo-13-a18pro-8-256-indigo" &&
+        offer.offer_price <=
+          1000
+    ),
+    "MacBook Neo sotto 1000 € dovrebbe essere riconosciuto come compatibile"
+  );
+
+
+  assert(
+    String(
+      data.clarification
+        ?.message ||
+      ""
+    ).includes(
+      "dati verificati sufficienti"
+    ),
+    "La risposta deve spiegare che mancano dati verificati sufficienti"
   );
 }
 
@@ -1026,6 +1058,187 @@ async function testMacBookAirM5FlexibleColor() {
 
 
 // ========================================
+// TEST 16
+// SONY WH-1000XM6
+// ========================================
+
+async function testSonyXM6() {
+  const data =
+    await search(
+      "WH-1000XM6"
+    );
+
+  assert(
+    data.canRecommend === true,
+    "WH-1000XM6 deve essere raccomandabile"
+  );
+
+  assert(
+    data.bestOffer
+      ?.id ===
+      "test-sony-wh1000xm6-olive-gray",
+    `Offerta WH-1000XM6 inattesa: ${data.bestOffer?.id}`
+  );
+
+  assert(
+    data.bestOffer
+      ?.offer_price ===
+      379,
+    `Prezzo WH-1000XM6 inatteso: ${data.bestOffer?.offer_price}`
+  );
+}
+
+
+// ========================================
+// TEST 17
+// IPAD AIR M4 — MULTI STORE + TABLET
+// ========================================
+
+async function testIPadAirM4() {
+  const data =
+    await search(
+      "iPad Air 11 M4 128 GB Grigio Siderale"
+    );
+
+  assert(
+    data.context
+      ?.category ===
+      "tablet",
+    `Categoria iPad inattesa: ${data.context?.category}`
+  );
+
+  assert(
+    data.results.length ===
+      2,
+    `Attese 2 offerte iPad Air, ricevute ${data.results.length}`
+  );
+
+  assert(
+    data.bestOffer
+      ?.id ===
+      "test-mediaworld-ipad-air-m4-128-space-gray",
+    `Migliore offerta iPad inattesa: ${data.bestOffer?.id}`
+  );
+
+  assert(
+    data.bestOffer
+      ?.offer_price ===
+      769,
+    `Prezzo iPad inatteso: ${data.bestOffer?.offer_price}`
+  );
+}
+
+
+// ========================================
+// TEST 18
+// MACBOOK NEO — MULTI STORE
+// ========================================
+
+async function testMacBookNeo() {
+  const data =
+    await search(
+      "MacBook Neo 13 A18 Pro 8 GB 256 GB Indaco"
+    );
+
+  assert(
+    data.canRecommend === true,
+    "MacBook Neo deve essere raccomandabile"
+  );
+
+  assert(
+    data.results.length ===
+      2,
+    `Attese 2 offerte MacBook Neo, ricevute ${data.results.length}`
+  );
+
+  assert(
+    data.bestOffer
+      ?.offer_price ===
+      799,
+    `Prezzo MacBook Neo inatteso: ${data.bestOffer?.offer_price}`
+  );
+}
+
+
+// ========================================
+// TEST 19
+// SWITCH 2 — BASE PRIMA DEL BUNDLE
+// ========================================
+
+async function testSwitch2PriceFirst() {
+  const data =
+    await search(
+      "Nintendo Switch 2"
+    );
+
+  assert(
+    data.context
+      ?.category ===
+      "consola",
+    `Categoria Switch inattesa: ${data.context?.category}`
+  );
+
+  assert(
+    data.status ===
+      "family_price_ready",
+    `Status Switch 2 inatteso: ${data.status}`
+  );
+
+  assert(
+    data.bestOffer
+      ?.id ===
+      "test-mediaworld-switch2-base",
+    `Variante Switch 2 inattesa: ${data.bestOffer?.id}`
+  );
+
+  assert(
+    data.bestOffer
+      ?.offer_price ===
+      499,
+    `Prezzo Switch 2 inatteso: ${data.bestOffer?.offer_price}`
+  );
+}
+
+
+// ========================================
+// TEST 20
+// SWITCH 2 — BUNDLE ESATTO
+// ========================================
+
+async function testSwitch2MarioKartBundle() {
+  const data =
+    await search(
+      "Nintendo Switch 2 Mario Kart World"
+    );
+
+  assert(
+    data.canRecommend === true,
+    "Bundle Switch 2 Mario Kart deve essere raccomandabile"
+  );
+
+  assert(
+    data.results.length ===
+      1,
+    `Attesa 1 offerta bundle, ricevute ${data.results.length}`
+  );
+
+  assert(
+    data.bestOffer
+      ?.id ===
+      "test-mediaworld-switch2-mario-kart",
+    `Bundle Switch 2 inatteso: ${data.bestOffer?.id}`
+  );
+
+  assert(
+    data.bestOffer
+      ?.offer_price ===
+      519,
+    `Prezzo bundle Switch 2 inatteso: ${data.bestOffer?.offer_price}`
+  );
+}
+
+
+// ========================================
 // TESTS
 // ========================================
 
@@ -1072,10 +1285,10 @@ const tests = [
 
   {
     name:
-      "RECOMMENDATION — nessun laptop sotto 1000 €",
+      "RECOMMENDATION — laptop sotto 1000 € senza dati comparabili",
 
     run:
-      testNoLaptopInBudget,
+      testLaptopUnder1000KnowledgeInsufficient,
   },
 
   {
@@ -1156,6 +1369,46 @@ const tests = [
 
     run:
       testMacBookAirM5FlexibleColor,
+  },
+
+  {
+    name:
+      "AUDIO — Sony WH-1000XM6",
+
+    run:
+      testSonyXM6,
+  },
+
+  {
+    name:
+      "TABLET — iPad Air M4 multi-store",
+
+    run:
+      testIPadAirM4,
+  },
+
+  {
+    name:
+      "LAPTOP — MacBook Neo multi-store",
+
+    run:
+      testMacBookNeo,
+  },
+
+  {
+    name:
+      "GAMING — Switch 2 base price-first",
+
+    run:
+      testSwitch2PriceFirst,
+  },
+
+  {
+    name:
+      "GAMING — Switch 2 Mario Kart bundle",
+
+    run:
+      testSwitch2MarioKartBundle,
   },
 ];
 
