@@ -39,15 +39,15 @@
     "productId": "sony-wh-1000xm5",
     "store": "Sony",
     "seller": "Sony",
-    "old_price": 299,
-    "offer_price": 259,
+    "old_price": null,
+    "offer_price": 299,
     "currency": "EUR",
     "shipping_price": 0,
     "stock": true,
     "url": "https://www.sony.it/store/product/wh1000xm5b.ce7/WH-1000XM5-Wireless-Noise-Cancelling-Headphones",
     "updatedAt": null,
     "verifiedAt": "2026-11-04",
-    "price_note": "Prezzo base verificato; eventuale codice promozionale separato e non incluso nel ranking.",
+    "price_note": "Prezzo standard 299 €. Promo con codice separata: 259 €, non usata nel ranking standard.",
     "pricing": {
       "type": "standard",
       "conditional": false,
@@ -55,14 +55,15 @@
         {
           "type": "promo_code",
           "code": "HALLOWEEN26",
-          "description": "Sony indica -15% con codice HALLOWEEN26. Il prezzo risultante non viene usato nel ranking finché non è verificato al checkout.",
-          "affects_price": true
+          "description": "Sony indica una promozione con codice HALLOWEEN26.",
+          "affects_price": true,
+          "conditional_offer_price": 259
         }
       ],
       "paymentOptions": [
         {
           "type": "one_time",
-          "total_price": 259
+          "total_price": 299
         },
         {
           "type": "installment",
