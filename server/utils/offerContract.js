@@ -266,6 +266,56 @@ function validateOffer(offer) {
 
 
   // ------------------------------------
+  // PRICING / CONDIZIONI
+  // ------------------------------------
+
+  if (
+    offer.pricing !== null &&
+    offer.pricing !== undefined
+  ) {
+    if (
+      typeof offer.pricing !== "object" ||
+      Array.isArray(offer.pricing)
+    ) {
+      errors.push(
+        "invalid_pricing"
+      );
+    } else {
+      if (
+        offer.pricing.conditional !== undefined &&
+        typeof offer.pricing.conditional !== "boolean"
+      ) {
+        errors.push(
+          "invalid_pricing_conditional"
+        );
+      }
+
+      if (
+        offer.pricing.conditions !== undefined &&
+        !Array.isArray(
+          offer.pricing.conditions
+        )
+      ) {
+        errors.push(
+          "invalid_pricing_conditions"
+        );
+      }
+
+      if (
+        offer.pricing.paymentOptions !== undefined &&
+        !Array.isArray(
+          offer.pricing.paymentOptions
+        )
+      ) {
+        errors.push(
+          "invalid_payment_options"
+        );
+      }
+    }
+  }
+
+
+  // ------------------------------------
   // TIMESTAMP
   //
   // null è valido.
