@@ -163,5 +163,310 @@
         }
       ]
     }
+  },
+  {
+    "id": "real-apple-iphone18pro-256-black",
+    "productId": "apple-iphone-18-pro-256-black",
+    "store": "Apple",
+    "seller": "Apple",
+    "old_price": null,
+    "offer_price": 1489,
+    "currency": "EUR",
+    "shipping_price": 0,
+    "stock": true,
+    "url": "https://www.apple.com/it/shop/buy-iphone/iphone-18-pro",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-04",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 1489
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-apple-iphone17-256-black",
+    "productId": "apple-iphone-17-256-black",
+    "store": "Apple",
+    "seller": "Apple",
+    "old_price": null,
+    "offer_price": 1129,
+    "currency": "EUR",
+    "shipping_price": 0,
+    "stock": true,
+    "url": "https://www.apple.com/it/shop/buy-iphone/iphone-17",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-04",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 1129
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-mediaworld-iphone17-256-black",
+    "productId": "apple-iphone-17-256-black",
+    "store": "MediaWorld",
+    "seller": "MediaWorld",
+    "old_price": 1129,
+    "offer_price": 989.49,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.mediaworld.it/it/product/_apple-iphone-17-256gb-nero-389194.html",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-04",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 989.49
+        },
+        {
+          "type": "installment",
+          "installments": 10,
+          "installment_amount": 98.95,
+          "displayed_total": 989.49,
+          "financing_cost": 0,
+          "tan": 0,
+          "taeg": 0,
+          "provider": null,
+          "note": "Piano rateale mostrato da MediaWorld al momento della verifica."
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-mediaworld-iphone17-256-sage",
+    "productId": "apple-iphone-17-256-sage",
+    "store": "MediaWorld",
+    "seller": "MediaWorld",
+    "old_price": 1129,
+    "offer_price": 999.49,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.mediaworld.it/it/product/_apple-iphone-17-256gb-salvia-389199.html",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-04",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 999.49
+        },
+        {
+          "type": "installment",
+          "installments": 10,
+          "installment_amount": 99.95,
+          "displayed_total": 999.49,
+          "financing_cost": 0,
+          "tan": 0,
+          "taeg": 0,
+          "provider": null,
+          "note": "Piano rateale mostrato da MediaWorld al momento della verifica."
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-samsung-s26ultra-256-white",
+    "productId": "samsung-galaxy-s26-ultra-256-white",
+    "store": "Samsung",
+    "seller": "Samsung",
+    "old_price": null,
+    "offer_price": 1399,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.samsung.com/it/smartphones/galaxy-s26-ultra/buy/",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-04",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 1399
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-mediaworld-s26ultra-256-white",
+    "productId": "samsung-galaxy-s26-ultra-256-white",
+    "store": "MediaWorld",
+    "seller": "MediaWorld",
+    "old_price": 1599,
+    "offer_price": 1274.49,
+    "currency": "EUR",
+    "shipping_price": 3.99,
+    "stock": true,
+    "url": "https://www.mediaworld.it/it/product/_samsung-galaxy-m3-256gb-1024-gb-titanium-jetblack-564017.html",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-04",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 1274.49
+        },
+        {
+          "type": "installment",
+          "installments": 24,
+          "installment_amount": 60,
+          "displayed_total": 1440,
+          "financing_cost": 165.51,
+          "tan": 12,
+          "taeg": 12.69,
+          "provider": null,
+          "note": "Esempio di finanziamento MediaWorld; il ranking usa il prezzo di acquisto di 1274,49 €."
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-apple-mba13-m5-midnight",
+    "productId": "apple-macbook-air-13-m5-16-512-midnight",
+    "store": "Apple",
+    "seller": "Apple",
+    "old_price": null,
+    "offer_price": 1449,
+    "currency": "EUR",
+    "shipping_price": 0,
+    "stock": true,
+    "url": "https://www.apple.com/it/shop/buy-mac/macbook-air",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-04",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 1449
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-mediaworld-mba13-m5-midnight",
+    "productId": "apple-macbook-air-13-m5-16-512-midnight",
+    "store": "MediaWorld",
+    "seller": "MediaWorld",
+    "old_price": 1449,
+    "offer_price": 1399,
+    "currency": "EUR",
+    "shipping_price": 4.99,
+    "stock": true,
+    "url": "https://www.mediaworld.it/it/product/_apple-macbook-air-13-chip-m5-10-cpu-8-gpu-16gb-512gb-mezzanotte-566914.html",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-04",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 1399
+        },
+        {
+          "type": "installment",
+          "installments": 10,
+          "installment_amount": 139.9,
+          "displayed_total": 1399,
+          "financing_cost": 0,
+          "tan": 0,
+          "taeg": 0,
+          "provider": null,
+          "note": "Piano rateale mostrato da MediaWorld al momento della verifica."
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-apple-mba13-m5-galassia",
+    "productId": "apple-macbook-air-13-m5-16-512-starlight",
+    "store": "Apple",
+    "seller": "Apple",
+    "old_price": null,
+    "offer_price": 1449,
+    "currency": "EUR",
+    "shipping_price": 0,
+    "stock": true,
+    "url": "https://www.apple.com/it/shop/buy-mac/macbook-air",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-04",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 1449
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-mediaworld-mba13-m5-galassia",
+    "productId": "apple-macbook-air-13-m5-16-512-starlight",
+    "store": "MediaWorld",
+    "seller": "MediaWorld",
+    "old_price": 1449,
+    "offer_price": 1399,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.mediaworld.it/it/product/_apple-macbook-air-13-chip-m5-10-cpu-8-gpu-16gb-512gb-galassia-566911.html",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-04",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 1399
+        },
+        {
+          "type": "installment",
+          "installments": 10,
+          "installment_amount": 139.9,
+          "displayed_total": 1399,
+          "financing_cost": 0,
+          "tan": 0,
+          "taeg": 0,
+          "provider": null,
+          "note": "Piano rateale mostrato da MediaWorld al momento della verifica."
+        }
+      ]
+    }
   }
 ]

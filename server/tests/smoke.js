@@ -418,6 +418,34 @@ async function testRecommendationBudget() {
       1000,
     `L'offerta supera il budget: ${data.bestOffer?.offer_price}`
   );
+
+  assert(
+    data.context
+      ?.dataCoverage
+      ?.partialObjectives
+      ?.some(
+        item =>
+          item.criterion ===
+          "camera"
+      ),
+    "La copertura camera dovrebbe essere dichiarata parziale"
+  );
+
+  assert(
+    data.context
+      ?.dataCoverage
+      ?.excludedFamilies >= 1,
+    "Dovrebbe essere dichiarata almeno una famiglia esclusa dal ranking"
+  );
+
+  assert(
+    data.recommendation
+      ?.message
+      ?.includes(
+        "dati verificati comparabili"
+      ),
+    "La raccomandazione deve spiegare la copertura parziale"
+  );
 }
 
 
@@ -838,6 +866,166 @@ async function testAirPodsFamilyPriceFirst() {
 
 
 // ========================================
+// TEST 12
+// IPHONE 17 — COLORE FLESSIBILE
+// ========================================
+
+async function testIPhone17FlexibleColor() {
+  const data =
+    await search(
+      "iPhone 17 256 GB"
+    );
+
+  assert(
+    data.status ===
+      "family_price_ready",
+    `Status iPhone 17 inatteso: ${data.status}`
+  );
+
+  assert(
+    data.canRecommend === true,
+    "iPhone 17 senza colore non deve chiedere chiarimenti"
+  );
+
+  assert(
+    data.results.some(
+      offer =>
+        offer.color === "Nero"
+    ) &&
+    data.results.some(
+      offer =>
+        offer.color === "Salvia"
+    ),
+    "La ricerca deve mantenere più colori compatibili"
+  );
+
+  assert(
+    data.bestOffer
+      ?.id ===
+      "test-mediaworld-iphone17-256-black",
+    `Offerta iPhone 17 inattesa: ${data.bestOffer?.id}`
+  );
+
+  assert(
+    data.bestOffer
+      ?.offer_price ===
+      989.49,
+    `Prezzo iPhone 17 inatteso: ${data.bestOffer?.offer_price}`
+  );
+}
+
+
+// ========================================
+// TEST 13
+// IPHONE 17 — COLORE ESPLICITO
+// ========================================
+
+async function testIPhone17ExplicitColor() {
+  const data =
+    await search(
+      "iPhone 17 256 GB Salvia"
+    );
+
+  assert(
+    data.canRecommend === true,
+    "iPhone 17 Salvia deve essere raccomandabile"
+  );
+
+  assert(
+    data.results.length === 1,
+    `Attesa una sola offerta Salvia, ricevute ${data.results.length}`
+  );
+
+  assert(
+    data.bestOffer
+      ?.id ===
+      "test-mediaworld-iphone17-256-sage",
+    `Offerta Salvia inattesa: ${data.bestOffer?.id}`
+  );
+
+  assert(
+    data.bestOffer
+      ?.offer_price ===
+      999.49,
+    `Prezzo Salvia inatteso: ${data.bestOffer?.offer_price}`
+  );
+}
+
+
+// ========================================
+// TEST 14
+// GALAXY S26 ULTRA — MULTI STORE
+// ========================================
+
+async function testGalaxyS26UltraMultiStore() {
+  const data =
+    await search(
+      "Galaxy S26 Ultra 256 GB White"
+    );
+
+  assert(
+    data.canRecommend === true,
+    "Galaxy S26 Ultra deve essere raccomandabile"
+  );
+
+  assert(
+    data.results.length === 2,
+    `Attese 2 offerte Galaxy S26 Ultra, ricevute ${data.results.length}`
+  );
+
+  assert(
+    data.bestOffer
+      ?.id ===
+      "test-mediaworld-s26ultra-256-white",
+    `Migliore offerta Galaxy inattesa: ${data.bestOffer?.id}`
+  );
+
+  assert(
+    data.bestOffer
+      ?.offer_price ===
+      1274.49,
+    `Prezzo Galaxy inatteso: ${data.bestOffer?.offer_price}`
+  );
+}
+
+
+// ========================================
+// TEST 15
+// MACBOOK AIR M5 — COLORE FLESSIBILE
+// ========================================
+
+async function testMacBookAirM5FlexibleColor() {
+  const data =
+    await search(
+      "MacBook Air 13 M5 16 GB 512 GB"
+    );
+
+  assert(
+    data.status ===
+      "family_price_ready",
+    `Status MacBook Air M5 inatteso: ${data.status}`
+  );
+
+  assert(
+    data.canRecommend === true,
+    "MacBook Air M5 senza colore non deve chiedere chiarimenti"
+  );
+
+  assert(
+    data.results.length === 4,
+    `Attese 4 offerte MacBook Air M5, ricevute ${data.results.length}`
+  );
+
+  assert(
+    data.bestOffer
+      ?.offer_price ===
+      1399,
+    `Prezzo MacBook Air M5 inatteso: ${data.bestOffer?.offer_price}`
+  );
+}
+
+
+// ========================================
 // TESTS
 // ========================================
 
@@ -936,6 +1124,38 @@ const tests = [
 
     run:
       testAirPodsFamilyPriceFirst,
+  },
+
+  {
+    name:
+      "VARIANT — iPhone 17 colore flessibile",
+
+    run:
+      testIPhone17FlexibleColor,
+  },
+
+  {
+    name:
+      "VARIANT — iPhone 17 colore esplicito",
+
+    run:
+      testIPhone17ExplicitColor,
+  },
+
+  {
+    name:
+      "MULTI STORE — Galaxy S26 Ultra",
+
+    run:
+      testGalaxyS26UltraMultiStore,
+  },
+
+  {
+    name:
+      "VARIANT — MacBook Air M5 colore flessibile",
+
+    run:
+      testMacBookAirM5FlexibleColor,
   },
 ];
 

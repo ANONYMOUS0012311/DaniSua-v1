@@ -14,7 +14,10 @@
     "attributes": {
       "storage": "128 GB",
       "color": "Titanio Blu"
-    }
+    },
+    "productLineId": "apple-iphone",
+    "productLineName": "iPhone",
+    "familyName": "iPhone 15 Pro"
   },
   {
     "id": "apple-iphone-15-pro-256",
@@ -31,7 +34,10 @@
     "attributes": {
       "storage": "256 GB",
       "color": "Titanio Naturale"
-    }
+    },
+    "productLineId": "apple-iphone",
+    "productLineName": "iPhone",
+    "familyName": "iPhone 15 Pro"
   },
   {
     "id": "apple-iphone-15-128",
@@ -50,7 +56,10 @@
       "color": "Nero"
     },
     "image": null,
-    "imageSourcePage": "https://www.unieuro.it/online/iPhone/iPhone-15-128GB-Nero-pidAPLIPHONE15128"
+    "imageSourcePage": "https://www.unieuro.it/online/iPhone/iPhone-15-128GB-Nero-pidAPLIPHONE15128",
+    "productLineId": "apple-iphone",
+    "productLineName": "iPhone",
+    "familyName": "iPhone 15"
   },
   {
     "id": "samsung-galaxy-s24-ultra-256",
@@ -67,7 +76,10 @@
     "attributes": {
       "storage": "256 GB",
       "color": "Nero"
-    }
+    },
+    "productLineId": "samsung-galaxy-s",
+    "productLineName": "Galaxy S",
+    "familyName": "Galaxy S24 Ultra"
   },
   {
     "id": "sony-wh-1000xm5",
@@ -85,7 +97,10 @@
       "color": "Nero"
     },
     "image": null,
-    "imageSourcePage": "https://www.sony.it/store/product/wh1000xm5b.ce7/WH-1000XM5-Wireless-Noise-Cancelling-Headphones"
+    "imageSourcePage": "https://www.sony.it/store/product/wh1000xm5b.ce7/WH-1000XM5-Wireless-Noise-Cancelling-Headphones",
+    "productLineId": "sony-wh-1000x",
+    "productLineName": "WH-1000X",
+    "familyName": "WH-1000XM5"
   },
   {
     "id": "sony-playstation-5-slim-bundle-2-controller",
@@ -119,7 +134,10 @@
     "attributes": {
       "storage": "512 GB",
       "ram": "16 GB"
-    }
+    },
+    "productLineId": "apple-macbook-air",
+    "productLineName": "MacBook Air",
+    "familyName": "MacBook Air 15 M2"
   },
   {
     "id": "apple-airpods-4",
@@ -217,5 +235,146 @@
     },
     "image": null,
     "imageSourcePage": "https://www.apple.com/it/shop/buy-airpods/airpods-pro-3"
+  },
+  {
+    "id": "apple-iphone-18-pro-256-black",
+    "familyId": "apple-iphone-18-pro",
+    "familyName": "iPhone 18 Pro",
+    "productLineId": "apple-iphone",
+    "productLineName": "iPhone",
+    "category": "smartphone",
+    "brand": "Apple",
+    "model": "iPhone 18 Pro",
+    "storage": "256 GB",
+    "ram": null,
+    "color": "Nero",
+    "condition": "new",
+    "gtin": null,
+    "title": "Apple iPhone 18 Pro 256 GB Nero",
+    "attributes": {
+      "storage": "256 GB",
+      "color": "Nero",
+      "pro": true
+    },
+    "image": null,
+    "imageSourcePage": "https://www.apple.com/it/shop/buy-iphone/iphone-18-pro"
+  },
+  {
+    "id": "apple-iphone-17-256-black",
+    "familyId": "apple-iphone-17",
+    "familyName": "iPhone 17",
+    "productLineId": "apple-iphone",
+    "productLineName": "iPhone",
+    "category": "smartphone",
+    "brand": "Apple",
+    "model": "iPhone 17",
+    "storage": "256 GB",
+    "ram": null,
+    "color": "Nero",
+    "condition": "new",
+    "gtin": null,
+    "title": "Apple iPhone 17 256 GB Nero",
+    "attributes": {
+      "storage": "256 GB",
+      "color": "Nero"
+    },
+    "image": null,
+    "imageSourcePage": "https://www.apple.com/it/shop/buy-iphone/iphone-17"
+  },
+  {
+    "id": "apple-iphone-17-256-sage",
+    "familyId": "apple-iphone-17",
+    "familyName": "iPhone 17",
+    "productLineId": "apple-iphone",
+    "productLineName": "iPhone",
+    "category": "smartphone",
+    "brand": "Apple",
+    "model": "iPhone 17",
+    "storage": "256 GB",
+    "ram": null,
+    "color": "Salvia",
+    "condition": "new",
+    "gtin": null,
+    "title": "Apple iPhone 17 256 GB Salvia",
+    "attributes": {
+      "storage": "256 GB",
+      "color": "Salvia"
+    },
+    "image": null,
+    "imageSourcePage": "https://www.mediaworld.it/it/product/_apple-iphone-17-256gb-salvia-389199.html"
+  },
+  {
+    "id": "samsung-galaxy-s26-ultra-256-white",
+    "familyId": "samsung-galaxy-s26-ultra",
+    "familyName": "Galaxy S26 Ultra",
+    "productLineId": "samsung-galaxy-s",
+    "productLineName": "Galaxy S",
+    "category": "smartphone",
+    "brand": "Samsung",
+    "model": "Galaxy S26 Ultra",
+    "storage": "256 GB",
+    "ram": "12 GB",
+    "color": "White",
+    "condition": "new",
+    "gtin": null,
+    "title": "Samsung Galaxy S26 Ultra 256 GB White",
+    "attributes": {
+      "storage": "256 GB",
+      "ram": "12 GB",
+      "color": "White",
+      "stylus": true
+    },
+    "image": null,
+    "imageSourcePage": "https://www.samsung.com/it/smartphones/galaxy-s26-ultra/buy/"
+  },
+  {
+    "id": "apple-macbook-air-13-m5-16-512-midnight",
+    "familyId": "apple-macbook-air-13-m5",
+    "familyName": "MacBook Air 13 M5",
+    "productLineId": "apple-macbook-air",
+    "productLineName": "MacBook Air",
+    "category": "portatil",
+    "brand": "Apple",
+    "model": "MacBook Air 13 M5",
+    "storage": "512 GB",
+    "ram": "16 GB",
+    "color": "Mezzanotte",
+    "condition": "new",
+    "gtin": null,
+    "title": "Apple MacBook Air 13 M5 16 GB 512 GB Mezzanotte",
+    "attributes": {
+      "storage": "512 GB",
+      "ram": "16 GB",
+      "color": "Mezzanotte",
+      "chip": "M5",
+      "display": "13.6"
+    },
+    "image": null,
+    "imageSourcePage": "https://www.mediaworld.it/it/product/_apple-macbook-air-13-chip-m5-10-cpu-8-gpu-16gb-512gb-mezzanotte-566914.html"
+  },
+  {
+    "id": "apple-macbook-air-13-m5-16-512-starlight",
+    "familyId": "apple-macbook-air-13-m5",
+    "familyName": "MacBook Air 13 M5",
+    "productLineId": "apple-macbook-air",
+    "productLineName": "MacBook Air",
+    "category": "portatil",
+    "brand": "Apple",
+    "model": "MacBook Air 13 M5",
+    "storage": "512 GB",
+    "ram": "16 GB",
+    "color": "Galassia",
+    "condition": "new",
+    "gtin": null,
+    "title": "Apple MacBook Air 13 M5 16 GB 512 GB Galassia",
+    "attributes": {
+      "storage": "512 GB",
+      "ram": "16 GB",
+      "color": "Galassia",
+      "chip": "M5",
+      "display": "13.6"
+    },
+    "image": null,
+    "imageSourcePage": "https://www.mediaworld.it/it/product/_apple-macbook-air-13-chip-m5-10-cpu-8-gpu-16gb-512gb-galassia-566911.html"
   }
 ]
