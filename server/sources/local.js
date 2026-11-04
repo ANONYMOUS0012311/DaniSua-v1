@@ -1,6 +1,10 @@
 const fs = require("fs");
 const path = require("path");
 
+const {
+  evaluateOfferFreshness,
+} = require("../utils/freshness");
+
 
 // ========================================
 // LEER JSON
@@ -388,6 +392,11 @@ function joinProductData(
     updatedAt:
       offer.updatedAt ??
       null,
+
+    freshness:
+      evaluateOfferFreshness(
+        offer
+      ),
   };
 }
 
