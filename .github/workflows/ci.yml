@@ -31,3 +31,6 @@ jobs:
 
       - name: Run smoke tests
         run: npm test
+
+      - name: Check offer freshness
+        run: npm run check:freshness
