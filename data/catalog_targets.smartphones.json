@@ -1,0 +1,285 @@
+{
+  "schemaVersion": 1,
+  "market": "IT",
+  "category": "smartphone",
+  "goal": {
+    "targetFamilies": 30,
+    "principle": "Prioritize useful market coverage and multi-store price comparison over raw product count.",
+    "readiness": {
+      "p0MinimumVerifiedStores": 3,
+      "p1MinimumVerifiedStores": 2
+    }
+  },
+  "families": [
+    {
+      "familyId": "apple-iphone-18-pro",
+      "brand": "Apple",
+      "familyName": "iPhone 18 Pro",
+      "priority": "P0",
+      "segment": "premium",
+      "minimumStores": 3,
+      "officialSource": "https://www.apple.com/it/shop/buy-iphone"
+    },
+    {
+      "familyId": "apple-iphone-18-pro-max",
+      "brand": "Apple",
+      "familyName": "iPhone 18 Pro Max",
+      "priority": "P1",
+      "segment": "premium",
+      "minimumStores": 2,
+      "officialSource": "https://www.apple.com/it/shop/buy-iphone"
+    },
+    {
+      "familyId": "apple-iphone-duo",
+      "brand": "Apple",
+      "familyName": "iPhone Duo",
+      "priority": "P1",
+      "segment": "foldable-premium",
+      "minimumStores": 2,
+      "officialSource": "https://www.apple.com/it/shop/buy-iphone"
+    },
+    {
+      "familyId": "apple-iphone-air",
+      "brand": "Apple",
+      "familyName": "iPhone Air",
+      "priority": "P1",
+      "segment": "premium",
+      "minimumStores": 2,
+      "officialSource": "https://www.apple.com/it/shop/buy-iphone"
+    },
+    {
+      "familyId": "apple-iphone-17",
+      "brand": "Apple",
+      "familyName": "iPhone 17",
+      "priority": "P0",
+      "segment": "upper-mid",
+      "minimumStores": 3,
+      "officialSource": "https://www.apple.com/it/shop/buy-iphone"
+    },
+    {
+      "familyId": "apple-iphone-17e",
+      "brand": "Apple",
+      "familyName": "iPhone 17e",
+      "priority": "P0",
+      "segment": "mid",
+      "minimumStores": 3,
+      "officialSource": "https://www.apple.com/it/shop/buy-iphone"
+    },
+    {
+      "familyId": "apple-iphone-16",
+      "brand": "Apple",
+      "familyName": "iPhone 16",
+      "priority": "P0",
+      "segment": "mid",
+      "minimumStores": 3,
+      "officialSource": "https://www.apple.com/it/shop/buy-iphone"
+    },
+    {
+      "familyId": "samsung-galaxy-s26-ultra",
+      "brand": "Samsung",
+      "familyName": "Galaxy S26 Ultra",
+      "priority": "P0",
+      "segment": "premium",
+      "minimumStores": 3,
+      "officialSource": "https://www.samsung.com/it/smartphones/"
+    },
+    {
+      "familyId": "samsung-galaxy-s26-plus",
+      "brand": "Samsung",
+      "familyName": "Galaxy S26+",
+      "priority": "P1",
+      "segment": "premium",
+      "minimumStores": 2,
+      "officialSource": "https://www.samsung.com/it/smartphones/"
+    },
+    {
+      "familyId": "samsung-galaxy-s26",
+      "brand": "Samsung",
+      "familyName": "Galaxy S26",
+      "priority": "P0",
+      "segment": "premium",
+      "minimumStores": 3,
+      "officialSource": "https://www.samsung.com/it/smartphones/"
+    },
+    {
+      "familyId": "samsung-galaxy-s26-fe",
+      "brand": "Samsung",
+      "familyName": "Galaxy S26 FE",
+      "priority": "P1",
+      "segment": "upper-mid",
+      "minimumStores": 2,
+      "officialSource": "https://www.samsung.com/it/smartphones/"
+    },
+    {
+      "familyId": "samsung-galaxy-z-fold8",
+      "brand": "Samsung",
+      "familyName": "Galaxy Z Fold8",
+      "priority": "P1",
+      "segment": "foldable-premium",
+      "minimumStores": 2,
+      "officialSource": "https://www.samsung.com/it/smartphones/"
+    },
+    {
+      "familyId": "samsung-galaxy-z-flip8",
+      "brand": "Samsung",
+      "familyName": "Galaxy Z Flip8",
+      "priority": "P1",
+      "segment": "foldable-premium",
+      "minimumStores": 2,
+      "officialSource": "https://www.samsung.com/it/smartphones/"
+    },
+    {
+      "familyId": "samsung-galaxy-a57",
+      "brand": "Samsung",
+      "familyName": "Galaxy A57 5G",
+      "priority": "P0",
+      "segment": "mid",
+      "minimumStores": 3,
+      "officialSource": "https://www.samsung.com/it/smartphones/"
+    },
+    {
+      "familyId": "samsung-galaxy-a37",
+      "brand": "Samsung",
+      "familyName": "Galaxy A37",
+      "priority": "P1",
+      "segment": "budget-mid",
+      "minimumStores": 2,
+      "officialSource": "https://www.samsung.com/it/smartphones/"
+    },
+    {
+      "familyId": "google-pixel-11-pro-xl",
+      "brand": "Google",
+      "familyName": "Pixel 11 Pro XL",
+      "priority": "P1",
+      "segment": "premium",
+      "minimumStores": 2,
+      "officialSource": "https://store.google.com/it/category/phones?hl=it"
+    },
+    {
+      "familyId": "google-pixel-11-pro",
+      "brand": "Google",
+      "familyName": "Pixel 11 Pro",
+      "priority": "P0",
+      "segment": "premium",
+      "minimumStores": 3,
+      "officialSource": "https://store.google.com/it/category/phones?hl=it"
+    },
+    {
+      "familyId": "google-pixel-11",
+      "brand": "Google",
+      "familyName": "Pixel 11",
+      "priority": "P0",
+      "segment": "upper-mid",
+      "minimumStores": 3,
+      "officialSource": "https://store.google.com/it/category/phones?hl=it"
+    },
+    {
+      "familyId": "google-pixel-10a",
+      "brand": "Google",
+      "familyName": "Pixel 10a",
+      "priority": "P0",
+      "segment": "mid",
+      "minimumStores": 3,
+      "officialSource": "https://store.google.com/it/category/phones?hl=it"
+    },
+    {
+      "familyId": "xiaomi-17-ultra",
+      "brand": "Xiaomi",
+      "familyName": "Xiaomi 17 Ultra",
+      "priority": "P1",
+      "segment": "premium",
+      "minimumStores": 2,
+      "officialSource": "https://www.mi.com/it/"
+    },
+    {
+      "familyId": "xiaomi-17t-pro",
+      "brand": "Xiaomi",
+      "familyName": "Xiaomi 17T Pro",
+      "priority": "P0",
+      "segment": "upper-mid",
+      "minimumStores": 3,
+      "officialSource": "https://www.mi.com/it/"
+    },
+    {
+      "familyId": "xiaomi-17t",
+      "brand": "Xiaomi",
+      "familyName": "Xiaomi 17T",
+      "priority": "P0",
+      "segment": "mid",
+      "minimumStores": 3,
+      "officialSource": "https://www.mi.com/it/"
+    },
+    {
+      "familyId": "redmi-note-17-pro-max-5g",
+      "brand": "Xiaomi",
+      "familyName": "REDMI Note 17 Pro Max 5G",
+      "priority": "P1",
+      "segment": "mid",
+      "minimumStores": 2,
+      "officialSource": "https://www.mi.com/it/product-list/redmi-series/"
+    },
+    {
+      "familyId": "redmi-note-17-pro-5g",
+      "brand": "Xiaomi",
+      "familyName": "REDMI Note 17 Pro 5G",
+      "priority": "P0",
+      "segment": "mid",
+      "minimumStores": 3,
+      "officialSource": "https://www.mi.com/it/product-list/redmi-series/"
+    },
+    {
+      "familyId": "redmi-note-17-5g",
+      "brand": "Xiaomi",
+      "familyName": "REDMI Note 17 5G",
+      "priority": "P0",
+      "segment": "budget-mid",
+      "minimumStores": 3,
+      "officialSource": "https://www.mi.com/it/product-list/redmi-series/"
+    },
+    {
+      "familyId": "honor-magic8-pro",
+      "brand": "HONOR",
+      "familyName": "HONOR Magic8 Pro",
+      "priority": "P0",
+      "segment": "premium",
+      "minimumStores": 3,
+      "officialSource": "https://www.honor.com/it/phones/"
+    },
+    {
+      "familyId": "honor-magic8-lite",
+      "brand": "HONOR",
+      "familyName": "HONOR Magic8 Lite",
+      "priority": "P1",
+      "segment": "mid",
+      "minimumStores": 2,
+      "officialSource": "https://www.honor.com/it/phones/"
+    },
+    {
+      "familyId": "honor-600-pro",
+      "brand": "HONOR",
+      "familyName": "HONOR 600 Pro",
+      "priority": "P1",
+      "segment": "upper-mid",
+      "minimumStores": 2,
+      "officialSource": "https://www.honor.com/it/phones/"
+    },
+    {
+      "familyId": "oppo-find-x10",
+      "brand": "OPPO",
+      "familyName": "OPPO Find X10",
+      "priority": "P0",
+      "segment": "premium",
+      "minimumStores": 3,
+      "officialSource": "https://www.oppo.com/it/smartphones/"
+    },
+    {
+      "familyId": "oppo-reno16-pro-5g",
+      "brand": "OPPO",
+      "familyName": "OPPO Reno16 Pro 5G",
+      "priority": "P1",
+      "segment": "upper-mid",
+      "minimumStores": 2,
+      "officialSource": "https://www.oppo.com/it/smartphones/"
+    }
+  ]
+}
