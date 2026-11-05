@@ -2823,6 +2823,84 @@ async function testSmartphoneBatch5FlagshipsFoldables() {
 
 
 // ========================================
+// SMARTPHONE FINAL TARGET — FIVE FAMILIES
+// ========================================
+
+async function testSmartphoneFinalTargetFive() {
+  const cases = [
+    {
+      query: "HONOR Magic8 Pro 512 GB",
+      familyId: "honor-magic8-pro",
+      expectedOffers: 1,
+      expectedBest: "test-honor-magic8pro-512",
+      expectedFinalCost: 1099.9,
+    },
+    {
+      query: "HONOR Magic8 Lite 256 GB Black",
+      familyId: "honor-magic8-lite",
+      expectedOffers: 1,
+      expectedBest: "test-mediaworld-magic8lite-256-black",
+      expectedFinalCost: 317.48,
+    },
+    {
+      query: "HONOR 600 Pro 512 GB",
+      familyId: "honor-600-pro",
+      expectedOffers: 1,
+      expectedBest: "test-honor-600pro-512",
+      expectedFinalCost: null,
+    },
+    {
+      query: "OPPO Find X10 256 GB Mist Grey",
+      familyId: "oppo-find-x10",
+      expectedOffers: 2,
+      expectedBest: "test-mediaworld-findx10-256-mistgrey",
+      expectedFinalCost: 1403.98,
+    },
+    {
+      query: "OPPO Reno16 Pro 5G 512 GB Pop White",
+      familyId: "oppo-reno16-pro-5g",
+      expectedOffers: 1,
+      expectedBest: "test-euronics-reno16pro-512-popwhite",
+      expectedFinalCost: 1007.89,
+    },
+  ];
+
+  for (const item of cases) {
+    const data = await search(item.query);
+
+    assert(
+      [
+        "specific",
+        "best_offer_ready",
+        "family_price_ready",
+      ].includes(data.status),
+      `${item.familyId}: status inatteso ${data.status}`
+    );
+
+    assert(
+      data.results.length === item.expectedOffers,
+      `${item.familyId}: attese ${item.expectedOffers} offerte, ricevute ${data.results.length}`
+    );
+
+    assert(
+      data.bestOffer?.familyId === item.familyId,
+      `${item.familyId}: famiglia inattesa ${data.bestOffer?.familyId}`
+    );
+
+    assert(
+      data.bestOffer?.id === item.expectedBest,
+      `${item.familyId}: bestOffer inattesa ${data.bestOffer?.id}`
+    );
+
+    assert(
+      data.recommendation?.finalCost === item.expectedFinalCost,
+      `${item.familyId}: finalCost inatteso ${data.recommendation?.finalCost}`
+    );
+  }
+}
+
+
+// ========================================
 // TESTS
 // ========================================
 
@@ -3129,6 +3207,14 @@ const tests = [
 
     run:
       testPixel11ProductionIngest,
+  },
+
+  {
+    name:
+      "SMARTPHONE FINAL TARGET — five families",
+
+    run:
+      testSmartphoneFinalTargetFive,
   },
 
   {

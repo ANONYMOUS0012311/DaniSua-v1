@@ -1024,5 +1024,118 @@
     },
     "image": null,
     "imageSourcePage": "https://www.mi.com/it/product/xiaomi-17-ultra/"
+  },
+  {
+    "id": "honor-magic8-pro-512",
+    "familyId": "honor-magic8-pro",
+    "familyName": "HONOR Magic8 Pro",
+    "productLineId": "honor-magic",
+    "productLineName": "HONOR Magic",
+    "category": "smartphone",
+    "brand": "HONOR",
+    "model": "HONOR Magic8 Pro",
+    "storage": "512 GB",
+    "ram": "12 GB",
+    "color": null,
+    "condition": "new",
+    "gtin": null,
+    "title": "HONOR Magic8 Pro 12+512 GB",
+    "attributes": {
+      "storage": "512 GB",
+      "ram": "12 GB"
+    },
+    "image": null,
+    "imageSourcePage": "https://www.honor.com/it/phones/honor-magic8-pro/buy/"
+  },
+  {
+    "id": "honor-magic8-lite-256-black",
+    "familyId": "honor-magic8-lite",
+    "familyName": "HONOR Magic8 Lite",
+    "productLineId": "honor-magic",
+    "productLineName": "HONOR Magic",
+    "category": "smartphone",
+    "brand": "HONOR",
+    "model": "HONOR Magic8 Lite",
+    "storage": "256 GB",
+    "ram": "8 GB",
+    "color": "Black",
+    "condition": "new",
+    "gtin": null,
+    "title": "HONOR Magic8 Lite 8+256 GB Black",
+    "attributes": {
+      "storage": "256 GB",
+      "ram": "8 GB",
+      "color": "Black"
+    },
+    "image": null,
+    "imageSourcePage": "https://www.honor.com/it/phones/honor-magic8-lite/"
+  },
+  {
+    "id": "honor-600-pro-512",
+    "familyId": "honor-600-pro",
+    "familyName": "HONOR 600 Pro",
+    "productLineId": "honor-600",
+    "productLineName": "HONOR 600",
+    "category": "smartphone",
+    "brand": "HONOR",
+    "model": "HONOR 600 Pro",
+    "storage": "512 GB",
+    "ram": "12 GB",
+    "color": null,
+    "condition": "new",
+    "gtin": null,
+    "title": "HONOR 600 Pro 12+512 GB",
+    "attributes": {
+      "storage": "512 GB",
+      "ram": "12 GB"
+    },
+    "image": null,
+    "imageSourcePage": "https://www.honor.com/it/phones/honor-600-pro/"
+  },
+  {
+    "id": "oppo-find-x10-256-mist-grey",
+    "familyId": "oppo-find-x10",
+    "familyName": "OPPO Find X10",
+    "productLineId": "oppo-find-x",
+    "productLineName": "OPPO Find X",
+    "category": "smartphone",
+    "brand": "OPPO",
+    "model": "OPPO Find X10",
+    "storage": "256 GB",
+    "ram": "12 GB",
+    "color": "Mist Grey",
+    "condition": "new",
+    "gtin": null,
+    "title": "OPPO Find X10 5G 12+256 GB Mist Grey",
+    "attributes": {
+      "storage": "256 GB",
+      "ram": "12 GB",
+      "color": "Mist Grey"
+    },
+    "image": null,
+    "imageSourcePage": "https://www.oppo.com/it/smartphones/series-find-x/find-x10/"
+  },
+  {
+    "id": "oppo-reno16-pro-512-pop-white",
+    "familyId": "oppo-reno16-pro-5g",
+    "familyName": "OPPO Reno16 Pro 5G",
+    "productLineId": "oppo-reno",
+    "productLineName": "OPPO Reno",
+    "category": "smartphone",
+    "brand": "OPPO",
+    "model": "OPPO Reno16 Pro 5G",
+    "storage": "512 GB",
+    "ram": "12 GB",
+    "color": "Pop White",
+    "condition": "new",
+    "gtin": null,
+    "title": "OPPO Reno16 Pro 5G 12+512 GB Pop White",
+    "attributes": {
+      "storage": "512 GB",
+      "ram": "12 GB",
+      "color": "Pop White"
+    },
+    "image": null,
+    "imageSourcePage": "https://www.oppo.com/it/smartphones/series-reno/reno16-pro/"
   }
 ]

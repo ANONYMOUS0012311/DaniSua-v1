@@ -1696,5 +1696,177 @@
         }
       ]
     }
+  },
+  {
+    "id": "test-honor-magic8pro-512",
+    "productId": "honor-magic8-pro-512",
+    "store": "HONOR",
+    "seller": "HONOR",
+    "old_price": null,
+    "offer_price": 1099.9,
+    "currency": "EUR",
+    "shipping_price": 0,
+    "stock": true,
+    "url": "https://www.honor.com/it/phones/honor-magic8-pro/buy/",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "black_friday",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 1099.9
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-mediaworld-magic8lite-256-black",
+    "productId": "honor-magic8-lite-256-black",
+    "store": "MediaWorld",
+    "seller": "MediaWorld",
+    "old_price": 379.9,
+    "offer_price": 312.49,
+    "currency": "EUR",
+    "shipping_price": 4.99,
+    "stock": true,
+    "url": "https://www.mediaworld.it/it/brand/honor/smartphone/honor-magic-series",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 312.49
+        },
+        {
+          "type": "installment",
+          "installments": 24,
+          "installment_amount": 14.8,
+          "displayed_total": 355.2,
+          "financing_cost": 42.71,
+          "tan": 12.61,
+          "taeg": 13.37,
+          "provider": null,
+          "note": "Finanziamento mostrato da MediaWorld al momento della verifica; non equivale al prezzo in unica soluzione."
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-honor-600pro-512",
+    "productId": "honor-600-pro-512",
+    "store": "HONOR",
+    "seller": "HONOR",
+    "old_price": null,
+    "offer_price": 699.9,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.honor.com/it/shop/",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "black_friday",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 699.9
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-mediaworld-findx10-256-mistgrey",
+    "productId": "oppo-find-x10-256-mist-grey",
+    "store": "MediaWorld",
+    "seller": "MediaWorld",
+    "old_price": null,
+    "offer_price": 1399.99,
+    "currency": "EUR",
+    "shipping_price": 3.99,
+    "stock": true,
+    "url": "https://www.mediaworld.it/it/product/_oppo-find-x10-5g-12256-mist-grey-box-256-gb-grey-762792.html",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 1399.99
+        },
+        {
+          "type": "installment",
+          "installments": 10,
+          "installment_amount": 140,
+          "displayed_total": 1399.99,
+          "financing_cost": 0,
+          "tan": 0,
+          "taeg": 0,
+          "provider": null,
+          "note": "Esempio a tasso zero mostrato da MediaWorld al momento della verifica."
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-euronics-findx10-256-mistgrey",
+    "productId": "oppo-find-x10-256-mist-grey",
+    "store": "Euronics",
+    "seller": "Euronics",
+    "old_price": null,
+    "offer_price": 1399,
+    "currency": "EUR",
+    "shipping_price": 7.9,
+    "stock": true,
+    "url": "https://www.euronics.it/telefonia/smartphone-e-cellulari/smartphone-dual-sim/oppo---smartphone-find-x10-5g-256-box-mist-grey/262012453.html",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 1399
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-euronics-reno16pro-512-popwhite",
+    "productId": "oppo-reno16-pro-512-pop-white",
+    "store": "Euronics",
+    "seller": "Euronics",
+    "old_price": 1099.99,
+    "offer_price": 999.99,
+    "currency": "EUR",
+    "shipping_price": 7.9,
+    "stock": true,
+    "url": "https://www.euronics.it/telefonia/smartphone-e-cellulari/smartphone-dual-sim/oppo---smartphone-reno16-pro-5g-pop-white/262007117.html",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 999.99
+        }
+      ]
+    }
   }
 ]
