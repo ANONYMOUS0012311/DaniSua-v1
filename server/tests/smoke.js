@@ -430,7 +430,7 @@ async function testRecommendationBudget() {
   assert(
     data.recommendation
       ?.finalCost ===
-      853.48,
+      null,
     `Costo finale iPhone 16 inatteso: ${data.recommendation?.finalCost}`
   );
 
@@ -2098,6 +2098,16 @@ async function testOfficialSmartphoneStoresTrust() {
       url: "https://www.euronics.it/telefonia/smartphone-e-cellulari/",
       expectedStoreId: "euronics-it",
     },
+    {
+      store: "Comet",
+      url: "https://www.comet.it/smartphone-e-telefonia/",
+      expectedStoreId: "comet-it",
+    },
+    {
+      store: "Expert",
+      url: "https://www.expert.it/it/it/exp/shop/",
+      expectedStoreId: "expert-it",
+    },
   ];
 
   for (const item of cases) {
@@ -2261,18 +2271,18 @@ async function testMidrangeSmartphoneProductionBlock() {
     );
 
   assert(
-    iphone16.results.length === 3,
-    `Attesi 3 prezzi iPhone 16 Nero, ricevuti ${iphone16.results.length}`
+    iphone16.results.length === 4,
+    `Attesi 4 prezzi iPhone 16 Nero, ricevuti ${iphone16.results.length}`
   );
 
   assert(
     iphone16.bestOffer?.id ===
-      "test-mediaworld-iphone16-128-black",
+      "test-comet-iphone16-128-black",
     `Miglior iPhone 16 inatteso: ${iphone16.bestOffer?.id}`
   );
 
   assert(
-    iphone16.recommendation?.finalCost === 853.48,
+    iphone16.recommendation?.finalCost === null,
     `Costo finale iPhone 16 inatteso: ${iphone16.recommendation?.finalCost}`
   );
 
@@ -2669,7 +2679,7 @@ async function testSmartphoneBatch4PremiumBreadth() {
     {
       query: "Galaxy S26+ 256 GB",
       familyId: "samsung-galaxy-s26-plus",
-      expectedOffers: 2,
+      expectedOffers: 3,
       expectedBest: "test-euronics-s26plus-256-cobalt-violet",
       expectedFinalCost: 1176.9,
     },
@@ -2858,9 +2868,9 @@ async function testSmartphoneFinalTargetFive() {
     {
       query: "OPPO Find X10 256 GB Mist Grey",
       familyId: "oppo-find-x10",
-      expectedOffers: 2,
-      expectedBest: "test-mediaworld-findx10-256-mistgrey",
-      expectedFinalCost: 1403.98,
+      expectedOffers: 3,
+      expectedBest: "test-unieuro-findx10-256-mistgrey",
+      expectedFinalCost: null,
     },
     {
       query: "OPPO Reno16 Pro 5G 512 GB Pop White",
@@ -2986,6 +2996,45 @@ async function testBetaCoreDepthWaveTwo() {
     {
       query: "Galaxy S26+ 256 GB",
       stores: ["Samsung", "Euronics"],
+    },
+  ];
+
+  for (const item of cases) {
+    const data = await search(item.query);
+    const stores =
+      new Set(
+        data.results.map(
+          offer => offer.store
+        )
+      );
+
+    for (const store of item.stores) {
+      assert(
+        stores.has(store),
+        `${item.query}: manca lo store ${store}`
+      );
+    }
+  }
+}
+
+
+// ========================================
+// BETA CORE DEPTH — WAVE 3
+// ========================================
+
+async function testBetaCoreDepthWaveThree() {
+  const cases = [
+    {
+      query: "iPhone 16 128 GB Nero",
+      stores: ["Apple", "Euronics", "MediaWorld", "Comet"],
+    },
+    {
+      query: "Galaxy S26+ 256 GB",
+      stores: ["Samsung", "Euronics", "Expert"],
+    },
+    {
+      query: "OPPO Find X10 256 GB Mist Grey",
+      stores: ["MediaWorld", "Euronics", "Unieuro"],
     },
   ];
 
@@ -3315,6 +3364,14 @@ const tests = [
 
     run:
       testPixel11ProductionIngest,
+  },
+
+  {
+    name:
+      "BETA CORE DEPTH — wave 3",
+
+    run:
+      testBetaCoreDepthWaveThree,
   },
 
   {
