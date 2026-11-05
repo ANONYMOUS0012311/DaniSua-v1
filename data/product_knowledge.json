@@ -908,6 +908,346 @@
         }
       ],
       "updatedAt": "2026-11-05"
+    },
+    {
+      "productId": "apple-iphone-15-256-black",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": 145,
+        "battery": null,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "evidence": [
+        {
+          "criterion": "camera",
+          "type": "independent_test",
+          "sourceId": "dxomark-iphone-15-camera-v5",
+          "score": 145,
+          "protocol": "DXOMARK Camera v5",
+          "publishedAt": "2023-10-13"
+        }
+      ],
+      "sources": [
+        {
+          "id": "dxomark-iphone-15-camera-v5",
+          "name": "DXOMARK",
+          "type": "independent_test",
+          "title": "Apple iPhone 15 Camera test",
+          "url": "https://www.dxomark.com/apple-iphone-15-camera-test/",
+          "protocol": "Camera v5"
+        }
+      ],
+      "updatedAt": "2026-09-16",
+      "scoreMeta": {
+        "camera": {
+          "sourceId": "dxomark-iphone-15-camera-v5",
+          "protocol": "DXOMARK Camera v5"
+        }
+      }
+    },
+    {
+      "productId": "apple-iphone-15-512-black",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": 145,
+        "battery": null,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "evidence": [
+        {
+          "criterion": "camera",
+          "type": "independent_test",
+          "sourceId": "dxomark-iphone-15-camera-v5",
+          "score": 145,
+          "protocol": "DXOMARK Camera v5",
+          "publishedAt": "2023-10-13"
+        }
+      ],
+      "sources": [
+        {
+          "id": "dxomark-iphone-15-camera-v5",
+          "name": "DXOMARK",
+          "type": "independent_test",
+          "title": "Apple iPhone 15 Camera test",
+          "url": "https://www.dxomark.com/apple-iphone-15-camera-test/",
+          "protocol": "Camera v5"
+        }
+      ],
+      "updatedAt": "2026-09-16",
+      "scoreMeta": {
+        "camera": {
+          "sourceId": "dxomark-iphone-15-camera-v5",
+          "protocol": "DXOMARK Camera v5"
+        }
+      }
+    },
+    {
+      "productId": "apple-iphone-16-256-white",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": 147,
+        "battery": 37,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "camera": {
+          "sourceId": "dxomark-iphone-16-camera-v5",
+          "protocol": "DXOMARK Camera v5"
+        },
+        "battery": {
+          "sourceId": "apple-iphone16-eu-energy",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "display": {
+          "sizeInches": 6.1,
+          "type": "Super Retina XDR OLED",
+          "peakBrightnessNits": 2000
+        },
+        "performance": {
+          "chip": "Apple A18"
+        },
+        "camera": {
+          "mainMp": 48,
+          "ultrawideMp": 12,
+          "opticalQualityZoomX": 2
+        },
+        "battery": {
+          "capacityMah": 3561,
+          "videoPlaybackHours": 22,
+          "euCycleHours": 37,
+          "cycleLife": 1000,
+          "euEnduranceHours": 37
+        },
+        "durability": {
+          "ipRating": "IP68"
+        },
+        "software": {
+          "minimumSupportYears": 5
+        },
+        "euEnergyLabel": {
+          "energyClass": "B",
+          "reliabilityClass": "C",
+          "repairabilityClass": "C",
+          "regulation": "EU 2023/1669"
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "camera",
+          "type": "independent_test",
+          "sourceId": "dxomark-iphone-16-camera-v5",
+          "score": 147,
+          "protocol": "DXOMARK Camera v5",
+          "publishedAt": "2024-11-21"
+        },
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "apple-iphone16-eu-energy",
+          "score": 37,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-05"
+        }
+      ],
+      "sources": [
+        {
+          "id": "apple-iphone16-specs",
+          "name": "Apple",
+          "type": "manufacturer_specs",
+          "title": "iPhone 16 - Specifiche tecniche",
+          "url": "https://www.apple.com/it/iphone-16/specs/"
+        },
+        {
+          "id": "dxomark-iphone-16-camera-v5",
+          "name": "DXOMARK",
+          "type": "independent_test",
+          "title": "Apple iPhone 16 Camera test",
+          "url": "https://www.dxomark.com/apple-iphone-16-camera-test/",
+          "protocol": "DXOMARK Camera v5"
+        },
+        {
+          "id": "apple-iphone16-eu-energy",
+          "name": "Apple",
+          "type": "regulatory_product_information",
+          "title": "iPhone 16 - Informazioni sul consumo energetico UE",
+          "url": "https://www.apple.com/it/iphone-16/specs/"
+        }
+      ],
+      "updatedAt": "2026-11-05"
+    },
+    {
+      "productId": "apple-iphone-16-512-black",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": 147,
+        "battery": 37,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "camera": {
+          "sourceId": "dxomark-iphone-16-camera-v5",
+          "protocol": "DXOMARK Camera v5"
+        },
+        "battery": {
+          "sourceId": "apple-iphone16-eu-energy",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "display": {
+          "sizeInches": 6.1,
+          "type": "Super Retina XDR OLED",
+          "peakBrightnessNits": 2000
+        },
+        "performance": {
+          "chip": "Apple A18"
+        },
+        "camera": {
+          "mainMp": 48,
+          "ultrawideMp": 12,
+          "opticalQualityZoomX": 2
+        },
+        "battery": {
+          "capacityMah": 3561,
+          "videoPlaybackHours": 22,
+          "euCycleHours": 37,
+          "cycleLife": 1000,
+          "euEnduranceHours": 37
+        },
+        "durability": {
+          "ipRating": "IP68"
+        },
+        "software": {
+          "minimumSupportYears": 5
+        },
+        "euEnergyLabel": {
+          "energyClass": "B",
+          "reliabilityClass": "C",
+          "repairabilityClass": "C",
+          "regulation": "EU 2023/1669"
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "camera",
+          "type": "independent_test",
+          "sourceId": "dxomark-iphone-16-camera-v5",
+          "score": 147,
+          "protocol": "DXOMARK Camera v5",
+          "publishedAt": "2024-11-21"
+        },
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "apple-iphone16-eu-energy",
+          "score": 37,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-05"
+        }
+      ],
+      "sources": [
+        {
+          "id": "apple-iphone16-specs",
+          "name": "Apple",
+          "type": "manufacturer_specs",
+          "title": "iPhone 16 - Specifiche tecniche",
+          "url": "https://www.apple.com/it/iphone-16/specs/"
+        },
+        {
+          "id": "dxomark-iphone-16-camera-v5",
+          "name": "DXOMARK",
+          "type": "independent_test",
+          "title": "Apple iPhone 16 Camera test",
+          "url": "https://www.dxomark.com/apple-iphone-16-camera-test/",
+          "protocol": "DXOMARK Camera v5"
+        },
+        {
+          "id": "apple-iphone16-eu-energy",
+          "name": "Apple",
+          "type": "regulatory_product_information",
+          "title": "iPhone 16 - Informazioni sul consumo energetico UE",
+          "url": "https://www.apple.com/it/iphone-16/specs/"
+        }
+      ],
+      "updatedAt": "2026-11-05"
+    },
+    {
+      "productId": "apple-iphone-17-512-white",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 41,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "apple-iphone17-eu-energy",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 41,
+          "cycleLife": 1000
+        },
+        "euEnergyLabel": {
+          "energyClass": "A",
+          "reliabilityClass": "B",
+          "repairabilityClass": "C",
+          "regulation": "EU 2023/1669"
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "apple-iphone17-eu-energy",
+          "score": 41,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-05"
+        }
+      ],
+      "sources": [
+        {
+          "id": "apple-iphone17-eu-energy",
+          "name": "Apple",
+          "type": "regulatory_product_information",
+          "title": "iPhone 17 - Informazioni sul consumo energetico UE",
+          "url": "https://www.apple.com/it/iphone/"
+        }
+      ],
+      "updatedAt": "2026-11-05"
     }
   ]
 }
