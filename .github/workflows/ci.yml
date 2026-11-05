@@ -38,5 +38,8 @@ jobs:
       - name: Check smartphone catalog coverage
         run: npm run catalog:coverage
 
+      - name: Check product knowledge coverage
+        run: npm run knowledge:coverage
+
       - name: Audit production dependencies
         run: npm audit --audit-level=moderate
