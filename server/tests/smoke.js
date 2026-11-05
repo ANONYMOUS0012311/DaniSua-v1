@@ -23,6 +23,10 @@ const {
   importFeedContent,
 } = require("../ingestion/feedImporter");
 
+const {
+  evaluateOfferTrust,
+} = require("../utils/trustPolicy");
+
 
 const BASE_URL =
   process.env.DANISUA_BASE_URL ||
@@ -2017,6 +2021,68 @@ async function testExactPriceSearchStillUsesBestOffer() {
 
 
 // ========================================
+// TRUST — NUOVI STORE UFFICIALI
+// ========================================
+
+async function testOfficialSmartphoneStoresTrust() {
+  const cases = [
+    {
+      store: "Google Store",
+      url: "https://store.google.com/it/category/phones?hl=it",
+      expectedStoreId: "google-store-it",
+    },
+    {
+      store: "Xiaomi",
+      url: "https://www.mi.com/it/",
+      expectedStoreId: "xiaomi-it",
+    },
+    {
+      store: "HONOR",
+      url: "https://www.honor.com/it/phones/",
+      expectedStoreId: "honor-it",
+    },
+    {
+      store: "OPPO",
+      url: "https://www.oppo.com/it/smartphones/",
+      expectedStoreId: "oppo-it",
+    },
+    {
+      store: "Euronics",
+      url: "https://www.euronics.it/telefonia/smartphone-e-cellulari/",
+      expectedStoreId: "euronics-it",
+    },
+  ];
+
+  for (const item of cases) {
+    const trust =
+      evaluateOfferTrust({
+        store: item.store,
+        seller: item.store,
+        url: item.url,
+      });
+
+    assert(
+      trust.knownStore === true &&
+      trust.verifiedStore === true &&
+      trust.betaEligible === true,
+      `Store ufficiale non idoneo alla beta: ${item.store}`
+    );
+
+    assert(
+      trust.storeId ===
+        item.expectedStoreId,
+      `Store ID inatteso per ${item.store}: ${trust.storeId}`
+    );
+
+    assert(
+      trust.directSeller === true,
+      `${item.store} dovrebbe essere venditore diretto`
+    );
+  }
+}
+
+
+// ========================================
 // TESTS
 // ========================================
 
@@ -2291,6 +2357,14 @@ const tests = [
 
     run:
       testExactPriceSearchStillUsesBestOffer,
+  },
+
+  {
+    name:
+      "TRUST — store smartphone ufficiali",
+
+    run:
+      testOfficialSmartphoneStoresTrust,
   },
 ];
 
