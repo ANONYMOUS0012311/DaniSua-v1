@@ -1251,5 +1251,28 @@
     },
     "image": null,
     "imageSourcePage": "https://www.samsung.com/it/smartphones/galaxy-s26/buy/"
+  },
+  {
+    "id": "samsung-galaxy-s26-plus-256-white",
+    "familyId": "samsung-galaxy-s26-plus",
+    "familyName": "Galaxy S26+",
+    "productLineId": "samsung-galaxy-s",
+    "productLineName": "Galaxy S",
+    "category": "smartphone",
+    "brand": "Samsung",
+    "model": "Galaxy S26+",
+    "storage": "256 GB",
+    "ram": "12 GB",
+    "color": "White",
+    "condition": "new",
+    "gtin": null,
+    "title": "Samsung Galaxy S26+ 256 GB White",
+    "attributes": {
+      "storage": "256 GB",
+      "ram": "12 GB",
+      "color": "White"
+    },
+    "image": null,
+    "imageSourcePage": "https://www.expert.it/it/it/exp/shop/product/galaxy-s26-256gb12gb-white/exp911541"
   }
 ]
