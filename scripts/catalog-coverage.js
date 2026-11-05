@@ -73,10 +73,34 @@ const rows =
             ) || []
         );
 
+      const verifiedOffers =
+        familyOffers.filter(
+          offer =>
+            Boolean(
+              offer.verifiedAt
+            )
+        );
+
+      const comparableOffers =
+        verifiedOffers.filter(
+          offer =>
+            offer.pricing
+              ?.conditional !==
+            true
+        );
+
+      const conditionalOffers =
+        verifiedOffers.filter(
+          offer =>
+            offer.pricing
+              ?.conditional ===
+            true
+        );
+
       const stores =
         [
           ...new Set(
-            familyOffers
+            comparableOffers
               .map(
                 offer =>
                   offer.store
@@ -85,13 +109,17 @@ const rows =
           ),
         ].sort();
 
-      const verifiedOffers =
-        familyOffers.filter(
-          offer =>
-            Boolean(
-              offer.verifiedAt
-            )
-        );
+      const conditionalStores =
+        [
+          ...new Set(
+            conditionalOffers
+              .map(
+                offer =>
+                  offer.store
+              )
+              .filter(Boolean)
+          ),
+        ].sort();
 
       let status = "missing";
 
@@ -131,9 +159,14 @@ const rows =
           familyOffers.length,
         verifiedOffers:
           verifiedOffers.length,
+        comparableOffers:
+          comparableOffers.length,
+        conditionalOffers:
+          conditionalOffers.length,
         stores,
         storeCount:
           stores.length,
+        conditionalStores,
         status,
       };
     }
