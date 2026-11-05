@@ -2605,16 +2605,16 @@ async function testSmartphoneBatch3FiveFamilies() {
     {
       query: "Xiaomi 17T 256 GB Blue",
       familyId: "xiaomi-17t",
-      expectedOffers: 2,
+      expectedOffers: 3,
       expectedBest: "test-euronics-xiaomi17t-256-blue",
       expectedFinalCost: 531.9,
     },
     {
       query: "REDMI Note 17 Pro 5G 256 GB Black",
       familyId: "redmi-note-17-pro-5g",
-      expectedOffers: 2,
-      expectedBest: "test-xiaomi-redminote17pro-5g-256-black",
-      expectedFinalCost: null,
+      expectedOffers: 4,
+      expectedBest: "test-mediaworld-redminote17pro-5g-256-black",
+      expectedFinalCost: 374.98,
     },
     {
       query: "Galaxy S26 FE 256 GB Graphite",
@@ -2672,9 +2672,9 @@ async function testSmartphoneBatch4PremiumBreadth() {
     {
       query: "iPhone Air 256 GB Nero Siderale",
       familyId: "apple-iphone-air",
-      expectedOffers: 1,
-      expectedBest: "test-apple-iphone-air-256-black",
-      expectedFinalCost: 1339,
+      expectedOffers: 3,
+      expectedBest: "test-comet-iphone-air-256-black",
+      expectedFinalCost: null,
     },
     {
       query: "Galaxy S26+ 256 GB",
@@ -2854,7 +2854,7 @@ async function testSmartphoneFinalTargetFive() {
     {
       query: "HONOR Magic8 Lite 256 GB Black",
       familyId: "honor-magic8-lite",
-      expectedOffers: 1,
+      expectedOffers: 3,
       expectedBest: "test-mediaworld-magic8lite-256-black",
       expectedFinalCost: 317.48,
     },
@@ -3035,6 +3035,61 @@ async function testBetaCoreDepthWaveThree() {
     {
       query: "OPPO Find X10 256 GB Mist Grey",
       stores: ["MediaWorld", "Euronics", "Unieuro"],
+    },
+  ];
+
+  for (const item of cases) {
+    const data = await search(item.query);
+    const stores =
+      new Set(
+        data.results.map(
+          offer => offer.store
+        )
+      );
+
+    for (const store of item.stores) {
+      assert(
+        stores.has(store),
+        `${item.query}: manca lo store ${store}`
+      );
+    }
+  }
+}
+
+
+// ========================================
+// BETA CORE DEPTH — WAVE 4
+// ========================================
+
+async function testBetaCoreDepthWaveFour() {
+  const cases = [
+    {
+      query: "iPhone 18 Pro 256 GB Nero",
+      stores: ["Apple", "Euronics", "Unieuro", "Comet"],
+    },
+    {
+      query: "iPhone Air 256 GB Nero Siderale",
+      stores: ["Apple", "Euronics", "Comet"],
+    },
+    {
+      query: "Galaxy A37 5G 128 GB",
+      stores: ["Euronics", "Comet", "Expert"],
+    },
+    {
+      query: "Xiaomi 17T Pro",
+      stores: ["Xiaomi", "MediaWorld", "Expert"],
+    },
+    {
+      query: "Xiaomi 17T 256 GB",
+      stores: ["Xiaomi", "Euronics", "MediaWorld", "Expert"],
+    },
+    {
+      query: "REDMI Note 17 Pro 5G 256 GB Black",
+      stores: ["Xiaomi", "Euronics", "MediaWorld", "Expert"],
+    },
+    {
+      query: "HONOR Magic8 Lite 256 GB",
+      stores: ["MediaWorld", "Euronics", "Expert"],
     },
   ];
 
@@ -3364,6 +3419,14 @@ const tests = [
 
     run:
       testPixel11ProductionIngest,
+  },
+
+  {
+    name:
+      "BETA CORE DEPTH — wave 4",
+
+    run:
+      testBetaCoreDepthWaveFour,
   },
 
   {

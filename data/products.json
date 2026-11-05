@@ -1274,5 +1274,97 @@
     },
     "image": null,
     "imageSourcePage": "https://www.expert.it/it/it/exp/shop/product/galaxy-s26-256gb12gb-white/exp911541"
+  },
+  {
+    "id": "samsung-galaxy-a37-128-charcoal",
+    "familyId": "samsung-galaxy-a37",
+    "familyName": "Galaxy A37 5G",
+    "productLineId": "samsung-galaxy-a",
+    "productLineName": "Galaxy A",
+    "category": "smartphone",
+    "brand": "Samsung",
+    "model": "Galaxy A37 5G",
+    "storage": "128 GB",
+    "ram": "6 GB",
+    "color": "Awesome Charcoal",
+    "condition": "new",
+    "gtin": null,
+    "title": "Samsung Galaxy A37 5G 128 GB Awesome Charcoal",
+    "attributes": {
+      "storage": "128 GB",
+      "ram": "6 GB",
+      "color": "Awesome Charcoal"
+    },
+    "image": null,
+    "imageSourcePage": "https://www.samsung.com/it/smartphones/galaxy-a/galaxy-a37-5g/buy/"
+  },
+  {
+    "id": "xiaomi-17t-pro-512-black",
+    "familyId": "xiaomi-17t-pro",
+    "familyName": "Xiaomi 17T Pro",
+    "productLineId": "xiaomi-17t",
+    "productLineName": "Xiaomi 17T",
+    "category": "smartphone",
+    "brand": "Xiaomi",
+    "model": "Xiaomi 17T Pro",
+    "storage": "512 GB",
+    "ram": "12 GB",
+    "color": "Black",
+    "condition": "new",
+    "gtin": null,
+    "title": "Xiaomi 17T Pro 12+512 GB Black",
+    "attributes": {
+      "storage": "512 GB",
+      "ram": "12 GB",
+      "color": "Black"
+    },
+    "image": null,
+    "imageSourcePage": "https://www.mi.com/it/product/xiaomi-17t-pro/"
+  },
+  {
+    "id": "xiaomi-17t-256-violet",
+    "familyId": "xiaomi-17t",
+    "familyName": "Xiaomi 17T",
+    "productLineId": "xiaomi-17t",
+    "productLineName": "Xiaomi 17T",
+    "category": "smartphone",
+    "brand": "Xiaomi",
+    "model": "Xiaomi 17T",
+    "storage": "256 GB",
+    "ram": "12 GB",
+    "color": "Violet",
+    "condition": "new",
+    "gtin": null,
+    "title": "Xiaomi 17T 12+256 GB Violet",
+    "attributes": {
+      "storage": "256 GB",
+      "ram": "12 GB",
+      "color": "Violet"
+    },
+    "image": null,
+    "imageSourcePage": "https://www.mi.com/it/product/xiaomi-17t/"
+  },
+  {
+    "id": "honor-magic8-lite-256-midnight-black",
+    "familyId": "honor-magic8-lite",
+    "familyName": "HONOR Magic8 Lite",
+    "productLineId": "honor-magic",
+    "productLineName": "HONOR Magic",
+    "category": "smartphone",
+    "brand": "HONOR",
+    "model": "HONOR Magic8 Lite",
+    "storage": "256 GB",
+    "ram": "8 GB",
+    "color": "Midnight Black",
+    "condition": "new",
+    "gtin": null,
+    "title": "HONOR Magic8 Lite 8+256 GB Midnight Black",
+    "attributes": {
+      "storage": "256 GB",
+      "ram": "8 GB",
+      "color": "Midnight Black"
+    },
+    "image": null,
+    "imageSourcePage": "https://www.honor.com/it/phones/honor-magic8-lite/"
   }
 ]
