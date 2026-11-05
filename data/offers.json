@@ -1730,7 +1730,7 @@
     "old_price": 379.9,
     "offer_price": 312.49,
     "currency": "EUR",
-    "shipping_price": null,
+    "shipping_price": 4.99,
     "stock": true,
     "url": "https://www.mediaworld.it/it/brand/honor/smartphone/honor-magic-series",
     "updatedAt": null,
@@ -1845,8 +1845,8 @@
     }
   },
   {
-    "id": "test-euronics-reno16pro-512-black",
-    "productId": "oppo-reno16-pro-512-starlight-black",
+    "id": "test-euronics-reno16pro-512-popwhite",
+    "productId": "oppo-reno16-pro-512-pop-white",
     "store": "Euronics",
     "seller": "Euronics",
     "old_price": 1099.99,
