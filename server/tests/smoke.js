@@ -422,8 +422,15 @@ async function testRecommendationBudget() {
   assert(
     data.bestOffer
       .familyId ===
-      "apple-iphone-15",
-    `Famiglia attesa apple-iphone-15, ricevuta ${data.bestOffer?.familyId}`
+      "apple-iphone-16",
+    `Famiglia attesa apple-iphone-16, ricevuta ${data.bestOffer?.familyId}`
+  );
+
+  assert(
+    data.recommendation
+      ?.finalCost ===
+      974.9,
+    `Costo finale iPhone 16 inatteso: ${data.recommendation?.finalCost}`
   );
 
 
