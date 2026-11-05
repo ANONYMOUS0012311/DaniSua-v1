@@ -500,5 +500,51 @@
     },
     "image": null,
     "imageSourcePage": "https://www.mediaworld.it/it/product/_nintendo-bundle-mkworld-con-ns2-nero-blu-rosso-760360.html"
+  },
+  {
+    "id": "samsung-galaxy-s26-256-white",
+    "familyId": "samsung-galaxy-s26",
+    "familyName": "Galaxy S26",
+    "productLineId": "samsung-galaxy-s",
+    "productLineName": "Galaxy S",
+    "category": "smartphone",
+    "brand": "Samsung",
+    "model": "Galaxy S26",
+    "storage": "256 GB",
+    "ram": "12 GB",
+    "color": "White",
+    "condition": "new",
+    "gtin": "8806097827764",
+    "title": "Samsung Galaxy S26 256 GB White",
+    "attributes": {
+      "storage": "256 GB",
+      "ram": "12 GB",
+      "color": "White"
+    },
+    "image": null,
+    "imageSourcePage": "https://www.samsung.com/it/smartphones/galaxy-s26/buy/?modelCode=SM-S942BZWGEUE"
+  },
+  {
+    "id": "google-pixel-11-256-obsidian",
+    "familyId": "google-pixel-11",
+    "familyName": "Pixel 11",
+    "productLineId": "google-pixel",
+    "productLineName": "Pixel",
+    "category": "smartphone",
+    "brand": "Google",
+    "model": "Pixel 11",
+    "storage": "256 GB",
+    "ram": "12 GB",
+    "color": "Nero ossidiana",
+    "condition": "new",
+    "gtin": null,
+    "title": "Google Pixel 11 256 GB Nero Ossidiana",
+    "attributes": {
+      "storage": "256 GB",
+      "ram": "12 GB",
+      "color": "Nero ossidiana"
+    },
+    "image": null,
+    "imageSourcePage": "https://store.google.com/it/category/phones?hl=it"
   }
 ]
