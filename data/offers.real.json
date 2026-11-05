@@ -1850,5 +1850,180 @@
         }
       ]
     }
+  },
+  {
+    "id": "real-mediaworld-iphone17e-256-soft-pink",
+    "productId": "apple-iphone-17e-256-soft-pink",
+    "store": "MediaWorld",
+    "seller": "MediaWorld",
+    "old_price": null,
+    "offer_price": 879,
+    "currency": "EUR",
+    "shipping_price": 3.99,
+    "stock": true,
+    "url": "https://www.mediaworld.it/it/product/_apple-iphone-17e-256gb-394758.html",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 879
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-unieuro-a57-256-blue",
+    "productId": "samsung-galaxy-a57-256-blue",
+    "store": "Unieuro",
+    "seller": "Unieuro",
+    "old_price": 599.9,
+    "offer_price": 479.9,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.unieuro.it/online/Smartphone/A57-5G-pidSAMA575G256B",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 479.9
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-google-pixel10a-128-obsidian",
+    "productId": "google-pixel-10a-128-obsidian",
+    "store": "Google Store",
+    "seller": "Google Store",
+    "old_price": null,
+    "offer_price": 649,
+    "currency": "EUR",
+    "shipping_price": 0,
+    "stock": true,
+    "url": "https://store.google.com/it/product/pixel_10a?hl=it",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 649
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-unieuro-iphone17-256-black",
+    "productId": "apple-iphone-17-256-black",
+    "store": "Unieuro",
+    "seller": "Unieuro",
+    "old_price": 1129,
+    "offer_price": 999,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.unieuro.it/online/iPhone/iPhone-17-256GB-Nero-pidAPLIPHONE17256",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 999
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-euronics-iphone17-256-black",
+    "productId": "apple-iphone-17-256-black",
+    "store": "Euronics",
+    "seller": "Euronics",
+    "old_price": null,
+    "offer_price": 1050,
+    "currency": "EUR",
+    "shipping_price": 7.9,
+    "stock": true,
+    "url": "https://www.euronics.it/telefonia/smartphone-e-cellulari/iphone/apple---iphone-17-256gb-nero/252011565.html",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 1050
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-euronics-pixel11pro-256-obsidian",
+    "productId": "google-pixel-11-pro-256-obsidian",
+    "store": "Euronics",
+    "seller": "Euronics",
+    "old_price": null,
+    "offer_price": 1049,
+    "currency": "EUR",
+    "shipping_price": 7.9,
+    "stock": true,
+    "url": "https://www.euronics.it/telefonia/smartphone-e-cellulari/smartphone-dual-sim/google---smartphone-google-pixel-11-pro-256gb-nero-ossidiana/262010092.html",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 1049
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-euronics-redminote17-5g-256-black",
+    "productId": "xiaomi-redmi-note17-5g-256-black",
+    "store": "Euronics",
+    "seller": "Euronics",
+    "old_price": 399.9,
+    "offer_price": 299,
+    "currency": "EUR",
+    "shipping_price": 7.9,
+    "stock": true,
+    "url": "https://www.euronics.it/telefonia/smartphone-e-cellulari/smartphone-dual-sim/xiaomi---smartphone-redmi-note-17-5g-6gb-256gb-black/262009518.html",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 299
+        }
+      ]
+    }
   }
 ]
