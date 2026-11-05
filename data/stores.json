@@ -226,5 +226,39 @@
       "www.euronics.it"
     ],
     "notes": "Retailer di elettronica italiano utilizzato per ampliare la copertura smartphone della beta."
+  },
+  {
+    "id": "comet-it",
+    "name": "Comet",
+    "aliases": [
+      "Comet Italia"
+    ],
+    "country": "IT",
+    "type": "retailer",
+    "verifiedByDaniSua": true,
+    "trustTier": "A",
+    "betaEligible": true,
+    "domains": [
+      "comet.it",
+      "www.comet.it"
+    ],
+    "notes": "Retailer italiano di elettronica, associato Aires; usato per ampliare la profondità della beta."
+  },
+  {
+    "id": "expert-it",
+    "name": "Expert",
+    "aliases": [
+      "Expert Italia"
+    ],
+    "country": "IT",
+    "type": "retailer",
+    "verifiedByDaniSua": true,
+    "trustTier": "A",
+    "betaEligible": true,
+    "domains": [
+      "expert.it",
+      "www.expert.it"
+    ],
+    "notes": "Retailer italiano di elettronica, associato Aires; usato per ampliare la profondità della beta."
   }
 ]

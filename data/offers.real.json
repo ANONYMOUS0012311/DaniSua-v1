@@ -2258,5 +2258,82 @@
         }
       ]
     }
+  },
+  {
+    "id": "real-comet-iphone16-128-black",
+    "productId": "apple-iphone-16-128-black",
+    "store": "Comet",
+    "seller": "Comet",
+    "old_price": 1029,
+    "offer_price": 849,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.comet.it/apple-iphone-16-128-gb-nero-APL036949-prdtt",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 849
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-expert-s26plus-256-white",
+    "productId": "samsung-galaxy-s26-plus-256-white",
+    "store": "Expert",
+    "seller": "Expert",
+    "old_price": 1389,
+    "offer_price": 1242.9,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.expert.it/it/it/exp/shop/product/galaxy-s26-256gb12gb-white/exp911541",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 1242.9
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-unieuro-findx10-256-mistgrey",
+    "productId": "oppo-find-x10-256-mist-grey",
+    "store": "Unieuro",
+    "seller": "Unieuro",
+    "old_price": null,
+    "offer_price": 1399,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.unieuro.it/online/Smartphone/Find-X10-5G-256-Grey-Box-pidOOPFX105G12256GRpBU",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [
+        "La pagina mostra anche 200€ di Extra Sconto in carrello; lo sconto condizionato non è incluso nel prezzo standard modellato."
+      ],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 1399
+        }
+      ]
+    }
   }
 ]
