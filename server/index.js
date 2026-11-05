@@ -2778,9 +2778,37 @@ function getKnowledgeSource(knowledge, sourceId) {
 
 function buildRankingEvidence(winner, bestOffer) {
   const knowledge = bestOffer?.knowledge;
-  const used = Array.isArray(winner?.ranking?.usedCriteria)
-    ? winner.ranking.usedCriteria
-    : [];
+  const used =
+    Array.isArray(
+      winner?.ranking
+        ?.usedCriteria
+    )
+      ? winner.ranking.usedCriteria
+      : (
+          winner?.ranking
+            ?.criterion &&
+          winner.ranking
+            .criterion !==
+            "multi" &&
+          typeof winner.ranking
+            ?.score ===
+            "number"
+            ? [
+                {
+                  criterion:
+                    winner.ranking
+                      .criterion,
+                  rawScore:
+                    winner.ranking
+                      .score,
+                  normalizedScore:
+                    winner.ranking
+                      .normalizedScore ??
+                    null,
+                },
+              ]
+            : []
+        );
   if (!knowledge || used.length === 0) {
     return [];
   }
