@@ -81,6 +81,12 @@ const rows =
             )
         );
 
+      const availableVerifiedOffers =
+        verifiedOffers.filter(
+          offer =>
+            offer.stock !== false
+        );
+
       const comparableOffers =
         verifiedOffers.filter(
           offer =>
@@ -120,6 +126,88 @@ const rows =
               .filter(Boolean)
           ),
         ].sort();
+
+      const requiredStorageValues =
+        Array.isArray(
+          target
+            .priceShapingDimensions
+            ?.storage
+        )
+          ? target
+              .priceShapingDimensions
+              .storage
+          : [];
+
+      const catalogedStorageValues =
+        [
+          ...new Set(
+            familyProducts
+              .map(
+                product =>
+                  product.storage
+              )
+              .filter(Boolean)
+          ),
+        ];
+
+      const pricedStorageValues =
+        [
+          ...new Set(
+            familyProducts
+              .filter(
+                product =>
+                  availableVerifiedOffers
+                    .some(
+                      offer =>
+                        offer.productId ===
+                        product.id &&
+                        offer.pricing
+                          ?.conditional !==
+                          true
+                    )
+              )
+              .map(
+                product =>
+                  product.storage
+              )
+              .filter(Boolean)
+          ),
+        ];
+
+      const missingCatalogStorageValues =
+        requiredStorageValues
+          .filter(
+            value =>
+              !catalogedStorageValues
+                .includes(value)
+          );
+
+      const missingPricedStorageValues =
+        requiredStorageValues
+          .filter(
+            value =>
+              !pricedStorageValues
+                .includes(value)
+          );
+
+      const variantDepthTracked =
+        requiredStorageValues
+          .length > 0;
+
+      const variantDepthStatus =
+        !variantDepthTracked
+          ? "not_tracked"
+          : (
+              missingCatalogStorageValues
+                .length > 0
+                ? "missing_variants"
+                : (
+                    missingPricedStorageValues
+                      .length > 0
+                      ? "missing_prices"
+                      : "ready"
+                  )
+            );
 
       let status = "missing";
 
@@ -170,6 +258,17 @@ const rows =
         storeCount:
           stores.length,
         conditionalStores,
+        variantDepth: {
+          tracked:
+            variantDepthTracked,
+          status:
+            variantDepthStatus,
+          requiredStorageValues,
+          catalogedStorageValues,
+          pricedStorageValues,
+          missingCatalogStorageValues,
+          missingPricedStorageValues,
+        },
         status,
       };
     }
@@ -220,6 +319,20 @@ const importantRows =
       row.betaTier === "important"
   );
 
+const variantDepthRows =
+  rows.filter(
+    row =>
+      row.variantDepth
+        ?.tracked === true
+  );
+
+const variantDepthReady =
+  variantDepthRows.filter(
+    row =>
+      row.variantDepth
+        ?.status === "ready"
+  );
+
 const summary = {
   market:
     targets.market,
@@ -242,6 +355,38 @@ const summary = {
       p0.length,
     ready:
       p0Ready,
+  },
+  variantDepth: {
+    targetFamilies:
+      variantDepthRows.length,
+    readyFamilies:
+      variantDepthReady.length,
+    incompleteFamilies:
+      variantDepthRows
+        .filter(
+          row =>
+            row.variantDepth
+              ?.status !== "ready"
+        )
+        .map(
+          row => ({
+            familyId:
+              row.familyId,
+            familyName:
+              row.familyName,
+            status:
+              row.variantDepth
+                ?.status,
+            missingCatalogStorageValues:
+              row.variantDepth
+                ?.missingCatalogStorageValues ||
+              [],
+            missingPricedStorageValues:
+              row.variantDepth
+                ?.missingPricedStorageValues ||
+              [],
+          })
+        ),
   },
   betaDepth: {
     targetFamilies:

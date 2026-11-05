@@ -11,7 +11,7 @@
     "stock": true,
     "url": "https://www.unieuro.it/online/iPhone/iPhone-15-128GB-Nero-pidAPLIPHONE15128",
     "updatedAt": null,
-    "verifiedAt": "2026-11-04",
+    "verifiedAt": "2026-11-05",
     "pricing": {
       "type": "standard",
       "conditional": false,
@@ -2707,6 +2707,81 @@
         {
           "type": "one_time",
           "total_price": 349.9
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-unieuro-iphone16-256-white",
+    "productId": "apple-iphone-16-256-white",
+    "store": "Unieuro",
+    "seller": "Unieuro",
+    "old_price": 1011,
+    "offer_price": 899,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.unieuro.it/online/iPhone/iPhone-16-256GB-Bianco-pidILIIPHONE16256W",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 899
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-mediaworld-iphone17-512-white",
+    "productId": "apple-iphone-17-512-white",
+    "store": "MediaWorld",
+    "seller": "MediaWorld",
+    "old_price": 1379,
+    "offer_price": 1305.49,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.mediaworld.it/it/product/_apple-iphone-17-512gb-bianco-389227.html",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 1305.49
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-unieuro-iphone17-512-white",
+    "productId": "apple-iphone-17-512-white",
+    "store": "Unieuro",
+    "seller": "Unieuro",
+    "old_price": 1379,
+    "offer_price": 1299,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.unieuro.it/online/products?q=0195950644302",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 1299
         }
       ]
     }

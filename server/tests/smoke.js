@@ -3113,10 +3113,136 @@ async function testBetaCoreDepthWaveFour() {
 
 
 // ========================================
+// PRICE-SHAPING VARIANTS — STORAGE DEPTH
+// ========================================
+
+async function testPriceShapingVariantDepth() {
+  const iphone17Family =
+    await search(
+      "iPhone 17 più economico"
+    );
+
+  assert(
+    iphone17Family
+      .recommendation
+      ?.selectedVariant
+      ?.storage === "256 GB",
+    `iPhone 17 generico deve scegliere la capacità più economica: ${iphone17Family.recommendation?.selectedVariant?.storage}`
+  );
+
+  assert(
+    iphone17Family
+      .variantCoverage
+      ?.complete === true &&
+    iphone17Family
+      .recommendation
+      ?.comparisonCompleteness ===
+        "complete",
+    "iPhone 17 coverage inattesa: " +
+      JSON.stringify({
+        variantCoverage:
+          iphone17Family.variantCoverage,
+        completeness:
+          iphone17Family
+            .recommendation
+            ?.comparisonCompleteness,
+        storages:
+          iphone17Family.results
+            ?.map(
+              offer =>
+                offer.storage
+            ),
+      })
+  );
+
+  const iphone17_512 =
+    await search(
+      "iPhone 17 512 GB più economico"
+    );
+
+  assert(
+    iphone17_512
+      .recommendation
+      ?.selectedVariant
+      ?.storage === "512 GB",
+    `iPhone 17 512 deve restare vincolato a 512 GB: ${iphone17_512.recommendation?.selectedVariant?.storage}`
+  );
+
+  assert(
+    iphone17_512.results.length > 0 &&
+    iphone17_512.results.every(
+      offer =>
+        offer.storage === "512 GB"
+    ),
+    "La ricerca iPhone 17 512 GB non deve includere altre capacità"
+  );
+
+  const iphone16Family =
+    await search(
+      "iPhone 16 più economico"
+    );
+
+  assert(
+    iphone16Family
+      .recommendation
+      ?.selectedVariant
+      ?.storage === "128 GB",
+    `iPhone 16 generico deve poter scegliere 128 GB: ${iphone16Family.recommendation?.selectedVariant?.storage}`
+  );
+
+  assert(
+    iphone16Family
+      .variantCoverage
+      ?.complete === false &&
+    iphone16Family
+      .variantCoverage
+      ?.missingStorages
+      ?.includes("512 GB") &&
+    iphone16Family
+      .recommendation
+      ?.comparisonCompleteness ===
+        "partial",
+    "iPhone 16 deve dichiarare confronto parziale finché manca il prezzo 512 GB"
+  );
+
+  const iphone16_256 =
+    await search(
+      "iPhone 16 256 GB più economico"
+    );
+
+  assert(
+    iphone16_256
+      .recommendation
+      ?.selectedVariant
+      ?.storage === "256 GB",
+    `iPhone 16 256 deve restare vincolato a 256 GB: ${iphone16_256.recommendation?.selectedVariant?.storage}`
+  );
+
+  assert(
+    iphone16_256.results.length > 0 &&
+    iphone16_256.results.every(
+      offer =>
+        offer.storage === "256 GB"
+    ),
+    "La ricerca iPhone 16 256 GB non deve includere altre capacità"
+  );
+}
+
+
+// ========================================
 // TESTS
 // ========================================
 
 const tests = [
+  {
+    name:
+      "PRICE-SHAPING VARIANTS — storage depth",
+
+    run:
+      testPriceShapingVariantDepth,
+  },
+
+
   {
     name:
       "PRODUCT_SEARCH — offerte equivalenti",

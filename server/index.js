@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const crypto = require("crypto");
+const smartphoneCatalogTargets = require("../data/catalog_targets.smartphones.json");
 
 const sourceRegistry = require("./sources/registry");
 
@@ -1356,6 +1357,195 @@ function buildFamilyPriceReady(
 }
 
 
+
+// ========================================
+// VARIANT DEPTH — PRICE-SHAPING COVERAGE
+// ========================================
+
+const VARIANT_DEPTH_TARGETS =
+  new Map(
+    (
+      smartphoneCatalogTargets
+        ?.families ||
+      []
+    )
+      .filter(
+        family =>
+          Array.isArray(
+            family
+              ?.priceShapingDimensions
+              ?.storage
+          )
+      )
+      .map(
+        family => [
+          family.familyId,
+          family
+            .priceShapingDimensions
+            .storage,
+        ]
+      )
+  );
+
+
+function buildVariantCoverageMeta(
+  offers
+) {
+  if (
+    !Array.isArray(offers) ||
+    offers.length === 0
+  ) {
+    return null;
+  }
+
+  const familyIds =
+    uniqueValues(
+      offers,
+      "familyId"
+    );
+
+  if (familyIds.length !== 1) {
+    return null;
+  }
+
+  const familyId =
+    familyIds[0];
+
+  const requiredStorages =
+    VARIANT_DEPTH_TARGETS
+      .get(familyId);
+
+  if (
+    !Array.isArray(
+      requiredStorages
+    ) ||
+    requiredStorages.length === 0
+  ) {
+    return null;
+  }
+
+  const coveredStorages =
+    uniqueValues(
+      offers,
+      "storage"
+    );
+
+  const missingStorages =
+    requiredStorages.filter(
+      storage =>
+        !coveredStorages
+          .includes(storage)
+    );
+
+  return {
+    tracked: true,
+    familyId,
+    dimension:
+      "storage",
+    complete:
+      missingStorages.length === 0,
+    requiredStorages,
+    coveredStorages,
+    missingStorages,
+  };
+}
+
+
+function querySpecifiesTrackedStorage(
+  query,
+  offers
+) {
+  if (
+    !Array.isArray(offers) ||
+    offers.length === 0
+  ) {
+    return false;
+  }
+
+  const familyIds =
+    uniqueValues(
+      offers,
+      "familyId"
+    );
+
+  if (familyIds.length !== 1) {
+    return false;
+  }
+
+  const requiredStorages =
+    VARIANT_DEPTH_TARGETS
+      .get(
+        familyIds[0]
+      ) || [];
+
+  return requiredStorages
+    .some(
+      storage =>
+        queryContains(
+          query,
+          storage
+        )
+    );
+}
+
+
+function shouldReportVariantCoverage(
+  query,
+  offers
+) {
+  return (
+    hasSingleFamily(offers) &&
+    !querySpecifiesTrackedStorage(
+      query,
+      offers
+    )
+  );
+}
+
+
+function attachVariantCoverage(
+  recommendation,
+  variantCoverage
+) {
+  if (
+    !recommendation ||
+    !variantCoverage
+  ) {
+    return recommendation;
+  }
+
+  const complete =
+    variantCoverage.complete ===
+    true;
+
+  const suffix =
+    complete
+      ? " Copertura varianti completa per le capacità monitorate."
+      : (
+          " Confronto varianti parziale: mancano prezzi verificati per " +
+          variantCoverage
+            .missingStorages
+            .join(", ") +
+          "."
+        );
+
+  return {
+    ...recommendation,
+    comparisonCompleteness:
+      complete
+        ? "complete"
+        : "partial",
+    variantCoverage,
+    message:
+      (
+        recommendation.message ||
+        ""
+      ) +
+      suffix,
+  };
+}
+
+
 // ========================================
 // PRODUCT SEARCH
 // ========================================
@@ -2673,6 +2863,15 @@ function buildGenericPriceRecommendation(
       model:
         bestOffer.model ||
         null,
+      storage:
+        bestOffer.storage ||
+        null,
+      ram:
+        bestOffer.ram ||
+        null,
+      condition:
+        bestOffer.condition ||
+        null,
       color:
         bestOffer.color ||
         null,
@@ -2736,6 +2935,9 @@ function buildBestOfferRecommendation(
         null,
       ram:
         bestOffer.ram ||
+        null,
+      condition:
+        bestOffer.condition ||
         null,
       color:
         bestOffer.color ||
@@ -3347,6 +3549,23 @@ app.get(
                 );
         }
 
+        const variantCoverage =
+          shouldReportVariantCoverage(
+            productQuery,
+            comparableResults
+          )
+            ? buildVariantCoverageMeta(
+                comparableResults
+              )
+            : null;
+
+        recommendation =
+          attachVariantCoverage(
+            recommendation,
+            variantCoverage
+          );
+
+
         return res.json({
           query:
             rawQuery,
@@ -3392,6 +3611,8 @@ app.get(
           bestOffer,
 
           recommendation,
+
+          variantCoverage,
 
           ranking: null,
 
@@ -3448,6 +3669,23 @@ app.get(
             );
         }
 
+        const variantCoverage =
+          shouldReportVariantCoverage(
+            productQuery,
+            comparableResults
+          )
+            ? buildVariantCoverageMeta(
+                comparableResults
+              )
+            : null;
+
+        recommendation =
+          attachVariantCoverage(
+            recommendation,
+            variantCoverage
+          );
+
+
         return res.json({
           query:
             rawQuery,
@@ -3493,6 +3731,8 @@ app.get(
           bestOffer,
 
           recommendation,
+
+          variantCoverage,
 
           ranking: null,
 
