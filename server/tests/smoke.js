@@ -2728,6 +2728,101 @@ async function testSmartphoneBatch4PremiumBreadth() {
 
 
 // ========================================
+// SMARTPHONE BATCH 5 — FLAGSHIPS + FOLDABLES
+// ========================================
+
+async function testSmartphoneBatch5FlagshipsFoldables() {
+  const cases = [
+    {
+      query: "iPhone 18 Pro Max 256 GB Nero",
+      familyId: "apple-iphone-18-pro-max",
+      expectedOffers: 1,
+      expectedBest: "test-apple-iphone18promax-256-black",
+      expectedFinalCost: 1639,
+    },
+    {
+      query: "iPhone Duo 256 GB Bianco Stellare",
+      familyId: "apple-iphone-duo",
+      expectedOffers: 1,
+      expectedBest: "test-apple-iphoneduo-256-starlight",
+      expectedFinalCost: 2369,
+    },
+    {
+      query: "Galaxy Z Fold8 256 GB Graphite",
+      familyId: "samsung-galaxy-z-fold8",
+      expectedOffers: 1,
+      expectedBest: "test-samsung-fold8-256-graphite",
+      expectedFinalCost: 2099,
+    },
+    {
+      query: "Galaxy Z Flip8 256 GB Graphite",
+      familyId: "samsung-galaxy-z-flip8",
+      expectedOffers: 1,
+      expectedBest: "test-samsung-flip8-256-graphite",
+      expectedFinalCost: 1379,
+    },
+    {
+      query: "Xiaomi 17 Ultra 512 GB Black",
+      familyId: "xiaomi-17-ultra",
+      expectedOffers: 2,
+      expectedBest: "test-xiaomi-17ultra-512-black-standard",
+      expectedFinalCost: null,
+    },
+  ];
+
+  for (const item of cases) {
+    const data = await search(item.query);
+
+    assert(
+      ["specific", "best_offer_ready"].includes(data.status),
+      `${item.familyId}: status inatteso ${data.status}`
+    );
+
+    assert(
+      data.results.length === item.expectedOffers,
+      `${item.familyId}: attese ${item.expectedOffers} offerte, ricevute ${data.results.length}`
+    );
+
+    assert(
+      data.bestOffer?.familyId === item.familyId,
+      `${item.familyId}: famiglia inattesa ${data.bestOffer?.familyId}`
+    );
+
+    assert(
+      data.bestOffer?.id === item.expectedBest,
+      `${item.familyId}: bestOffer inattesa ${data.bestOffer?.id}`
+    );
+
+    assert(
+      data.recommendation?.finalCost === item.expectedFinalCost,
+      `${item.familyId}: finalCost inatteso ${data.recommendation?.finalCost}`
+    );
+  }
+
+  const xiaomi =
+    await search(
+      "Xiaomi 17 Ultra 512 GB Black"
+    );
+
+  assert(
+    xiaomi.results.some(
+      offer =>
+        offer.id ===
+          "test-xiaomi-17ultra-512-black-bf" &&
+        offer.pricing?.conditional === true
+    ),
+    "La promo Xiaomi 17 Ultra con Mi Account deve restare esplicitamente condizionata"
+  );
+
+  assert(
+    xiaomi.bestOffer?.id !==
+      "test-xiaomi-17ultra-512-black-bf",
+    "La promo condizionata Xiaomi non deve vincere il ranking standard"
+  );
+}
+
+
+// ========================================
 // TESTS
 // ========================================
 
@@ -3034,6 +3129,14 @@ const tests = [
 
     run:
       testPixel11ProductionIngest,
+  },
+
+  {
+    name:
+      "SMARTPHONE BATCH 5 — flagships + foldables",
+
+    run:
+      testSmartphoneBatch5FlagshipsFoldables,
   },
 
   {
