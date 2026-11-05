@@ -2840,7 +2840,7 @@ async function testSmartphoneFinalTargetFive() {
       familyId: "honor-magic8-lite",
       expectedOffers: 1,
       expectedBest: "test-mediaworld-magic8lite-256-black",
-      expectedFinalCost: null,
+      expectedFinalCost: 317.48,
     },
     {
       query: "HONOR 600 Pro 512 GB",
@@ -2857,10 +2857,10 @@ async function testSmartphoneFinalTargetFive() {
       expectedFinalCost: 1403.98,
     },
     {
-      query: "OPPO Reno16 Pro 5G 512 GB Starlight Black",
+      query: "OPPO Reno16 Pro 5G 512 GB Pop White",
       familyId: "oppo-reno16-pro-5g",
       expectedOffers: 1,
-      expectedBest: "test-euronics-reno16pro-512-black",
+      expectedBest: "test-euronics-reno16pro-512-popwhite",
       expectedFinalCost: 1007.89,
     },
   ];
