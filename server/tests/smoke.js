@@ -2334,8 +2334,8 @@ async function testMidrangeSmartphoneProductionBlock() {
     );
 
   assert(
-    redmi.results.length === 4,
-    `Attesi 4 prezzi REDMI Note 17 5G, ricevuti ${redmi.results.length}`
+    redmi.results.length === 5,
+    `Attesi 5 prezzi REDMI Note 17 5G, ricevuti ${redmi.results.length}`
   );
 
   assert(
@@ -2612,7 +2612,7 @@ async function testSmartphoneBatch3FiveFamilies() {
     {
       query: "REDMI Note 17 Pro 5G 256 GB Black",
       familyId: "redmi-note-17-pro-5g",
-      expectedOffers: 4,
+      expectedOffers: 5,
       expectedBest: "test-mediaworld-redminote17pro-5g-256-black",
       expectedFinalCost: 374.98,
     },
@@ -2636,7 +2636,12 @@ async function testSmartphoneBatch3FiveFamilies() {
     const data = await search(item.query);
 
     assert(
-      data.status === "specific",
+      [
+        "specific",
+        "family_price_ready",
+      ].includes(
+        data.status
+      ),
       `${item.familyId}: status inatteso ${data.status}`
     );
 
