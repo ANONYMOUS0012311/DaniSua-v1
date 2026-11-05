@@ -1248,6 +1248,379 @@
         }
       ],
       "updatedAt": "2026-11-05"
+    },
+    {
+      "productId": "samsung-galaxy-a57-128-navy",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 52,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "eprel-a57-2526633",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "display": {
+          "type": "Super AMOLED Plus",
+          "refreshHz": 120,
+          "resolution": "1080 x 2340"
+        },
+        "performance": {
+          "cpu": "Octa-Core",
+          "cpuMaxGhz": 2.9,
+          "ramGb": 8
+        },
+        "camera": {
+          "mainMp": 50,
+          "ultrawideMp": 12,
+          "macroMp": 5,
+          "frontMp": 12,
+          "ois": true,
+          "video": "4K 30fps"
+        },
+        "storage": {
+          "gb": 256
+        },
+        "durability": {
+          "ipRating": "IP68"
+        },
+        "software": {
+          "osUpgradeGenerations": 6,
+          "securityUpdateYears": 6
+        },
+        "battery": {
+          "euEnduranceHours": 52,
+          "capacityMah": 4905,
+          "cycleLife": 1200
+        },
+        "euEnergyLabel": {
+          "energyClass": "A",
+          "reliabilityClass": "A",
+          "repairabilityClass": "C",
+          "regulation": "EU 2023/1669"
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "eprel-a57-2526633",
+          "score": 52,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-05"
+        }
+      ],
+      "sources": [
+        {
+          "id": "samsung-a57-specs",
+          "name": "Samsung",
+          "type": "manufacturer_specs",
+          "title": "Galaxy A57 5G 256GB",
+          "url": "https://www.samsung.com/it/smartphones/galaxy-a/galaxy-a57-5g-awesome-icyblue-256gb-sm-a576blbdeue/"
+        },
+        {
+          "id": "samsung-a57-buy",
+          "name": "Samsung",
+          "type": "manufacturer",
+          "title": "Acquista Galaxy A57 5G",
+          "url": "https://www.samsung.com/it/smartphones/galaxy-a/galaxy-a57-5g/buy/"
+        },
+        {
+          "id": "eprel-a57-2526633",
+          "name": "EU EPREL",
+          "type": "regulatory_product_information",
+          "title": "Samsung Galaxy A57 5G - EU product information sheet",
+          "url": "https://eprel.ec.europa.eu/qr/2526633"
+        }
+      ],
+      "updatedAt": "2026-11-05"
+    },
+    {
+      "productId": "google-pixel-10a-256-obsidian",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 53.23,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "eprel-pixel10a-2347998",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "display": {
+          "sizeInches": 6.3,
+          "type": "pOLED Actua",
+          "refreshHzMin": 60,
+          "refreshHzMax": 120,
+          "peakBrightnessNits": 3000
+        },
+        "performance": {
+          "chip": "Google Tensor G4",
+          "ramGb": 8
+        },
+        "camera": {
+          "mainMp": 48,
+          "ultrawideMp": 13,
+          "ois": true
+        },
+        "battery": {
+          "capacityMah": 5100,
+          "claimedHours": 30,
+          "extremeSaverHours": 120,
+          "euEnduranceHours": 53.23,
+          "cycleLife": 1000
+        },
+        "storage": {
+          "gb": 128
+        },
+        "durability": {
+          "ipRating": "IP68"
+        },
+        "charging": {
+          "wireless": true
+        },
+        "software": {
+          "supportYears": 7
+        },
+        "euEnergyLabel": {
+          "energyClass": "A",
+          "regulation": "EU 2023/1669"
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "camera",
+          "type": "independent_test_nonranking",
+          "sourceId": "dxomark-pixel-10a-camera-v6",
+          "score": 134,
+          "protocol": "DXOMARK Camera v6",
+          "publishedAt": "2026-03-05",
+          "rankingEligible": false,
+          "note": "Stored as evidence only. Camera v6 is not directly comparable with legacy Camera v5 scores."
+        },
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "eprel-pixel10a-2347998",
+          "score": 53.23,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-05"
+        }
+      ],
+      "sources": [
+        {
+          "id": "google-pixel10a-specs",
+          "name": "Google",
+          "type": "manufacturer_specs",
+          "title": "Specifiche tecniche di Google Pixel 10a",
+          "url": "https://store.google.com/it/product/pixel_10a_specs?hl=it"
+        },
+        {
+          "id": "dxomark-pixel-10a-camera-v6",
+          "name": "DXOMARK",
+          "type": "independent_test",
+          "title": "Google Pixel 10a Camera test",
+          "url": "https://www.dxomark.com/google-pixel-10a-camera-test/",
+          "protocol": "DXOMARK Camera v6"
+        },
+        {
+          "id": "eprel-pixel10a-2347998",
+          "name": "EU EPREL",
+          "type": "regulatory_product_information",
+          "title": "Google Pixel 10a - EU product information sheet",
+          "url": "https://eprel.ec.europa.eu/qr/2347998"
+        }
+      ],
+      "updatedAt": "2026-11-05"
+    },
+    {
+      "productId": "xiaomi-redmi-note17-5g-128-black",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 68,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "eprel-redmi-note17-2759229",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "display": {
+          "sizeInches": 6.99,
+          "type": "AMOLED FHD+",
+          "refreshHzMax": 120,
+          "peakBrightnessNits": 1800
+        },
+        "performance": {
+          "chip": "Snapdragon 4 Gen 4",
+          "ramGb": 6
+        },
+        "camera": {
+          "mainMp": 50,
+          "frontMp": 16
+        },
+        "battery": {
+          "capacityMah": 7700,
+          "euEnduranceHours": 68,
+          "cycleLife": 1000
+        },
+        "charging": {
+          "wiredWatts": 45
+        },
+        "storage": {
+          "gb": 256,
+          "expandableToTb": 2
+        },
+        "durability": {
+          "ipRating": "IP65"
+        },
+        "euEnergyLabel": {
+          "energyClass": "B",
+          "regulation": "EU 2023/1669"
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "eprel-redmi-note17-2759229",
+          "score": 68,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-05"
+        }
+      ],
+      "sources": [
+        {
+          "id": "xiaomi-redminote17-5g-specs",
+          "name": "Xiaomi",
+          "type": "manufacturer_specs",
+          "title": "REDMI Note 17 5G - Specifiche",
+          "url": "https://www.mi.com/it/product/redmi-note-17-5g/specs/"
+        },
+        {
+          "id": "eprel-redmi-note17-2759229",
+          "name": "EU EPREL",
+          "type": "regulatory_product_information",
+          "title": "REDMI Note 17 5G - EU product information sheet",
+          "url": "https://eprel.ec.europa.eu/qr/2759229"
+        }
+      ],
+      "updatedAt": "2026-11-05"
+    },
+    {
+      "productId": "xiaomi-redmi-note17-5g-256-black-8gb",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 68,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "eprel-redmi-note17-2759229",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "display": {
+          "sizeInches": 6.99,
+          "type": "AMOLED FHD+",
+          "refreshHzMax": 120,
+          "peakBrightnessNits": 1800
+        },
+        "performance": {
+          "chip": "Snapdragon 4 Gen 4",
+          "ramGb": 6
+        },
+        "camera": {
+          "mainMp": 50,
+          "frontMp": 16
+        },
+        "battery": {
+          "capacityMah": 7700,
+          "euEnduranceHours": 68,
+          "cycleLife": 1000
+        },
+        "charging": {
+          "wiredWatts": 45
+        },
+        "storage": {
+          "gb": 256,
+          "expandableToTb": 2
+        },
+        "durability": {
+          "ipRating": "IP65"
+        },
+        "euEnergyLabel": {
+          "energyClass": "B",
+          "regulation": "EU 2023/1669"
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "eprel-redmi-note17-2759229",
+          "score": 68,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-05"
+        }
+      ],
+      "sources": [
+        {
+          "id": "xiaomi-redminote17-5g-specs",
+          "name": "Xiaomi",
+          "type": "manufacturer_specs",
+          "title": "REDMI Note 17 5G - Specifiche",
+          "url": "https://www.mi.com/it/product/redmi-note-17-5g/specs/"
+        },
+        {
+          "id": "eprel-redmi-note17-2759229",
+          "name": "EU EPREL",
+          "type": "regulatory_product_information",
+          "title": "REDMI Note 17 5G - EU product information sheet",
+          "url": "https://eprel.ec.europa.eu/qr/2759229"
+        }
+      ],
+      "updatedAt": "2026-11-05"
     }
   ]
 }
