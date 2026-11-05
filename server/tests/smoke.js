@@ -2083,6 +2083,102 @@ async function testOfficialSmartphoneStoresTrust() {
 
 
 // ========================================
+// P0 PRODUCTION — GALAXY S26
+// ========================================
+
+async function testGalaxyS26ProductionIngest() {
+  const data =
+    await search(
+      "Galaxy S26 256 GB White"
+    );
+
+  assert(
+    data.status ===
+      "specific",
+    `Galaxy S26 dovrebbe essere specific, ricevuto ${data.status}`
+  );
+
+  assert(
+    data.results.length ===
+      2,
+    `Attesi 2 prezzi Galaxy S26, ricevuti ${data.results.length}`
+  );
+
+  assert(
+    data.bestOffer
+      ?.id ===
+      "test-mediaworld-s26-256-white",
+    `Miglior prezzo Galaxy S26 inatteso: ${data.bestOffer?.id}`
+  );
+
+  assert(
+    data.recommendation
+      ?.finalCost ===
+      852.99,
+    `Costo finale Galaxy S26 inatteso: ${data.recommendation?.finalCost}`
+  );
+}
+
+
+// ========================================
+// P0 PRODUCTION — PIXEL 11
+// ========================================
+
+async function testPixel11ProductionIngest() {
+  const data =
+    await search(
+      "Pixel 11 256 GB Nero Ossidiana"
+    );
+
+  assert(
+    data.status ===
+      "specific",
+    `Pixel 11 dovrebbe essere specific, ricevuto ${data.status}`
+  );
+
+  assert(
+    data.results.length ===
+      3,
+    `Attesi 3 listing Pixel 11, ricevuti ${data.results.length}`
+  );
+
+  assert(
+    data.results.some(
+      offer =>
+        offer.id ===
+        "test-euronics-pixel11-256-obsidian-pickup" &&
+        offer.pricing
+          ?.conditional ===
+        true
+    ),
+    "Il prezzo Euronics deve restare condizionato"
+  );
+
+  assert(
+    data.bestOffer
+      ?.id ===
+      "test-unieuro-pixel11-256-obsidian",
+    `Miglior prezzo provvisorio Pixel 11 inatteso: ${data.bestOffer?.id}`
+  );
+
+  assert(
+    data.recommendation
+      ?.finalCost ===
+      null,
+    "Pixel 11 non deve dichiarare un costo finale finché la spedizione Unieuro è sconosciuta"
+  );
+
+  assert(
+    data.bestOffer
+      ?.costComparison
+      ?.mode ===
+      "listed_price_provisional",
+    `Modalità Pixel 11 inattesa: ${data.bestOffer?.costComparison?.mode}`
+  );
+}
+
+
+// ========================================
 // TESTS
 // ========================================
 
@@ -2365,6 +2461,22 @@ const tests = [
 
     run:
       testOfficialSmartphoneStoresTrust,
+  },
+
+  {
+    name:
+      "P0 PRODUCTION — Galaxy S26",
+
+    run:
+      testGalaxyS26ProductionIngest,
+  },
+
+  {
+    name:
+      "P0 PRODUCTION — Pixel 11",
+
+    run:
+      testPixel11ProductionIngest,
   },
 ];
 
