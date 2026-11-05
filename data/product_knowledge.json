@@ -213,13 +213,19 @@
       "scores": {
         "overall": null,
         "camera": null,
-        "battery": null,
+        "battery": 45,
         "performance": null,
         "display": null,
         "software": null,
         "value": null
       },
-      "scoreMeta": {},
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "apple-iphone17e-eu-energy",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
       "facts": {
         "display": {
           "sizeInches": 6.1,
@@ -245,9 +251,31 @@
           "magsafe": true,
           "qi2": true,
           "wirelessWatts": 15
+        },
+        "battery": {
+          "euEnduranceHours": 45,
+          "capacityMah": 4005,
+          "cycleLife": 1000
+        },
+        "euEnergyLabel": {
+          "energyClass": "A",
+          "reliabilityClass": "B",
+          "repairabilityClass": "C",
+          "regulation": "EU 2023/1669"
         }
       },
-      "evidence": [],
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "apple-iphone17e-eu-energy",
+          "score": 45,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-05"
+        }
+      ],
       "sources": [
         {
           "id": "apple-iphone17e-2026",
@@ -262,6 +290,13 @@
           "type": "manufacturer_specs",
           "title": "iPhone 17e - Specifiche tecniche",
           "url": "https://support.apple.com/it-it/126470"
+        },
+        {
+          "id": "apple-iphone17e-eu-energy",
+          "name": "Apple",
+          "type": "regulatory_product_information",
+          "title": "iPhone 17e - Etichetta energetica UE",
+          "url": "https://www.apple.com/es/iphone-17e/specs/"
         }
       ],
       "updatedAt": "2026-11-05"
@@ -272,7 +307,7 @@
       "scores": {
         "overall": null,
         "camera": 147,
-        "battery": null,
+        "battery": 37,
         "performance": null,
         "display": null,
         "software": null,
@@ -282,6 +317,11 @@
         "camera": {
           "sourceId": "dxomark-iphone-16-camera-v5",
           "protocol": "DXOMARK Camera v5"
+        },
+        "battery": {
+          "sourceId": "apple-iphone16-eu-energy",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
         }
       },
       "facts": {
@@ -302,13 +342,20 @@
           "capacityMah": 3561,
           "videoPlaybackHours": 22,
           "euCycleHours": 37,
-          "cycleLife": 1000
+          "cycleLife": 1000,
+          "euEnduranceHours": 37
         },
         "durability": {
           "ipRating": "IP68"
         },
         "software": {
           "minimumSupportYears": 5
+        },
+        "euEnergyLabel": {
+          "energyClass": "B",
+          "reliabilityClass": "C",
+          "repairabilityClass": "C",
+          "regulation": "EU 2023/1669"
         }
       },
       "evidence": [
@@ -319,6 +366,16 @@
           "score": 147,
           "protocol": "DXOMARK Camera v5",
           "publishedAt": "2024-11-21"
+        },
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "apple-iphone16-eu-energy",
+          "score": 37,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-05"
         }
       ],
       "sources": [
@@ -336,6 +393,13 @@
           "title": "Apple iPhone 16 Camera test",
           "url": "https://www.dxomark.com/apple-iphone-16-camera-test/",
           "protocol": "DXOMARK Camera v5"
+        },
+        {
+          "id": "apple-iphone16-eu-energy",
+          "name": "Apple",
+          "type": "regulatory_product_information",
+          "title": "iPhone 16 - Informazioni sul consumo energetico UE",
+          "url": "https://www.apple.com/it/iphone-16/specs/"
         }
       ],
       "updatedAt": "2026-11-05"
@@ -346,13 +410,19 @@
       "scores": {
         "overall": null,
         "camera": null,
-        "battery": null,
+        "battery": 52,
         "performance": null,
         "display": null,
         "software": null,
         "value": null
       },
-      "scoreMeta": {},
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "eprel-a57-2526633",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
       "facts": {
         "display": {
           "type": "Super AMOLED Plus",
@@ -381,9 +451,31 @@
         "software": {
           "osUpgradeGenerations": 6,
           "securityUpdateYears": 6
+        },
+        "battery": {
+          "euEnduranceHours": 52,
+          "capacityMah": 4905,
+          "cycleLife": 1200
+        },
+        "euEnergyLabel": {
+          "energyClass": "A",
+          "reliabilityClass": "A",
+          "repairabilityClass": "C",
+          "regulation": "EU 2023/1669"
         }
       },
-      "evidence": [],
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "eprel-a57-2526633",
+          "score": 52,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-05"
+        }
+      ],
       "sources": [
         {
           "id": "samsung-a57-specs",
@@ -398,6 +490,13 @@
           "type": "manufacturer",
           "title": "Acquista Galaxy A57 5G",
           "url": "https://www.samsung.com/it/smartphones/galaxy-a/galaxy-a57-5g/buy/"
+        },
+        {
+          "id": "eprel-a57-2526633",
+          "name": "EU EPREL",
+          "type": "regulatory_product_information",
+          "title": "Samsung Galaxy A57 5G - EU product information sheet",
+          "url": "https://eprel.ec.europa.eu/qr/2526633"
         }
       ],
       "updatedAt": "2026-11-05"
@@ -408,13 +507,19 @@
       "scores": {
         "overall": null,
         "camera": null,
-        "battery": null,
+        "battery": 53.23,
         "performance": null,
         "display": null,
         "software": null,
         "value": null
       },
-      "scoreMeta": {},
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "eprel-pixel10a-2347998",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
       "facts": {
         "display": {
           "sizeInches": 6.3,
@@ -435,7 +540,9 @@
         "battery": {
           "capacityMah": 5100,
           "claimedHours": 30,
-          "extremeSaverHours": 120
+          "extremeSaverHours": 120,
+          "euEnduranceHours": 53.23,
+          "cycleLife": 1000
         },
         "storage": {
           "gb": 128
@@ -448,6 +555,10 @@
         },
         "software": {
           "supportYears": 7
+        },
+        "euEnergyLabel": {
+          "energyClass": "A",
+          "regulation": "EU 2023/1669"
         }
       },
       "evidence": [
@@ -460,6 +571,16 @@
           "publishedAt": "2026-03-05",
           "rankingEligible": false,
           "note": "Stored as evidence only. Camera v6 is not directly comparable with legacy Camera v5 scores."
+        },
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "eprel-pixel10a-2347998",
+          "score": 53.23,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-05"
         }
       ],
       "sources": [
@@ -477,6 +598,13 @@
           "title": "Google Pixel 10a Camera test",
           "url": "https://www.dxomark.com/google-pixel-10a-camera-test/",
           "protocol": "DXOMARK Camera v6"
+        },
+        {
+          "id": "eprel-pixel10a-2347998",
+          "name": "EU EPREL",
+          "type": "regulatory_product_information",
+          "title": "Google Pixel 10a - EU product information sheet",
+          "url": "https://eprel.ec.europa.eu/qr/2347998"
         }
       ],
       "updatedAt": "2026-11-05"
@@ -487,13 +615,19 @@
       "scores": {
         "overall": null,
         "camera": null,
-        "battery": null,
+        "battery": 53.23,
         "performance": null,
         "display": null,
         "software": null,
         "value": null
       },
-      "scoreMeta": {},
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "eprel-pixel10a-2347998",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
       "facts": {
         "display": {
           "sizeInches": 6.3,
@@ -514,7 +648,9 @@
         "battery": {
           "capacityMah": 5100,
           "claimedHours": 30,
-          "extremeSaverHours": 120
+          "extremeSaverHours": 120,
+          "euEnduranceHours": 53.23,
+          "cycleLife": 1000
         },
         "storage": {
           "gb": 128
@@ -527,6 +663,10 @@
         },
         "software": {
           "supportYears": 7
+        },
+        "euEnergyLabel": {
+          "energyClass": "A",
+          "regulation": "EU 2023/1669"
         }
       },
       "evidence": [
@@ -539,6 +679,16 @@
           "publishedAt": "2026-03-05",
           "rankingEligible": false,
           "note": "Stored as evidence only. Camera v6 is not directly comparable with legacy Camera v5 scores."
+        },
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "eprel-pixel10a-2347998",
+          "score": 53.23,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-05"
         }
       ],
       "sources": [
@@ -556,6 +706,13 @@
           "title": "Google Pixel 10a Camera test",
           "url": "https://www.dxomark.com/google-pixel-10a-camera-test/",
           "protocol": "DXOMARK Camera v6"
+        },
+        {
+          "id": "eprel-pixel10a-2347998",
+          "name": "EU EPREL",
+          "type": "regulatory_product_information",
+          "title": "Google Pixel 10a - EU product information sheet",
+          "url": "https://eprel.ec.europa.eu/qr/2347998"
         }
       ],
       "updatedAt": "2026-11-05"
@@ -566,13 +723,19 @@
       "scores": {
         "overall": null,
         "camera": null,
-        "battery": null,
+        "battery": 68,
         "performance": null,
         "display": null,
         "software": null,
         "value": null
       },
-      "scoreMeta": {},
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "eprel-redmi-note17-2759229",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
       "facts": {
         "display": {
           "sizeInches": 6.99,
@@ -589,7 +752,9 @@
           "frontMp": 16
         },
         "battery": {
-          "capacityMah": 7700
+          "capacityMah": 7700,
+          "euEnduranceHours": 68,
+          "cycleLife": 1000
         },
         "charging": {
           "wiredWatts": 45
@@ -600,9 +765,24 @@
         },
         "durability": {
           "ipRating": "IP65"
+        },
+        "euEnergyLabel": {
+          "energyClass": "B",
+          "regulation": "EU 2023/1669"
         }
       },
-      "evidence": [],
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "eprel-redmi-note17-2759229",
+          "score": 68,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-05"
+        }
+      ],
       "sources": [
         {
           "id": "xiaomi-redminote17-5g-specs",
@@ -610,6 +790,121 @@
           "type": "manufacturer_specs",
           "title": "REDMI Note 17 5G - Specifiche",
           "url": "https://www.mi.com/it/product/redmi-note-17-5g/specs/"
+        },
+        {
+          "id": "eprel-redmi-note17-2759229",
+          "name": "EU EPREL",
+          "type": "regulatory_product_information",
+          "title": "REDMI Note 17 5G - EU product information sheet",
+          "url": "https://eprel.ec.europa.eu/qr/2759229"
+        }
+      ],
+      "updatedAt": "2026-11-05"
+    },
+    {
+      "productId": "apple-iphone-17-256-black",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 41,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "apple-iphone17-eu-energy",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 41,
+          "cycleLife": 1000
+        },
+        "euEnergyLabel": {
+          "energyClass": "A",
+          "reliabilityClass": "B",
+          "repairabilityClass": "C",
+          "regulation": "EU 2023/1669"
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "apple-iphone17-eu-energy",
+          "score": 41,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-05"
+        }
+      ],
+      "sources": [
+        {
+          "id": "apple-iphone17-eu-energy",
+          "name": "Apple",
+          "type": "regulatory_product_information",
+          "title": "iPhone 17 - Informazioni sul consumo energetico UE",
+          "url": "https://www.apple.com/it/iphone/"
+        }
+      ],
+      "updatedAt": "2026-11-05"
+    },
+    {
+      "productId": "apple-iphone-17-256-sage",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 41,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "apple-iphone17-eu-energy",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 41,
+          "cycleLife": 1000
+        },
+        "euEnergyLabel": {
+          "energyClass": "A",
+          "reliabilityClass": "B",
+          "repairabilityClass": "C",
+          "regulation": "EU 2023/1669"
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "apple-iphone17-eu-energy",
+          "score": 41,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-05"
+        }
+      ],
+      "sources": [
+        {
+          "id": "apple-iphone17-eu-energy",
+          "name": "Apple",
+          "type": "regulatory_product_information",
+          "title": "iPhone 17 - Informazioni sul consumo energetico UE",
+          "url": "https://www.apple.com/it/iphone/"
         }
       ],
       "updatedAt": "2026-11-05"
