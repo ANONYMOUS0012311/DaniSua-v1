@@ -1,0 +1,230 @@
+{
+  "schemaVersion": 1,
+  "market": "IT",
+  "category": "smartphone",
+  "observedAt": "2026-11-04",
+  "purpose": "Research queue only. Entries here are not production offers until seller, variant, price and shipping are verified.",
+  "families": [
+    {
+      "familyId": "apple-iphone-18-pro",
+      "canonicalVariant": "256 GB Nero",
+      "state": "price_coverage_3_stores_shipping_partial",
+      "observations": [
+        {
+          "store": "Apple",
+          "seller": "Apple",
+          "price": 1489,
+          "currency": "EUR",
+          "shipping_price": 0,
+          "source": "https://www.apple.com/it/shop/buy-iphone/iphone-18-pro/display-da-6%2C3%22-256gb-nero",
+          "status": "verified_current",
+          "notes": "Official Apple 6.3-inch iPhone 18 Pro 256GB Nero price. Apple standard online delivery is free."
+        },
+        {
+          "store": "Unieuro",
+          "seller": "Unieuro",
+          "price": 1449,
+          "currency": "EUR",
+          "shipping_price": null,
+          "source": "https://www.unieuro.it/online/products?dFR%5BfacetAvailability%5D%5B0%5D=Disponibili&dFR%5BinVolantino%5D%5B0%5D=true&q=apple",
+          "status": "verified_current_listing",
+          "notes": "Fresh Unieuro listing shows 1449 EUR. The direct product page has shown 1489 EUR in older crawls, so this promotional price must be rechecked immediately before production ingest."
+        },
+        {
+          "store": "MediaWorld",
+          "seller": "MediaWorld",
+          "price": 1449.49,
+          "currency": "EUR",
+          "shipping_price": null,
+          "source": "https://www.mediaworld.it/it/list/iphone-256-gb",
+          "status": "verified_current_listing",
+          "notes": "Fresh MediaWorld listing for the exact 256GB Nero variant. Shipping is available but current listing does not expose a shipping amount."
+        }
+      ]
+    },
+    {
+      "familyId": "apple-iphone-17",
+      "canonicalVariant": "256 GB Nero",
+      "state": "price_ready_3_stores_final_cost_partial",
+      "observations": [
+        {
+          "store": "Apple",
+          "seller": "Apple",
+          "price": 1129,
+          "currency": "EUR",
+          "shipping_price": 0,
+          "source": "https://www.apple.com/it/shop/buy-iphone",
+          "status": "verified_current",
+          "notes": "Official Apple price for iPhone 17 256GB."
+        },
+        {
+          "store": "Unieuro",
+          "seller": "Unieuro",
+          "price": 999,
+          "currency": "EUR",
+          "shipping_price": null,
+          "source": "https://www.unieuro.it/online/products?q=0195950643909",
+          "status": "verified_current",
+          "notes": "Fresh Unieuro listing for iPhone 17 256GB Nero. Shipping amount is not exposed in the indexed product page."
+        },
+        {
+          "store": "MediaWorld",
+          "seller": "MediaWorld",
+          "price": 989.49,
+          "currency": "EUR",
+          "shipping_price": 3.99,
+          "source": "https://www.mediaworld.it/it/product/_apple-iphone-17-256gb-nero-389194.html",
+          "status": "verified_current_price_shipping_supported",
+          "notes": "Fresh MediaWorld category price is 989.49 EUR. The direct MediaWorld product page consistently exposes 3.99 EUR shipping for the first-party new-product offer; marketplace/refurbished listings are excluded."
+        }
+      ]
+    },
+    {
+      "familyId": "samsung-galaxy-s26-ultra",
+      "canonicalVariant": "256 GB White",
+      "state": "price_coverage_3_stores_shipping_partial",
+      "observations": [
+        {
+          "store": "Samsung",
+          "seller": "Samsung",
+          "price": 1499,
+          "currency": "EUR",
+          "shipping_price": 0,
+          "source": "https://news.samsung.com/it/samsung-presenta-la-serie-galaxy-s26-lo-smartphone-galaxy-ai-piu-intuitivo-di-sempre",
+          "status": "verified_official_msrp",
+          "notes": "Samsung Italy official launch price for Galaxy S26 Ultra 12GB+256GB. Current Samsung Shop may apply temporary promotions or trade-in incentives separately."
+        },
+        {
+          "store": "MediaWorld",
+          "seller": "MediaWorld",
+          "price": 1199.49,
+          "currency": "EUR",
+          "shipping_price": 3.99,
+          "source": "https://www.mediaworld.it/it/product/_samsung-galaxy-m3-256gb-1024-gb-titanium-jetblack-564017.html",
+          "status": "verified_current",
+          "notes": "Exact 256GB White variant. Current indexed page exposes 1199.49 EUR plus 3.99 EUR shipping and 0% 10-installment financing."
+        },
+        {
+          "store": "Unieuro",
+          "seller": "Unieuro",
+          "price": 1199,
+          "currency": "EUR",
+          "shipping_price": null,
+          "source": "https://www.unieuro.it/online/products?q=8806097826927",
+          "status": "verified_current_listing",
+          "notes": "Fresh Unieuro listing shows S26 Ultra 256GB at 1199 EUR. Exact White direct product page exists, but shipping amount is not exposed in indexed content."
+        }
+      ]
+    },
+    {
+      "familyId": "samsung-galaxy-s26",
+      "canonicalVariant": "256 GB White",
+      "state": "price_ready_3_stores_final_cost_partial",
+      "observations": [
+        {
+          "store": "Samsung",
+          "seller": "Samsung",
+          "price": 1029,
+          "currency": "EUR",
+          "shipping_price": 0,
+          "source": "https://www.samsung.com/it/smartphones/galaxy-s26/buy/?modelCode=SM-S942BZVGEUE",
+          "status": "verified_current",
+          "notes": "Official Samsung price for Galaxy S26 256GB. White is a standard color; Samsung Shop price may have temporary cart promotions."
+        },
+        {
+          "store": "MediaWorld",
+          "seller": "MediaWorld",
+          "price": 849,
+          "currency": "EUR",
+          "shipping_price": 3.99,
+          "source": "https://www.mediaworld.it/it/product/_samsung-galaxy-m1-256gb-1024-gb-titanium-jetblack-564048.html",
+          "status": "verified_retail",
+          "notes": "Exact 256GB White variant. Direct new-product offer; refurbished marketplace offer is excluded."
+        },
+        {
+          "store": "Unieuro",
+          "seller": "Unieuro",
+          "price": 799.9,
+          "currency": "EUR",
+          "shipping_price": null,
+          "source": "https://www.unieuro.it/online/products?q=8806097827313",
+          "status": "verified_current_listing_variant_match_required",
+          "notes": "Fresh Unieuro SKU search shows 799.90 EUR for Galaxy S26 256GB. The direct standard White product page exists separately from the Iliad-supplied listing; production ingest must use the standard Samsung SKU, never pidILIS26256W."
+        },
+        {
+          "store": "Unieuro",
+          "seller": "Iliad",
+          "price": 699,
+          "currency": "EUR",
+          "shipping_price": null,
+          "source": "https://www.unieuro.it/online/Smartphone/Galaxy-S26-Smartphone-AI-256GB-Processore-avanzato-Assistente-Foto-Creative-Studio-Camera-50-MP-4300-mAh-White-pidILIS26256W",
+          "status": "conditional_excluded",
+          "notes": "Operator-supplied listing. Excluded from standard ranking until commercial conditions are understood."
+        }
+      ]
+    },
+    {
+      "familyId": "google-pixel-11",
+      "canonicalVariant": "256 GB Nero ossidiana",
+      "state": "price_coverage_3_retailers_google_store_price_pending",
+      "observations": [
+        {
+          "store": "MediaWorld",
+          "seller": "MediaWorld",
+          "price": 799,
+          "currency": "EUR",
+          "shipping_price": 3.99,
+          "source": "https://www.mediaworld.it/it/product/_google-google-pixel-11-256gb-256-gb-596605.html",
+          "status": "verified_current",
+          "notes": "Exact Pixel 11 256GB Nero ossidiana. Direct new-product offer; refurbished marketplace option is excluded."
+        },
+        {
+          "store": "Euronics",
+          "seller": "Dimo S.p.a.",
+          "price": 849,
+          "currency": "EUR",
+          "shipping_price": null,
+          "source": "https://www.euronics.it/telefonia/smartphone-e-cellulari/smartphone-dual-sim/google---smartphone-google-pixel-11-256gb-nero-ossidiana/262010110.html",
+          "status": "verified_current_store_pickup",
+          "notes": "Exact 256GB Nero ossidiana. The indexed price is explicitly valid for selected-store pickup; do not assume national online shipping at the same final cost."
+        },
+        {
+          "store": "Unieuro",
+          "seller": "Unieuro",
+          "price": 999,
+          "currency": "EUR",
+          "shipping_price": null,
+          "source": "https://www.unieuro.it/online/Smartphone/Pixel-11-256GB-nero-pidGGOPIXEL11256",
+          "status": "verified_product_page_price_recheck_before_ingest",
+          "notes": "Exact 256GB Nero product page. Other fresh price trackers show more recent lower Unieuro prices, so recheck the direct retailer page immediately before production ingest."
+        },
+        {
+          "store": "Google Store",
+          "seller": "Google Store",
+          "price": null,
+          "currency": "EUR",
+          "shipping_price": null,
+          "source": "https://store.google.com/it/category/phones?hl=it",
+          "status": "official_family_presence_price_pending",
+          "notes": "Official Italian lineup presence is confirmed; exact current 256GB price still needs direct extraction."
+        }
+      ]
+    }
+  ],
+  "reviewSummary": {
+    "observedAt": "2026-11-04",
+    "readyForThreeStorePriceComparison": [
+      "apple-iphone-17",
+      "samsung-galaxy-s26-ultra",
+      "samsung-galaxy-s26",
+      "google-pixel-11"
+    ],
+    "threeStoreCoverageButRecheckPromotionBeforeIngest": [
+      "apple-iphone-18-pro"
+    ],
+    "importantExclusions": [
+      "Samsung Galaxy S26 Unieuro pidILIS26256W is operator-supplied by Iliad and must not enter standard ranking."
+    ],
+    "rule": "Price coverage is not the same as confirmed final cost. Unknown shipping remains null and prevents a guaranteed final-cost claim."
+  }
+}
