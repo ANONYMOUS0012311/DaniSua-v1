@@ -13,6 +13,8 @@ function readJson(name) {
 const targets = readJson("catalog_targets.smartphones.json");
 const products = readJson("products.json");
 const offers = readJson("offers.real.json");
+const variantMarketState = readJson("variant_market_status.smartphones.json");
+const variantMarketStatuses = Array.isArray(variantMarketState?.statuses) ? variantMarketState.statuses : [];
 
 const smartphoneProducts =
   products.filter(
@@ -124,6 +126,35 @@ function matchesConfiguration(
       String(value)
   );
 }
+
+function marketStatusMatchesConfiguration(
+  record,
+  familyId,
+  configuration
+) {
+  if (
+    !record ||
+    record.familyId !==
+      familyId ||
+    !record.configuration
+  ) {
+    return false;
+  }
+
+  return Object.entries(
+    configuration
+  ).every(
+    ([field, value]) =>
+      String(
+        record
+          .configuration
+          ?.[field] ??
+        ""
+      ) ===
+      String(value)
+  );
+}
+
 
 function configurationLabel(
   configuration
@@ -270,6 +301,99 @@ const rows =
                 )
           );
 
+      const marketKnownConfigurations =
+        requiredConfigurations
+          .filter(
+            configuration => {
+              const matchingProducts =
+                familyProducts.filter(
+                  product =>
+                    matchesConfiguration(
+                      product,
+                      configuration
+                    )
+                );
+
+              const hasAnyVerifiedOffer =
+                matchingProducts.some(
+                  product =>
+                    availableVerifiedOffers
+                      .some(
+                        offer =>
+                          offer.productId ===
+                            product.id
+                      )
+                );
+
+              const hasVerifiedMarketState =
+                variantMarketStatuses
+                  .some(
+                    record =>
+                      Boolean(
+                        record.verifiedAt
+                      ) &&
+                      marketStatusMatchesConfiguration(
+                        record,
+                        target.familyId,
+                        configuration
+                      )
+                  );
+
+              return (
+                hasAnyVerifiedOffer ||
+                hasVerifiedMarketState
+              );
+            }
+          );
+
+      const conditionalOnlyConfigurations =
+        requiredConfigurations
+          .filter(
+            configuration => {
+              const matchingProducts =
+                familyProducts.filter(
+                  product =>
+                    matchesConfiguration(
+                      product,
+                      configuration
+                    )
+                );
+
+              const hasStandard =
+                matchingProducts.some(
+                  product =>
+                    availableVerifiedOffers
+                      .some(
+                        offer =>
+                          offer.productId ===
+                            product.id &&
+                          offer.pricing
+                            ?.conditional !==
+                            true
+                      )
+                );
+
+              const hasConditional =
+                matchingProducts.some(
+                  product =>
+                    availableVerifiedOffers
+                      .some(
+                        offer =>
+                          offer.productId ===
+                            product.id &&
+                          offer.pricing
+                            ?.conditional ===
+                            true
+                      )
+                );
+
+              return (
+                !hasStandard &&
+                hasConditional
+              );
+            }
+          );
+
       const catalogedConfigurationLabels =
         catalogedConfigurations.map(
           configurationLabel
@@ -301,6 +425,53 @@ const rows =
                   configurationLabel(
                     configuration
                   )
+                )
+          );
+
+      const marketKnownConfigurationLabels =
+        marketKnownConfigurations
+          .map(
+            configurationLabel
+          );
+
+      const missingMarketConfigurations =
+        requiredConfigurations
+          .filter(
+            configuration =>
+              !marketKnownConfigurationLabels
+                .includes(
+                  configurationLabel(
+                    configuration
+                  )
+                )
+          );
+
+      const conditionalOnlyConfigurationLabels =
+        conditionalOnlyConfigurations
+          .map(
+            configurationLabel
+          );
+
+      const marketStateRecords =
+        variantMarketStatuses
+          .filter(
+            record =>
+              record.familyId ===
+                target.familyId &&
+              Boolean(
+                record.verifiedAt
+              )
+          )
+          .filter(
+            record =>
+              requiredConfigurations
+                .some(
+                  configuration =>
+                    marketStatusMatchesConfiguration(
+                      record,
+                      target.familyId,
+                      configuration
+                    )
                 )
           );
 
@@ -375,6 +546,21 @@ const rows =
                   )
             );
 
+      const variantMarketStatus =
+        !variantDepthTracked
+          ? "not_tracked"
+          : (
+              missingCatalogConfigurations
+                .length > 0
+                ? "missing_variants"
+                : (
+                    missingMarketConfigurations
+                      .length > 0
+                      ? "missing_market_evidence"
+                      : "ready"
+                  )
+            );
+
       let status = "missing";
 
       if (
@@ -429,11 +615,23 @@ const rows =
             variantDepthTracked,
           status:
             variantDepthStatus,
+          marketStatus:
+            variantMarketStatus,
+          comparisonComplete:
+            variantDepthStatus ===
+              "ready",
+          marketComplete:
+            variantMarketStatus ===
+              "ready",
           requiredConfigurations,
           catalogedConfigurations,
           pricedConfigurations,
+          marketKnownConfigurations,
+          conditionalOnlyConfigurations,
+          marketStateRecords,
           missingCatalogConfigurations,
           missingPricedConfigurations,
+          missingMarketConfigurations,
           requiredConfigurationLabels:
             requiredConfigurations
               .map(
@@ -441,6 +639,13 @@ const rows =
               ),
           catalogedConfigurationLabels,
           pricedConfigurationLabels,
+          marketKnownConfigurationLabels,
+          conditionalOnlyConfigurationLabels,
+          missingMarketConfigurationLabels:
+            missingMarketConfigurations
+              .map(
+                configurationLabel
+              ),
           missingCatalogConfigurationLabels:
             missingCatalogConfigurations
               .map(
@@ -521,6 +726,14 @@ const variantDepthReady =
         ?.status === "ready"
   );
 
+const variantMarketReady =
+  variantDepthRows.filter(
+    row =>
+      row.variantDepth
+        ?.marketStatus ===
+        "ready"
+  );
+
 const summary = {
   market:
     targets.market,
@@ -549,6 +762,31 @@ const summary = {
       variantDepthRows.length,
     readyFamilies:
       variantDepthReady.length,
+    marketReadyFamilies:
+      variantMarketReady.length,
+    marketIncompleteFamilies:
+      variantDepthRows
+        .filter(
+          row =>
+            row.variantDepth
+              ?.marketStatus !==
+              "ready"
+        )
+        .map(
+          row => ({
+            familyId:
+              row.familyId,
+            familyName:
+              row.familyName,
+            marketStatus:
+              row.variantDepth
+                ?.marketStatus,
+            missingMarketConfigurations:
+              row.variantDepth
+                ?.missingMarketConfigurationLabels ||
+              [],
+          })
+        ),
     incompleteFamilies:
       variantDepthRows
         .filter(
@@ -629,3 +867,21 @@ console.log(
     2
   )
 );
+
+if (
+  targets.goal
+    ?.variantDepth
+    ?.marketCoverage
+    ?.requireAllTrackedConfigurationsKnown ===
+      true &&
+  variantMarketReady.length !==
+    variantDepthRows.length
+) {
+  console.error(
+    "Variant market coverage incomplete: " +
+    variantMarketReady.length +
+    "/" +
+    variantDepthRows.length
+  );
+  process.exitCode = 1;
+}

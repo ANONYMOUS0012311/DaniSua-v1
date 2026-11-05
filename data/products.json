@@ -2037,16 +2037,39 @@
     "model": "HONOR Magic8 Lite",
     "storage": "512 GB",
     "ram": "8 GB",
-    "color": "Black",
+    "color": "Midnight Black",
     "condition": "new",
     "gtin": null,
-    "title": "HONOR HONOR Magic8 Lite 8 GB + 512 GB Black",
+    "title": "HONOR Magic8 Lite 8 GB + 512 GB Midnight Black",
     "attributes": {
       "storage": "512 GB",
       "ram": "8 GB",
-      "color": "Black"
+      "color": "Midnight Black"
     },
     "image": null,
     "imageSourcePage": "https://www.honor.com/it/phones/honor-magic8-lite/spec/"
+  },
+  {
+    "id": "xiaomi-17t-512-violet",
+    "familyId": "xiaomi-17t",
+    "familyName": "Xiaomi 17T",
+    "productLineId": "xiaomi",
+    "productLineName": "Xiaomi",
+    "category": "smartphone",
+    "brand": "Xiaomi",
+    "model": "Xiaomi 17T",
+    "storage": "512 GB",
+    "ram": "12 GB",
+    "color": "Violet",
+    "condition": "new",
+    "gtin": null,
+    "title": "Xiaomi 17T 12 GB + 512 GB Violet",
+    "attributes": {
+      "storage": "512 GB",
+      "ram": "12 GB",
+      "color": "Violet"
+    },
+    "image": null,
+    "imageSourcePage": "https://www.euronics.it/cds/facciamo-a-meta-cds/?prefn1=brand&prefv1=XIAOMI"
   }
 ]

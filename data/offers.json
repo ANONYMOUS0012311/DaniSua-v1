@@ -3146,5 +3146,205 @@
         }
       ]
     }
+  },
+  {
+    "id": "test-euronics-a37-256-charcoal",
+    "productId": "samsung-galaxy-a37-256-charcoal",
+    "store": "Euronics",
+    "seller": "Euronics",
+    "old_price": 529,
+    "offer_price": 439,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.euronics.it/telefonia/smartphone-e-cellulari/smartphone/?prefn1=brand&prefv1=SAMSUNG",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 439
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-euronics-pixel11-512-obsidian",
+    "productId": "google-pixel-11-512-obsidian",
+    "store": "Euronics",
+    "seller": "Euronics",
+    "old_price": null,
+    "offer_price": 979,
+    "currency": "EUR",
+    "shipping_price": 7.9,
+    "stock": true,
+    "url": "https://www.euronics.it/telefonia/smartphone-e-cellulari/smartphone-dual-sim/google---smartphone-google-pixel-11-512gb-nero-ossidiana/262010088.html?showAvailability=true",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 979
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-euronics-pixel10a-256-obsidian",
+    "productId": "google-pixel-10a-256-obsidian",
+    "store": "Euronics",
+    "seller": "Euronics",
+    "old_price": null,
+    "offer_price": 499,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.euronics.it/telefonia/smartphone-e-cellulari/smartphone/?prefn1=brand&prefv1=GOOGLE",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 499
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-mediaworld-pixel11pro-512-obsidian",
+    "productId": "google-pixel-11-pro-512-obsidian",
+    "store": "MediaWorld",
+    "seller": "MediaWorld",
+    "old_price": 1329,
+    "offer_price": 1129,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.mediaworld.it/it/brand/google/smartphone/pixel-11pro-xl",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 1129
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-mediaworld-pixel11pro-1tb-obsidian",
+    "productId": "google-pixel-11-pro-1tb-obsidian",
+    "store": "MediaWorld",
+    "seller": "MediaWorld",
+    "old_price": 1589,
+    "offer_price": 1386.99,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.mediaworld.it/it/brand/google/smartphone/pixel-11pro-xl",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 1386.99
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-mediaworld-pixel11proxl-512-obsidian",
+    "productId": "google-pixel-11-pro-xl-512-obsidian",
+    "store": "MediaWorld",
+    "seller": "MediaWorld",
+    "old_price": 1529,
+    "offer_price": 1329,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.mediaworld.it/it/brand/google/smartphone/pixel-11pro-xl",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 1329
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-expert-magic8lite-512-midnight-black",
+    "productId": "honor-magic8-lite-512-black",
+    "store": "Expert",
+    "seller": "Expert",
+    "old_price": 429.9,
+    "offer_price": 399.9,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.expert.it/it/it/exp/shop/brand/honor/hono",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 399.9
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-euronics-xiaomi17t-512-violet",
+    "productId": "xiaomi-17t-512-violet",
+    "store": "Euronics",
+    "seller": "Euronics",
+    "old_price": null,
+    "offer_price": 598,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.euronics.it/cds/facciamo-a-meta-cds/?prefn1=brand&prefv1=XIAOMI",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 598
+        }
+      ]
+    }
   }
 ]

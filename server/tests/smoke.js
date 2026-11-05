@@ -3361,14 +3361,125 @@ async function testPriceShapingRamStorageDepth() {
   assert(
     pixel11
       .variantCoverage
-      ?.complete === false &&
+      ?.comparisonComplete === true &&
     pixel11
       .variantCoverage
-      ?.missingConfigurationLabels
-      ?.includes(
-        "12 GB + 512 GB"
+      ?.marketComplete === true,
+    "Pixel 11 deve essere completo dopo l'aggiunta del prezzo 512 GB verificato"
+  );
+}
+
+
+// ========================================
+// VARIANT MARKET COVERAGE — COMPLETE KNOWLEDGE
+// ========================================
+
+async function testVariantMarketCoverageCompleteKnowledge() {
+  const iphone16 =
+    await search(
+      "iPhone 16 più economico"
+    );
+
+  assert(
+    iphone16
+      .variantCoverage
+      ?.marketComplete === true &&
+    iphone16
+      .variantCoverage
+      ?.comparisonComplete === false &&
+    iphone16
+      .variantCoverage
+      ?.marketStateRecords
+      ?.some(
+        record =>
+          record.status ===
+            "no_verified_direct_offer" &&
+          record.configuration
+            ?.storage ===
+            "512 GB"
       ),
-    "Pixel 11 deve dichiarare copertura parziale finché manca un prezzo 512 GB verificato"
+    "iPhone 16 deve conoscere il mercato 512 GB senza inventare un prezzo comparabile"
+  );
+
+  const redmi =
+    await search(
+      "REDMI Note 17 Pro 5G più economico"
+    );
+
+  assert(
+    redmi
+      .variantCoverage
+      ?.marketComplete === true &&
+    redmi
+      .variantCoverage
+      ?.comparisonComplete === false &&
+    redmi
+      .variantCoverage
+      ?.conditionalOnlyConfigurationLabels
+      ?.includes(
+        "12 GB + 256 GB"
+      ) &&
+    redmi
+      .variantCoverage
+      ?.conditionalOnlyConfigurationLabels
+      ?.includes(
+        "8 GB + 512 GB"
+      ),
+    "REDMI Note 17 Pro deve distinguere promo condizionate da prezzi standard"
+  );
+
+  const a37 =
+    await search(
+      "Galaxy A37 più economico"
+    );
+
+  assert(
+    a37
+      .variantCoverage
+      ?.marketComplete === true &&
+    a37
+      .variantCoverage
+      ?.comparisonComplete === true,
+    "Galaxy A37 deve essere completo sia nel mercato sia nel confronto"
+  );
+
+  const pixelPro =
+    await search(
+      "Pixel 11 Pro più economico"
+    );
+
+  assert(
+    pixelPro
+      .variantCoverage
+      ?.marketComplete === true &&
+    pixelPro
+      .variantCoverage
+      ?.comparisonComplete === true,
+    "Pixel 11 Pro deve coprire 256/512/1TB con prezzi standard"
+  );
+
+  const pixelProXL =
+    await search(
+      "Pixel 11 Pro XL più economico"
+    );
+
+  assert(
+    pixelProXL
+      .variantCoverage
+      ?.marketComplete === true &&
+    pixelProXL
+      .variantCoverage
+      ?.comparisonComplete === false &&
+    pixelProXL
+      .variantCoverage
+      ?.marketStateRecords
+      ?.some(
+        record =>
+          record.configuration
+            ?.storage ===
+            "1 TB"
+      ),
+    "Pixel 11 Pro XL deve conoscere lo stato 1TB anche senza prezzo standard verificato"
   );
 }
 
@@ -3378,6 +3489,15 @@ async function testPriceShapingRamStorageDepth() {
 // ========================================
 
 const tests = [
+  {
+    name:
+      "VARIANT MARKET COVERAGE — complete knowledge",
+
+    run:
+      testVariantMarketCoverageCompleteKnowledge,
+  },
+
+
   {
     name:
       "PRICE-SHAPING CONFIGURATIONS — RAM + storage",
