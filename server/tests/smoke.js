@@ -3130,6 +3130,17 @@ async function testPriceShapingVariantDepth() {
     `iPhone 17 generico deve scegliere la capacità più economica: ${iphone17Family.recommendation?.selectedVariant?.storage}`
   );
 
+  assert(
+    iphone17Family
+      .variantCoverage
+      ?.complete === true &&
+    iphone17Family
+      .recommendation
+      ?.comparisonCompleteness ===
+        "complete",
+    "iPhone 17 deve dichiarare copertura capacità completa"
+  );
+
   const iphone17_512 =
     await search(
       "iPhone 17 512 GB più economico"
@@ -3163,6 +3174,21 @@ async function testPriceShapingVariantDepth() {
       ?.selectedVariant
       ?.storage === "128 GB",
     `iPhone 16 generico deve poter scegliere 128 GB: ${iphone16Family.recommendation?.selectedVariant?.storage}`
+  );
+
+  assert(
+    iphone16Family
+      .variantCoverage
+      ?.complete === false &&
+    iphone16Family
+      .variantCoverage
+      ?.missingStorages
+      ?.includes("512 GB") &&
+    iphone16Family
+      .recommendation
+      ?.comparisonCompleteness ===
+        "partial",
+    "iPhone 16 deve dichiarare confronto parziale finché manca il prezzo 512 GB"
   );
 
   const iphone16_256 =
