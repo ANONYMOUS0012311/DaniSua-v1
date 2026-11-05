@@ -546,5 +546,141 @@
     },
     "image": null,
     "imageSourcePage": "https://store.google.com/it/category/phones?hl=it"
+  },
+  {
+    "id": "apple-iphone-17e-256-white",
+    "familyId": "apple-iphone-17e",
+    "familyName": "iPhone 17e",
+    "productLineId": "apple-iphone",
+    "productLineName": "iPhone",
+    "category": "smartphone",
+    "brand": "Apple",
+    "model": "iPhone 17e",
+    "storage": "256 GB",
+    "ram": null,
+    "color": "Bianco",
+    "condition": "new",
+    "gtin": null,
+    "title": "Apple iPhone 17e 256 GB Bianco",
+    "attributes": {
+      "storage": "256 GB",
+      "color": "Bianco"
+    },
+    "image": null,
+    "imageSourcePage": "https://www.apple.com/it/iphone-17e/"
+  },
+  {
+    "id": "apple-iphone-16-128-black",
+    "familyId": "apple-iphone-16",
+    "familyName": "iPhone 16",
+    "productLineId": "apple-iphone",
+    "productLineName": "iPhone",
+    "category": "smartphone",
+    "brand": "Apple",
+    "model": "iPhone 16",
+    "storage": "128 GB",
+    "ram": null,
+    "color": "Nero",
+    "condition": "new",
+    "gtin": null,
+    "title": "Apple iPhone 16 128 GB Nero",
+    "attributes": {
+      "storage": "128 GB",
+      "color": "Nero"
+    },
+    "image": null,
+    "imageSourcePage": "https://www.apple.com/it/shop/buy-iphone/iphone-16"
+  },
+  {
+    "id": "samsung-galaxy-a57-256-gray",
+    "familyId": "samsung-galaxy-a57",
+    "familyName": "Galaxy A57 5G",
+    "productLineId": "samsung-galaxy-a",
+    "productLineName": "Galaxy A",
+    "category": "smartphone",
+    "brand": "Samsung",
+    "model": "Galaxy A57 5G",
+    "storage": "256 GB",
+    "ram": "8 GB",
+    "color": "Awesome Gray",
+    "condition": "new",
+    "gtin": null,
+    "title": "Samsung Galaxy A57 5G 256 GB Awesome Gray",
+    "attributes": {
+      "storage": "256 GB",
+      "ram": "8 GB",
+      "color": "Awesome Gray"
+    },
+    "image": null,
+    "imageSourcePage": "https://www.samsung.com/it/smartphones/galaxy-a/galaxy-a57-5g/buy/?modelCode=SM-A576BDBBEUE"
+  },
+  {
+    "id": "google-pixel-10a-128-obsidian",
+    "familyId": "google-pixel-10a",
+    "familyName": "Pixel 10a",
+    "productLineId": "google-pixel",
+    "productLineName": "Pixel",
+    "category": "smartphone",
+    "brand": "Google",
+    "model": "Pixel 10a",
+    "storage": "128 GB",
+    "ram": "8 GB",
+    "color": "Nero ossidiana",
+    "condition": "new",
+    "gtin": null,
+    "title": "Google Pixel 10a 128 GB Nero Ossidiana",
+    "attributes": {
+      "storage": "128 GB",
+      "ram": "8 GB",
+      "color": "Nero ossidiana"
+    },
+    "image": null,
+    "imageSourcePage": "https://store.google.com/it/product/pixel_10a?hl=it"
+  },
+  {
+    "id": "google-pixel-10a-128-mist",
+    "familyId": "google-pixel-10a",
+    "familyName": "Pixel 10a",
+    "productLineId": "google-pixel",
+    "productLineName": "Pixel",
+    "category": "smartphone",
+    "brand": "Google",
+    "model": "Pixel 10a",
+    "storage": "128 GB",
+    "ram": "8 GB",
+    "color": "Grigio nebbia",
+    "condition": "new",
+    "gtin": null,
+    "title": "Google Pixel 10a 128 GB Grigio Nebbia",
+    "attributes": {
+      "storage": "128 GB",
+      "ram": "8 GB",
+      "color": "Grigio nebbia"
+    },
+    "image": null,
+    "imageSourcePage": "https://store.google.com/it/product/pixel_10a?hl=it"
+  },
+  {
+    "id": "xiaomi-redmi-note17-5g-256-black",
+    "familyId": "redmi-note-17-5g",
+    "familyName": "REDMI Note 17 5G",
+    "productLineId": "xiaomi-redmi-note",
+    "productLineName": "REDMI Note",
+    "category": "smartphone",
+    "brand": "Xiaomi",
+    "model": "REDMI Note 17 5G",
+    "storage": "256 GB",
+    "ram": "6 GB",
+    "color": "Black",
+    "condition": "new",
+    "gtin": null,
+    "title": "Xiaomi REDMI Note 17 5G 6+256 GB Black",
+    "attributes": {
+      "storage": "256 GB",
+      "ram": "6 GB",
+      "color": "Black"
+    },
+    "image": null,
+    "imageSourcePage": "https://www.mi.com/it/product/redmi-note-17-5g/"
   }
 ]
