@@ -29,7 +29,7 @@
         "color",
         "bundle"
       ],
-      "trackedFamilies": 21,
+      "trackedFamilies": 32,
       "marketCoverage": {
         "principle": "Market coverage is complete when every tracked configuration has either a verified current offer (standard or conditional) or verified market-state evidence explaining why no normal comparable offer is currently available.",
         "requireAllTrackedConfigurationsKnown": true
@@ -45,7 +45,21 @@
       "segment": "premium",
       "minimumStores": 4,
       "officialSource": "https://www.apple.com/it/shop/buy-iphone",
-      "betaTier": "core"
+      "betaTier": "core",
+      "priceShapingConfigurations": [
+        {
+          "storage": "256 GB"
+        },
+        {
+          "storage": "512 GB"
+        },
+        {
+          "storage": "1 TB"
+        },
+        {
+          "storage": "2 TB"
+        }
+      ]
     },
     {
       "familyId": "apple-iphone-18-pro-max",
@@ -55,7 +69,21 @@
       "segment": "premium",
       "minimumStores": 2,
       "officialSource": "https://www.apple.com/it/shop/buy-iphone",
-      "betaTier": "breadth"
+      "betaTier": "breadth",
+      "priceShapingConfigurations": [
+        {
+          "storage": "256 GB"
+        },
+        {
+          "storage": "512 GB"
+        },
+        {
+          "storage": "1 TB"
+        },
+        {
+          "storage": "2 TB"
+        }
+      ]
     },
     {
       "familyId": "apple-iphone-duo",
@@ -65,7 +93,21 @@
       "segment": "foldable-premium",
       "minimumStores": 2,
       "officialSource": "https://www.apple.com/it/shop/buy-iphone",
-      "betaTier": "breadth"
+      "betaTier": "breadth",
+      "priceShapingConfigurations": [
+        {
+          "storage": "256 GB"
+        },
+        {
+          "storage": "512 GB"
+        },
+        {
+          "storage": "1 TB"
+        },
+        {
+          "storage": "2 TB"
+        }
+      ]
     },
     {
       "familyId": "apple-iphone-air",
@@ -75,7 +117,18 @@
       "segment": "premium",
       "minimumStores": 3,
       "officialSource": "https://www.apple.com/it/shop/buy-iphone",
-      "betaTier": "important"
+      "betaTier": "important",
+      "priceShapingConfigurations": [
+        {
+          "storage": "256 GB"
+        },
+        {
+          "storage": "512 GB"
+        },
+        {
+          "storage": "1 TB"
+        }
+      ]
     },
     {
       "familyId": "apple-iphone-17",
@@ -101,7 +154,15 @@
       "segment": "mid",
       "minimumStores": 4,
       "officialSource": "https://www.apple.com/it/shop/buy-iphone",
-      "betaTier": "core"
+      "betaTier": "core",
+      "priceShapingConfigurations": [
+        {
+          "storage": "256 GB"
+        },
+        {
+          "storage": "512 GB"
+        }
+      ]
     },
     {
       "familyId": "apple-iphone-16",
@@ -246,7 +307,21 @@
       "segment": "foldable-premium",
       "minimumStores": 2,
       "officialSource": "https://www.samsung.com/it/smartphones/",
-      "betaTier": "breadth"
+      "betaTier": "breadth",
+      "priceShapingConfigurations": [
+        {
+          "storage": "256 GB",
+          "ram": "12 GB"
+        },
+        {
+          "storage": "512 GB",
+          "ram": "12 GB"
+        },
+        {
+          "storage": "1 TB",
+          "ram": "16 GB"
+        }
+      ]
     },
     {
       "familyId": "samsung-galaxy-z-flip8",
@@ -256,7 +331,17 @@
       "segment": "foldable-premium",
       "minimumStores": 2,
       "officialSource": "https://www.samsung.com/it/smartphones/",
-      "betaTier": "breadth"
+      "betaTier": "breadth",
+      "priceShapingConfigurations": [
+        {
+          "storage": "256 GB",
+          "ram": "12 GB"
+        },
+        {
+          "storage": "512 GB",
+          "ram": "12 GB"
+        }
+      ]
     },
     {
       "familyId": "samsung-galaxy-a57",
@@ -526,7 +611,13 @@
       "segment": "premium",
       "minimumStores": 3,
       "officialSource": "https://www.honor.com/it/phones/",
-      "betaTier": "breadth"
+      "betaTier": "breadth",
+      "priceShapingConfigurations": [
+        {
+          "storage": "512 GB",
+          "ram": "16 GB"
+        }
+      ]
     },
     {
       "familyId": "honor-magic8-lite",
@@ -556,7 +647,13 @@
       "segment": "upper-mid",
       "minimumStores": 2,
       "officialSource": "https://www.honor.com/it/phones/",
-      "betaTier": "breadth"
+      "betaTier": "breadth",
+      "priceShapingConfigurations": [
+        {
+          "storage": "512 GB",
+          "ram": "12 GB"
+        }
+      ]
     },
     {
       "familyId": "oppo-find-x10",
@@ -566,7 +663,17 @@
       "segment": "premium",
       "minimumStores": 3,
       "officialSource": "https://www.oppo.com/it/smartphones/",
-      "betaTier": "important"
+      "betaTier": "important",
+      "priceShapingConfigurations": [
+        {
+          "storage": "256 GB",
+          "ram": "12 GB"
+        },
+        {
+          "storage": "512 GB",
+          "ram": "12 GB"
+        }
+      ]
     },
     {
       "familyId": "oppo-reno16-pro-5g",
@@ -576,7 +683,13 @@
       "segment": "upper-mid",
       "minimumStores": 2,
       "officialSource": "https://www.oppo.com/it/smartphones/",
-      "betaTier": "breadth"
+      "betaTier": "breadth",
+      "priceShapingConfigurations": [
+        {
+          "storage": "512 GB",
+          "ram": "12 GB"
+        }
+      ]
     }
   ]
 }
