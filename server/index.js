@@ -2673,6 +2673,15 @@ function buildGenericPriceRecommendation(
       model:
         bestOffer.model ||
         null,
+      storage:
+        bestOffer.storage ||
+        null,
+      ram:
+        bestOffer.ram ||
+        null,
+      condition:
+        bestOffer.condition ||
+        null,
       color:
         bestOffer.color ||
         null,
@@ -2736,6 +2745,9 @@ function buildBestOfferRecommendation(
         null,
       ram:
         bestOffer.ram ||
+        null,
+      condition:
+        bestOffer.condition ||
         null,
       color:
         bestOffer.color ||
