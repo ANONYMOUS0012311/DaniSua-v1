@@ -2256,7 +2256,7 @@ async function testMidrangeSmartphoneProductionBlock() {
 
   assert(
     iphone17e.bestOffer?.id ===
-      "test-apple-iphone17e-256-white",
+      "test-euronics-iphone17e-256-white",
     `Miglior iPhone 17e inatteso: ${iphone17e.bestOffer?.id}`
   );
 
