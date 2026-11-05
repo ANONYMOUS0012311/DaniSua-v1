@@ -2901,6 +2901,57 @@ async function testSmartphoneFinalTargetFive() {
 
 
 // ========================================
+// BETA CORE DEPTH — WAVE 1
+// ========================================
+
+async function testBetaCoreDepthWaveOne() {
+  const cases = [
+    {
+      query: "iPhone 17 256 GB Nero",
+      stores: ["Apple", "MediaWorld", "Unieuro", "Euronics"],
+    },
+    {
+      query: "iPhone 17e 256 GB",
+      stores: ["Apple", "Euronics", "Unieuro", "MediaWorld"],
+    },
+    {
+      query: "Galaxy A57 5G 256 GB",
+      stores: ["Samsung", "MediaWorld", "Euronics", "Unieuro"],
+    },
+    {
+      query: "Pixel 10a 128 GB",
+      stores: ["Euronics", "Unieuro", "MediaWorld", "Google Store"],
+    },
+    {
+      query: "REDMI Note 17 5G 256 GB Black",
+      stores: ["Xiaomi", "MediaWorld", "Unieuro", "Euronics"],
+    },
+    {
+      query: "Pixel 11 Pro 256 GB Nero Ossidiana",
+      stores: ["Google Store", "MediaWorld", "Euronics"],
+    },
+  ];
+
+  for (const item of cases) {
+    const data = await search(item.query);
+    const stores =
+      new Set(
+        data.results.map(
+          offer => offer.store
+        )
+      );
+
+    for (const store of item.stores) {
+      assert(
+        stores.has(store),
+        `${item.query}: manca lo store ${store}`
+      );
+    }
+  }
+}
+
+
+// ========================================
 // TESTS
 // ========================================
 
@@ -3207,6 +3258,14 @@ const tests = [
 
     run:
       testPixel11ProductionIngest,
+  },
+
+  {
+    name:
+      "BETA CORE DEPTH — wave 1",
+
+    run:
+      testBetaCoreDepthWaveOne,
   },
 
   {
