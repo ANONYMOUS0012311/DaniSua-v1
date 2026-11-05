@@ -3361,14 +3361,11 @@ async function testPriceShapingRamStorageDepth() {
   assert(
     pixel11
       .variantCoverage
-      ?.complete === false &&
+      ?.comparisonComplete === true &&
     pixel11
       .variantCoverage
-      ?.missingConfigurationLabels
-      ?.includes(
-        "12 GB + 512 GB"
-      ),
-    "Pixel 11 deve dichiarare copertura parziale finché manca un prezzo 512 GB verificato"
+      ?.marketComplete === true,
+    "Pixel 11 deve essere completo dopo l'aggiunta del prezzo 512 GB verificato"
   );
 }
 
