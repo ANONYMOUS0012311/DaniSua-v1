@@ -151,6 +151,9 @@ const rows =
           target.priority,
         segment:
           target.segment,
+        betaTier:
+          target.betaTier ||
+          "breadth",
         minimumStores:
           target.minimumStores,
         variants:
@@ -192,6 +195,31 @@ const p0Ready =
       row.status === "ready"
   ).length;
 
+const betaDepthRows =
+  rows.filter(
+    row =>
+      row.betaTier === "core" ||
+      row.betaTier === "important"
+  );
+
+const betaDepthReady =
+  betaDepthRows.filter(
+    row =>
+      row.status === "ready"
+  );
+
+const coreRows =
+  rows.filter(
+    row =>
+      row.betaTier === "core"
+  );
+
+const importantRows =
+  rows.filter(
+    row =>
+      row.betaTier === "important"
+  );
+
 const summary = {
   market:
     targets.market,
@@ -214,6 +242,30 @@ const summary = {
       p0.length,
     ready:
       p0Ready,
+  },
+  betaDepth: {
+    targetFamilies:
+      betaDepthRows.length,
+    readyFamilies:
+      betaDepthReady.length,
+    core: {
+      target:
+        coreRows.length,
+      ready:
+        coreRows.filter(
+          row =>
+            row.status === "ready"
+        ).length,
+    },
+    important: {
+      target:
+        importantRows.length,
+      ready:
+        importantRows.filter(
+          row =>
+            row.status === "ready"
+        ).length,
+    },
   },
   coveragePercent:
     Number(
