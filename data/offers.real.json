@@ -803,5 +803,355 @@
         }
       ]
     }
+  },
+  {
+    "id": "real-apple-iphone17e-256-white",
+    "productId": "apple-iphone-17e-256-white",
+    "store": "Apple",
+    "seller": "Apple",
+    "old_price": null,
+    "offer_price": 729,
+    "currency": "EUR",
+    "shipping_price": 0,
+    "stock": true,
+    "url": "https://www.apple.com/it/shop/buy-iphone/iphone-17e",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05T10:40:00Z",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 729
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-euronics-iphone17e-256-white",
+    "productId": "apple-iphone-17e-256-white",
+    "store": "Euronics",
+    "seller": "Euronics",
+    "old_price": null,
+    "offer_price": 729,
+    "currency": "EUR",
+    "shipping_price": 7.9,
+    "stock": true,
+    "url": "https://www.euronics.it/telefonia/smartphone-e-cellulari/iphone/apple---iphone-17e-256gb-bianco/262002796.html",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05T10:40:00Z",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 729
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-unieuro-iphone17e-256-white",
+    "productId": "apple-iphone-17e-256-white",
+    "store": "Unieuro",
+    "seller": "Unieuro",
+    "old_price": 879,
+    "offer_price": 839,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.unieuro.it/online/iPhone/iPhone-17e-256GB-Bianco-pidAPLIPHONE17E256W",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05T10:40:00Z",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 839
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-apple-iphone16-128-black",
+    "productId": "apple-iphone-16-128-black",
+    "store": "Apple",
+    "seller": "Apple",
+    "old_price": null,
+    "offer_price": 1029,
+    "currency": "EUR",
+    "shipping_price": 0,
+    "stock": true,
+    "url": "https://www.apple.com/it/shop/buy-iphone/iphone-16",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05T10:40:00Z",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 1029
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-euronics-iphone16-128-black",
+    "productId": "apple-iphone-16-128-black",
+    "store": "Euronics",
+    "seller": "Euronics",
+    "old_price": null,
+    "offer_price": 967,
+    "currency": "EUR",
+    "shipping_price": 7.9,
+    "stock": true,
+    "url": "https://www.euronics.it/telefonia/smartphone-e-cellulari/iphone/apple---iphone-16-128gb-nero/242014570.html",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05T10:40:00Z",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 967
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-samsung-a57-256-gray",
+    "productId": "samsung-galaxy-a57-256-gray",
+    "store": "Samsung",
+    "seller": "Samsung",
+    "old_price": null,
+    "offer_price": 609,
+    "currency": "EUR",
+    "shipping_price": 0,
+    "stock": true,
+    "url": "https://www.samsung.com/it/smartphones/galaxy-a/galaxy-a57-5g/buy/?modelCode=SM-A576BDBBEUE",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05T10:40:00Z",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 609
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-mediaworld-a57-256-gray",
+    "productId": "samsung-galaxy-a57-256-gray",
+    "store": "MediaWorld",
+    "seller": "MediaWorld",
+    "old_price": 679.9,
+    "offer_price": 479.99,
+    "currency": "EUR",
+    "shipping_price": 3.99,
+    "stock": true,
+    "url": "https://www.mediaworld.it/it/product/_samsung-galaxy-a57-5g-256gb-256-gb-573323.html",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05T10:40:00Z",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 479.99
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-euronics-a57-256-gray",
+    "productId": "samsung-galaxy-a57-256-gray",
+    "store": "Euronics",
+    "seller": "Euronics",
+    "old_price": 599,
+    "offer_price": 516,
+    "currency": "EUR",
+    "shipping_price": 7.9,
+    "stock": true,
+    "url": "https://www.euronics.it/telefonia/smartphone-e-cellulari/smartphone-dual-sim/samsung---smartphone-galaxy-a57-5g-256gb-awesome-gray/262003745.html",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05T10:40:00Z",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 516
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-euronics-pixel10a-128-obsidian",
+    "productId": "google-pixel-10a-128-obsidian",
+    "store": "Euronics",
+    "seller": "Euronics",
+    "old_price": null,
+    "offer_price": 399,
+    "currency": "EUR",
+    "shipping_price": 7.9,
+    "stock": true,
+    "url": "https://www.euronics.it/telefonia/smartphone-e-cellulari/smartphone-dual-sim/google---smartphone-google-pixel-10a-128gb-nero-ossidiana/262002312.html",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05T10:40:00Z",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 399
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-unieuro-pixel10a-128-obsidian",
+    "productId": "google-pixel-10a-128-obsidian",
+    "store": "Unieuro",
+    "seller": "Unieuro",
+    "old_price": 549.9,
+    "offer_price": 399,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.unieuro.it/online/Smartphone/Pixel-10A-128GB-Nero-ossidiana-pidGGOPIXEL10A128",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05T10:40:00Z",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 399
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-mediaworld-pixel10a-128-mist",
+    "productId": "google-pixel-10a-128-mist",
+    "store": "MediaWorld",
+    "seller": "MediaWorld",
+    "old_price": 649,
+    "offer_price": 429,
+    "currency": "EUR",
+    "shipping_price": 3.99,
+    "stock": true,
+    "url": "https://www.mediaworld.it/it/product/_google-pixel-10a-128gb-128-gb-565938.html",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05T10:40:00Z",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 429
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-xiaomi-redminote17-5g-256-black",
+    "productId": "xiaomi-redmi-note17-5g-256-black",
+    "store": "Xiaomi",
+    "seller": "Xiaomi",
+    "old_price": null,
+    "offer_price": 299.9,
+    "currency": "EUR",
+    "shipping_price": 0,
+    "stock": true,
+    "url": "https://www.mi.com/it/product/redmi-note-17-5g/",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05T10:40:00Z",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 299.9
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-mediaworld-redminote17-5g-256-black",
+    "productId": "xiaomi-redmi-note17-5g-256-black",
+    "store": "MediaWorld",
+    "seller": "MediaWorld",
+    "old_price": 399.9,
+    "offer_price": 299,
+    "currency": "EUR",
+    "shipping_price": 3.99,
+    "stock": true,
+    "url": "https://www.mediaworld.it/it/product/_xiaomi-redmi-note-17-5g-6256-256-gb-598133.html",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05T10:40:00Z",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 299
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-unieuro-redminote17-5g-256-black",
+    "productId": "xiaomi-redmi-note17-5g-256-black",
+    "store": "Unieuro",
+    "seller": "Unieuro",
+    "old_price": 399.9,
+    "offer_price": 299,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.unieuro.it/online/Smartphone/Redmi-Note-17-5G-pidXIARN175G6256",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05T10:40:00Z",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 299
+        }
+      ]
+    }
   }
 ]

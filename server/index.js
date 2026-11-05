@@ -549,6 +549,40 @@ function isGenericCategoryProductQuery(
 
 
 // ========================================
+// SEGNALI NORMALIZZATI
+// ========================================
+
+function containsNormalizedSignal(
+  normalizedQuery,
+  signal
+) {
+  const query =
+    normalizeText(
+      normalizedQuery
+    );
+
+  const normalizedSignal =
+    normalizeText(
+      signal
+    );
+
+  if (
+    !query ||
+    !normalizedSignal
+  ) {
+    return false;
+  }
+
+  return (
+    ` ${query} `
+      .includes(
+        ` ${normalizedSignal} `
+      )
+  );
+}
+
+
+// ========================================
 // OBIETTIVI QUALITÀ
 // ========================================
 
@@ -658,7 +692,11 @@ function detectQualityObjectives(query) {
   for (const rule of rules) {
     const found =
       rule.signals.some(
-        signal => q.includes(signal)
+        signal =>
+          containsNormalizedSignal(
+            q,
+            signal
+          )
       );
 
     if (found) {
@@ -692,7 +730,11 @@ function detectHardRequirements(query) {
 
   if (
     ancSignals.some(
-      signal => q.includes(signal)
+      signal =>
+        containsNormalizedSignal(
+          q,
+          signal
+        )
     )
   ) {
     requirements.anc = true;
