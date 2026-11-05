@@ -1366,5 +1366,181 @@
     },
     "image": null,
     "imageSourcePage": "https://www.honor.com/it/phones/honor-magic8-lite/"
+  },
+  {
+    "id": "apple-iphone-14-128-midnight",
+    "familyId": "apple-iphone-14",
+    "familyName": "iPhone 14",
+    "productLineId": "apple-iphone",
+    "productLineName": "iPhone",
+    "category": "smartphone",
+    "brand": "Apple",
+    "model": "iPhone 14",
+    "storage": "128 GB",
+    "ram": null,
+    "color": "Mezzanotte",
+    "condition": "new",
+    "gtin": null,
+    "title": "Apple iPhone 14 128 GB Mezzanotte",
+    "attributes": {
+      "storage": "128 GB",
+      "color": "Mezzanotte"
+    },
+    "image": null,
+    "imageSourcePage": "https://support.apple.com/it-it/111850"
+  },
+  {
+    "id": "apple-iphone-14-256-midnight",
+    "familyId": "apple-iphone-14",
+    "familyName": "iPhone 14",
+    "productLineId": "apple-iphone",
+    "productLineName": "iPhone",
+    "category": "smartphone",
+    "brand": "Apple",
+    "model": "iPhone 14",
+    "storage": "256 GB",
+    "ram": null,
+    "color": "Mezzanotte",
+    "condition": "new",
+    "gtin": null,
+    "title": "Apple iPhone 14 256 GB Mezzanotte",
+    "attributes": {
+      "storage": "256 GB",
+      "color": "Mezzanotte"
+    },
+    "image": null,
+    "imageSourcePage": "https://support.apple.com/it-it/111850"
+  },
+  {
+    "id": "apple-iphone-14-512-midnight",
+    "familyId": "apple-iphone-14",
+    "familyName": "iPhone 14",
+    "productLineId": "apple-iphone",
+    "productLineName": "iPhone",
+    "category": "smartphone",
+    "brand": "Apple",
+    "model": "iPhone 14",
+    "storage": "512 GB",
+    "ram": null,
+    "color": "Mezzanotte",
+    "condition": "new",
+    "gtin": null,
+    "title": "Apple iPhone 14 512 GB Mezzanotte",
+    "attributes": {
+      "storage": "512 GB",
+      "color": "Mezzanotte"
+    },
+    "image": null,
+    "imageSourcePage": "https://support.apple.com/it-it/111850"
+  },
+  {
+    "id": "apple-iphone-15-256-black",
+    "familyId": "apple-iphone-15",
+    "familyName": "iPhone 15",
+    "productLineId": "apple-iphone",
+    "productLineName": "iPhone",
+    "category": "smartphone",
+    "brand": "Apple",
+    "model": "iPhone 15",
+    "storage": "256 GB",
+    "ram": null,
+    "color": "Nero",
+    "condition": "new",
+    "gtin": null,
+    "title": "Apple iPhone 15 256 GB Nero",
+    "attributes": {
+      "storage": "256 GB",
+      "color": "Nero"
+    },
+    "image": null,
+    "imageSourcePage": "https://support.apple.com/it-it/111831"
+  },
+  {
+    "id": "apple-iphone-15-512-black",
+    "familyId": "apple-iphone-15",
+    "familyName": "iPhone 15",
+    "productLineId": "apple-iphone",
+    "productLineName": "iPhone",
+    "category": "smartphone",
+    "brand": "Apple",
+    "model": "iPhone 15",
+    "storage": "512 GB",
+    "ram": null,
+    "color": "Nero",
+    "condition": "new",
+    "gtin": null,
+    "title": "Apple iPhone 15 512 GB Nero",
+    "attributes": {
+      "storage": "512 GB",
+      "color": "Nero"
+    },
+    "image": null,
+    "imageSourcePage": "https://support.apple.com/it-it/111831"
+  },
+  {
+    "id": "apple-iphone-16-256-white",
+    "familyId": "apple-iphone-16",
+    "familyName": "iPhone 16",
+    "productLineId": "apple-iphone",
+    "productLineName": "iPhone",
+    "category": "smartphone",
+    "brand": "Apple",
+    "model": "iPhone 16",
+    "storage": "256 GB",
+    "ram": null,
+    "color": "Bianco",
+    "condition": "new",
+    "gtin": null,
+    "title": "Apple iPhone 16 256 GB Bianco",
+    "attributes": {
+      "storage": "256 GB",
+      "color": "Bianco"
+    },
+    "image": null,
+    "imageSourcePage": "https://www.unieuro.it/online/iPhone/iPhone-16-256GB-Bianco-pidILIIPHONE16256W"
+  },
+  {
+    "id": "apple-iphone-16-512-black",
+    "familyId": "apple-iphone-16",
+    "familyName": "iPhone 16",
+    "productLineId": "apple-iphone",
+    "productLineName": "iPhone",
+    "category": "smartphone",
+    "brand": "Apple",
+    "model": "iPhone 16",
+    "storage": "512 GB",
+    "ram": null,
+    "color": "Nero",
+    "condition": "new",
+    "gtin": null,
+    "title": "Apple iPhone 16 512 GB Nero",
+    "attributes": {
+      "storage": "512 GB",
+      "color": "Nero"
+    },
+    "image": null,
+    "imageSourcePage": "https://support.apple.com/it-it/121029"
+  },
+  {
+    "id": "apple-iphone-17-512-white",
+    "familyId": "apple-iphone-17",
+    "familyName": "iPhone 17",
+    "productLineId": "apple-iphone",
+    "productLineName": "iPhone",
+    "category": "smartphone",
+    "brand": "Apple",
+    "model": "iPhone 17",
+    "storage": "512 GB",
+    "ram": null,
+    "color": "Bianco",
+    "condition": "new",
+    "gtin": null,
+    "title": "Apple iPhone 17 512 GB Bianco",
+    "attributes": {
+      "storage": "512 GB",
+      "color": "Bianco"
+    },
+    "image": null,
+    "imageSourcePage": "https://www.mediaworld.it/it/product/_apple-iphone-17-512gb-bianco-389227.html"
   }
 ]
