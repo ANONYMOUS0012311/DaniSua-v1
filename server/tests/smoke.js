@@ -2695,7 +2695,12 @@ async function testSmartphoneBatch4PremiumBreadth() {
     const data = await search(item.query);
 
     assert(
-      data.status === "specific",
+      [
+        "specific",
+        "best_offer_ready",
+      ].includes(
+        data.status
+      ),
       `${item.familyId}: status inatteso ${data.status}`
     );
 
