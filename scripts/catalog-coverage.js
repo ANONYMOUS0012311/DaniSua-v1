@@ -41,6 +41,104 @@ for (const product of smartphoneProducts) {
     .push(product);
 }
 
+const PRICE_SHAPING_FIELDS = [
+  "storage",
+  "ram",
+  "condition",
+  "connectivity",
+];
+
+function getRequiredConfigurations(target) {
+  if (
+    Array.isArray(
+      target
+        ?.priceShapingConfigurations
+    ) &&
+    target
+      .priceShapingConfigurations
+      .length > 0
+  ) {
+    return target
+      .priceShapingConfigurations
+      .map(
+        configuration =>
+          Object.fromEntries(
+            PRICE_SHAPING_FIELDS
+              .filter(
+                field =>
+                  configuration
+                    ?.[field] != null
+              )
+              .map(
+                field => [
+                  field,
+                  String(
+                    configuration[field]
+                  ),
+                ]
+              )
+          )
+      )
+      .filter(
+        configuration =>
+          Object.keys(
+            configuration
+          ).length > 0
+      );
+  }
+
+  const storages =
+    Array.isArray(
+      target
+        ?.priceShapingDimensions
+        ?.storage
+    )
+      ? target
+          .priceShapingDimensions
+          .storage
+      : [];
+
+  return storages.map(
+    storage => ({
+      storage:
+        String(storage),
+    })
+  );
+}
+
+function matchesConfiguration(
+  product,
+  configuration
+) {
+  return Object.entries(
+    configuration
+  ).every(
+    ([field, value]) =>
+      String(
+        product?.[field] ??
+        product
+          ?.attributes
+          ?.[field] ??
+        ""
+      ) ===
+      String(value)
+  );
+}
+
+function configurationLabel(
+  configuration
+) {
+  return [
+    configuration.ram,
+    configuration.storage,
+    configuration.connectivity,
+    configuration.condition,
+  ]
+    .filter(Boolean)
+    .join(" + ");
+}
+
+
 const offersByProduct =
   new Map();
 
@@ -127,24 +225,104 @@ const rows =
           ),
         ].sort();
 
-      const requiredStorageValues =
-        Array.isArray(
+      const requiredConfigurations =
+        getRequiredConfigurations(
           target
-            .priceShapingDimensions
-            ?.storage
-        )
-          ? target
-              .priceShapingDimensions
-              .storage
-          : [];
+        );
+
+      const catalogedConfigurations =
+        requiredConfigurations
+          .filter(
+            configuration =>
+              familyProducts
+                .some(
+                  product =>
+                    matchesConfiguration(
+                      product,
+                      configuration
+                    )
+                )
+          );
+
+      const pricedConfigurations =
+        requiredConfigurations
+          .filter(
+            configuration =>
+              familyProducts
+                .filter(
+                  product =>
+                    matchesConfiguration(
+                      product,
+                      configuration
+                    )
+                )
+                .some(
+                  product =>
+                    availableVerifiedOffers
+                      .some(
+                        offer =>
+                          offer.productId ===
+                            product.id &&
+                          offer.pricing
+                            ?.conditional !==
+                            true
+                      )
+                )
+          );
+
+      const catalogedConfigurationLabels =
+        catalogedConfigurations.map(
+          configurationLabel
+        );
+
+      const pricedConfigurationLabels =
+        pricedConfigurations.map(
+          configurationLabel
+        );
+
+      const missingCatalogConfigurations =
+        requiredConfigurations
+          .filter(
+            configuration =>
+              !catalogedConfigurationLabels
+                .includes(
+                  configurationLabel(
+                    configuration
+                  )
+                )
+          );
+
+      const missingPricedConfigurations =
+        requiredConfigurations
+          .filter(
+            configuration =>
+              !pricedConfigurationLabels
+                .includes(
+                  configurationLabel(
+                    configuration
+                  )
+                )
+          );
+
+      const requiredStorageValues =
+        [
+          ...new Set(
+            requiredConfigurations
+              .map(
+                configuration =>
+                  configuration.storage
+              )
+              .filter(Boolean)
+          ),
+        ];
 
       const catalogedStorageValues =
         [
           ...new Set(
-            familyProducts
+            catalogedConfigurations
               .map(
-                product =>
-                  product.storage
+                configuration =>
+                  configuration.storage
               )
               .filter(Boolean)
           ),
@@ -153,22 +331,10 @@ const rows =
       const pricedStorageValues =
         [
           ...new Set(
-            familyProducts
-              .filter(
-                product =>
-                  availableVerifiedOffers
-                    .some(
-                      offer =>
-                        offer.productId ===
-                        product.id &&
-                        offer.pricing
-                          ?.conditional !==
-                          true
-                    )
-              )
+            pricedConfigurations
               .map(
-                product =>
-                  product.storage
+                configuration =>
+                  configuration.storage
               )
               .filter(Boolean)
           ),
@@ -191,18 +357,18 @@ const rows =
           );
 
       const variantDepthTracked =
-        requiredStorageValues
+        requiredConfigurations
           .length > 0;
 
       const variantDepthStatus =
         !variantDepthTracked
           ? "not_tracked"
           : (
-              missingCatalogStorageValues
+              missingCatalogConfigurations
                 .length > 0
                 ? "missing_variants"
                 : (
-                    missingPricedStorageValues
+                    missingPricedConfigurations
                       .length > 0
                       ? "missing_prices"
                       : "ready"
@@ -263,6 +429,28 @@ const rows =
             variantDepthTracked,
           status:
             variantDepthStatus,
+          requiredConfigurations,
+          catalogedConfigurations,
+          pricedConfigurations,
+          missingCatalogConfigurations,
+          missingPricedConfigurations,
+          requiredConfigurationLabels:
+            requiredConfigurations
+              .map(
+                configurationLabel
+              ),
+          catalogedConfigurationLabels,
+          pricedConfigurationLabels,
+          missingCatalogConfigurationLabels:
+            missingCatalogConfigurations
+              .map(
+                configurationLabel
+              ),
+          missingPricedConfigurationLabels:
+            missingPricedConfigurations
+              .map(
+                configurationLabel
+              ),
           requiredStorageValues,
           catalogedStorageValues,
           pricedStorageValues,
@@ -377,6 +565,14 @@ const summary = {
             status:
               row.variantDepth
                 ?.status,
+            missingCatalogConfigurations:
+              row.variantDepth
+                ?.missingCatalogConfigurationLabels ||
+              [],
+            missingPricedConfigurations:
+              row.variantDepth
+                ?.missingPricedConfigurationLabels ||
+              [],
             missingCatalogStorageValues:
               row.variantDepth
                 ?.missingCatalogStorageValues ||
