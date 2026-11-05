@@ -2303,8 +2303,8 @@ async function testMidrangeSmartphoneProductionBlock() {
     );
 
   assert(
-    pixel.results.length === 3,
-    `Attesi 3 prezzi Pixel 10a, ricevuti ${pixel.results.length}`
+    pixel.results.length === 4,
+    `Attesi 4 prezzi Pixel 10a, ricevuti ${pixel.results.length}`
   );
 
   assert(
@@ -2324,8 +2324,8 @@ async function testMidrangeSmartphoneProductionBlock() {
     );
 
   assert(
-    redmi.results.length === 3,
-    `Attesi 3 prezzi REDMI Note 17 5G, ricevuti ${redmi.results.length}`
+    redmi.results.length === 4,
+    `Attesi 4 prezzi REDMI Note 17 5G, ricevuti ${redmi.results.length}`
   );
 
   assert(
@@ -2616,7 +2616,7 @@ async function testSmartphoneBatch3FiveFamilies() {
     {
       query: "Pixel 11 Pro 256 GB Nero Ossidiana",
       familyId: "google-pixel-11-pro",
-      expectedOffers: 2,
+      expectedOffers: 3,
       expectedBest: "test-mediaworld-pixel11pro-256-obsidian",
       expectedFinalCost: 1002.99,
     },
