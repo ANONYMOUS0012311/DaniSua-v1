@@ -2470,6 +2470,68 @@ async function testKnowledgeProtocolSafety() {
 
 
 // ========================================
+// EU BATTERY — STANDARDIZED RECOMMENDATION
+// ========================================
+
+async function testStandardizedBatteryRecommendation() {
+  const data =
+    await search(
+      "smartphone con buona batteria sotto 400 euro"
+    );
+
+  assert(
+    data.intent ===
+      "RECOMMENDATION",
+    `Intent batteria inatteso: ${data.intent}`
+  );
+
+  assert(
+    data.canRecommend === true,
+    "La richiesta batteria sotto 400 euro dovrebbe essere raccomandabile"
+  );
+
+  assert(
+    data.bestOffer
+      ?.familyId ===
+      "redmi-note-17-5g",
+    `Famiglia batteria attesa redmi-note-17-5g, ricevuta ${data.bestOffer?.familyId}`
+  );
+
+  assert(
+    data.recommendation
+      ?.rankingEvidence
+      ?.some(
+        item =>
+          item.criterion ===
+            "battery" &&
+          item.score === 68 &&
+          item.unit ===
+            "h" &&
+          item.protocol ===
+            "EU 2023/1669 battery endurance per cycle (hours)"
+      ),
+    "La raccomandazione batteria deve usare l'autonomia UE standardizzata"
+  );
+
+  assert(
+    data.recommendation
+      ?.finalCost ===
+      null,
+    "Il costo finale REDMI deve restare provvisorio finché la spedizione Unieuro è sconosciuta"
+  );
+
+  assert(
+    data.recommendation
+      ?.message
+      ?.includes(
+        "batteria: 68 h"
+      ),
+    "La spiegazione deve mostrare l'autonomia standardizzata in ore"
+  );
+}
+
+
+// ========================================
 // TESTS
 // ========================================
 
@@ -2784,6 +2846,14 @@ const tests = [
 
     run:
       testKnowledgeProtocolSafety,
+  },
+
+  {
+    name:
+      "EU BATTERY — standardized recommendation",
+
+    run:
+      testStandardizedBatteryRecommendation,
   },
 ];
 
