@@ -172,7 +172,7 @@
     "old_price": null,
     "offer_price": 249,
     "currency": "EUR",
-    "shipping_price": null,
+    "shipping_price": 0,
     "stock": true,
     "url": "https://www.apple.com/it/shop/buy-airpods/airpods-pro-3",
     "updatedAt": null,
@@ -184,17 +184,6 @@
         {
           "type": "one_time",
           "total_price": 249
-        },
-        {
-          "type": "installment",
-          "installments": 12,
-          "installment_amount": 22.01,
-          "displayed_total": 264.12,
-          "financing_cost": 15.12,
-          "tan": 11.02,
-          "taeg": null,
-          "provider": "Findomestic",
-          "note": "Finanziamento mostrato da Apple Italia; il ranking standard usa il prezzo totale di acquisto di 249 €."
         }
       ]
     }
@@ -255,7 +244,7 @@
     "old_price": 1129,
     "offer_price": 989.49,
     "currency": "EUR",
-    "shipping_price": null,
+    "shipping_price": 3.99,
     "stock": true,
     "url": "https://www.mediaworld.it/it/product/_apple-iphone-17-256gb-nero-389194.html",
     "updatedAt": null,
@@ -288,9 +277,9 @@
     "store": "MediaWorld",
     "seller": "MediaWorld",
     "old_price": 1129,
-    "offer_price": 999.49,
+    "offer_price": 989.49,
     "currency": "EUR",
-    "shipping_price": null,
+    "shipping_price": 3.99,
     "stock": true,
     "url": "https://www.mediaworld.it/it/product/_apple-iphone-17-256gb-salvia-389199.html",
     "updatedAt": null,
@@ -301,13 +290,13 @@
       "paymentOptions": [
         {
           "type": "one_time",
-          "total_price": 999.49
+          "total_price": 989.49
         },
         {
           "type": "installment",
           "installments": 10,
-          "installment_amount": 99.95,
-          "displayed_total": 999.49,
+          "installment_amount": 98.95,
+          "displayed_total": 989.49,
           "financing_cost": 0,
           "tan": 0,
           "taeg": 0,
@@ -325,7 +314,7 @@
     "old_price": null,
     "offer_price": 1399,
     "currency": "EUR",
-    "shipping_price": null,
+    "shipping_price": 0,
     "stock": true,
     "url": "https://www.samsung.com/it/smartphones/galaxy-s26-ultra/buy/",
     "updatedAt": null,
@@ -347,7 +336,7 @@
     "store": "MediaWorld",
     "seller": "MediaWorld",
     "old_price": 1599,
-    "offer_price": 1274.49,
+    "offer_price": 1199.49,
     "currency": "EUR",
     "shipping_price": 3.99,
     "stock": true,
@@ -360,18 +349,18 @@
       "paymentOptions": [
         {
           "type": "one_time",
-          "total_price": 1274.49
+          "total_price": 1199.49
         },
         {
           "type": "installment",
-          "installments": 24,
-          "installment_amount": 60,
-          "displayed_total": 1440,
-          "financing_cost": 165.51,
-          "tan": 12,
-          "taeg": 12.69,
+          "installments": 10,
+          "installment_amount": 119.95,
+          "displayed_total": 1199.49,
+          "financing_cost": 0,
+          "tan": 0,
+          "taeg": 0,
           "provider": null,
-          "note": "Esempio di finanziamento MediaWorld; il ranking usa il prezzo di acquisto di 1274,49 €."
+          "note": "Piano rateale mostrato da MediaWorld al momento della verifica."
         }
       ]
     }
@@ -467,7 +456,7 @@
     "old_price": 1449,
     "offer_price": 1399,
     "currency": "EUR",
-    "shipping_price": null,
+    "shipping_price": 4.99,
     "stock": true,
     "url": "https://www.mediaworld.it/it/product/_apple-macbook-air-13-chip-m5-10-cpu-8-gpu-16gb-512gb-galassia-566911.html",
     "updatedAt": null,
@@ -550,7 +539,7 @@
     "old_price": 829,
     "offer_price": 769,
     "currency": "EUR",
-    "shipping_price": null,
+    "shipping_price": 4.99,
     "stock": true,
     "url": "https://www.mediaworld.it/it/product/_tablet-apple-ipadair-wifi-128gb-sg-space-grey-425907.html",
     "updatedAt": null,
@@ -609,7 +598,7 @@
     "old_price": 799,
     "offer_price": 799,
     "currency": "EUR",
-    "shipping_price": null,
+    "shipping_price": 4.99,
     "stock": true,
     "url": "https://www.mediaworld.it/it/product/_apple-macbook-neo-13-chip-a18-pro-6-cpu-5-gpu-8gb-256gb-magic-keyboard-indaco-566925.html",
     "updatedAt": null,
@@ -646,7 +635,7 @@
     "currency": "EUR",
     "shipping_price": null,
     "stock": true,
-    "url": "https://www.mediaworld.it/it/product/_nintendo-nintendo-switch-2-nero-430529.html",
+    "url": "https://www.mediaworld.it/it/product/_nintendo-switch-2-eur-osm-nero-rossa-598288.html",
     "updatedAt": null,
     "pricing": {
       "type": "standard",
@@ -679,7 +668,7 @@
     "old_price": null,
     "offer_price": 519,
     "currency": "EUR",
-    "shipping_price": null,
+    "shipping_price": 4.99,
     "stock": true,
     "url": "https://www.mediaworld.it/it/product/_nintendo-bundle-mkworld-con-ns2-nero-blu-rosso-760360.html",
     "updatedAt": null,
