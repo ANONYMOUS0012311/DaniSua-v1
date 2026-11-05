@@ -2532,6 +2532,70 @@ async function testStandardizedBatteryRecommendation() {
 
 
 // ========================================
+// SEARCH V2 — LINGUAGGIO NATURALE BATTERIA
+// ========================================
+
+async function testNaturalBatteryLanguage() {
+  const cases = [
+    "telefono che duri tutto il giorno sotto 400 euro",
+    "smartphone che non voglio ricaricare continuamente sotto 400 euro",
+    "telefono con molta batteria sotto 400 euro",
+    "smartphone que dure todo el dia sotto 400 euro",
+  ];
+
+  for (const query of cases) {
+    const data =
+      await search(
+        query
+      );
+
+    assert(
+      data.intent ===
+        "RECOMMENDATION",
+      `Intent batteria naturale inatteso per "${query}": ${data.intent}`
+    );
+
+    assert(
+      data.context
+        ?.objectives
+        ?.some(
+          item =>
+            item.criterion ===
+              "battery"
+        ),
+      `Obiettivo batteria non rilevato per "${query}"`
+    );
+
+    assert(
+      data.productQuery ===
+        "smartphone",
+      `La query di catalogo dovrebbe restare generica per "${query}", ricevuto ${data.productQuery}`
+    );
+
+    assert(
+      data.bestOffer
+        ?.familyId ===
+        "redmi-note-17-5g",
+      `Famiglia batteria inattesa per "${query}": ${data.bestOffer?.familyId}`
+    );
+
+    assert(
+      data.recommendation
+        ?.rankingEvidence
+        ?.some(
+          item =>
+            item.criterion ===
+              "battery" &&
+            item.score === 68 &&
+            item.unit === "h"
+        ),
+      `Evidenza batteria UE mancante per "${query}"`
+    );
+  }
+}
+
+
+// ========================================
 // TESTS
 // ========================================
 
@@ -2854,6 +2918,14 @@ const tests = [
 
     run:
       testStandardizedBatteryRecommendation,
+  },
+
+  {
+    name:
+      "SEARCH V2 — natural battery language",
+
+    run:
+      testNaturalBatteryLanguage,
   },
 ];
 
