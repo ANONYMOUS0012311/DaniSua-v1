@@ -29,7 +29,11 @@
         "color",
         "bundle"
       ],
-      "trackedFamilies": 21
+      "trackedFamilies": 21,
+      "marketCoverage": {
+        "principle": "Market coverage is complete when every tracked configuration has either a verified current offer (standard or conditional) or verified market-state evidence explaining why no normal comparable offer is currently available.",
+        "requireAllTrackedConfigurationsKnown": true
+      }
     }
   },
   "families": [
