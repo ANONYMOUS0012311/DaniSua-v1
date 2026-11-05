@@ -1621,6 +1621,100 @@
         }
       ],
       "updatedAt": "2026-11-05"
+    },
+    {
+      "productId": "apple-iphone-17e-512-white",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 45,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "apple-iphone17e-eu-energy",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "display": {
+          "sizeInches": 6.1,
+          "type": "Super Retina XDR OLED",
+          "peakBrightnessNits": 1200
+        },
+        "performance": {
+          "chip": "Apple A19"
+        },
+        "camera": {
+          "mainMp": 48,
+          "opticalQualityZoomX": 2,
+          "video": "4K Dolby Vision"
+        },
+        "storage": {
+          "gb": 256
+        },
+        "durability": {
+          "ipRating": "IP68",
+          "frontGlass": "Ceramic Shield 2"
+        },
+        "charging": {
+          "magsafe": true,
+          "qi2": true,
+          "wirelessWatts": 15
+        },
+        "battery": {
+          "euEnduranceHours": 45,
+          "capacityMah": 4005,
+          "cycleLife": 1000
+        },
+        "euEnergyLabel": {
+          "energyClass": "A",
+          "reliabilityClass": "B",
+          "repairabilityClass": "C",
+          "regulation": "EU 2023/1669"
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "apple-iphone17e-eu-energy",
+          "score": 45,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-05"
+        }
+      ],
+      "sources": [
+        {
+          "id": "apple-iphone17e-2026",
+          "name": "Apple",
+          "type": "manufacturer",
+          "title": "Apple presenta iPhone 17e",
+          "url": "https://www.apple.com/it/newsroom/2026/03/apple-introduces-iphone-17e/"
+        },
+        {
+          "id": "apple-iphone17e-specs",
+          "name": "Apple Support",
+          "type": "manufacturer_specs",
+          "title": "iPhone 17e - Specifiche tecniche",
+          "url": "https://support.apple.com/it-it/126470"
+        },
+        {
+          "id": "apple-iphone17e-eu-energy",
+          "name": "Apple",
+          "type": "regulatory_product_information",
+          "title": "iPhone 17e - Etichetta energetica UE",
+          "url": "https://www.apple.com/es/iphone-17e/specs/"
+        }
+      ],
+      "updatedAt": "2026-11-05"
     }
   ]
 }
