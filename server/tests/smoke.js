@@ -26,6 +26,7 @@ const {
 
 const {
   evaluateOfferTrust,
+  filterBetaEligibleOffers,
 } = require("../utils/trustPolicy");
 
 
@@ -2532,6 +2533,56 @@ async function testStandardizedBatteryRecommendation() {
 
 
 // ========================================
+// TRUST — SELLER IDENTITY ON RETAILER SITES
+// ========================================
+
+async function testRetailerThirdPartySellerGuard() {
+  const cases = [
+    { store: "MediaWorld", seller: "Beatrix20" },
+    { store: "Unieuro", seller: "Unknown Seller" },
+    { store: "Samsung", seller: "External Vendor" },
+    { store: "Euronics", seller: null },
+  ];
+
+  for (const item of cases) {
+    const offer = {
+      ...item,
+      id: "unverified-seller",
+      offer_price: 100,
+      url: "https://www.mediaworld.it/it/product/example",
+    };
+    const trust = evaluateOfferTrust(offer);
+    assert(
+      trust.knownStore === true &&
+      trust.verifiedStore === true &&
+      trust.betaEligible === false &&
+      trust.directSeller === false &&
+      trust.reason === "seller_requires_verification",
+      `Seller terzo non bloccato: ${item.store} / ${item.seller}`
+    );
+    assert(
+      filterBetaEligibleOffers([offer]).length === 0,
+      `Offerta terza idonea alla beta: ${item.store}`
+    );
+  }
+
+  for (const store of ["MediaWorld", "Unieuro", "Samsung", "Euronics"]) {
+    const offer = {
+      store,
+      seller: store,
+      url: "https://www.mediaworld.it/it/product/example",
+    };
+    const trust = evaluateOfferTrust(offer);
+    assert(
+      trust.betaEligible === true &&
+      trust.directSeller === true,
+      `Venditore diretto bloccato: ${store}`
+    );
+  }
+}
+
+
+// ========================================
 // TESTS
 // ========================================
 
@@ -2582,6 +2633,14 @@ const tests = [
 
     run:
       testLaptopUnder1000KnowledgeInsufficient,
+  },
+
+  {
+    name:
+      "TRUST — seller identity retailer guard",
+
+    run:
+      testRetailerThirdPartySellerGuard,
   },
 
   {
