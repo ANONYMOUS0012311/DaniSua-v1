@@ -11,7 +11,8 @@
       },
       "status": "no_verified_direct_offer",
       "sourceUrl": "https://www.mediaworld.it/it/brand/apple/iphone/iphone-16",
-      "note": "La variante 512 GB è presente nel mercato/catalogo, ma nelle fonti retail verificate non è stata confermata oggi un'offerta nuova venduta direttamente da un negozio DaniSua."
+      "note": "La variante 512 GB è presente nel mercato/catalogo, ma nelle fonti retail verificate non è stata confermata oggi un'offerta nuova venduta direttamente da un negozio DaniSua.",
+      "verifiedAt": "2026-11-05"
     },
     {
       "familyId": "apple-iphone-14",
@@ -20,7 +21,8 @@
       },
       "status": "no_verified_direct_offer",
       "sourceUrl": "https://www.mediaworld.it/it/brand/apple/iphone/altri-modelli/iphone-14",
-      "note": "Le offerte trovate sono prevalentemente ricondizionate o di seller terzi; nessuna offerta nuova diretta verificata è stata confermata."
+      "note": "Le offerte trovate sono prevalentemente ricondizionate o di seller terzi; nessuna offerta nuova diretta verificata è stata confermata.",
+      "verifiedAt": "2026-11-05"
     },
     {
       "familyId": "apple-iphone-14",
@@ -29,7 +31,8 @@
       },
       "status": "no_verified_direct_offer",
       "sourceUrl": "https://www.euronics.it/apple-iphone-14/iphone-14-256gb/",
-      "note": "Euronics mostra la variante ma la segnala non disponibile online e per ritiro; le altre offerte trovate erano ricondizionate o seller terzi."
+      "note": "Euronics mostra la variante ma la segnala non disponibile online e per ritiro; le altre offerte trovate erano ricondizionate o seller terzi.",
+      "verifiedAt": "2026-11-05"
     },
     {
       "familyId": "apple-iphone-14",
@@ -38,7 +41,8 @@
       },
       "status": "no_verified_direct_offer",
       "sourceUrl": "https://www.euronics.it/apple-iphone-14/iphone-14/",
-      "note": "Euronics mostra la variante 512 GB ma la segnala non disponibile; nessuna offerta nuova diretta verificata è stata confermata."
+      "note": "Euronics mostra la variante 512 GB ma la segnala non disponibile; nessuna offerta nuova diretta verificata è stata confermata.",
+      "verifiedAt": "2026-11-05"
     },
     {
       "familyId": "apple-iphone-15",
@@ -47,7 +51,8 @@
       },
       "status": "no_verified_direct_offer",
       "sourceUrl": "https://www.mediaworld.it/it/brand/apple/iphone/iphone-15",
-      "note": "Le offerte 256 GB osservate oggi erano ricondizionate o attribuite a seller terzi; nessuna offerta nuova diretta verificata è stata confermata."
+      "note": "Le offerte 256 GB osservate oggi erano ricondizionate o attribuite a seller terzi; nessuna offerta nuova diretta verificata è stata confermata.",
+      "verifiedAt": "2026-11-05"
     },
     {
       "familyId": "apple-iphone-15",
@@ -56,7 +61,8 @@
       },
       "status": "no_verified_direct_offer",
       "sourceUrl": "https://www.mediaworld.it/it/brand/apple/iphone/iphone-15",
-      "note": "Il taglio 512 GB è presente nel catalogo di mercato, ma non è stata confermata oggi un'offerta nuova diretta idonea alla beta."
+      "note": "Il taglio 512 GB è presente nel catalogo di mercato, ma non è stata confermata oggi un'offerta nuova diretta idonea alla beta.",
+      "verifiedAt": "2026-11-05"
     },
     {
       "familyId": "samsung-galaxy-s26-plus",
@@ -66,7 +72,8 @@
       },
       "status": "coming_soon_official",
       "sourceUrl": "https://www.samsung.com/it/smartphones/galaxy-s26/buy/?modelCode=SM-S947BLBGEUE",
-      "note": "Samsung Italia riconosce la configurazione 12+512 GB ma la pagina verificata la indica come disponibile a breve."
+      "note": "Samsung Italia riconosce la configurazione 12+512 GB ma la pagina verificata la indica come disponibile a breve.",
+      "verifiedAt": "2026-11-05"
     },
     {
       "familyId": "google-pixel-11-pro-xl",
@@ -76,7 +83,8 @@
       },
       "status": "no_verified_direct_offer",
       "sourceUrl": "https://www.mediaworld.it/it/brand/google/smartphone/pixel-11pro-xl",
-      "note": "Le fonti verificate mostrano Pixel 11 Pro XL 256/512 GB, ma non è stata confermata oggi un'offerta diretta per 1 TB."
+      "note": "Le fonti verificate mostrano Pixel 11 Pro XL 256/512 GB, ma non è stata confermata oggi un'offerta diretta per 1 TB.",
+      "verifiedAt": "2026-11-05"
     }
   ]
 }
