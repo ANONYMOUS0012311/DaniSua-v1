@@ -3058,6 +3058,61 @@ async function testBetaCoreDepthWaveThree() {
 
 
 // ========================================
+// BETA CORE DEPTH — WAVE 4
+// ========================================
+
+async function testBetaCoreDepthWaveFour() {
+  const cases = [
+    {
+      query: "iPhone 18 Pro 256 GB Nero",
+      stores: ["Apple", "Euronics", "Unieuro", "Comet"],
+    },
+    {
+      query: "iPhone Air 256 GB Nero Siderale",
+      stores: ["Apple", "Euronics", "Comet"],
+    },
+    {
+      query: "Galaxy A37 5G 128 GB",
+      stores: ["Euronics", "Comet", "Expert"],
+    },
+    {
+      query: "Xiaomi 17T Pro",
+      stores: ["Xiaomi", "MediaWorld", "Expert"],
+    },
+    {
+      query: "Xiaomi 17T 256 GB",
+      stores: ["Xiaomi", "Euronics", "MediaWorld", "Expert"],
+    },
+    {
+      query: "REDMI Note 17 Pro 5G 256 GB Black",
+      stores: ["Xiaomi", "Euronics", "MediaWorld", "Expert"],
+    },
+    {
+      query: "HONOR Magic8 Lite 256 GB",
+      stores: ["MediaWorld", "Euronics", "Expert"],
+    },
+  ];
+
+  for (const item of cases) {
+    const data = await search(item.query);
+    const stores =
+      new Set(
+        data.results.map(
+          offer => offer.store
+        )
+      );
+
+    for (const store of item.stores) {
+      assert(
+        stores.has(store),
+        `${item.query}: manca lo store ${store}`
+      );
+    }
+  }
+}
+
+
+// ========================================
 // TESTS
 // ========================================
 
@@ -3364,6 +3419,14 @@ const tests = [
 
     run:
       testPixel11ProductionIngest,
+  },
+
+  {
+    name:
+      "BETA CORE DEPTH — wave 4",
+
+    run:
+      testBetaCoreDepthWaveFour,
   },
 
   {
