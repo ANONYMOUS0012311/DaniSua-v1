@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const crypto = require("crypto");
 const smartphoneCatalogTargets = require("../data/catalog_targets.smartphones.json");
+const smartphoneVariantMarketState = require("../data/variant_market_status.smartphones.json");
 
 const sourceRegistry = require("./sources/registry");
 
@@ -1431,6 +1432,45 @@ function getTargetConfigurations(
 }
 
 
+const VARIANT_MARKET_STATUSES =
+  Array.isArray(
+    smartphoneVariantMarketState
+      ?.statuses
+  )
+    ? smartphoneVariantMarketState
+        .statuses
+    : [];
+
+
+function marketStatusMatchesConfiguration(
+  record,
+  familyId,
+  configuration
+) {
+  if (
+    !record ||
+    record.familyId !==
+      familyId ||
+    !record.configuration
+  ) {
+    return false;
+  }
+
+  return Object.entries(
+    configuration
+  ).every(
+    ([field, value]) =>
+      normalizeText(
+        record
+          .configuration
+          ?.[field] ??
+        ""
+      ) ===
+      normalizeText(value)
+  );
+}
+
+
 const VARIANT_DEPTH_TARGETS =
   new Map(
     (
@@ -1638,7 +1678,7 @@ function buildVariantCoverageMeta(
     return null;
   }
 
-  const comparableOffers =
+  const standardOffers =
     offers.filter(
       offer =>
         offer.stock !== false &&
@@ -1647,11 +1687,17 @@ function buildVariantCoverageMeta(
         )
     );
 
-  const coveredConfigurations =
+  const allCurrentOffers =
+    offers.filter(
+      offer =>
+        offer.stock !== false
+    );
+
+  const comparableConfigurations =
     requiredConfigurations
       .filter(
         configuration =>
-          comparableOffers
+          standardOffers
             .some(
               offer =>
                 offerMatchesConfiguration(
@@ -1661,8 +1707,74 @@ function buildVariantCoverageMeta(
             )
       );
 
-  const coveredLabels =
-    coveredConfigurations.map(
+  const marketKnownConfigurations =
+    requiredConfigurations
+      .filter(
+        configuration => {
+          const hasCurrentOffer =
+            allCurrentOffers
+              .some(
+                offer =>
+                  offerMatchesConfiguration(
+                    offer,
+                    configuration
+                  )
+              );
+
+          const hasMarketState =
+            VARIANT_MARKET_STATUSES
+              .some(
+                record =>
+                  Boolean(
+                    record.verifiedAt
+                  ) &&
+                  marketStatusMatchesConfiguration(
+                    record,
+                    familyId,
+                    configuration
+                  )
+              );
+
+          return (
+            hasCurrentOffer ||
+            hasMarketState
+          );
+        }
+      );
+
+  const conditionalOnlyConfigurations =
+    requiredConfigurations
+      .filter(
+        configuration => {
+          const matching =
+            allCurrentOffers
+              .filter(
+                offer =>
+                  offerMatchesConfiguration(
+                    offer,
+                    configuration
+                  )
+              );
+
+          return (
+            matching.length > 0 &&
+            matching.every(
+              offer =>
+                offer.pricing
+                  ?.conditional ===
+                  true
+            )
+          );
+        }
+      );
+
+  const comparableLabels =
+    comparableConfigurations.map(
+      configurationLabel
+    );
+
+  const marketKnownLabels =
+    marketKnownConfigurations.map(
       configurationLabel
     );
 
@@ -1670,11 +1782,45 @@ function buildVariantCoverageMeta(
     requiredConfigurations
       .filter(
         configuration =>
-          !coveredLabels.includes(
+          !comparableLabels.includes(
             configurationLabel(
               configuration
             )
           )
+      );
+
+  const missingMarketConfigurations =
+    requiredConfigurations
+      .filter(
+        configuration =>
+          !marketKnownLabels.includes(
+            configurationLabel(
+              configuration
+            )
+          )
+      );
+
+  const marketStateRecords =
+    VARIANT_MARKET_STATUSES
+      .filter(
+        record =>
+          record.familyId ===
+            familyId &&
+          Boolean(
+            record.verifiedAt
+          )
+      )
+      .filter(
+        record =>
+          requiredConfigurations
+            .some(
+              configuration =>
+                marketStatusMatchesConfiguration(
+                  record,
+                  familyId,
+                  configuration
+                )
+            )
       );
 
   const requiredStorages =
@@ -1692,7 +1838,7 @@ function buildVariantCoverageMeta(
   const coveredStorages =
     [
       ...new Set(
-        coveredConfigurations
+        comparableConfigurations
           .map(
             configuration =>
               configuration.storage
@@ -1708,6 +1854,14 @@ function buildVariantCoverageMeta(
           !coveredStorages
             .includes(storage)
       );
+
+  const comparisonComplete =
+    missingConfigurations.length ===
+    0;
+
+  const marketComplete =
+    missingMarketConfigurations
+      .length === 0;
 
   return {
     tracked: true,
@@ -1726,20 +1880,41 @@ function buildVariantCoverageMeta(
       ],
     constraints,
     complete:
-      missingConfigurations
-        .length === 0,
+      comparisonComplete,
+    comparisonComplete,
+    marketComplete,
     requiredConfigurations,
-    coveredConfigurations,
+    coveredConfigurations:
+      comparableConfigurations,
+    comparableConfigurations,
+    marketKnownConfigurations,
+    conditionalOnlyConfigurations,
     missingConfigurations,
+    missingMarketConfigurations,
+    marketStateRecords,
     requiredConfigurationLabels:
       requiredConfigurations
         .map(
           configurationLabel
         ),
     coveredConfigurationLabels:
-      coveredLabels,
+      comparableLabels,
+    comparableConfigurationLabels:
+      comparableLabels,
+    marketKnownConfigurationLabels:
+      marketKnownLabels,
+    conditionalOnlyConfigurationLabels:
+      conditionalOnlyConfigurations
+        .map(
+          configurationLabel
+        ),
     missingConfigurationLabels:
       missingConfigurations
+        .map(
+          configurationLabel
+        ),
+    missingMarketConfigurationLabels:
+      missingMarketConfigurations
         .map(
           configurationLabel
         ),
@@ -1748,7 +1923,6 @@ function buildVariantCoverageMeta(
     missingStorages,
   };
 }
-
 
 function shouldReportVariantCoverage(
   offers
@@ -1770,25 +1944,45 @@ function attachVariantCoverage(
     return recommendation;
   }
 
-  const complete =
-    variantCoverage.complete ===
-    true;
+  const comparisonComplete =
+    variantCoverage
+      .comparisonComplete ===
+      true;
 
-  const suffix =
-    complete
-      ? " Copertura configurazioni completa per le varianti monitorate."
-      : (
-          " Confronto configurazioni parziale: mancano prezzi verificati per " +
-          variantCoverage
-            .missingConfigurationLabels
-            .join(", ") +
-          "."
-        );
+  const marketComplete =
+    variantCoverage
+      .marketComplete ===
+      true;
+
+  let suffix = "";
+
+  if (comparisonComplete) {
+    suffix =
+      " Copertura prezzi comparabili completa per le configurazioni monitorate.";
+  } else if (marketComplete) {
+    suffix =
+      " Copertura di mercato completa, ma il confronto prezzi standard è parziale per: " +
+      variantCoverage
+        .missingConfigurationLabels
+        .join(", ") +
+      ".";
+  } else {
+    suffix =
+      " Copertura di mercato ancora incompleta per: " +
+      variantCoverage
+        .missingMarketConfigurationLabels
+        .join(", ") +
+      ".";
+  }
 
   return {
     ...recommendation,
     comparisonCompleteness:
-      complete
+      comparisonComplete
+        ? "complete"
+        : "partial",
+    marketCompleteness:
+      marketComplete
         ? "complete"
         : "partial",
     variantCoverage,
@@ -1800,7 +1994,6 @@ function attachVariantCoverage(
       suffix,
   };
 }
-
 
 // PRODUCT SEARCH
 // ========================================
