@@ -1389,5 +1389,130 @@
         }
       ]
     }
+  },
+  {
+    "id": "real-apple-iphone-air-256-black",
+    "productId": "apple-iphone-air-256-black",
+    "store": "Apple",
+    "seller": "Apple",
+    "old_price": null,
+    "offer_price": 1339,
+    "currency": "EUR",
+    "shipping_price": 0,
+    "stock": true,
+    "url": "https://www.apple.com/it/shop/buy-iphone/iphone-air",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 1339
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-samsung-s26plus-256",
+    "productId": "samsung-galaxy-s26-plus-256",
+    "store": "Samsung",
+    "seller": "Samsung",
+    "old_price": 1289,
+    "offer_price": 1189,
+    "currency": "EUR",
+    "shipping_price": 0,
+    "stock": true,
+    "url": "https://www.samsung.com/it/smartphones/galaxy-s26/buy/?modelCode=SM-S947BLBGEUE",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 1189
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-euronics-pixel11proxl-256-obsidian",
+    "productId": "google-pixel-11-pro-xl-256-obsidian",
+    "store": "Euronics",
+    "seller": "Euronics",
+    "old_price": 1399,
+    "offer_price": 1207,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.euronics.it/telefonia/smartphone-e-cellulari/smartphone-dual-sim/google---smartphone-google-pixel-11-pro-xl-256gb-nero-ossidiana/262010101.html",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 1207
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-xiaomi-17tpro-256",
+    "productId": "xiaomi-17t-pro-256",
+    "store": "Xiaomi",
+    "seller": "Xiaomi",
+    "old_price": 899.9,
+    "offer_price": 649.9,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.mi.com/it/product/xiaomi-17t-pro/",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 649.9
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-xiaomi-redminote17promax-5g-256-black",
+    "productId": "xiaomi-redmi-note17-pro-max-5g-256-black",
+    "store": "Xiaomi",
+    "seller": "Xiaomi",
+    "old_price": 599.9,
+    "offer_price": 499.9,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.mi.com/it/product/redmi-note-17-pro-max-5g/",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 499.9
+        }
+      ]
+    }
   }
 ]

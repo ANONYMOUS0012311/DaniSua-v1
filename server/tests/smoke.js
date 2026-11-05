@@ -2654,6 +2654,80 @@ async function testSmartphoneBatch3FiveFamilies() {
 
 
 // ========================================
+// SMARTPHONE BATCH 4 — PREMIUM BREADTH
+// ========================================
+
+async function testSmartphoneBatch4PremiumBreadth() {
+  const cases = [
+    {
+      query: "iPhone Air 256 GB Nero Siderale",
+      familyId: "apple-iphone-air",
+      expectedBest: "test-apple-iphone-air-256-black",
+      expectedFinalCost: 1339,
+    },
+    {
+      query: "Galaxy S26+ 256 GB",
+      familyId: "samsung-galaxy-s26-plus",
+      expectedBest: "test-samsung-s26plus-256",
+      expectedFinalCost: 1189,
+    },
+    {
+      query: "Pixel 11 Pro XL 256 GB Nero Ossidiana",
+      familyId: "google-pixel-11-pro-xl",
+      expectedBest: "test-euronics-pixel11proxl-256-obsidian",
+      expectedFinalCost: null,
+    },
+    {
+      query: "Xiaomi 17T Pro 256 GB",
+      familyId: "xiaomi-17t-pro",
+      expectedBest: "test-xiaomi-17tpro-256",
+      expectedFinalCost: null,
+    },
+    {
+      query: "REDMI Note 17 Pro Max 5G 256 GB Black",
+      familyId: "redmi-note-17-pro-max-5g",
+      expectedBest: "test-xiaomi-redminote17promax-5g-256-black",
+      expectedFinalCost: null,
+    },
+  ];
+
+  for (const item of cases) {
+    const data = await search(item.query);
+
+    assert(
+      [
+        "specific",
+        "best_offer_ready",
+      ].includes(
+        data.status
+      ),
+      `${item.familyId}: status inatteso ${data.status}`
+    );
+
+    assert(
+      data.results.length === 1,
+      `${item.familyId}: attesa 1 offerta verificata, ricevute ${data.results.length}`
+    );
+
+    assert(
+      data.bestOffer?.familyId === item.familyId,
+      `${item.familyId}: famiglia inattesa ${data.bestOffer?.familyId}`
+    );
+
+    assert(
+      data.bestOffer?.id === item.expectedBest,
+      `${item.familyId}: bestOffer inattesa ${data.bestOffer?.id}`
+    );
+
+    assert(
+      data.recommendation?.finalCost === item.expectedFinalCost,
+      `${item.familyId}: finalCost inatteso ${data.recommendation?.finalCost}`
+    );
+  }
+}
+
+
+// ========================================
 // TESTS
 // ========================================
 
@@ -2960,6 +3034,14 @@ const tests = [
 
     run:
       testPixel11ProductionIngest,
+  },
+
+  {
+    name:
+      "SMARTPHONE BATCH 4 — premium breadth",
+
+    run:
+      testSmartphoneBatch4PremiumBreadth,
   },
 
   {

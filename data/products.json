@@ -797,5 +797,117 @@
     },
     "image": null,
     "imageSourcePage": "https://store.google.com/it/product/pixel_11_pro?hl=it"
+  },
+  {
+    "id": "apple-iphone-air-256-black",
+    "familyId": "apple-iphone-air",
+    "familyName": "iPhone Air",
+    "productLineId": "apple-iphone",
+    "productLineName": "iPhone",
+    "category": "smartphone",
+    "brand": "Apple",
+    "model": "iPhone Air",
+    "storage": "256 GB",
+    "ram": null,
+    "color": "Nero siderale",
+    "condition": "new",
+    "gtin": null,
+    "title": "Apple iPhone Air 256 GB Nero Siderale",
+    "attributes": {
+      "storage": "256 GB",
+      "color": "Nero siderale"
+    },
+    "image": null,
+    "imageSourcePage": "https://www.apple.com/it/shop/buy-iphone/iphone-air"
+  },
+  {
+    "id": "samsung-galaxy-s26-plus-256",
+    "familyId": "samsung-galaxy-s26-plus",
+    "familyName": "Galaxy S26+",
+    "productLineId": "samsung-galaxy-s",
+    "productLineName": "Galaxy S",
+    "category": "smartphone",
+    "brand": "Samsung",
+    "model": "Galaxy S26+",
+    "storage": "256 GB",
+    "ram": "12 GB",
+    "color": null,
+    "condition": "new",
+    "gtin": null,
+    "title": "Samsung Galaxy S26+ 256 GB",
+    "attributes": {
+      "storage": "256 GB",
+      "ram": "12 GB"
+    },
+    "image": null,
+    "imageSourcePage": "https://www.samsung.com/it/smartphones/galaxy-s26/buy/"
+  },
+  {
+    "id": "google-pixel-11-pro-xl-256-obsidian",
+    "familyId": "google-pixel-11-pro-xl",
+    "familyName": "Pixel 11 Pro XL",
+    "productLineId": "google-pixel",
+    "productLineName": "Pixel",
+    "category": "smartphone",
+    "brand": "Google",
+    "model": "Pixel 11 Pro XL",
+    "storage": "256 GB",
+    "ram": "12 GB",
+    "color": "Nero ossidiana",
+    "condition": "new",
+    "gtin": null,
+    "title": "Google Pixel 11 Pro XL 256 GB Nero Ossidiana",
+    "attributes": {
+      "storage": "256 GB",
+      "ram": "12 GB",
+      "color": "Nero ossidiana"
+    },
+    "image": null,
+    "imageSourcePage": "https://store.google.com/it/product/pixel_11_pro?hl=it"
+  },
+  {
+    "id": "xiaomi-17t-pro-256",
+    "familyId": "xiaomi-17t-pro",
+    "familyName": "Xiaomi 17T Pro",
+    "productLineId": "xiaomi-17t",
+    "productLineName": "Xiaomi 17T",
+    "category": "smartphone",
+    "brand": "Xiaomi",
+    "model": "Xiaomi 17T Pro",
+    "storage": "256 GB",
+    "ram": "12 GB",
+    "color": null,
+    "condition": "new",
+    "gtin": null,
+    "title": "Xiaomi 17T Pro 12+256 GB",
+    "attributes": {
+      "storage": "256 GB",
+      "ram": "12 GB"
+    },
+    "image": null,
+    "imageSourcePage": "https://www.mi.com/it/product/xiaomi-17t-pro/"
+  },
+  {
+    "id": "xiaomi-redmi-note17-pro-max-5g-256-black",
+    "familyId": "redmi-note-17-pro-max-5g",
+    "familyName": "REDMI Note 17 Pro Max 5G",
+    "productLineId": "xiaomi-redmi-note",
+    "productLineName": "REDMI Note",
+    "category": "smartphone",
+    "brand": "Xiaomi",
+    "model": "REDMI Note 17 Pro Max 5G",
+    "storage": "256 GB",
+    "ram": "8 GB",
+    "color": "Black",
+    "condition": "new",
+    "gtin": null,
+    "title": "Xiaomi REDMI Note 17 Pro Max 5G 8+256 GB Black",
+    "attributes": {
+      "storage": "256 GB",
+      "ram": "8 GB",
+      "color": "Black"
+    },
+    "image": null,
+    "imageSourcePage": "https://www.mi.com/it/product/redmi-note-17-pro-max-5g/"
   }
 ]
