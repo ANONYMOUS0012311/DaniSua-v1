@@ -3138,7 +3138,21 @@ async function testPriceShapingVariantDepth() {
       .recommendation
       ?.comparisonCompleteness ===
         "complete",
-    "iPhone 17 deve dichiarare copertura capacità completa"
+    "iPhone 17 coverage inattesa: " +
+      JSON.stringify({
+        variantCoverage:
+          iphone17Family.variantCoverage,
+        completeness:
+          iphone17Family
+            .recommendation
+            ?.comparisonCompleteness,
+        storages:
+          iphone17Family.results
+            ?.map(
+              offer =>
+                offer.storage
+            ),
+      })
   );
 
   const iphone17_512 =
