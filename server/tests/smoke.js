@@ -13,6 +13,7 @@ const {
   getLowestOffer,
   getKnownFinalCost,
   getOfferSelection,
+  normalizeCriterionScores,
 } = require("../utils/rankProducts");
 
 const {
@@ -2306,6 +2307,124 @@ async function testMidrangeSmartphoneProductionBlock() {
 
 
 // ========================================
+// PRODUCT KNOWLEDGE — PROTOCOL SAFETY
+// ========================================
+
+async function testKnowledgeProtocolSafety() {
+  const v5 = {
+    productId:
+      "camera-v5",
+    familyId:
+      "camera-v5",
+    knowledge: {
+      scores: {
+        camera: 147,
+      },
+      scoreMeta: {
+        camera: {
+          protocol:
+            "DXOMARK Camera v5",
+        },
+      },
+      evidence: [],
+    },
+  };
+
+  const v5b = {
+    productId:
+      "camera-v5-b",
+    familyId:
+      "camera-v5-b",
+    knowledge: {
+      scores: {
+        camera: 145,
+      },
+      scoreMeta: {
+        camera: {
+          protocol:
+            "DXOMARK Camera v5",
+        },
+      },
+      evidence: [],
+    },
+  };
+
+  const v6 = {
+    productId:
+      "camera-v6",
+    familyId:
+      "camera-v6",
+    knowledge: {
+      scores: {
+        camera: 134,
+      },
+      scoreMeta: {
+        camera: {
+          protocol:
+            "DXOMARK Camera v6",
+        },
+      },
+      evidence: [],
+    },
+  };
+
+  const sameProtocol =
+    normalizeCriterionScores(
+      [
+        v5,
+        v5b,
+      ],
+      "camera"
+    );
+
+  assert(
+    sameProtocol.size === 2,
+    "Score con lo stesso protocollo devono restare comparabili"
+  );
+
+  const mixedProtocol =
+    normalizeCriterionScores(
+      [
+        v5,
+        v6,
+      ],
+      "camera"
+    );
+
+  assert(
+    mixedProtocol.size === 0,
+    "DaniSua non deve normalizzare Camera v5 e Camera v6 sulla stessa scala"
+  );
+
+  const versionedAndUnknown =
+    normalizeCriterionScores(
+      [
+        v5,
+        {
+          productId:
+            "camera-unknown",
+          familyId:
+            "camera-unknown",
+          knowledge: {
+            scores: {
+              camera: 150,
+            },
+            scoreMeta: {},
+            evidence: [],
+          },
+        },
+      ],
+      "camera"
+    );
+
+  assert(
+    versionedAndUnknown.size === 0,
+    "Uno score versionato non deve essere confrontato con uno score senza protocollo"
+  );
+}
+
+
+// ========================================
 // TESTS
 // ========================================
 
@@ -2612,6 +2731,14 @@ const tests = [
 
     run:
       testMidrangeSmartphoneProductionBlock,
+  },
+
+  {
+    name:
+      "KNOWLEDGE — benchmark protocol safety",
+
+    run:
+      testKnowledgeProtocolSafety,
   },
 ];
 
