@@ -433,6 +433,44 @@ async function testRecommendationBudget() {
     `Costo finale iPhone 16 inatteso: ${data.recommendation?.finalCost}`
   );
 
+  assert(
+    data.recommendation
+      ?.confidence ===
+      "medium",
+    `Confidenza inattesa: ${data.recommendation?.confidence}`
+  );
+
+  assert(
+    data.recommendation
+      ?.rankingEvidence
+      ?.some(
+        item =>
+          item.criterion ===
+            "camera" &&
+          item.score === 147 &&
+          item.protocol ===
+            "DXOMARK Camera v5" &&
+          item.sourceName ===
+            "DXOMARK"
+      ),
+    "La raccomandazione deve spiegare lo score camera comparabile usato nel ranking"
+  );
+
+  assert(
+    data.recommendation
+      ?.verifiedFacts
+      ?.some(
+        item =>
+          item.key ===
+            "camera" &&
+          item.value ===
+            "48 MP" &&
+          item.usedForRanking ===
+            false
+      ),
+    "I fatti del produttore devono essere separati dai dati usati nel ranking"
+  );
+
 
   assert(
     data.bestOffer
