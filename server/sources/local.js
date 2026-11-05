@@ -333,6 +333,14 @@ function joinProductData(
         knowledge?.scores ??
         {},
 
+      scoreMeta:
+        knowledge?.scoreMeta ??
+        {},
+
+      facts:
+        knowledge?.facts ??
+        {},
+
       evidence:
         Array.isArray(
           knowledge?.evidence

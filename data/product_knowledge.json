@@ -33,7 +33,13 @@
           "protocol": "Camera v5"
         }
       ],
-      "updatedAt": "2026-09-16"
+      "updatedAt": "2026-09-16",
+      "scoreMeta": {
+        "camera": {
+          "sourceId": "dxomark-iphone-15-pro-camera-v5",
+          "protocol": "DXOMARK Camera v5"
+        }
+      }
     },
     {
       "productId": "apple-iphone-15-pro-256",
@@ -67,7 +73,13 @@
           "protocol": "Camera v5"
         }
       ],
-      "updatedAt": "2026-09-16"
+      "updatedAt": "2026-09-16",
+      "scoreMeta": {
+        "camera": {
+          "sourceId": "dxomark-iphone-15-pro-camera-v5",
+          "protocol": "DXOMARK Camera v5"
+        }
+      }
     },
     {
       "productId": "apple-iphone-15-128",
@@ -101,7 +113,13 @@
           "protocol": "Camera v5"
         }
       ],
-      "updatedAt": "2026-09-16"
+      "updatedAt": "2026-09-16",
+      "scoreMeta": {
+        "camera": {
+          "sourceId": "dxomark-iphone-15-camera-v5",
+          "protocol": "DXOMARK Camera v5"
+        }
+      }
     },
     {
       "productId": "samsung-galaxy-s24-ultra-256",
@@ -135,7 +153,13 @@
           "protocol": "Camera v5"
         }
       ],
-      "updatedAt": "2026-09-16"
+      "updatedAt": "2026-09-16",
+      "scoreMeta": {
+        "camera": {
+          "sourceId": "dxomark-s24-ultra-camera-v5",
+          "protocol": "DXOMARK Camera v5"
+        }
+      }
     },
     {
       "productId": "sony-wh-1000xm5",
@@ -182,6 +206,413 @@
       "evidence": [],
       "sources": [],
       "updatedAt": null
+    },
+    {
+      "productId": "apple-iphone-17e-256-white",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": null,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {},
+      "facts": {
+        "display": {
+          "sizeInches": 6.1,
+          "type": "Super Retina XDR OLED",
+          "peakBrightnessNits": 1200
+        },
+        "performance": {
+          "chip": "Apple A19"
+        },
+        "camera": {
+          "mainMp": 48,
+          "opticalQualityZoomX": 2,
+          "video": "4K Dolby Vision"
+        },
+        "storage": {
+          "gb": 256
+        },
+        "durability": {
+          "ipRating": "IP68",
+          "frontGlass": "Ceramic Shield 2"
+        },
+        "charging": {
+          "magsafe": true,
+          "qi2": true,
+          "wirelessWatts": 15
+        }
+      },
+      "evidence": [],
+      "sources": [
+        {
+          "id": "apple-iphone17e-2026",
+          "name": "Apple",
+          "type": "manufacturer",
+          "title": "Apple presenta iPhone 17e",
+          "url": "https://www.apple.com/it/newsroom/2026/03/apple-introduces-iphone-17e/"
+        },
+        {
+          "id": "apple-iphone17e-specs",
+          "name": "Apple Support",
+          "type": "manufacturer_specs",
+          "title": "iPhone 17e - Specifiche tecniche",
+          "url": "https://support.apple.com/it-it/126470"
+        }
+      ],
+      "updatedAt": "2026-11-05"
+    },
+    {
+      "productId": "apple-iphone-16-128-black",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": 147,
+        "battery": null,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "camera": {
+          "sourceId": "dxomark-iphone-16-camera-v5",
+          "protocol": "DXOMARK Camera v5"
+        }
+      },
+      "facts": {
+        "display": {
+          "sizeInches": 6.1,
+          "type": "Super Retina XDR OLED",
+          "peakBrightnessNits": 2000
+        },
+        "performance": {
+          "chip": "Apple A18"
+        },
+        "camera": {
+          "mainMp": 48,
+          "ultrawideMp": 12,
+          "opticalQualityZoomX": 2
+        },
+        "battery": {
+          "capacityMah": 3561,
+          "videoPlaybackHours": 22,
+          "euCycleHours": 37,
+          "cycleLife": 1000
+        },
+        "durability": {
+          "ipRating": "IP68"
+        },
+        "software": {
+          "minimumSupportYears": 5
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "camera",
+          "type": "independent_test",
+          "sourceId": "dxomark-iphone-16-camera-v5",
+          "score": 147,
+          "protocol": "DXOMARK Camera v5",
+          "publishedAt": "2024-11-21"
+        }
+      ],
+      "sources": [
+        {
+          "id": "apple-iphone16-specs",
+          "name": "Apple",
+          "type": "manufacturer_specs",
+          "title": "iPhone 16 - Specifiche tecniche",
+          "url": "https://www.apple.com/it/iphone-16/specs/"
+        },
+        {
+          "id": "dxomark-iphone-16-camera-v5",
+          "name": "DXOMARK",
+          "type": "independent_test",
+          "title": "Apple iPhone 16 Camera test",
+          "url": "https://www.dxomark.com/apple-iphone-16-camera-test/",
+          "protocol": "DXOMARK Camera v5"
+        }
+      ],
+      "updatedAt": "2026-11-05"
+    },
+    {
+      "productId": "samsung-galaxy-a57-256-gray",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": null,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {},
+      "facts": {
+        "display": {
+          "type": "Super AMOLED Plus",
+          "refreshHz": 120,
+          "resolution": "1080 x 2340"
+        },
+        "performance": {
+          "cpu": "Octa-Core",
+          "cpuMaxGhz": 2.9,
+          "ramGb": 8
+        },
+        "camera": {
+          "mainMp": 50,
+          "ultrawideMp": 12,
+          "macroMp": 5,
+          "frontMp": 12,
+          "ois": true,
+          "video": "4K 30fps"
+        },
+        "storage": {
+          "gb": 256
+        },
+        "durability": {
+          "ipRating": "IP68"
+        },
+        "software": {
+          "osUpgradeGenerations": 6,
+          "securityUpdateYears": 6
+        }
+      },
+      "evidence": [],
+      "sources": [
+        {
+          "id": "samsung-a57-specs",
+          "name": "Samsung",
+          "type": "manufacturer_specs",
+          "title": "Galaxy A57 5G 256GB",
+          "url": "https://www.samsung.com/it/smartphones/galaxy-a/galaxy-a57-5g-awesome-icyblue-256gb-sm-a576blbdeue/"
+        },
+        {
+          "id": "samsung-a57-buy",
+          "name": "Samsung",
+          "type": "manufacturer",
+          "title": "Acquista Galaxy A57 5G",
+          "url": "https://www.samsung.com/it/smartphones/galaxy-a/galaxy-a57-5g/buy/"
+        }
+      ],
+      "updatedAt": "2026-11-05"
+    },
+    {
+      "productId": "google-pixel-10a-128-obsidian",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": null,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {},
+      "facts": {
+        "display": {
+          "sizeInches": 6.3,
+          "type": "pOLED Actua",
+          "refreshHzMin": 60,
+          "refreshHzMax": 120,
+          "peakBrightnessNits": 3000
+        },
+        "performance": {
+          "chip": "Google Tensor G4",
+          "ramGb": 8
+        },
+        "camera": {
+          "mainMp": 48,
+          "ultrawideMp": 13,
+          "ois": true
+        },
+        "battery": {
+          "capacityMah": 5100,
+          "claimedHours": 30,
+          "extremeSaverHours": 120
+        },
+        "storage": {
+          "gb": 128
+        },
+        "durability": {
+          "ipRating": "IP68"
+        },
+        "charging": {
+          "wireless": true
+        },
+        "software": {
+          "supportYears": 7
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "camera",
+          "type": "independent_test_nonranking",
+          "sourceId": "dxomark-pixel-10a-camera-v6",
+          "score": 134,
+          "protocol": "DXOMARK Camera v6",
+          "publishedAt": "2026-03-05",
+          "rankingEligible": false,
+          "note": "Stored as evidence only. Camera v6 is not directly comparable with legacy Camera v5 scores."
+        }
+      ],
+      "sources": [
+        {
+          "id": "google-pixel10a-specs",
+          "name": "Google",
+          "type": "manufacturer_specs",
+          "title": "Specifiche tecniche di Google Pixel 10a",
+          "url": "https://store.google.com/it/product/pixel_10a_specs?hl=it"
+        },
+        {
+          "id": "dxomark-pixel-10a-camera-v6",
+          "name": "DXOMARK",
+          "type": "independent_test",
+          "title": "Google Pixel 10a Camera test",
+          "url": "https://www.dxomark.com/google-pixel-10a-camera-test/",
+          "protocol": "DXOMARK Camera v6"
+        }
+      ],
+      "updatedAt": "2026-11-05"
+    },
+    {
+      "productId": "google-pixel-10a-128-mist",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": null,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {},
+      "facts": {
+        "display": {
+          "sizeInches": 6.3,
+          "type": "pOLED Actua",
+          "refreshHzMin": 60,
+          "refreshHzMax": 120,
+          "peakBrightnessNits": 3000
+        },
+        "performance": {
+          "chip": "Google Tensor G4",
+          "ramGb": 8
+        },
+        "camera": {
+          "mainMp": 48,
+          "ultrawideMp": 13,
+          "ois": true
+        },
+        "battery": {
+          "capacityMah": 5100,
+          "claimedHours": 30,
+          "extremeSaverHours": 120
+        },
+        "storage": {
+          "gb": 128
+        },
+        "durability": {
+          "ipRating": "IP68"
+        },
+        "charging": {
+          "wireless": true
+        },
+        "software": {
+          "supportYears": 7
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "camera",
+          "type": "independent_test_nonranking",
+          "sourceId": "dxomark-pixel-10a-camera-v6",
+          "score": 134,
+          "protocol": "DXOMARK Camera v6",
+          "publishedAt": "2026-03-05",
+          "rankingEligible": false,
+          "note": "Stored as evidence only. Camera v6 is not directly comparable with legacy Camera v5 scores."
+        }
+      ],
+      "sources": [
+        {
+          "id": "google-pixel10a-specs",
+          "name": "Google",
+          "type": "manufacturer_specs",
+          "title": "Specifiche tecniche di Google Pixel 10a",
+          "url": "https://store.google.com/it/product/pixel_10a_specs?hl=it"
+        },
+        {
+          "id": "dxomark-pixel-10a-camera-v6",
+          "name": "DXOMARK",
+          "type": "independent_test",
+          "title": "Google Pixel 10a Camera test",
+          "url": "https://www.dxomark.com/google-pixel-10a-camera-test/",
+          "protocol": "DXOMARK Camera v6"
+        }
+      ],
+      "updatedAt": "2026-11-05"
+    },
+    {
+      "productId": "xiaomi-redmi-note17-5g-256-black",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": null,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {},
+      "facts": {
+        "display": {
+          "sizeInches": 6.99,
+          "type": "AMOLED FHD+",
+          "refreshHzMax": 120,
+          "peakBrightnessNits": 1800
+        },
+        "performance": {
+          "chip": "Snapdragon 4 Gen 4",
+          "ramGb": 6
+        },
+        "camera": {
+          "mainMp": 50,
+          "frontMp": 16
+        },
+        "battery": {
+          "capacityMah": 7700
+        },
+        "charging": {
+          "wiredWatts": 45
+        },
+        "storage": {
+          "gb": 256,
+          "expandableToTb": 2
+        },
+        "durability": {
+          "ipRating": "IP65"
+        }
+      },
+      "evidence": [],
+      "sources": [
+        {
+          "id": "xiaomi-redminote17-5g-specs",
+          "name": "Xiaomi",
+          "type": "manufacturer_specs",
+          "title": "REDMI Note 17 5G - Specifiche",
+          "url": "https://www.mi.com/it/product/redmi-note-17-5g/specs/"
+        }
+      ],
+      "updatedAt": "2026-11-05"
     }
   ]
 }

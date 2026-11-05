@@ -1,0 +1,234 @@
+const fs = require("fs");
+const path = require("path");
+
+function readJson(name) {
+  return JSON.parse(
+    fs.readFileSync(
+      path.join(
+        __dirname,
+        "..",
+        "data",
+        name
+      ),
+      "utf8"
+    )
+  );
+}
+
+const products =
+  readJson("products.json");
+
+const rawKnowledge =
+  readJson(
+    "product_knowledge.json"
+  );
+
+const knowledgeItems =
+  Array.isArray(rawKnowledge)
+    ? rawKnowledge
+    : (
+        Array.isArray(
+          rawKnowledge?.items
+        )
+          ? rawKnowledge.items
+          : []
+      );
+
+const smartphoneProducts =
+  products.filter(
+    product =>
+      product.category ===
+      "smartphone"
+  );
+
+const knowledgeMap =
+  new Map(
+    knowledgeItems.map(
+      item => [
+        item.productId,
+        item,
+      ]
+    )
+  );
+
+const familyMap =
+  new Map();
+
+for (const product of smartphoneProducts) {
+  const familyId =
+    product.familyId ||
+    product.id;
+
+  if (!familyMap.has(familyId)) {
+    familyMap.set(
+      familyId,
+      []
+    );
+  }
+
+  familyMap
+    .get(familyId)
+    .push(product);
+}
+
+function hasFacts(item) {
+  return Boolean(
+    item?.facts &&
+    typeof item.facts ===
+      "object" &&
+    Object.keys(
+      item.facts
+    ).length > 0
+  );
+}
+
+function numericCriteria(item) {
+  return Object.entries(
+    item?.scores || {}
+  )
+    .filter(
+      ([, value]) =>
+        typeof value ===
+          "number" &&
+        Number.isFinite(value)
+    )
+    .map(
+      ([criterion]) =>
+        criterion
+    );
+}
+
+const families =
+  Array.from(
+    familyMap.entries()
+  ).map(
+    ([familyId, variants]) => {
+      const knowledge =
+        variants
+          .map(
+            variant =>
+              knowledgeMap.get(
+                variant.id
+              ) || null
+          )
+          .filter(Boolean);
+
+      const criteria =
+        [
+          ...new Set(
+            knowledge.flatMap(
+              numericCriteria
+            )
+          ),
+        ].sort();
+
+      const protocols = {};
+
+      for (const criterion of criteria) {
+        protocols[criterion] =
+          [
+            ...new Set(
+              knowledge
+                .map(
+                  item =>
+                    item
+                      ?.scoreMeta
+                      ?.[criterion]
+                      ?.protocol ||
+                    null
+                )
+                .filter(Boolean)
+            ),
+          ];
+      }
+
+      return {
+        familyId,
+        variants:
+          variants.length,
+        variantsWithKnowledge:
+          knowledge.length,
+        variantsWithFacts:
+          knowledge.filter(
+            hasFacts
+          ).length,
+        scoreCriteria:
+          criteria,
+        protocols,
+      };
+    }
+  );
+
+const variantsWithKnowledge =
+  smartphoneProducts.filter(
+    product =>
+      knowledgeMap.has(
+        product.id
+      )
+  ).length;
+
+const variantsWithFacts =
+  smartphoneProducts.filter(
+    product =>
+      hasFacts(
+        knowledgeMap.get(
+          product.id
+        )
+      )
+  ).length;
+
+const variantsWithScores =
+  smartphoneProducts.filter(
+    product =>
+      numericCriteria(
+        knowledgeMap.get(
+          product.id
+        )
+      ).length > 0
+  ).length;
+
+const summary = {
+  smartphoneVariants:
+    smartphoneProducts.length,
+  smartphoneFamilies:
+    familyMap.size,
+  variantsWithKnowledge,
+  variantsWithFacts,
+  variantsWithComparableScores:
+    variantsWithScores,
+  knowledgeCoveragePercent:
+    smartphoneProducts.length > 0
+      ? Number(
+          (
+            (
+              variantsWithKnowledge /
+              smartphoneProducts.length
+            ) *
+            100
+          ).toFixed(1)
+        )
+      : 0,
+  factsCoveragePercent:
+    smartphoneProducts.length > 0
+      ? Number(
+          (
+            (
+              variantsWithFacts /
+              smartphoneProducts.length
+            ) *
+            100
+          ).toFixed(1)
+        )
+      : 0,
+};
+
+console.log(
+  JSON.stringify(
+    {
+      summary,
+      families,
+    },
+    null,
+    2
+  )
+);

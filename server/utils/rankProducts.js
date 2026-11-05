@@ -92,6 +92,8 @@ function getUniqueProducts(offers) {
           knowledge:
             offer.knowledge || {
               scores: {},
+              scoreMeta: {},
+              facts: {},
               evidence: [],
               sources: [],
               updatedAt: null,
@@ -225,6 +227,8 @@ function getUniqueFamilies(offers) {
           knowledge:
             offer.knowledge || {
               scores: {},
+              scoreMeta: {},
+              facts: {},
               evidence: [],
               sources: [],
               updatedAt: null,
@@ -750,6 +754,137 @@ function getScore(
 
 
 // ========================================
+// PROTOCOLLO SCORE / BENCHMARK
+// ========================================
+
+const INCOMPATIBLE_PROTOCOL =
+  "__incompatible_protocol__";
+
+
+function getVariantCriterionProtocol(
+  product,
+  criterion
+) {
+  const explicit =
+    product
+      ?.knowledge
+      ?.scoreMeta
+      ?.[criterion]
+      ?.protocol;
+
+  if (
+    typeof explicit === "string" &&
+    explicit.trim()
+  ) {
+    return explicit.trim();
+  }
+
+  const evidence =
+    Array.isArray(
+      product?.knowledge?.evidence
+    )
+      ? product.knowledge.evidence
+      : [];
+
+  const matching =
+    evidence.find(
+      item =>
+        item?.criterion ===
+          criterion &&
+        item?.rankingEligible !==
+          false &&
+        typeof item?.protocol ===
+          "string" &&
+        item.protocol.trim()
+    );
+
+  return matching
+    ?.protocol
+    ?.trim() ||
+    null;
+}
+
+
+function getFamilyCriterionProtocol(
+  family,
+  criterion
+) {
+  if (
+    !family ||
+    !Array.isArray(
+      family.variants
+    ) ||
+    family.variants.length === 0
+  ) {
+    return null;
+  }
+
+  const scoredVariants =
+    family.variants.filter(
+      variant =>
+        getVariantScore(
+          variant,
+          criterion
+        ) !== null
+    );
+
+  if (
+    scoredVariants.length === 0
+  ) {
+    return null;
+  }
+
+  const protocols =
+    scoredVariants.map(
+      variant =>
+        getVariantCriterionProtocol(
+          variant,
+          criterion
+        )
+    );
+
+  const knownProtocols =
+    [
+      ...new Set(
+        protocols.filter(Boolean)
+      ),
+    ];
+
+  if (
+    knownProtocols.length > 1 ||
+    (
+      knownProtocols.length === 1 &&
+      protocols.some(
+        protocol => !protocol
+      )
+    )
+  ) {
+    return INCOMPATIBLE_PROTOCOL;
+  }
+
+  return knownProtocols[0] || null;
+}
+
+
+function getCriterionProtocol(
+  entity,
+  criterion
+) {
+  return Array.isArray(
+    entity?.variants
+  )
+    ? getFamilyCriterionProtocol(
+        entity,
+        criterion
+      )
+    : getVariantCriterionProtocol(
+        entity,
+        criterion
+      );
+}
+
+
+// ========================================
 // NORMALIZZARE CRITERIO 0-100
 // ========================================
 
@@ -770,6 +905,12 @@ function normalizeCriterionScores(
             entity,
             criterion
           ),
+
+        protocol:
+          getCriterionProtocol(
+            entity,
+            criterion
+          ),
       }))
       .filter(
         item =>
@@ -784,6 +925,44 @@ function normalizeCriterionScores(
 
   if (
     valid.length === 0
+  ) {
+    return result;
+  }
+
+  if (
+    valid.some(
+      item =>
+        item.protocol ===
+        INCOMPATIBLE_PROTOCOL
+    )
+  ) {
+    return result;
+  }
+
+  const protocols =
+    [
+      ...new Set(
+        valid
+          .map(
+            item =>
+              item.protocol
+          )
+          .filter(Boolean)
+      ),
+    ];
+
+  const hasUnknownProtocol =
+    valid.some(
+      item =>
+        !item.protocol
+    );
+
+  if (
+    protocols.length > 1 ||
+    (
+      protocols.length === 1 &&
+      hasUnknownProtocol
+    )
   ) {
     return result;
   }
@@ -829,6 +1008,7 @@ function normalizeCriterionScores(
 
     result.set(
       item.key,
+
       Number(
         normalized.toFixed(2)
       )
@@ -837,7 +1017,6 @@ function normalizeCriterionScores(
 
   return result;
 }
-
 
 // ========================================
 // RANKING PER UN CRITERIO
@@ -1384,6 +1563,12 @@ module.exports = {
   getFamilyScore,
 
   getScore,
+
+  getVariantCriterionProtocol,
+
+  getFamilyCriterionProtocol,
+
+  getCriterionProtocol,
 
   normalizeCriterionScores,
 
