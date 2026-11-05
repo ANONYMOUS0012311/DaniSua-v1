@@ -1929,6 +1929,94 @@ async function testSafeCorsError() {
 
 
 // ========================================
+// SEARCH V2 — INTENTO NATURALE
+// ========================================
+
+async function testNaturalNeedDoesNotAskForModel() {
+  const cases = [
+    {
+      query:
+        "smartphone per foto",
+      expectedIntent:
+        "RECOMMENDATION",
+      expectedProductQuery:
+        "smartphone",
+    },
+    {
+      query:
+        "portatile per università",
+      expectedIntent:
+        "RECOMMENDATION",
+      expectedProductQuery:
+        "portatil",
+    },
+    {
+      query:
+        "smartphone sotto 1000 euro",
+      expectedIntent:
+        "RECOMMENDATION",
+      expectedProductQuery:
+        "smartphone",
+    },
+  ];
+
+  for (const item of cases) {
+    const data =
+      await search(
+        item.query
+      );
+
+    assert(
+      data.intent ===
+        item.expectedIntent,
+      `Intent inatteso per "${item.query}": ${data.intent}`
+    );
+
+    assert(
+      String(
+        data.productQuery || ""
+      ).toLowerCase() ===
+        item.expectedProductQuery,
+      `productQuery inattesa per "${item.query}": ${data.productQuery}`
+    );
+
+    assert(
+      data.clarification
+        ?.missing
+        ?.includes(
+          "model"
+        ) !== true,
+      `DaniSua non deve chiedere il modello per "${item.query}"`
+    );
+  }
+}
+
+
+async function testExactPriceSearchStillUsesBestOffer() {
+  const data =
+    await search(
+      "iPhone 15 Pro più economico"
+    );
+
+  assert(
+    data.intent ===
+      "BEST_OFFER",
+    `BEST_OFFER atteso per prodotto specifico, ricevuto ${data.intent}`
+  );
+
+  assert(
+    String(
+      data.productQuery || ""
+    ).toLowerCase()
+      .includes(
+        "iphone 15 pro"
+      ),
+    `La ricerca specifica deve preservare il prodotto: ${data.productQuery}`
+  );
+}
+
+
+// ========================================
 // TESTS
 // ========================================
 
@@ -2187,6 +2275,22 @@ const tests = [
 
     run:
       testSafeCorsError,
+  },
+
+  {
+    name:
+      "SEARCH V2 — bisogno naturale senza modello",
+
+    run:
+      testNaturalNeedDoesNotAskForModel,
+  },
+
+  {
+    name:
+      "SEARCH V2 — prodotto specifico mantiene BEST_OFFER",
+
+    run:
+      testExactPriceSearchStillUsesBestOffer,
   },
 ];
 

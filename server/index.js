@@ -24,6 +24,7 @@ const {
 
 const {
   analyzeRecommendationNeed,
+  detectUseCase,
 } = require("./utils/recommendationEngine");
 
 const app = express();
@@ -416,6 +417,8 @@ function detectCategory(query) {
         "telefoni",
         "cellulare",
         "cellulari",
+        "iphone",
+        "galaxy",
       ],
     },
 
@@ -426,6 +429,10 @@ function detectCategory(query) {
         "auricolari",
         "headphone",
         "headphones",
+        "airpods",
+        "xm5",
+        "xm6",
+        "wh 1000xm",
       ],
     },
 
@@ -436,6 +443,7 @@ function detectCategory(query) {
         "portatili",
         "laptop",
         "notebook",
+        "macbook",
       ],
     },
 
@@ -472,6 +480,71 @@ function detectCategory(query) {
   }
 
   return null;
+}
+
+
+// ========================================
+// RICHIESTA GENERICA DI CATEGORIA
+// ========================================
+
+const CATEGORY_GENERIC_ALIASES = {
+  smartphone: [
+    "smartphone",
+    "telefono",
+    "telefoni",
+    "cellulare",
+    "cellulari",
+  ],
+  auriculares: [
+    "cuffie",
+    "auricolari",
+    "headphone",
+    "headphones",
+  ],
+  portatil: [
+    "portatile",
+    "portatili",
+    "laptop",
+    "notebook",
+  ],
+  tablet: [
+    "tablet",
+    "tablets",
+  ],
+  consola: [
+    "console",
+    "consola",
+  ],
+};
+
+
+function isGenericCategoryProductQuery(
+  productQuery,
+  category
+) {
+  if (!category) {
+    return false;
+  }
+
+  const q =
+    normalizeText(
+      productQuery
+    );
+
+  if (!q) {
+    return true;
+  }
+
+  const aliases =
+    CATEGORY_GENERIC_ALIASES[
+      category
+    ] || [];
+
+  return aliases.some(
+    alias =>
+      q ===
+      normalizeText(alias)
+  );
 }
 
 
@@ -666,8 +739,31 @@ function detectIntent(query) {
   const priceObjective =
     hasPriceObjective(query);
 
+  const budget =
+    extractBudget(query);
+
   const qualityObjectives =
     detectQualityObjectives(query);
+
+  const category =
+    detectCategory(query);
+
+  const useCase =
+    detectUseCase(
+      query,
+      category
+    );
+
+  const productQuery =
+    cleanProductQuery(
+      query
+    );
+
+  const genericCategoryRequest =
+    isGenericCategoryProductQuery(
+      productQuery,
+      category
+    );
 
   if (
     priceObjective &&
@@ -677,27 +773,9 @@ function detectIntent(query) {
   }
 
   if (priceObjective) {
-    return "BEST_OFFER";
-  }
-
-  const recommendationSignals = [
-    "mi serve",
-    "ho bisogno",
-    "consigliami",
-    "cosa mi consigli",
-    "cosa consigli",
-    "aiutami a scegliere",
-    "non so quale scegliere",
-    "cerco qualcosa",
-    "vorrei qualcosa",
-  ];
-
-  if (
-    recommendationSignals.some(
-      signal => q.includes(signal)
-    )
-  ) {
-    return "RECOMMENDATION";
+    return genericCategoryRequest
+      ? "RECOMMENDATION"
+      : "BEST_OFFER";
   }
 
   const bestProductSignals = [
@@ -716,9 +794,46 @@ function detectIntent(query) {
     return "BEST_PRODUCT";
   }
 
+  const recommendationSignals = [
+    "mi serve",
+    "ho bisogno",
+    "consigliami",
+    "cosa mi consigli",
+    "cosa consigli",
+    "aiutami a scegliere",
+    "non so quale scegliere",
+    "cerco qualcosa",
+    "vorrei qualcosa",
+    "mi interessa",
+    "per me",
+  ];
+
+  const explicitRecommendation =
+    recommendationSignals.some(
+      signal => q.includes(signal)
+    );
+
+  if (explicitRecommendation) {
+    return "RECOMMENDATION";
+  }
+
+  if (
+    genericCategoryRequest &&
+    (
+      useCase ||
+      qualityObjectives.length > 0 ||
+      budget !== null
+    )
+  ) {
+    return "RECOMMENDATION";
+  }
+
+  if (budget !== null) {
+    return "BEST_OFFER";
+  }
+
   return "PRODUCT_SEARCH";
 }
-
 
 // ========================================
 // BUDGET
@@ -838,6 +953,72 @@ function cleanProductQuery(query) {
     " "
   );
 
+  // DANISUA_SEARCH_V2_NEED_CLEANER
+  // Le parole che descrivono l'uso guidano il
+  // ranking, ma non devono restringere la ricerca
+  // testuale del catalogo.
+  const needPhrases = [
+    "fare foto",
+    "fare video",
+    "foto",
+    "fotografia",
+    "fotografie",
+    "video",
+    "universita",
+    "universitario",
+    "universitaria",
+    "studio",
+    "studiare",
+    "studenti",
+    "studente",
+    "lezioni",
+    "gaming",
+    "giocare",
+    "videogiochi",
+    "giochi",
+    "lavoro",
+    "lavorare",
+    "ufficio",
+    "professionale",
+    "professionista",
+    "viaggio",
+    "viaggiare",
+    "aereo",
+    "treno",
+    "musica",
+    "ascoltare musica",
+    "uso quotidiano",
+    "tutti i giorni",
+    "uso normale",
+    "quotidiano",
+    "batteria",
+    "autonomia",
+    "prestazioni",
+    "performance",
+    "potente",
+    "potenza",
+    "veloce",
+    "velocita",
+    "display",
+    "schermo",
+    "audio",
+    "suono",
+    "comfort",
+    "comodita",
+    "portabilita",
+    "peso",
+    "aggiornamenti",
+    "software",
+  ];
+
+  for (const phrase of needPhrases) {
+    q = q.replaceAll(
+      phrase,
+      " "
+    );
+  }
+
+
   const stopWords =
     new Set([
       "voglio",
@@ -865,6 +1046,12 @@ function cleanProductQuery(query) {
       "delle",
       "di",
       "con",
+      "l",
+      "d",
+      "buona",
+      "buono",
+      "ottima",
+      "ottimo",
     ]);
 
   return q
@@ -888,6 +1075,11 @@ function buildCatalogQuery(
   intent,
   category
 ) {
+  const cleaned =
+    cleanProductQuery(
+      rawQuery
+    );
+
   if (
     (
       intent === "BEST_PRODUCT" ||
@@ -895,14 +1087,19 @@ function buildCatalogQuery(
     ) &&
     category
   ) {
-    return category;
+    return isGenericCategoryProductQuery(
+      cleaned,
+      category
+    )
+      ? category
+      : (
+          cleaned ||
+          category
+        );
   }
 
-  return cleanProductQuery(
-    rawQuery
-  );
+  return cleaned;
 }
-
 
 // ========================================
 // IDENTITÀ VARIANTE
@@ -1164,7 +1361,7 @@ function analyzeProductSearch(
       canRecommend: true,
       scope: "exact_product",
       message:
-        "Ho identificato il prodotto. Posso confrontare le offerte disponibili.",
+        "Ho identificato il prodotto. Posso confrontare i prezzi disponibili tra i negozi.",
       missing: [],
       options: {},
       selectedProducts:
@@ -1316,7 +1513,7 @@ function analyzeProductSearch(
         canRecommend: true,
         scope: "exact_product",
         message:
-          "Ho identificato il prodotto. Posso confrontare le offerte disponibili.",
+          "Ho identificato il prodotto. Posso confrontare i prezzi disponibili tra i negozi.",
         missing: [],
         options: {},
         selectedProducts:
@@ -1348,7 +1545,7 @@ function analyzeProductSearch(
       canRecommend: true,
       scope: "exact_product",
       message:
-        "Ho identificato il prodotto. Posso confrontare le offerte disponibili.",
+        "Ho identificato il prodotto. Posso confrontare i prezzi disponibili tra i negozi.",
       missing: [],
       options: {},
       selectedProducts:
@@ -1397,7 +1594,7 @@ function analyzeBestOffer(
       status: "not_found",
       canRecommend: false,
       message:
-        "Non ho trovato offerte per questo prodotto.",
+        "Non ho trovato prezzi disponibili per questo prodotto.",
       missing: [],
       options: {},
       selectedProducts: [],
@@ -1494,7 +1691,7 @@ function analyzeBestOffer(
       "best_offer_ready",
     canRecommend: true,
     message:
-      "Ho identificato il prodotto e posso cercare l'offerta più economica tra le varianti disponibili.",
+      "Ho identificato il prodotto e posso cercare il prezzo più conveniente tra le varianti disponibili.",
     missing: [],
     options: {},
     selectedProducts,
@@ -3190,6 +3387,7 @@ app.get(
             category,
             objectives,
             priceObjective,
+            hardRequirements,
 
             recommendationNeed:
               analysis.need ||

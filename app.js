@@ -199,7 +199,7 @@ function updateAiHint(raw) {
 
   const intentLabel =
     info.filters?.intent === "deal"
-      ? " · offerta"
+      ? " · cerca il prezzo migliore"
       : "";
 
   aiHint.innerHTML = `
@@ -267,7 +267,7 @@ function getClarificationPrompt(
   if (missing.includes("model")) {
     return {
       message:
-        'Dimmi il modello preciso che stai cercando. Se non ne hai già uno in mente, puoi anche descrivere cosa ti serve, per esempio: "Consigliami uno smartphone sotto 800 euro per fotografia".',
+        'Se hai già un modello in mente, scrivilo. Altrimenti dimmi semplicemente cosa ti serve, per esempio: "smartphone per foto sotto 800 euro".',
       placeholder:
         "Scrivi il modello oppure budget e utilizzo",
     };
@@ -580,7 +580,7 @@ function renderBestOffer(
   const comparisonLabel =
     isGenericPriceFirst
       ? "opzioni compatibili"
-      : "offerte equivalenti";
+      : "prezzi dello stesso prodotto";
 
   const ruleNote =
     finalCostConfirmed
