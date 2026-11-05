@@ -3,7 +3,7 @@
   "market": "IT",
   "category": "smartphone",
   "goal": {
-    "targetFamilies": 30,
+    "targetFamilies": 32,
     "principle": "Prioritize useful market coverage and multi-store price comparison over raw product count.",
     "readiness": {
       "p0MinimumVerifiedStores": 3,
@@ -15,6 +15,20 @@
       "importantFamilies": 8,
       "coreMinimumVerifiedStores": 4,
       "importantMinimumVerifiedStores": 3
+    },
+    "variantDepth": {
+      "principle": "A price comparison is complete only when DaniSua covers the configurations that materially change price, compatibility or utility. For smartphones, storage is mandatory when multiple capacities exist; RAM, condition and connectivity become mandatory when they define distinct commercial configurations. Color and bundles are opportunistic: they may win on price, but do not create mandatory completeness by themselves.",
+      "initialFamilies": 4,
+      "requiredWhenPriceShaping": [
+        "storage",
+        "ram",
+        "condition",
+        "connectivity"
+      ],
+      "opportunisticDimensions": [
+        "color",
+        "bundle"
+      ]
     }
   },
   "families": [
@@ -66,7 +80,13 @@
       "segment": "upper-mid",
       "minimumStores": 4,
       "officialSource": "https://www.apple.com/it/shop/buy-iphone",
-      "betaTier": "core"
+      "betaTier": "core",
+      "priceShapingDimensions": {
+        "storage": [
+          "256 GB",
+          "512 GB"
+        ]
+      }
     },
     {
       "familyId": "apple-iphone-17e",
@@ -86,7 +106,48 @@
       "segment": "mid",
       "minimumStores": 4,
       "officialSource": "https://www.apple.com/it/shop/buy-iphone",
-      "betaTier": "core"
+      "betaTier": "core",
+      "priceShapingDimensions": {
+        "storage": [
+          "128 GB",
+          "256 GB",
+          "512 GB"
+        ]
+      }
+    },
+    {
+      "familyId": "apple-iphone-14",
+      "brand": "Apple",
+      "familyName": "iPhone 14",
+      "priority": "P1",
+      "segment": "value",
+      "minimumStores": 1,
+      "officialSource": "https://support.apple.com/it-it/111850",
+      "betaTier": "breadth",
+      "priceShapingDimensions": {
+        "storage": [
+          "128 GB",
+          "256 GB",
+          "512 GB"
+        ]
+      }
+    },
+    {
+      "familyId": "apple-iphone-15",
+      "brand": "Apple",
+      "familyName": "iPhone 15",
+      "priority": "P1",
+      "segment": "value-mid",
+      "minimumStores": 1,
+      "officialSource": "https://support.apple.com/it-it/111831",
+      "betaTier": "breadth",
+      "priceShapingDimensions": {
+        "storage": [
+          "128 GB",
+          "256 GB",
+          "512 GB"
+        ]
+      }
     },
     {
       "familyId": "samsung-galaxy-s26-ultra",
