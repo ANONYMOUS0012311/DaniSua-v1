@@ -2185,20 +2185,17 @@ async function testPixel11ProductionIngest() {
 
   assert(
     data.results.length ===
-      3,
-    `Attesi 3 listing Pixel 11, ricevuti ${data.results.length}`
+      2,
+    `Attesi 2 listing verificati Pixel 11, ricevuti ${data.results.length}`
   );
 
   assert(
-    data.results.some(
+    data.results.every(
       offer =>
-        offer.id ===
-        "test-euronics-pixel11-256-obsidian-pickup" &&
-        offer.pricing
-          ?.conditional ===
-        true
+        offer.id !==
+        "test-euronics-pixel11-256-obsidian-pickup"
     ),
-    "Il prezzo Euronics deve restare condizionato"
+    "Il listing Euronics con seller Dimo non verificato deve essere escluso"
   );
 
   assert(
