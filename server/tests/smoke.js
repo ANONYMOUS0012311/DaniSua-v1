@@ -430,7 +430,7 @@ async function testRecommendationBudget() {
   assert(
     data.recommendation
       ?.finalCost ===
-      974.9,
+      853.48,
     `Costo finale iPhone 16 inatteso: ${data.recommendation?.finalCost}`
   );
 
@@ -2147,8 +2147,8 @@ async function testGalaxyS26ProductionIngest() {
 
   assert(
     data.results.length ===
-      2,
-    `Attesi 2 prezzi Galaxy S26, ricevuti ${data.results.length}`
+      3,
+    `Attesi 3 prezzi Galaxy S26 White, ricevuti ${data.results.length}`
   );
 
   assert(
@@ -2185,8 +2185,8 @@ async function testPixel11ProductionIngest() {
 
   assert(
     data.results.length ===
-      2,
-    `Attesi 2 listing verificati Pixel 11, ricevuti ${data.results.length}`
+      3,
+    `Attesi 3 listing verificati Pixel 11, ricevuti ${data.results.length}`
   );
 
   assert(
@@ -2261,18 +2261,18 @@ async function testMidrangeSmartphoneProductionBlock() {
     );
 
   assert(
-    iphone16.results.length === 2,
-    `Attesi 2 prezzi iPhone 16, ricevuti ${iphone16.results.length}`
+    iphone16.results.length === 3,
+    `Attesi 3 prezzi iPhone 16 Nero, ricevuti ${iphone16.results.length}`
   );
 
   assert(
     iphone16.bestOffer?.id ===
-      "test-euronics-iphone16-128-black",
+      "test-mediaworld-iphone16-128-black",
     `Miglior iPhone 16 inatteso: ${iphone16.bestOffer?.id}`
   );
 
   assert(
-    iphone16.recommendation?.finalCost === 974.9,
+    iphone16.recommendation?.finalCost === 853.48,
     `Costo finale iPhone 16 inatteso: ${iphone16.recommendation?.finalCost}`
   );
 
@@ -2609,9 +2609,9 @@ async function testSmartphoneBatch3FiveFamilies() {
     {
       query: "Galaxy S26 FE 256 GB Graphite",
       familyId: "samsung-galaxy-s26-fe",
-      expectedOffers: 2,
-      expectedBest: "test-euronics-s26fe-256-graphite",
-      expectedFinalCost: 731.9,
+      expectedOffers: 3,
+      expectedBest: "test-mediaworld-s26fe-256-graphite",
+      expectedFinalCost: null,
     },
     {
       query: "Pixel 11 Pro 256 GB Nero Ossidiana",
@@ -2952,6 +2952,57 @@ async function testBetaCoreDepthWaveOne() {
 
 
 // ========================================
+// BETA CORE DEPTH — WAVE 2
+// ========================================
+
+async function testBetaCoreDepthWaveTwo() {
+  const cases = [
+    {
+      query: "Galaxy S26 Ultra 256 GB",
+      stores: ["Samsung", "MediaWorld", "Euronics", "Unieuro"],
+    },
+    {
+      query: "Galaxy S26 256 GB",
+      stores: ["Samsung", "MediaWorld", "Euronics", "Unieuro"],
+    },
+    {
+      query: "Galaxy S26 FE 256 GB Graphite",
+      stores: ["Samsung", "Euronics", "MediaWorld"],
+    },
+    {
+      query: "Pixel 11 256 GB Nero Ossidiana",
+      stores: ["MediaWorld", "Unieuro", "Google Store"],
+    },
+    {
+      query: "iPhone 16 128 GB Nero",
+      stores: ["Apple", "Euronics", "MediaWorld"],
+    },
+    {
+      query: "Galaxy S26+ 256 GB",
+      stores: ["Samsung", "Euronics"],
+    },
+  ];
+
+  for (const item of cases) {
+    const data = await search(item.query);
+    const stores =
+      new Set(
+        data.results.map(
+          offer => offer.store
+        )
+      );
+
+    for (const store of item.stores) {
+      assert(
+        stores.has(store),
+        `${item.query}: manca lo store ${store}`
+      );
+    }
+  }
+}
+
+
+// ========================================
 // TESTS
 // ========================================
 
@@ -3258,6 +3309,14 @@ const tests = [
 
     run:
       testPixel11ProductionIngest,
+  },
+
+  {
+    name:
+      "BETA CORE DEPTH — wave 2",
+
+    run:
+      testBetaCoreDepthWaveTwo,
   },
 
   {
