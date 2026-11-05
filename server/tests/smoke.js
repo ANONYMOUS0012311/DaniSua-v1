@@ -2286,13 +2286,21 @@ async function testMidrangeSmartphoneProductionBlock() {
 
   assert(
     redmi.bestOffer?.id ===
-      "test-xiaomi-redminote17-5g-256-black",
-    `Miglior REDMI Note 17 inatteso: ${redmi.bestOffer?.id}`
+      "test-unieuro-redminote17-5g-256-black",
+    `Miglior prezzo provvisorio REDMI Note 17 inatteso: ${redmi.bestOffer?.id}`
   );
 
   assert(
-    redmi.recommendation?.finalCost === 299.9,
-    `Costo finale REDMI Note 17 inatteso: ${redmi.recommendation?.finalCost}`
+    redmi.recommendation?.finalCost === null,
+    "REDMI Note 17 non deve dichiarare un costo finale con spedizione Unieuro sconosciuta"
+  );
+
+  assert(
+    redmi.bestOffer
+      ?.costComparison
+      ?.mode ===
+      "listed_price_provisional",
+    `Modalità REDMI Note 17 inattesa: ${redmi.bestOffer?.costComparison?.mode}`
   );
 }
 
