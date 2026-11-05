@@ -3508,8 +3508,6 @@ app.get(
         recommendation =
           attachVariantCoverage(
             recommendation,
-
-          variantCoverage,
             variantCoverage
           );
 
@@ -3559,6 +3557,8 @@ app.get(
           bestOffer,
 
           recommendation,
+
+          variantCoverage,
 
           ranking: null,
 
@@ -3626,8 +3626,6 @@ app.get(
         recommendation =
           attachVariantCoverage(
             recommendation,
-
-          variantCoverage,
             variantCoverage
           );
 
@@ -3677,6 +3675,8 @@ app.get(
           bestOffer,
 
           recommendation,
+
+          variantCoverage,
 
           ranking: null,
 
