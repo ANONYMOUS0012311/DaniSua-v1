@@ -1451,6 +1451,58 @@ function buildVariantCoverageMeta(
 }
 
 
+function querySpecifiesTrackedStorage(
+  query,
+  offers
+) {
+  if (
+    !Array.isArray(offers) ||
+    offers.length === 0
+  ) {
+    return false;
+  }
+
+  const familyIds =
+    uniqueValues(
+      offers,
+      "familyId"
+    );
+
+  if (familyIds.length !== 1) {
+    return false;
+  }
+
+  const requiredStorages =
+    VARIANT_DEPTH_TARGETS
+      .get(
+        familyIds[0]
+      ) || [];
+
+  return requiredStorages
+    .some(
+      storage =>
+        queryContains(
+          query,
+          storage
+        )
+    );
+}
+
+
+function shouldReportVariantCoverage(
+  query,
+  offers
+) {
+  return (
+    hasSingleFamily(offers) &&
+    !querySpecifiesTrackedStorage(
+      query,
+      offers
+    )
+  );
+}
+
+
 function attachVariantCoverage(
   recommendation,
   variantCoverage
@@ -3498,8 +3550,10 @@ app.get(
         }
 
         const variantCoverage =
-          analysis.scope ===
-            "family"
+          shouldReportVariantCoverage(
+            productQuery,
+            comparableResults
+          )
             ? buildVariantCoverageMeta(
                 comparableResults
               )
@@ -3616,8 +3670,10 @@ app.get(
         }
 
         const variantCoverage =
-          analysis.scope ===
-            "family"
+          shouldReportVariantCoverage(
+            productQuery,
+            comparableResults
+          )
             ? buildVariantCoverageMeta(
                 comparableResults
               )
