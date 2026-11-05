@@ -2189,8 +2189,15 @@ async function testMidrangeSmartphoneProductionBlock() {
     );
 
   assert(
+    iphone17e.context
+      ?.hardRequirements
+      ?.anc !== true,
+    "Il colore Bianco non deve essere interpretato come requisito ANC"
+  );
+
+  assert(
     iphone17e.results.length === 3,
-    `Attesi 3 prezzi iPhone 17e, ricevuti ${iphone17e.results.length}. Risposta: ${JSON.stringify(iphone17e)}`
+    `Attesi 3 prezzi iPhone 17e, ricevuti ${iphone17e.results.length}`
   );
 
   assert(
