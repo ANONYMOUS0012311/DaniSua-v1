@@ -694,5 +694,132 @@
         }
       ]
     }
+  },
+  {
+    "id": "test-samsung-s26-256-white",
+    "productId": "samsung-galaxy-s26-256-white",
+    "store": "Samsung",
+    "seller": "Samsung",
+    "old_price": null,
+    "offer_price": 1029,
+    "currency": "EUR",
+    "shipping_price": 0,
+    "stock": true,
+    "url": "https://www.samsung.com/it/smartphones/galaxy-s26/buy/?modelCode=SM-S942BZWGEUE",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 1029
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-mediaworld-s26-256-white",
+    "productId": "samsung-galaxy-s26-256-white",
+    "store": "MediaWorld",
+    "seller": "MediaWorld",
+    "old_price": 1029,
+    "offer_price": 849,
+    "currency": "EUR",
+    "shipping_price": 3.99,
+    "stock": true,
+    "url": "https://www.mediaworld.it/it/product/_samsung-galaxy-m1-256gb-1024-gb-titanium-jetblack-564048.html",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 849
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-mediaworld-pixel11-256-obsidian",
+    "productId": "google-pixel-11-256-obsidian",
+    "store": "MediaWorld",
+    "seller": "MediaWorld",
+    "old_price": 899,
+    "offer_price": 799,
+    "currency": "EUR",
+    "shipping_price": 3.99,
+    "stock": true,
+    "url": "https://www.mediaworld.it/it/product/_google-google-pixel-11-256gb-256-gb-596605.html",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 799
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-unieuro-pixel11-256-obsidian",
+    "productId": "google-pixel-11-256-obsidian",
+    "store": "Unieuro",
+    "seller": "Unieuro",
+    "old_price": 849,
+    "offer_price": 799,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.unieuro.it/online/Smartphone/Pixel-11-256GB-nero-pidGGOPIXEL11256",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 799
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-euronics-pixel11-256-obsidian-pickup",
+    "productId": "google-pixel-11-256-obsidian",
+    "store": "Euronics",
+    "seller": "Dimo S.p.a.",
+    "old_price": null,
+    "offer_price": 849,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.euronics.it/telefonia/smartphone-e-cellulari/smartphone-dual-sim/google---smartphone-google-pixel-11-256gb-nero-ossidiana/262010110.html",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "pickup",
+      "conditional": true,
+      "conditions": [
+        "Prezzo riservato a Prenota e Ritira / Paga e Ritira nei negozi selezionati o acquisto in negozio."
+      ],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 849
+        }
+      ]
+    }
   }
 ]
