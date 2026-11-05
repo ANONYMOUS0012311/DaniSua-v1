@@ -2179,6 +2179,118 @@ async function testPixel11ProductionIngest() {
 
 
 // ========================================
+// MIDRANGE SMARTPHONE PRODUCTION
+// ========================================
+
+async function testMidrangeSmartphoneProductionBlock() {
+  const iphone17e =
+    await search(
+      "iPhone 17e 256 GB Bianco"
+    );
+
+  assert(
+    iphone17e.results.length === 3,
+    `Attesi 3 prezzi iPhone 17e, ricevuti ${iphone17e.results.length}`
+  );
+
+  assert(
+    iphone17e.bestOffer?.id ===
+      "test-apple-iphone17e-256-white",
+    `Miglior iPhone 17e inatteso: ${iphone17e.bestOffer?.id}`
+  );
+
+  assert(
+    iphone17e.recommendation?.finalCost === 729,
+    `Costo finale iPhone 17e inatteso: ${iphone17e.recommendation?.finalCost}`
+  );
+
+  const iphone16 =
+    await search(
+      "iPhone 16 128 GB Nero"
+    );
+
+  assert(
+    iphone16.results.length === 2,
+    `Attesi 2 prezzi iPhone 16, ricevuti ${iphone16.results.length}`
+  );
+
+  assert(
+    iphone16.bestOffer?.id ===
+      "test-euronics-iphone16-128-black",
+    `Miglior iPhone 16 inatteso: ${iphone16.bestOffer?.id}`
+  );
+
+  assert(
+    iphone16.recommendation?.finalCost === 974.9,
+    `Costo finale iPhone 16 inatteso: ${iphone16.recommendation?.finalCost}`
+  );
+
+  const a57 =
+    await search(
+      "Galaxy A57 5G 256 GB Awesome Gray"
+    );
+
+  assert(
+    a57.results.length === 3,
+    `Attesi 3 prezzi A57, ricevuti ${a57.results.length}`
+  );
+
+  assert(
+    a57.bestOffer?.id ===
+      "test-mediaworld-a57-256-gray",
+    `Miglior A57 inatteso: ${a57.bestOffer?.id}`
+  );
+
+  assert(
+    a57.recommendation?.finalCost === 483.98,
+    `Costo finale A57 inatteso: ${a57.recommendation?.finalCost}`
+  );
+
+  const pixel =
+    await search(
+      "Pixel 10a 128 GB"
+    );
+
+  assert(
+    pixel.results.length === 3,
+    `Attesi 3 prezzi Pixel 10a, ricevuti ${pixel.results.length}`
+  );
+
+  assert(
+    pixel.bestOffer?.id ===
+      "test-unieuro-pixel10a-128-obsidian",
+    `Miglior Pixel 10a provvisorio inatteso: ${pixel.bestOffer?.id}`
+  );
+
+  assert(
+    pixel.recommendation?.finalCost === null,
+    "Pixel 10a non deve dichiarare un costo finale con spedizione Unieuro sconosciuta"
+  );
+
+  const redmi =
+    await search(
+      "REDMI Note 17 5G 256 GB Black"
+    );
+
+  assert(
+    redmi.results.length === 3,
+    `Attesi 3 prezzi REDMI Note 17 5G, ricevuti ${redmi.results.length}`
+  );
+
+  assert(
+    redmi.bestOffer?.id ===
+      "test-xiaomi-redminote17-5g-256-black",
+    `Miglior REDMI Note 17 inatteso: ${redmi.bestOffer?.id}`
+  );
+
+  assert(
+    redmi.recommendation?.finalCost === 299.9,
+    `Costo finale REDMI Note 17 inatteso: ${redmi.recommendation?.finalCost}`
+  );
+}
+
+
+// ========================================
 // TESTS
 // ========================================
 
@@ -2477,6 +2589,14 @@ const tests = [
 
     run:
       testPixel11ProductionIngest,
+  },
+
+  {
+    name:
+      "MIDRANGE — smartphone production block",
+
+    run:
+      testMidrangeSmartphoneProductionBlock,
   },
 ];
 
