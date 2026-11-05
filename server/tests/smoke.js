@@ -2256,12 +2256,12 @@ async function testMidrangeSmartphoneProductionBlock() {
 
   assert(
     iphone17e.bestOffer?.id ===
-      "test-apple-iphone17e-256-white",
+      "test-euronics-iphone17e-256-white",
     `Miglior iPhone 17e inatteso: ${iphone17e.bestOffer?.id}`
   );
 
   assert(
-    iphone17e.recommendation?.finalCost === 729,
+    iphone17e.recommendation?.finalCost === 736.9,
     `Costo finale iPhone 17e inatteso: ${iphone17e.recommendation?.finalCost}`
   );
 
@@ -3485,10 +3485,148 @@ async function testVariantMarketCoverageCompleteKnowledge() {
 
 
 // ========================================
+// REMAINING SMARTPHONE FAMILIES — VARIANT DEPTH
+// ========================================
+
+async function testRemainingSmartphoneVariantDepth() {
+  const cases = [
+    {
+      query: "iPhone 18 Pro più economico",
+      required: ["256 GB", "512 GB", "1 TB", "2 TB"],
+      expectedStorage: "256 GB",
+    },
+    {
+      query: "iPhone 18 Pro Max più economico",
+      required: ["256 GB", "512 GB", "1 TB", "2 TB"],
+      expectedStorage: "256 GB",
+    },
+    {
+      query: "iPhone Duo più economico",
+      required: ["256 GB", "512 GB", "1 TB", "2 TB"],
+      expectedStorage: "256 GB",
+    },
+    {
+      query: "iPhone Air più economico",
+      required: ["256 GB", "512 GB", "1 TB"],
+      expectedStorage: "256 GB",
+    },
+    {
+      query: "iPhone 17e più economico",
+      required: ["256 GB", "512 GB"],
+      expectedStorage: "256 GB",
+    },
+    {
+      query: "Galaxy Z Fold8 più economico",
+      required: ["12 GB + 256 GB", "12 GB + 512 GB", "16 GB + 1 TB"],
+      expectedStorage: "256 GB",
+    },
+    {
+      query: "Galaxy Z Flip8 più economico",
+      required: ["12 GB + 256 GB", "12 GB + 512 GB"],
+      expectedStorage: "512 GB",
+    },
+    {
+      query: "HONOR Magic8 Pro più economico",
+      required: ["16 GB + 512 GB"],
+      expectedStorage: "512 GB",
+    },
+    {
+      query: "HONOR 600 Pro più economico",
+      required: ["12 GB + 512 GB"],
+      expectedStorage: "512 GB",
+    },
+    {
+      query: "OPPO Find X10 più economico",
+      required: ["12 GB + 256 GB", "12 GB + 512 GB"],
+      expectedStorage: "256 GB",
+    },
+    {
+      query: "OPPO Reno16 Pro 5G più economico",
+      required: ["12 GB + 512 GB"],
+      expectedStorage: "512 GB",
+    },
+  ];
+
+  for (const item of cases) {
+    const data =
+      await search(
+        item.query
+      );
+
+    assert(
+      data.variantCoverage
+        ?.marketComplete ===
+        true &&
+      data.variantCoverage
+        ?.comparisonComplete ===
+        true,
+      item.query +
+        ": variant depth non completo " +
+        JSON.stringify(
+          data.variantCoverage
+        )
+    );
+
+    assert(
+      JSON.stringify(
+        data.variantCoverage
+          ?.requiredConfigurationLabels
+      ) ===
+      JSON.stringify(
+        item.required
+      ),
+      item.query +
+        ": configurazioni inattese " +
+        JSON.stringify(
+          data.variantCoverage
+            ?.requiredConfigurationLabels
+        )
+    );
+
+    assert(
+      data.recommendation
+        ?.selectedVariant
+        ?.storage ===
+        item.expectedStorage,
+      item.query +
+        ": storage selezionato inatteso " +
+        data.recommendation
+          ?.selectedVariant
+          ?.storage
+    );
+  }
+
+  const fold1tb =
+    await search(
+      "Galaxy Z Fold8 1 TB più economico"
+    );
+
+  assert(
+    fold1tb.results.length > 0 &&
+    fold1tb.results.every(
+      offer =>
+        offer.storage === "1 TB" &&
+        offer.ram === "16 GB"
+    ),
+    "Galaxy Z Fold8 1 TB deve restare vincolato a 16 GB + 1 TB"
+  );
+}
+
+
+// ========================================
 // TESTS
 // ========================================
 
 const tests = [
+  {
+    name:
+      "REMAINING SMARTPHONES — variant depth complete",
+
+    run:
+      testRemainingSmartphoneVariantDepth,
+  },
+
+
   {
     name:
       "VARIANT MARKET COVERAGE — complete knowledge",

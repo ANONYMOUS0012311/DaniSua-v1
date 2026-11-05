@@ -210,7 +210,8 @@
           "total_price": 1489
         }
       ]
-    }
+    },
+    "verifiedAt": null
   },
   {
     "id": "test-apple-iphone17-256-black",
@@ -828,7 +829,7 @@
     "store": "Apple",
     "seller": "Apple",
     "old_price": null,
-    "offer_price": 729,
+    "offer_price": 879,
     "currency": "EUR",
     "shipping_price": 0,
     "stock": true,
@@ -842,7 +843,7 @@
       "paymentOptions": [
         {
           "type": "one_time",
-          "total_price": 729
+          "total_price": 879
         }
       ]
     }
@@ -3343,6 +3344,406 @@
         {
           "type": "one_time",
           "total_price": 598
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-apple-iphone18pro-512-black",
+    "productId": "apple-iphone-18-pro-512-black",
+    "store": "Apple",
+    "seller": "Apple",
+    "old_price": null,
+    "offer_price": 1739,
+    "currency": "EUR",
+    "shipping_price": 0,
+    "stock": true,
+    "url": "https://www.apple.com/it/shop/buy-iphone/iphone-18-pro",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 1739
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-apple-iphone18pro-1tb-black",
+    "productId": "apple-iphone-18-pro-1tb-black",
+    "store": "Apple",
+    "seller": "Apple",
+    "old_price": null,
+    "offer_price": 2239,
+    "currency": "EUR",
+    "shipping_price": 0,
+    "stock": true,
+    "url": "https://www.apple.com/it/shop/buy-iphone/iphone-18-pro",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 2239
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-apple-iphone18pro-2tb-black",
+    "productId": "apple-iphone-18-pro-2tb-black",
+    "store": "Apple",
+    "seller": "Apple",
+    "old_price": null,
+    "offer_price": 2989,
+    "currency": "EUR",
+    "shipping_price": 0,
+    "stock": true,
+    "url": "https://www.apple.com/it/shop/buy-iphone/iphone-18-pro",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 2989
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-apple-iphone18promax-512-black",
+    "productId": "apple-iphone-18-pro-max-512-black",
+    "store": "Apple",
+    "seller": "Apple",
+    "old_price": null,
+    "offer_price": 1889,
+    "currency": "EUR",
+    "shipping_price": 0,
+    "stock": true,
+    "url": "https://www.apple.com/it/shop/buy-iphone/iphone-18-pro",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 1889
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-apple-iphone18promax-1tb-black",
+    "productId": "apple-iphone-18-pro-max-1tb-black",
+    "store": "Apple",
+    "seller": "Apple",
+    "old_price": null,
+    "offer_price": 2389,
+    "currency": "EUR",
+    "shipping_price": 0,
+    "stock": true,
+    "url": "https://www.apple.com/it/shop/buy-iphone/iphone-18-pro",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 2389
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-apple-iphone18promax-2tb-black",
+    "productId": "apple-iphone-18-pro-max-2tb-black",
+    "store": "Apple",
+    "seller": "Apple",
+    "old_price": null,
+    "offer_price": 3139,
+    "currency": "EUR",
+    "shipping_price": 0,
+    "stock": true,
+    "url": "https://www.apple.com/it/shop/buy-iphone/iphone-18-pro",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 3139
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-apple-iphoneduo-512-starlight",
+    "productId": "apple-iphone-duo-512-starlight",
+    "store": "Apple",
+    "seller": "Apple",
+    "old_price": null,
+    "offer_price": 2619,
+    "currency": "EUR",
+    "shipping_price": 0,
+    "stock": true,
+    "url": "https://www.apple.com/it/shop/buy-iphone/iphone-duo",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 2619
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-apple-iphoneduo-1tb-starlight",
+    "productId": "apple-iphone-duo-1tb-starlight",
+    "store": "Apple",
+    "seller": "Apple",
+    "old_price": null,
+    "offer_price": 3119,
+    "currency": "EUR",
+    "shipping_price": 0,
+    "stock": true,
+    "url": "https://www.apple.com/it/shop/buy-iphone/iphone-duo",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 3119
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-apple-iphoneduo-2tb-starlight",
+    "productId": "apple-iphone-duo-2tb-starlight",
+    "store": "Apple",
+    "seller": "Apple",
+    "old_price": null,
+    "offer_price": 3869,
+    "currency": "EUR",
+    "shipping_price": 0,
+    "stock": true,
+    "url": "https://www.apple.com/it/shop/buy-iphone/iphone-duo",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 3869
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-apple-iphoneair-512-black",
+    "productId": "apple-iphone-air-512-black",
+    "store": "Apple",
+    "seller": "Apple",
+    "old_price": null,
+    "offer_price": 1589,
+    "currency": "EUR",
+    "shipping_price": 0,
+    "stock": true,
+    "url": "https://www.apple.com/it/shop/buy-iphone/iphone-air",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 1589
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-apple-iphoneair-1tb-black",
+    "productId": "apple-iphone-air-1tb-black",
+    "store": "Apple",
+    "seller": "Apple",
+    "old_price": null,
+    "offer_price": 2089,
+    "currency": "EUR",
+    "shipping_price": 0,
+    "stock": true,
+    "url": "https://www.apple.com/it/shop/buy-iphone/iphone-air",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 2089
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-apple-iphone17e-512-white",
+    "productId": "apple-iphone-17e-512-white",
+    "store": "Apple",
+    "seller": "Apple",
+    "old_price": null,
+    "offer_price": 1129,
+    "currency": "EUR",
+    "shipping_price": 0,
+    "stock": true,
+    "url": "https://www.apple.com/it/shop/buy-iphone/iphone-17e",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 1129
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-samsung-fold8-512-graphite",
+    "productId": "samsung-galaxy-z-fold8-512-graphite",
+    "store": "Samsung",
+    "seller": "Samsung",
+    "old_price": null,
+    "offer_price": 2299,
+    "currency": "EUR",
+    "shipping_price": 0,
+    "stock": true,
+    "url": "https://www.samsung.com/it/smartphones/galaxy-z-fold8/buy/",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 2299
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-samsung-fold8-1tb-graphite",
+    "productId": "samsung-galaxy-z-fold8-1tb-graphite",
+    "store": "Samsung",
+    "seller": "Samsung",
+    "old_price": null,
+    "offer_price": 2699,
+    "currency": "EUR",
+    "shipping_price": 0,
+    "stock": true,
+    "url": "https://www.samsung.com/it/smartphones/galaxy-z-fold8/buy/",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 2699
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-mediaworld-flip8-512-graphite",
+    "productId": "samsung-galaxy-z-flip8-512-graphite",
+    "store": "MediaWorld",
+    "seller": "MediaWorld",
+    "old_price": null,
+    "offer_price": 1199.49,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.mediaworld.it/it/list/smartphone-512-gb",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 1199.49
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-mediaworld-findx10-512-mistgrey",
+    "productId": "oppo-find-x10-512-mist-grey",
+    "store": "MediaWorld",
+    "seller": "MediaWorld",
+    "old_price": null,
+    "offer_price": 1599.99,
+    "currency": "EUR",
+    "shipping_price": 3.99,
+    "stock": true,
+    "url": "https://www.mediaworld.it/it/product/_oppo-find-x10-5g-12512-mist-grey-box-512-gb-grey-762790.html",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 1599.99
         }
       ]
     }
