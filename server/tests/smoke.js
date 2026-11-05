@@ -3230,10 +3230,158 @@ async function testPriceShapingVariantDepth() {
 
 
 // ========================================
+// PRICE-SHAPING CONFIGURATIONS — RAM + STORAGE
+// ========================================
+
+async function testPriceShapingRamStorageDepth() {
+  const ultra =
+    await search(
+      "Galaxy S26 Ultra più economico"
+    );
+
+  assert(
+    ultra
+      .variantCoverage
+      ?.complete === true &&
+    ultra
+      .variantCoverage
+      ?.requiredConfigurationLabels
+      ?.length === 3,
+    "Galaxy S26 Ultra deve coprire 12+256, 12+512 e 16+1TB"
+  );
+
+  assert(
+    ultra
+      .recommendation
+      ?.selectedVariant
+      ?.storage === "256 GB",
+    `Galaxy S26 Ultra più economico inatteso: ${ultra.recommendation?.selectedVariant?.storage}`
+  );
+
+  const s26fe =
+    await search(
+      "Galaxy S26 FE più economico"
+    );
+
+  assert(
+    s26fe
+      .variantCoverage
+      ?.complete === true,
+    "Galaxy S26 FE deve avere copertura completa 8+128 / 8+256"
+  );
+
+  assert(
+    s26fe
+      .recommendation
+      ?.selectedVariant
+      ?.storage === "256 GB",
+    "DaniSua deve poter scegliere 256 GB quando l'offerta reale costa meno della 128 GB"
+  );
+
+  const redmi =
+    await search(
+      "REDMI Note 17 5G più economico"
+    );
+
+  assert(
+    redmi
+      .variantCoverage
+      ?.complete === false &&
+    redmi
+      .variantCoverage
+      ?.missingConfigurationLabels
+      ?.includes(
+        "8 GB + 256 GB"
+      ),
+    "REDMI Note 17 5G deve restare parziale finché 8+256 ha solo prezzo condizionato"
+  );
+
+  const redmi512 =
+    await search(
+      "REDMI Note 17 Pro 5G 512 GB più economico"
+    );
+
+  assert(
+    redmi512
+      .variantCoverage
+      ?.constraints
+      ?.storage === "512 GB" &&
+    !redmi512
+      .variantCoverage
+      ?.constraints
+      ?.ram,
+    "512 GB non deve essere interpretato per errore come RAM 12 GB"
+  );
+
+  assert(
+    redmi512
+      .variantCoverage
+      ?.requiredConfigurationLabels
+      ?.length === 1 &&
+    redmi512
+      .variantCoverage
+      ?.requiredConfigurationLabels
+      ?.[0] ===
+        "8 GB + 512 GB",
+    "La ricerca 512 GB deve restringere la configurazione a 8 GB + 512 GB"
+  );
+
+  assert(
+    redmi512.results.length > 0 &&
+    redmi512.results.every(
+      offer =>
+        offer.storage ===
+          "512 GB"
+    ),
+    "La ricerca REDMI 512 GB non deve mischiare altri tagli"
+  );
+
+  const a57 =
+    await search(
+      "Galaxy A57 più economico"
+    );
+
+  assert(
+    a57
+      .variantCoverage
+      ?.complete === true,
+    "Galaxy A57 deve coprire 8+128 e 8+256"
+  );
+
+  const pixel11 =
+    await search(
+      "Pixel 11 più economico"
+    );
+
+  assert(
+    pixel11
+      .variantCoverage
+      ?.complete === false &&
+    pixel11
+      .variantCoverage
+      ?.missingConfigurationLabels
+      ?.includes(
+        "12 GB + 512 GB"
+      ),
+    "Pixel 11 deve dichiarare copertura parziale finché manca un prezzo 512 GB verificato"
+  );
+}
+
+
+// ========================================
 // TESTS
 // ========================================
 
 const tests = [
+  {
+    name:
+      "PRICE-SHAPING CONFIGURATIONS — RAM + storage",
+
+    run:
+      testPriceShapingRamStorageDepth,
+  },
+
+
   {
     name:
       "PRICE-SHAPING VARIANTS — storage depth",
