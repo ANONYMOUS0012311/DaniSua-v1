@@ -138,5 +138,93 @@
       "www.sony.it"
     ],
     "notes": "Store ufficiale Sony utilizzato nella beta DaniSua."
+  },
+  {
+    "id": "google-store-it",
+    "name": "Google Store",
+    "aliases": [
+      "Google",
+      "Google Store Italia"
+    ],
+    "country": "IT",
+    "type": "official_brand_store",
+    "verifiedByDaniSua": true,
+    "trustTier": "A",
+    "betaEligible": true,
+    "domains": [
+      "store.google.com"
+    ],
+    "notes": "Store ufficiale Google per dispositivi Pixel in Italia."
+  },
+  {
+    "id": "xiaomi-it",
+    "name": "Xiaomi",
+    "aliases": [
+      "Mi Store",
+      "Xiaomi Italia"
+    ],
+    "country": "IT",
+    "type": "official_brand_store",
+    "verifiedByDaniSua": true,
+    "trustTier": "A",
+    "betaEligible": true,
+    "domains": [
+      "mi.com",
+      "www.mi.com"
+    ],
+    "notes": "Store ufficiale Xiaomi Italia."
+  },
+  {
+    "id": "honor-it",
+    "name": "HONOR",
+    "aliases": [
+      "HONOR Italia",
+      "Honor"
+    ],
+    "country": "IT",
+    "type": "official_brand_store",
+    "verifiedByDaniSua": true,
+    "trustTier": "A",
+    "betaEligible": true,
+    "domains": [
+      "honor.com",
+      "www.honor.com"
+    ],
+    "notes": "Store ufficiale HONOR Italia."
+  },
+  {
+    "id": "oppo-it",
+    "name": "OPPO",
+    "aliases": [
+      "OPPO Italia",
+      "Oppo"
+    ],
+    "country": "IT",
+    "type": "official_brand_store",
+    "verifiedByDaniSua": true,
+    "trustTier": "A",
+    "betaEligible": true,
+    "domains": [
+      "oppo.com",
+      "www.oppo.com"
+    ],
+    "notes": "Store ufficiale OPPO Italia."
+  },
+  {
+    "id": "euronics-it",
+    "name": "Euronics",
+    "aliases": [
+      "Euronics Italia"
+    ],
+    "country": "IT",
+    "type": "retailer",
+    "verifiedByDaniSua": true,
+    "trustTier": "A",
+    "betaEligible": true,
+    "domains": [
+      "euronics.it",
+      "www.euronics.it"
+    ],
+    "notes": "Retailer di elettronica italiano utilizzato per ampliare la copertura smartphone della beta."
   }
 ]
