@@ -2303,8 +2303,8 @@ async function testMidrangeSmartphoneProductionBlock() {
     );
 
   assert(
-    pixel.results.length === 3,
-    `Attesi 3 prezzi Pixel 10a, ricevuti ${pixel.results.length}`
+    pixel.results.length === 4,
+    `Attesi 4 prezzi Pixel 10a, ricevuti ${pixel.results.length}`
   );
 
   assert(
@@ -2324,8 +2324,8 @@ async function testMidrangeSmartphoneProductionBlock() {
     );
 
   assert(
-    redmi.results.length === 3,
-    `Attesi 3 prezzi REDMI Note 17 5G, ricevuti ${redmi.results.length}`
+    redmi.results.length === 4,
+    `Attesi 4 prezzi REDMI Note 17 5G, ricevuti ${redmi.results.length}`
   );
 
   assert(
@@ -2616,7 +2616,7 @@ async function testSmartphoneBatch3FiveFamilies() {
     {
       query: "Pixel 11 Pro 256 GB Nero Ossidiana",
       familyId: "google-pixel-11-pro",
-      expectedOffers: 2,
+      expectedOffers: 3,
       expectedBest: "test-mediaworld-pixel11pro-256-obsidian",
       expectedFinalCost: 1002.99,
     },
@@ -2896,6 +2896,57 @@ async function testSmartphoneFinalTargetFive() {
       data.recommendation?.finalCost === item.expectedFinalCost,
       `${item.familyId}: finalCost inatteso ${data.recommendation?.finalCost}`
     );
+  }
+}
+
+
+// ========================================
+// BETA CORE DEPTH — WAVE 1
+// ========================================
+
+async function testBetaCoreDepthWaveOne() {
+  const cases = [
+    {
+      query: "iPhone 17 256 GB Nero",
+      stores: ["Apple", "MediaWorld", "Unieuro", "Euronics"],
+    },
+    {
+      query: "iPhone 17e 256 GB",
+      stores: ["Apple", "Euronics", "Unieuro", "MediaWorld"],
+    },
+    {
+      query: "Galaxy A57 5G 256 GB",
+      stores: ["Samsung", "MediaWorld", "Euronics", "Unieuro"],
+    },
+    {
+      query: "Pixel 10a 128 GB",
+      stores: ["Euronics", "Unieuro", "MediaWorld", "Google Store"],
+    },
+    {
+      query: "REDMI Note 17 5G 256 GB Black",
+      stores: ["Xiaomi", "MediaWorld", "Unieuro", "Euronics"],
+    },
+    {
+      query: "Pixel 11 Pro 256 GB Nero Ossidiana",
+      stores: ["Google Store", "MediaWorld", "Euronics"],
+    },
+  ];
+
+  for (const item of cases) {
+    const data = await search(item.query);
+    const stores =
+      new Set(
+        data.results.map(
+          offer => offer.store
+        )
+      );
+
+    for (const store of item.stores) {
+      assert(
+        stores.has(store),
+        `${item.query}: manca lo store ${store}`
+      );
+    }
   }
 }
 
@@ -3207,6 +3258,14 @@ const tests = [
 
     run:
       testPixel11ProductionIngest,
+  },
+
+  {
+    name:
+      "BETA CORE DEPTH — wave 1",
+
+    run:
+      testBetaCoreDepthWaveOne,
   },
 
   {

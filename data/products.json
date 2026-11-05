@@ -1137,5 +1137,50 @@
     },
     "image": null,
     "imageSourcePage": "https://www.oppo.com/it/smartphones/series-reno/reno16-pro/"
+  },
+  {
+    "id": "apple-iphone-17e-256-soft-pink",
+    "familyId": "apple-iphone-17e",
+    "familyName": "iPhone 17e",
+    "productLineId": "apple-iphone",
+    "productLineName": "iPhone",
+    "category": "smartphone",
+    "brand": "Apple",
+    "model": "iPhone 17e",
+    "storage": "256 GB",
+    "ram": null,
+    "color": "Rosa chiaro",
+    "condition": "new",
+    "gtin": null,
+    "title": "Apple iPhone 17e 256 GB Rosa Chiaro",
+    "attributes": {
+      "storage": "256 GB",
+      "color": "Rosa chiaro"
+    },
+    "image": null,
+    "imageSourcePage": "https://www.mediaworld.it/it/product/_apple-iphone-17e-256gb-394758.html"
+  },
+  {
+    "id": "samsung-galaxy-a57-256-blue",
+    "familyId": "samsung-galaxy-a57",
+    "familyName": "Galaxy A57 5G",
+    "productLineId": "samsung-galaxy-a",
+    "productLineName": "Galaxy A",
+    "category": "smartphone",
+    "brand": "Samsung",
+    "model": "Galaxy A57 5G",
+    "storage": "256 GB",
+    "ram": "8 GB",
+    "color": "Blu",
+    "condition": "new",
+    "gtin": null,
+    "title": "Samsung Galaxy A57 5G 256 GB Blu",
+    "attributes": {
+      "storage": "256 GB",
+      "ram": "8 GB",
+      "color": "Blu"
+    },
+    "image": null,
+    "imageSourcePage": "https://www.unieuro.it/online/Smartphone/A57-5G-pidSAMA575G256B"
   }
 ]
