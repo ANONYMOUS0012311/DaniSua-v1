@@ -17,7 +17,7 @@
       "importantMinimumVerifiedStores": 3
     },
     "variantDepth": {
-      "principle": "A price comparison is complete only when DaniSua covers the configurations that materially change price, compatibility or utility. For smartphones, storage is mandatory when multiple capacities exist; RAM, condition and connectivity become mandatory when they define distinct commercial configurations. Color and bundles are opportunistic: they may win on price, but do not create mandatory completeness by themselves.",
+      "principle": "A price comparison is complete only when DaniSua covers every commercial configuration that materially changes price, compatibility or utility. Required configurations may combine storage, RAM, condition and connectivity. Color and bundles remain opportunistic unless they define a distinct commercial configuration.",
       "initialFamilies": 4,
       "requiredWhenPriceShaping": [
         "storage",
@@ -28,7 +28,8 @@
       "opportunisticDimensions": [
         "color",
         "bundle"
-      ]
+      ],
+      "trackedFamilies": 21
     }
   },
   "families": [
@@ -157,7 +158,21 @@
       "segment": "premium",
       "minimumStores": 4,
       "officialSource": "https://www.samsung.com/it/smartphones/",
-      "betaTier": "core"
+      "betaTier": "core",
+      "priceShapingConfigurations": [
+        {
+          "storage": "256 GB",
+          "ram": "12 GB"
+        },
+        {
+          "storage": "512 GB",
+          "ram": "12 GB"
+        },
+        {
+          "storage": "1 TB",
+          "ram": "16 GB"
+        }
+      ]
     },
     {
       "familyId": "samsung-galaxy-s26-plus",
@@ -167,7 +182,17 @@
       "segment": "premium",
       "minimumStores": 3,
       "officialSource": "https://www.samsung.com/it/smartphones/",
-      "betaTier": "important"
+      "betaTier": "important",
+      "priceShapingConfigurations": [
+        {
+          "storage": "256 GB",
+          "ram": "12 GB"
+        },
+        {
+          "storage": "512 GB",
+          "ram": "12 GB"
+        }
+      ]
     },
     {
       "familyId": "samsung-galaxy-s26",
@@ -177,7 +202,17 @@
       "segment": "premium",
       "minimumStores": 4,
       "officialSource": "https://www.samsung.com/it/smartphones/",
-      "betaTier": "core"
+      "betaTier": "core",
+      "priceShapingConfigurations": [
+        {
+          "storage": "256 GB",
+          "ram": "12 GB"
+        },
+        {
+          "storage": "512 GB",
+          "ram": "12 GB"
+        }
+      ]
     },
     {
       "familyId": "samsung-galaxy-s26-fe",
@@ -187,7 +222,17 @@
       "segment": "upper-mid",
       "minimumStores": 3,
       "officialSource": "https://www.samsung.com/it/smartphones/",
-      "betaTier": "important"
+      "betaTier": "important",
+      "priceShapingConfigurations": [
+        {
+          "storage": "128 GB",
+          "ram": "8 GB"
+        },
+        {
+          "storage": "256 GB",
+          "ram": "8 GB"
+        }
+      ]
     },
     {
       "familyId": "samsung-galaxy-z-fold8",
@@ -217,7 +262,17 @@
       "segment": "mid",
       "minimumStores": 4,
       "officialSource": "https://www.samsung.com/it/smartphones/",
-      "betaTier": "core"
+      "betaTier": "core",
+      "priceShapingConfigurations": [
+        {
+          "storage": "128 GB",
+          "ram": "8 GB"
+        },
+        {
+          "storage": "256 GB",
+          "ram": "8 GB"
+        }
+      ]
     },
     {
       "familyId": "samsung-galaxy-a37",
@@ -227,7 +282,17 @@
       "segment": "budget-mid",
       "minimumStores": 3,
       "officialSource": "https://www.samsung.com/it/smartphones/",
-      "betaTier": "important"
+      "betaTier": "important",
+      "priceShapingConfigurations": [
+        {
+          "storage": "128 GB",
+          "ram": "6 GB"
+        },
+        {
+          "storage": "256 GB",
+          "ram": "8 GB"
+        }
+      ]
     },
     {
       "familyId": "google-pixel-11-pro-xl",
@@ -237,7 +302,21 @@
       "segment": "premium",
       "minimumStores": 2,
       "officialSource": "https://store.google.com/it/category/phones?hl=it",
-      "betaTier": "breadth"
+      "betaTier": "breadth",
+      "priceShapingConfigurations": [
+        {
+          "storage": "256 GB",
+          "ram": "12 GB"
+        },
+        {
+          "storage": "512 GB",
+          "ram": "16 GB"
+        },
+        {
+          "storage": "1 TB",
+          "ram": "16 GB"
+        }
+      ]
     },
     {
       "familyId": "google-pixel-11-pro",
@@ -247,7 +326,21 @@
       "segment": "premium",
       "minimumStores": 3,
       "officialSource": "https://store.google.com/it/category/phones?hl=it",
-      "betaTier": "important"
+      "betaTier": "important",
+      "priceShapingConfigurations": [
+        {
+          "storage": "256 GB",
+          "ram": "12 GB"
+        },
+        {
+          "storage": "512 GB",
+          "ram": "16 GB"
+        },
+        {
+          "storage": "1 TB",
+          "ram": "16 GB"
+        }
+      ]
     },
     {
       "familyId": "google-pixel-11",
@@ -257,7 +350,17 @@
       "segment": "upper-mid",
       "minimumStores": 4,
       "officialSource": "https://store.google.com/it/category/phones?hl=it",
-      "betaTier": "core"
+      "betaTier": "core",
+      "priceShapingConfigurations": [
+        {
+          "storage": "256 GB",
+          "ram": "12 GB"
+        },
+        {
+          "storage": "512 GB",
+          "ram": "12 GB"
+        }
+      ]
     },
     {
       "familyId": "google-pixel-10a",
@@ -267,7 +370,17 @@
       "segment": "mid",
       "minimumStores": 4,
       "officialSource": "https://store.google.com/it/category/phones?hl=it",
-      "betaTier": "core"
+      "betaTier": "core",
+      "priceShapingConfigurations": [
+        {
+          "storage": "128 GB",
+          "ram": "8 GB"
+        },
+        {
+          "storage": "256 GB",
+          "ram": "8 GB"
+        }
+      ]
     },
     {
       "familyId": "xiaomi-17-ultra",
@@ -277,7 +390,17 @@
       "segment": "premium",
       "minimumStores": 2,
       "officialSource": "https://www.mi.com/it/",
-      "betaTier": "breadth"
+      "betaTier": "breadth",
+      "priceShapingConfigurations": [
+        {
+          "storage": "512 GB",
+          "ram": "16 GB"
+        },
+        {
+          "storage": "1 TB",
+          "ram": "16 GB"
+        }
+      ]
     },
     {
       "familyId": "xiaomi-17t-pro",
@@ -287,7 +410,21 @@
       "segment": "upper-mid",
       "minimumStores": 3,
       "officialSource": "https://www.mi.com/it/",
-      "betaTier": "important"
+      "betaTier": "important",
+      "priceShapingConfigurations": [
+        {
+          "storage": "256 GB",
+          "ram": "12 GB"
+        },
+        {
+          "storage": "512 GB",
+          "ram": "12 GB"
+        },
+        {
+          "storage": "1 TB",
+          "ram": "12 GB"
+        }
+      ]
     },
     {
       "familyId": "xiaomi-17t",
@@ -297,7 +434,17 @@
       "segment": "mid",
       "minimumStores": 4,
       "officialSource": "https://www.mi.com/it/",
-      "betaTier": "core"
+      "betaTier": "core",
+      "priceShapingConfigurations": [
+        {
+          "storage": "256 GB",
+          "ram": "12 GB"
+        },
+        {
+          "storage": "512 GB",
+          "ram": "12 GB"
+        }
+      ]
     },
     {
       "familyId": "redmi-note-17-pro-max-5g",
@@ -307,7 +454,17 @@
       "segment": "mid",
       "minimumStores": 2,
       "officialSource": "https://www.mi.com/it/product-list/redmi-series/",
-      "betaTier": "breadth"
+      "betaTier": "breadth",
+      "priceShapingConfigurations": [
+        {
+          "storage": "256 GB",
+          "ram": "8 GB"
+        },
+        {
+          "storage": "512 GB",
+          "ram": "8 GB"
+        }
+      ]
     },
     {
       "familyId": "redmi-note-17-pro-5g",
@@ -317,7 +474,21 @@
       "segment": "mid",
       "minimumStores": 4,
       "officialSource": "https://www.mi.com/it/product-list/redmi-series/",
-      "betaTier": "core"
+      "betaTier": "core",
+      "priceShapingConfigurations": [
+        {
+          "storage": "256 GB",
+          "ram": "6 GB"
+        },
+        {
+          "storage": "256 GB",
+          "ram": "12 GB"
+        },
+        {
+          "storage": "512 GB",
+          "ram": "8 GB"
+        }
+      ]
     },
     {
       "familyId": "redmi-note-17-5g",
@@ -327,7 +498,21 @@
       "segment": "budget-mid",
       "minimumStores": 4,
       "officialSource": "https://www.mi.com/it/product-list/redmi-series/",
-      "betaTier": "core"
+      "betaTier": "core",
+      "priceShapingConfigurations": [
+        {
+          "storage": "128 GB",
+          "ram": "6 GB"
+        },
+        {
+          "storage": "256 GB",
+          "ram": "6 GB"
+        },
+        {
+          "storage": "256 GB",
+          "ram": "8 GB"
+        }
+      ]
     },
     {
       "familyId": "honor-magic8-pro",
@@ -347,7 +532,17 @@
       "segment": "mid",
       "minimumStores": 3,
       "officialSource": "https://www.honor.com/it/phones/",
-      "betaTier": "important"
+      "betaTier": "important",
+      "priceShapingConfigurations": [
+        {
+          "storage": "256 GB",
+          "ram": "8 GB"
+        },
+        {
+          "storage": "512 GB",
+          "ram": "8 GB"
+        }
+      ]
     },
     {
       "familyId": "honor-600-pro",
