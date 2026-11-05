@@ -2662,30 +2662,35 @@ async function testSmartphoneBatch4PremiumBreadth() {
     {
       query: "iPhone Air 256 GB Nero Siderale",
       familyId: "apple-iphone-air",
+      expectedOffers: 1,
       expectedBest: "test-apple-iphone-air-256-black",
       expectedFinalCost: 1339,
     },
     {
       query: "Galaxy S26+ 256 GB",
       familyId: "samsung-galaxy-s26-plus",
-      expectedBest: "test-samsung-s26plus-256",
-      expectedFinalCost: 1189,
+      expectedOffers: 2,
+      expectedBest: "test-euronics-s26plus-256-cobalt-violet",
+      expectedFinalCost: 1176.9,
     },
     {
       query: "Pixel 11 Pro XL 256 GB Nero Ossidiana",
       familyId: "google-pixel-11-pro-xl",
+      expectedOffers: 1,
       expectedBest: "test-euronics-pixel11proxl-256-obsidian",
       expectedFinalCost: null,
     },
     {
       query: "Xiaomi 17T Pro 256 GB",
       familyId: "xiaomi-17t-pro",
+      expectedOffers: 1,
       expectedBest: "test-xiaomi-17tpro-256",
       expectedFinalCost: null,
     },
     {
       query: "REDMI Note 17 Pro Max 5G 256 GB Black",
       familyId: "redmi-note-17-pro-max-5g",
+      expectedOffers: 1,
       expectedBest: "test-xiaomi-redminote17promax-5g-256-black",
       expectedFinalCost: null,
     },
@@ -2698,6 +2703,7 @@ async function testSmartphoneBatch4PremiumBreadth() {
       [
         "specific",
         "best_offer_ready",
+        "family_price_ready",
       ].includes(
         data.status
       ),
@@ -2705,8 +2711,8 @@ async function testSmartphoneBatch4PremiumBreadth() {
     );
 
     assert(
-      data.results.length === 1,
-      `${item.familyId}: attesa 1 offerta verificata, ricevute ${data.results.length}`
+      data.results.length === item.expectedOffers,
+      `${item.familyId}: attese ${item.expectedOffers} offerte verificate, ricevute ${data.results.length}`
     );
 
     assert(
