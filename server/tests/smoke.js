@@ -2580,6 +2580,80 @@ async function testRetailerThirdPartySellerGuard() {
 
 
 // ========================================
+// SMARTPHONE BATCH 3 — FIVE FAMILIES
+// ========================================
+
+async function testSmartphoneBatch3FiveFamilies() {
+  const cases = [
+    {
+      query: "Galaxy A37 5G 128 GB Awesome Lavender",
+      familyId: "samsung-galaxy-a37",
+      expectedOffers: 1,
+      expectedBest: "test-euronics-a37-128-lavender",
+      expectedFinalCost: 342.9,
+    },
+    {
+      query: "Xiaomi 17T 256 GB Blue",
+      familyId: "xiaomi-17t",
+      expectedOffers: 2,
+      expectedBest: "test-euronics-xiaomi17t-256-blue",
+      expectedFinalCost: 531.9,
+    },
+    {
+      query: "REDMI Note 17 Pro 5G 256 GB Black",
+      familyId: "redmi-note-17-pro-5g",
+      expectedOffers: 2,
+      expectedBest: "test-xiaomi-redminote17pro-5g-256-black",
+      expectedFinalCost: null,
+    },
+    {
+      query: "Galaxy S26 FE 256 GB Graphite",
+      familyId: "samsung-galaxy-s26-fe",
+      expectedOffers: 2,
+      expectedBest: "test-euronics-s26fe-256-graphite",
+      expectedFinalCost: 731.9,
+    },
+    {
+      query: "Pixel 11 Pro 256 GB Nero Ossidiana",
+      familyId: "google-pixel-11-pro",
+      expectedOffers: 2,
+      expectedBest: "test-mediaworld-pixel11pro-256-obsidian",
+      expectedFinalCost: 1002.99,
+    },
+  ];
+
+  for (const item of cases) {
+    const data = await search(item.query);
+
+    assert(
+      data.status === "specific",
+      `${item.familyId}: status inatteso ${data.status}`
+    );
+
+    assert(
+      data.results.length === item.expectedOffers,
+      `${item.familyId}: attese ${item.expectedOffers} offerte, ricevute ${data.results.length}`
+    );
+
+    assert(
+      data.bestOffer?.familyId === item.familyId,
+      `${item.familyId}: famiglia bestOffer inattesa ${data.bestOffer?.familyId}`
+    );
+
+    assert(
+      data.bestOffer?.id === item.expectedBest,
+      `${item.familyId}: bestOffer inattesa ${data.bestOffer?.id}`
+    );
+
+    assert(
+      data.recommendation?.finalCost === item.expectedFinalCost,
+      `${item.familyId}: finalCost inatteso ${data.recommendation?.finalCost}`
+    );
+  }
+}
+
+
+// ========================================
 // TESTS
 // ========================================
 
@@ -2886,6 +2960,14 @@ const tests = [
 
     run:
       testPixel11ProductionIngest,
+  },
+
+  {
+    name:
+      "SMARTPHONE BATCH 3 — five families",
+
+    run:
+      testSmartphoneBatch3FiveFamilies,
   },
 
   {
