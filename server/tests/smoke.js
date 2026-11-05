@@ -2190,7 +2190,7 @@ async function testMidrangeSmartphoneProductionBlock() {
 
   assert(
     iphone17e.results.length === 3,
-    `Attesi 3 prezzi iPhone 17e, ricevuti ${iphone17e.results.length}`
+    `Attesi 3 prezzi iPhone 17e, ricevuti ${iphone17e.results.length}. Risposta: ${JSON.stringify(iphone17e)}`
   );
 
   assert(
