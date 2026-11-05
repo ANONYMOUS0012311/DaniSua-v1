@@ -1362,6 +1362,75 @@ function buildFamilyPriceReady(
 // VARIANT DEPTH — PRICE-SHAPING COVERAGE
 // ========================================
 
+const PRICE_SHAPING_FIELDS = [
+  "storage",
+  "ram",
+  "condition",
+  "connectivity",
+];
+
+
+function getTargetConfigurations(
+  family
+) {
+  if (
+    Array.isArray(
+      family
+        ?.priceShapingConfigurations
+    ) &&
+    family
+      .priceShapingConfigurations
+      .length > 0
+  ) {
+    return family
+      .priceShapingConfigurations
+      .map(
+        configuration =>
+          Object.fromEntries(
+            PRICE_SHAPING_FIELDS
+              .filter(
+                field =>
+                  configuration
+                    ?.[field] != null
+              )
+              .map(
+                field => [
+                  field,
+                  String(
+                    configuration[field]
+                  ),
+                ]
+              )
+          )
+      )
+      .filter(
+        configuration =>
+          Object.keys(
+            configuration
+          ).length > 0
+      );
+  }
+
+  const storages =
+    Array.isArray(
+      family
+        ?.priceShapingDimensions
+        ?.storage
+    )
+      ? family
+          .priceShapingDimensions
+          .storage
+      : [];
+
+  return storages.map(
+    storage => ({
+      storage:
+        String(storage),
+    })
+  );
+}
+
+
 const VARIANT_DEPTH_TARGETS =
   new Map(
     (
@@ -1369,26 +1438,118 @@ const VARIANT_DEPTH_TARGETS =
         ?.families ||
       []
     )
-      .filter(
-        family =>
-          Array.isArray(
-            family
-              ?.priceShapingDimensions
-              ?.storage
-          )
-      )
       .map(
         family => [
           family.familyId,
-          family
-            .priceShapingDimensions
-            .storage,
+          getTargetConfigurations(
+            family
+          ),
         ]
+      )
+      .filter(
+        (
+          [, configurations]
+        ) =>
+          configurations.length > 0
       )
   );
 
 
+function configurationLabel(
+  configuration
+) {
+  return [
+    configuration.ram,
+    configuration.storage,
+    configuration.connectivity,
+    configuration.condition,
+  ]
+    .filter(Boolean)
+    .join(" + ");
+}
+
+
+function offerMatchesConfiguration(
+  offer,
+  configuration
+) {
+  return Object.entries(
+    configuration
+  ).every(
+    ([field, value]) =>
+      normalizeText(
+        offer?.[field] ??
+        offer
+          ?.attributes
+          ?.[field] ??
+        ""
+      ) ===
+      normalizeText(value)
+  );
+}
+
+
+function getVariantQueryConstraints(
+  query,
+  configurations
+) {
+  const constraints = {};
+
+  for (
+    const field of
+    PRICE_SHAPING_FIELDS
+  ) {
+    const values =
+      [
+        ...new Set(
+          configurations
+            .map(
+              configuration =>
+                configuration[field]
+            )
+            .filter(Boolean)
+        ),
+      ];
+
+    const matches =
+      values.filter(
+        value =>
+          queryContains(
+            query,
+            value
+          )
+      );
+
+    if (
+      matches.length === 1
+    ) {
+      constraints[field] =
+        matches[0];
+    }
+  }
+
+  return constraints;
+}
+
+
+function configurationMatchesConstraints(
+  configuration,
+  constraints
+) {
+  return Object.entries(
+    constraints
+  ).every(
+    ([field, value]) =>
+      normalizeText(
+        configuration[field]
+      ) ===
+      normalizeText(value)
+  );
+}
+
+
 function buildVariantCoverageMeta(
+  query,
   offers
 ) {
   if (
@@ -1411,39 +1572,146 @@ function buildVariantCoverageMeta(
   const familyId =
     familyIds[0];
 
-  const requiredStorages =
+  const targetConfigurations =
     VARIANT_DEPTH_TARGETS
-      .get(familyId);
+      .get(familyId) ||
+    [];
 
   if (
-    !Array.isArray(
-      requiredStorages
-    ) ||
-    requiredStorages.length === 0
+    targetConfigurations.length ===
+    0
   ) {
     return null;
   }
 
-  const coveredStorages =
-    uniqueValues(
-      offers,
-      "storage"
+  const constraints =
+    getVariantQueryConstraints(
+      query,
+      targetConfigurations
     );
 
-  const missingStorages =
-    requiredStorages.filter(
-      storage =>
-        !coveredStorages
-          .includes(storage)
+  const requiredConfigurations =
+    targetConfigurations
+      .filter(
+        configuration =>
+          configurationMatchesConstraints(
+            configuration,
+            constraints
+          )
+      );
+
+  if (
+    requiredConfigurations.length ===
+    0
+  ) {
+    return null;
+  }
+
+  const comparableOffers =
+    offers.filter(
+      offer =>
+        offer.stock !== false &&
+        isDefaultComparableOffer(
+          offer
+        )
     );
+
+  const coveredConfigurations =
+    requiredConfigurations
+      .filter(
+        configuration =>
+          comparableOffers
+            .some(
+              offer =>
+                offerMatchesConfiguration(
+                  offer,
+                  configuration
+                )
+            )
+      );
+
+  const coveredLabels =
+    coveredConfigurations.map(
+      configurationLabel
+    );
+
+  const missingConfigurations =
+    requiredConfigurations
+      .filter(
+        configuration =>
+          !coveredLabels.includes(
+            configurationLabel(
+              configuration
+            )
+          )
+      );
+
+  const requiredStorages =
+    [
+      ...new Set(
+        requiredConfigurations
+          .map(
+            configuration =>
+              configuration.storage
+          )
+          .filter(Boolean)
+      ),
+    ];
+
+  const coveredStorages =
+    [
+      ...new Set(
+        coveredConfigurations
+          .map(
+            configuration =>
+              configuration.storage
+          )
+          .filter(Boolean)
+      ),
+    ];
+
+  const missingStorages =
+    requiredStorages
+      .filter(
+        storage =>
+          !coveredStorages
+            .includes(storage)
+      );
 
   return {
     tracked: true,
     familyId,
-    dimension:
-      "storage",
+    dimensions:
+      [
+        ...new Set(
+          requiredConfigurations
+            .flatMap(
+              configuration =>
+                Object.keys(
+                  configuration
+                )
+            )
+        ),
+      ],
+    constraints,
     complete:
-      missingStorages.length === 0,
+      missingConfigurations
+        .length === 0,
+    requiredConfigurations,
+    coveredConfigurations,
+    missingConfigurations,
+    requiredConfigurationLabels:
+      requiredConfigurations
+        .map(
+          configurationLabel
+        ),
+    coveredConfigurationLabels:
+      coveredLabels,
+    missingConfigurationLabels:
+      missingConfigurations
+        .map(
+          configurationLabel
+        ),
     requiredStorages,
     coveredStorages,
     missingStorages,
@@ -1451,54 +1719,11 @@ function buildVariantCoverageMeta(
 }
 
 
-function querySpecifiesTrackedStorage(
-  query,
-  offers
-) {
-  if (
-    !Array.isArray(offers) ||
-    offers.length === 0
-  ) {
-    return false;
-  }
-
-  const familyIds =
-    uniqueValues(
-      offers,
-      "familyId"
-    );
-
-  if (familyIds.length !== 1) {
-    return false;
-  }
-
-  const requiredStorages =
-    VARIANT_DEPTH_TARGETS
-      .get(
-        familyIds[0]
-      ) || [];
-
-  return requiredStorages
-    .some(
-      storage =>
-        queryContains(
-          query,
-          storage
-        )
-    );
-}
-
-
 function shouldReportVariantCoverage(
-  query,
   offers
 ) {
-  return (
-    hasSingleFamily(offers) &&
-    !querySpecifiesTrackedStorage(
-      query,
-      offers
-    )
+  return hasSingleFamily(
+    offers
   );
 }
 
@@ -1520,11 +1745,11 @@ function attachVariantCoverage(
 
   const suffix =
     complete
-      ? " Copertura varianti completa per le capacità monitorate."
+      ? " Copertura configurazioni completa per le varianti monitorate."
       : (
-          " Confronto varianti parziale: mancano prezzi verificati per " +
+          " Confronto configurazioni parziale: mancano prezzi verificati per " +
           variantCoverage
-            .missingStorages
+            .missingConfigurationLabels
             .join(", ") +
           "."
         );
@@ -1546,7 +1771,6 @@ function attachVariantCoverage(
 }
 
 
-// ========================================
 // PRODUCT SEARCH
 // ========================================
 
@@ -3551,10 +3775,10 @@ app.get(
 
         const variantCoverage =
           shouldReportVariantCoverage(
-            productQuery,
             comparableResults
           )
             ? buildVariantCoverageMeta(
+                productQuery,
                 comparableResults
               )
             : null;
@@ -3671,10 +3895,10 @@ app.get(
 
         const variantCoverage =
           shouldReportVariantCoverage(
-            productQuery,
             comparableResults
           )
             ? buildVariantCoverageMeta(
+                productQuery,
                 comparableResults
               )
             : null;
