@@ -8,6 +8,13 @@
     "readiness": {
       "p0MinimumVerifiedStores": 3,
       "p1MinimumVerifiedStores": 2
+    },
+    "betaDepth": {
+      "principle": "Deep comparison on the families most useful to beta users. Core families require 4 verified non-conditional stores; important families require 3. Breadth families remain discoverable but do not block beta depth readiness.",
+      "coreFamilies": 12,
+      "importantFamilies": 8,
+      "coreMinimumVerifiedStores": 4,
+      "importantMinimumVerifiedStores": 3
     }
   },
   "families": [
@@ -17,8 +24,9 @@
       "familyName": "iPhone 18 Pro",
       "priority": "P0",
       "segment": "premium",
-      "minimumStores": 3,
-      "officialSource": "https://www.apple.com/it/shop/buy-iphone"
+      "minimumStores": 4,
+      "officialSource": "https://www.apple.com/it/shop/buy-iphone",
+      "betaTier": "core"
     },
     {
       "familyId": "apple-iphone-18-pro-max",
@@ -27,7 +35,8 @@
       "priority": "P1",
       "segment": "premium",
       "minimumStores": 2,
-      "officialSource": "https://www.apple.com/it/shop/buy-iphone"
+      "officialSource": "https://www.apple.com/it/shop/buy-iphone",
+      "betaTier": "breadth"
     },
     {
       "familyId": "apple-iphone-duo",
@@ -36,7 +45,8 @@
       "priority": "P1",
       "segment": "foldable-premium",
       "minimumStores": 2,
-      "officialSource": "https://www.apple.com/it/shop/buy-iphone"
+      "officialSource": "https://www.apple.com/it/shop/buy-iphone",
+      "betaTier": "breadth"
     },
     {
       "familyId": "apple-iphone-air",
@@ -44,8 +54,9 @@
       "familyName": "iPhone Air",
       "priority": "P1",
       "segment": "premium",
-      "minimumStores": 2,
-      "officialSource": "https://www.apple.com/it/shop/buy-iphone"
+      "minimumStores": 3,
+      "officialSource": "https://www.apple.com/it/shop/buy-iphone",
+      "betaTier": "important"
     },
     {
       "familyId": "apple-iphone-17",
@@ -53,8 +64,9 @@
       "familyName": "iPhone 17",
       "priority": "P0",
       "segment": "upper-mid",
-      "minimumStores": 3,
-      "officialSource": "https://www.apple.com/it/shop/buy-iphone"
+      "minimumStores": 4,
+      "officialSource": "https://www.apple.com/it/shop/buy-iphone",
+      "betaTier": "core"
     },
     {
       "familyId": "apple-iphone-17e",
@@ -62,8 +74,9 @@
       "familyName": "iPhone 17e",
       "priority": "P0",
       "segment": "mid",
-      "minimumStores": 3,
-      "officialSource": "https://www.apple.com/it/shop/buy-iphone"
+      "minimumStores": 4,
+      "officialSource": "https://www.apple.com/it/shop/buy-iphone",
+      "betaTier": "core"
     },
     {
       "familyId": "apple-iphone-16",
@@ -71,8 +84,9 @@
       "familyName": "iPhone 16",
       "priority": "P0",
       "segment": "mid",
-      "minimumStores": 3,
-      "officialSource": "https://www.apple.com/it/shop/buy-iphone"
+      "minimumStores": 4,
+      "officialSource": "https://www.apple.com/it/shop/buy-iphone",
+      "betaTier": "core"
     },
     {
       "familyId": "samsung-galaxy-s26-ultra",
@@ -80,8 +94,9 @@
       "familyName": "Galaxy S26 Ultra",
       "priority": "P0",
       "segment": "premium",
-      "minimumStores": 3,
-      "officialSource": "https://www.samsung.com/it/smartphones/"
+      "minimumStores": 4,
+      "officialSource": "https://www.samsung.com/it/smartphones/",
+      "betaTier": "core"
     },
     {
       "familyId": "samsung-galaxy-s26-plus",
@@ -89,8 +104,9 @@
       "familyName": "Galaxy S26+",
       "priority": "P1",
       "segment": "premium",
-      "minimumStores": 2,
-      "officialSource": "https://www.samsung.com/it/smartphones/"
+      "minimumStores": 3,
+      "officialSource": "https://www.samsung.com/it/smartphones/",
+      "betaTier": "important"
     },
     {
       "familyId": "samsung-galaxy-s26",
@@ -98,8 +114,9 @@
       "familyName": "Galaxy S26",
       "priority": "P0",
       "segment": "premium",
-      "minimumStores": 3,
-      "officialSource": "https://www.samsung.com/it/smartphones/"
+      "minimumStores": 4,
+      "officialSource": "https://www.samsung.com/it/smartphones/",
+      "betaTier": "core"
     },
     {
       "familyId": "samsung-galaxy-s26-fe",
@@ -107,8 +124,9 @@
       "familyName": "Galaxy S26 FE",
       "priority": "P1",
       "segment": "upper-mid",
-      "minimumStores": 2,
-      "officialSource": "https://www.samsung.com/it/smartphones/"
+      "minimumStores": 3,
+      "officialSource": "https://www.samsung.com/it/smartphones/",
+      "betaTier": "important"
     },
     {
       "familyId": "samsung-galaxy-z-fold8",
@@ -117,7 +135,8 @@
       "priority": "P1",
       "segment": "foldable-premium",
       "minimumStores": 2,
-      "officialSource": "https://www.samsung.com/it/smartphones/"
+      "officialSource": "https://www.samsung.com/it/smartphones/",
+      "betaTier": "breadth"
     },
     {
       "familyId": "samsung-galaxy-z-flip8",
@@ -126,7 +145,8 @@
       "priority": "P1",
       "segment": "foldable-premium",
       "minimumStores": 2,
-      "officialSource": "https://www.samsung.com/it/smartphones/"
+      "officialSource": "https://www.samsung.com/it/smartphones/",
+      "betaTier": "breadth"
     },
     {
       "familyId": "samsung-galaxy-a57",
@@ -134,8 +154,9 @@
       "familyName": "Galaxy A57 5G",
       "priority": "P0",
       "segment": "mid",
-      "minimumStores": 3,
-      "officialSource": "https://www.samsung.com/it/smartphones/"
+      "minimumStores": 4,
+      "officialSource": "https://www.samsung.com/it/smartphones/",
+      "betaTier": "core"
     },
     {
       "familyId": "samsung-galaxy-a37",
@@ -143,8 +164,9 @@
       "familyName": "Galaxy A37",
       "priority": "P1",
       "segment": "budget-mid",
-      "minimumStores": 2,
-      "officialSource": "https://www.samsung.com/it/smartphones/"
+      "minimumStores": 3,
+      "officialSource": "https://www.samsung.com/it/smartphones/",
+      "betaTier": "important"
     },
     {
       "familyId": "google-pixel-11-pro-xl",
@@ -153,7 +175,8 @@
       "priority": "P1",
       "segment": "premium",
       "minimumStores": 2,
-      "officialSource": "https://store.google.com/it/category/phones?hl=it"
+      "officialSource": "https://store.google.com/it/category/phones?hl=it",
+      "betaTier": "breadth"
     },
     {
       "familyId": "google-pixel-11-pro",
@@ -162,7 +185,8 @@
       "priority": "P0",
       "segment": "premium",
       "minimumStores": 3,
-      "officialSource": "https://store.google.com/it/category/phones?hl=it"
+      "officialSource": "https://store.google.com/it/category/phones?hl=it",
+      "betaTier": "important"
     },
     {
       "familyId": "google-pixel-11",
@@ -170,8 +194,9 @@
       "familyName": "Pixel 11",
       "priority": "P0",
       "segment": "upper-mid",
-      "minimumStores": 3,
-      "officialSource": "https://store.google.com/it/category/phones?hl=it"
+      "minimumStores": 4,
+      "officialSource": "https://store.google.com/it/category/phones?hl=it",
+      "betaTier": "core"
     },
     {
       "familyId": "google-pixel-10a",
@@ -179,8 +204,9 @@
       "familyName": "Pixel 10a",
       "priority": "P0",
       "segment": "mid",
-      "minimumStores": 3,
-      "officialSource": "https://store.google.com/it/category/phones?hl=it"
+      "minimumStores": 4,
+      "officialSource": "https://store.google.com/it/category/phones?hl=it",
+      "betaTier": "core"
     },
     {
       "familyId": "xiaomi-17-ultra",
@@ -189,7 +215,8 @@
       "priority": "P1",
       "segment": "premium",
       "minimumStores": 2,
-      "officialSource": "https://www.mi.com/it/"
+      "officialSource": "https://www.mi.com/it/",
+      "betaTier": "breadth"
     },
     {
       "familyId": "xiaomi-17t-pro",
@@ -198,7 +225,8 @@
       "priority": "P0",
       "segment": "upper-mid",
       "minimumStores": 3,
-      "officialSource": "https://www.mi.com/it/"
+      "officialSource": "https://www.mi.com/it/",
+      "betaTier": "important"
     },
     {
       "familyId": "xiaomi-17t",
@@ -206,8 +234,9 @@
       "familyName": "Xiaomi 17T",
       "priority": "P0",
       "segment": "mid",
-      "minimumStores": 3,
-      "officialSource": "https://www.mi.com/it/"
+      "minimumStores": 4,
+      "officialSource": "https://www.mi.com/it/",
+      "betaTier": "core"
     },
     {
       "familyId": "redmi-note-17-pro-max-5g",
@@ -216,7 +245,8 @@
       "priority": "P1",
       "segment": "mid",
       "minimumStores": 2,
-      "officialSource": "https://www.mi.com/it/product-list/redmi-series/"
+      "officialSource": "https://www.mi.com/it/product-list/redmi-series/",
+      "betaTier": "breadth"
     },
     {
       "familyId": "redmi-note-17-pro-5g",
@@ -224,8 +254,9 @@
       "familyName": "REDMI Note 17 Pro 5G",
       "priority": "P0",
       "segment": "mid",
-      "minimumStores": 3,
-      "officialSource": "https://www.mi.com/it/product-list/redmi-series/"
+      "minimumStores": 4,
+      "officialSource": "https://www.mi.com/it/product-list/redmi-series/",
+      "betaTier": "core"
     },
     {
       "familyId": "redmi-note-17-5g",
@@ -233,8 +264,9 @@
       "familyName": "REDMI Note 17 5G",
       "priority": "P0",
       "segment": "budget-mid",
-      "minimumStores": 3,
-      "officialSource": "https://www.mi.com/it/product-list/redmi-series/"
+      "minimumStores": 4,
+      "officialSource": "https://www.mi.com/it/product-list/redmi-series/",
+      "betaTier": "core"
     },
     {
       "familyId": "honor-magic8-pro",
@@ -243,7 +275,8 @@
       "priority": "P0",
       "segment": "premium",
       "minimumStores": 3,
-      "officialSource": "https://www.honor.com/it/phones/"
+      "officialSource": "https://www.honor.com/it/phones/",
+      "betaTier": "breadth"
     },
     {
       "familyId": "honor-magic8-lite",
@@ -251,8 +284,9 @@
       "familyName": "HONOR Magic8 Lite",
       "priority": "P1",
       "segment": "mid",
-      "minimumStores": 2,
-      "officialSource": "https://www.honor.com/it/phones/"
+      "minimumStores": 3,
+      "officialSource": "https://www.honor.com/it/phones/",
+      "betaTier": "important"
     },
     {
       "familyId": "honor-600-pro",
@@ -261,7 +295,8 @@
       "priority": "P1",
       "segment": "upper-mid",
       "minimumStores": 2,
-      "officialSource": "https://www.honor.com/it/phones/"
+      "officialSource": "https://www.honor.com/it/phones/",
+      "betaTier": "breadth"
     },
     {
       "familyId": "oppo-find-x10",
@@ -270,7 +305,8 @@
       "priority": "P0",
       "segment": "premium",
       "minimumStores": 3,
-      "officialSource": "https://www.oppo.com/it/smartphones/"
+      "officialSource": "https://www.oppo.com/it/smartphones/",
+      "betaTier": "important"
     },
     {
       "familyId": "oppo-reno16-pro-5g",
@@ -279,7 +315,8 @@
       "priority": "P1",
       "segment": "upper-mid",
       "minimumStores": 2,
-      "officialSource": "https://www.oppo.com/it/smartphones/"
+      "officialSource": "https://www.oppo.com/it/smartphones/",
+      "betaTier": "breadth"
     }
   ]
 }
