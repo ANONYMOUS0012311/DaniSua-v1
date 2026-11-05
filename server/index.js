@@ -2752,6 +2752,109 @@ function buildBestOfferRecommendation(
 
 
 // ========================================
+// SPIEGAZIONE RACCOMANDAZIONE
+// ========================================
+
+const CRITERION_LABELS = {
+  camera: "fotocamera",
+  battery: "batteria",
+  performance: "prestazioni",
+  display: "display",
+  software: "software",
+  value: "rapporto qualità/prezzo",
+  sound: "audio",
+  anc: "cancellazione del rumore",
+  comfort: "comfort",
+  portability: "portabilità",
+  overall: "valutazione generale",
+};
+
+function getKnowledgeSource(knowledge, sourceId) {
+  if (!sourceId || !Array.isArray(knowledge?.sources)) {
+    return null;
+  }
+  return knowledge.sources.find(source => source?.id === sourceId) || null;
+}
+
+function buildRankingEvidence(winner, bestOffer) {
+  const knowledge = bestOffer?.knowledge;
+  const used = Array.isArray(winner?.ranking?.usedCriteria)
+    ? winner.ranking.usedCriteria
+    : [];
+  if (!knowledge || used.length === 0) {
+    return [];
+  }
+  return used.map(item => {
+    const criterion = item?.criterion;
+    if (!criterion) {
+      return null;
+    }
+    const meta = knowledge?.scoreMeta?.[criterion] || null;
+    const evidence = Array.isArray(knowledge?.evidence)
+      ? knowledge.evidence.find(entry =>
+          entry?.criterion === criterion &&
+          entry?.rankingEligible !== false &&
+          (typeof item.rawScore !== "number" || entry?.score === item.rawScore)
+        )
+      : null;
+    const sourceId = meta?.sourceId || evidence?.sourceId || null;
+    const source = getKnowledgeSource(knowledge, sourceId);
+    return {
+      criterion,
+      label: CRITERION_LABELS[criterion] || criterion,
+      score: typeof item.rawScore === "number" ? item.rawScore : null,
+      normalizedScore: typeof item.normalizedScore === "number" ? item.normalizedScore : null,
+      protocol: meta?.protocol || evidence?.protocol || null,
+      sourceId,
+      sourceName: source?.name || null,
+      sourceUrl: source?.url || null,
+    };
+  }).filter(Boolean);
+}
+
+function buildVerifiedFactHighlights(bestOffer) {
+  const knowledge = bestOffer?.knowledge;
+  const facts = knowledge?.facts;
+  if (!facts || typeof facts !== "object") {
+    return [];
+  }
+  const highlights = [];
+  const push = (key, label, value) => {
+    if (value === null || value === undefined || value === "") {
+      return;
+    }
+    highlights.push({ key, label, value: String(value), usedForRanking: false });
+  };
+  if (typeof facts?.camera?.mainMp === "number") {
+    push("camera", "Fotocamera principale", facts.camera.mainMp + " MP");
+  }
+  if (typeof facts?.battery?.capacityMah === "number") {
+    push("battery", "Batteria", facts.battery.capacityMah + " mAh");
+  }
+  const supportYears = facts?.software?.supportYears ??
+    facts?.software?.minimumSupportYears ??
+    facts?.software?.securityUpdateYears ?? null;
+  if (typeof supportYears === "number") {
+    push("software", "Supporto software dichiarato", supportYears + " anni");
+  }
+  const refreshRate = facts?.display?.refreshHz ?? facts?.display?.refreshHzMax ?? null;
+  if (typeof refreshRate === "number") {
+    push("display", "Refresh rate display", "fino a " + refreshRate + " Hz");
+  }
+  if (facts?.performance?.chip) {
+    push("performance", "Chip", facts.performance.chip);
+  }
+  return highlights.slice(0, 4);
+}
+
+function getRecommendationConfidence(partialCriteria, missingCriteria, excludedFamilies) {
+  if (missingCriteria.length === 0 && partialCriteria.length === 0 && excludedFamilies === 0) {
+    return "high";
+  }
+  return "medium";
+}
+
+// ========================================
 // RACCOMANDAZIONE BEST PRODUCT
 // ========================================
 
@@ -2774,6 +2877,17 @@ function buildBestProductRecommendation(
         [
           bestOffer,
         ]
+    );
+
+  const rankingEvidence =
+    buildRankingEvidence(
+      winner,
+      bestOffer
+    );
+
+  const verifiedFacts =
+    buildVerifiedFactHighlights(
+      bestOffer
     );
 
   return {
@@ -2801,6 +2915,10 @@ function buildBestProductRecommendation(
     criteria:
       ranking?.criteria ||
       [],
+
+    rankingEvidence,
+
+    verifiedFacts,
 
     store:
       bestOffer.store,
@@ -2888,8 +3006,51 @@ function buildNeedRecommendation(
         ]
     );
 
+  const rankingEvidence =
+    buildRankingEvidence(
+      winner,
+      bestOffer
+    );
+
+  const verifiedFacts =
+    buildVerifiedFactHighlights(
+      bestOffer
+    );
+
+  const confidence =
+    getRecommendationConfidence(
+      partialCriteria,
+      missingCriteria,
+      excludedFamilies
+    );
+
   let message =
     `Per l'uso "${analysis.need?.useCase?.label || "generale"}", questo è il modello che risulta più adatto usando i dati comparabili disponibili.`;
+
+  if (rankingEvidence.length > 0) {
+    const evidenceText =
+      rankingEvidence
+        .map(item =>
+          item.score !== null
+            ? item.label + ": " + item.score +
+              (item.protocol ? " (" + item.protocol + ")" : "")
+            : item.label
+        )
+        .join(", ");
+
+    message +=
+      " Il ranking ha usato dati comparabili verificati: " + evidenceText + ".";
+  }
+
+  if (verifiedFacts.length > 0) {
+    const factsText =
+      verifiedFacts
+        .map(item => item.label + ": " + item.value)
+        .join(", ");
+
+    message +=
+      " Dati verificati sul prodotto, non usati come punteggio: " + factsText + ".";
+  }
 
   if (
     partialCriteria.length > 0 &&
@@ -2930,6 +3091,12 @@ function buildNeedRecommendation(
     partialCriteria,
 
     excludedFamilies,
+
+    confidence,
+
+    rankingEvidence,
+
+    verifiedFacts,
 
     rankingScore:
       winner.ranking
