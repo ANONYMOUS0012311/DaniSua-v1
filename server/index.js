@@ -283,6 +283,7 @@ function normalizeText(value) {
     .toLowerCase()
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
+    .replace(/€/g, " euro ")
     .replace(/\+/g, " plus ")
     .replace(/[^a-z0-9]+/g, " ")
     .replace(/\s+/g, " ")
@@ -889,7 +890,7 @@ function extractBudget(query) {
     /sotto\s+(\d+(?:[.,]\d+)?)\s*(?:euro|eur)?/,
     /entro\s+(\d+(?:[.,]\d+)?)\s*(?:euro|eur)?/,
     /massimo\s+(\d+(?:[.,]\d+)?)\s*(?:euro|eur)?/,
-    /max\s+(\d+(?:[.,]\d+)?)\s*(?:euro|eur)?/,
+    /max\s+(\d+(?:[.,]\d+)?)\s*(?:euro|eur)\b/,
     /fino\s+a\s+(\d+(?:[.,]\d+)?)\s*(?:euro|eur)?/,
   ];
 
@@ -987,7 +988,7 @@ function cleanProductQuery(query) {
   );
 
   q = q.replace(
-    /\b(?:sotto|entro|massimo|max)\s+\d+(?:[.,]\d+)?\s*(?:euro|eur)?\b/g,
+    /\b(?:sotto|entro|massimo)\s+\d+(?:[.,]\d+)?\s*(?:euro|eur)?\b|\bmax\s+\d+(?:[.,]\d+)?\s*(?:euro|eur)\b/g,
     " "
   );
 
