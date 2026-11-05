@@ -2833,6 +2833,7 @@ function buildRankingEvidence(winner, bestOffer) {
       score: typeof item.rawScore === "number" ? item.rawScore : null,
       normalizedScore: typeof item.normalizedScore === "number" ? item.normalizedScore : null,
       protocol: meta?.protocol || evidence?.protocol || null,
+      unit: meta?.unit || evidence?.unit || null,
       sourceId,
       sourceName: source?.name || null,
       sourceUrl: source?.url || null,
@@ -3061,6 +3062,7 @@ function buildNeedRecommendation(
         .map(item =>
           item.score !== null
             ? item.label + ": " + item.score +
+              (item.unit ? " " + item.unit : "") +
               (item.protocol ? " (" + item.protocol + ")" : "")
             : item.label
         )
