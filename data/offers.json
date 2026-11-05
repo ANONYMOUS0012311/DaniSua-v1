@@ -1532,5 +1532,169 @@
         }
       ]
     }
+  },
+  {
+    "id": "test-apple-iphone18promax-256-black",
+    "productId": "apple-iphone-18-pro-max-256-black",
+    "store": "Apple",
+    "seller": "Apple",
+    "old_price": null,
+    "offer_price": 1639,
+    "currency": "EUR",
+    "shipping_price": 0,
+    "stock": true,
+    "url": "https://www.apple.com/it/shop/buy-iphone/iphone-18-pro",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 1639
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-apple-iphoneduo-256-starlight",
+    "productId": "apple-iphone-duo-256-starlight",
+    "store": "Apple",
+    "seller": "Apple",
+    "old_price": null,
+    "offer_price": 2369,
+    "currency": "EUR",
+    "shipping_price": 0,
+    "stock": true,
+    "url": "https://www.apple.com/it/shop/buy-iphone/iphone-duo",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 2369
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-samsung-fold8-256-graphite",
+    "productId": "samsung-galaxy-z-fold8-256-graphite",
+    "store": "Samsung",
+    "seller": "Samsung",
+    "old_price": null,
+    "offer_price": 2099,
+    "currency": "EUR",
+    "shipping_price": 0,
+    "stock": true,
+    "url": "https://www.samsung.com/it/smartphones/galaxy-z-fold8/buy/",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 2099
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-samsung-flip8-256-graphite",
+    "productId": "samsung-galaxy-z-flip8-256-graphite",
+    "store": "Samsung",
+    "seller": "Samsung",
+    "old_price": null,
+    "offer_price": 1379,
+    "currency": "EUR",
+    "shipping_price": 0,
+    "stock": true,
+    "url": "https://www.samsung.com/it/smartphones/galaxy-z-flip8/buy/",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 1379
+        },
+        {
+          "type": "installment",
+          "installments": 30,
+          "installment_amount": 45.97,
+          "displayed_total": 1379,
+          "financing_cost": 0,
+          "tan": 0,
+          "taeg": 0,
+          "provider": "Samsung/Findomestic",
+          "note": "Piano a tasso zero mostrato da Samsung al momento della verifica."
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-xiaomi-17ultra-512-black-standard",
+    "productId": "xiaomi-17-ultra-512-black",
+    "store": "Xiaomi",
+    "seller": "Xiaomi",
+    "old_price": null,
+    "offer_price": 1499.9,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.mi.com/it/product/xiaomi-17-ultra/",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 1499.9
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-xiaomi-17ultra-512-black-bf",
+    "productId": "xiaomi-17-ultra-512-black",
+    "store": "Xiaomi",
+    "seller": "Xiaomi",
+    "old_price": 1499.9,
+    "offer_price": 1099.9,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.mi.com/it/product/xiaomi-17-ultra/",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "account_promo",
+      "conditional": true,
+      "conditions": [
+        "Richiede un Mi Account personale.",
+        "Promozione Black Friday valida dal 02/11/2026 alle 10:00 fino al 19/11/2026 alle 09:59."
+      ],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 1099.9
+        }
+      ]
+    }
   }
 ]
