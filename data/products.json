@@ -909,5 +909,120 @@
     },
     "image": null,
     "imageSourcePage": "https://www.mi.com/it/product/redmi-note-17-pro-max-5g/"
+  },
+  {
+    "id": "apple-iphone-18-pro-max-256-black",
+    "familyId": "apple-iphone-18-pro-max",
+    "familyName": "iPhone 18 Pro Max",
+    "productLineId": "apple-iphone",
+    "productLineName": "iPhone",
+    "category": "smartphone",
+    "brand": "Apple",
+    "model": "iPhone 18 Pro Max",
+    "storage": "256 GB",
+    "ram": null,
+    "color": "Nero",
+    "condition": "new",
+    "gtin": null,
+    "title": "Apple iPhone 18 Pro Max 256 GB Nero",
+    "attributes": {
+      "storage": "256 GB",
+      "color": "Nero"
+    },
+    "image": null,
+    "imageSourcePage": "https://www.apple.com/it/shop/buy-iphone/iphone-18-pro"
+  },
+  {
+    "id": "apple-iphone-duo-256-starlight",
+    "familyId": "apple-iphone-duo",
+    "familyName": "iPhone Duo",
+    "productLineId": "apple-iphone",
+    "productLineName": "iPhone",
+    "category": "smartphone",
+    "brand": "Apple",
+    "model": "iPhone Duo",
+    "storage": "256 GB",
+    "ram": null,
+    "color": "Bianco stellare",
+    "condition": "new",
+    "gtin": null,
+    "title": "Apple iPhone Duo 256 GB Bianco Stellare",
+    "attributes": {
+      "storage": "256 GB",
+      "color": "Bianco stellare"
+    },
+    "image": null,
+    "imageSourcePage": "https://www.apple.com/it/shop/buy-iphone/iphone-duo"
+  },
+  {
+    "id": "samsung-galaxy-z-fold8-256-graphite",
+    "familyId": "samsung-galaxy-z-fold8",
+    "familyName": "Galaxy Z Fold8",
+    "productLineId": "samsung-galaxy-z",
+    "productLineName": "Galaxy Z",
+    "category": "smartphone",
+    "brand": "Samsung",
+    "model": "Galaxy Z Fold8",
+    "storage": "256 GB",
+    "ram": "12 GB",
+    "color": "Graphite",
+    "condition": "new",
+    "gtin": null,
+    "title": "Samsung Galaxy Z Fold8 12+256 GB Graphite",
+    "attributes": {
+      "storage": "256 GB",
+      "ram": "12 GB",
+      "color": "Graphite",
+      "foldable": true
+    },
+    "image": null,
+    "imageSourcePage": "https://www.samsung.com/it/smartphones/galaxy-z-fold8/buy/"
+  },
+  {
+    "id": "samsung-galaxy-z-flip8-256-graphite",
+    "familyId": "samsung-galaxy-z-flip8",
+    "familyName": "Galaxy Z Flip8",
+    "productLineId": "samsung-galaxy-z",
+    "productLineName": "Galaxy Z",
+    "category": "smartphone",
+    "brand": "Samsung",
+    "model": "Galaxy Z Flip8",
+    "storage": "256 GB",
+    "ram": "12 GB",
+    "color": "Graphite",
+    "condition": "new",
+    "gtin": null,
+    "title": "Samsung Galaxy Z Flip8 12+256 GB Graphite",
+    "attributes": {
+      "storage": "256 GB",
+      "ram": "12 GB",
+      "color": "Graphite",
+      "foldable": true
+    },
+    "image": null,
+    "imageSourcePage": "https://www.samsung.com/it/smartphones/galaxy-z-flip8/buy/"
+  },
+  {
+    "id": "xiaomi-17-ultra-512-black",
+    "familyId": "xiaomi-17-ultra",
+    "familyName": "Xiaomi 17 Ultra",
+    "productLineId": "xiaomi-17",
+    "productLineName": "Xiaomi 17",
+    "category": "smartphone",
+    "brand": "Xiaomi",
+    "model": "Xiaomi 17 Ultra",
+    "storage": "512 GB",
+    "ram": "16 GB",
+    "color": "Black",
+    "condition": "new",
+    "gtin": null,
+    "title": "Xiaomi 17 Ultra 16+512 GB Black",
+    "attributes": {
+      "storage": "512 GB",
+      "ram": "16 GB",
+      "color": "Black"
+    },
+    "image": null,
+    "imageSourcePage": "https://www.mi.com/it/product/xiaomi-17-ultra/"
   }
 ]
