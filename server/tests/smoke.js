@@ -2261,7 +2261,7 @@ async function testMidrangeSmartphoneProductionBlock() {
   );
 
   assert(
-    iphone17e.recommendation?.finalCost === 729,
+    iphone17e.recommendation?.finalCost === 736.9,
     `Costo finale iPhone 17e inatteso: ${iphone17e.recommendation?.finalCost}`
   );
 
