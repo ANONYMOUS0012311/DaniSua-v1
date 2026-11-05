@@ -1489,6 +1489,37 @@ function offerMatchesConfiguration(
 }
 
 
+function queryContainsConfigurationValue(
+  query,
+  value
+) {
+  const normalizedQuery =
+    normalizeText(query);
+
+  const normalizedValue =
+    normalizeText(value);
+
+  if (
+    !normalizedQuery ||
+    !normalizedValue
+  ) {
+    return false;
+  }
+
+  const escaped =
+    normalizedValue.replace(
+      /[.*+?^$\{\}()|[\]\\]/g,
+      "\\$&"
+    );
+
+  return new RegExp(
+    `(^|\\s)${escaped}(?=\\s|$)`
+  ).test(
+    normalizedQuery
+  );
+}
+
+
 function getVariantQueryConstraints(
   query,
   configurations
@@ -1514,7 +1545,7 @@ function getVariantQueryConstraints(
     const matches =
       values.filter(
         value =>
-          queryContains(
+          queryContainsConfigurationValue(
             query,
             value
           )
