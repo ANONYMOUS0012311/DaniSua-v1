@@ -241,7 +241,17 @@ function isDirectRetailerSeller(
     storeType ===
       "official_brand_store"
   ) {
-    return true;
+    const seller =
+      normalizeText(
+        offer.seller
+      );
+
+    // A verified platform is not proof that a third-party
+    // seller on that platform has been verified.
+    return Boolean(seller) &&
+      getStoreNames(
+        storeRecord
+      ).includes(seller);
   }
 
 
@@ -328,7 +338,6 @@ function evaluateOfferTrust(
   // ------------------------------------
 
   if (
-    isMarketplace &&
     !directSeller
   ) {
     return {
@@ -357,7 +366,7 @@ function evaluateOfferTrust(
         storeRecord.id,
 
       reason:
-        "marketplace_seller_requires_verification",
+        "seller_requires_verification",
     };
   }
 
