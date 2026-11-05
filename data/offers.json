@@ -1171,5 +1171,241 @@
         }
       ]
     }
+  },
+  {
+    "id": "test-euronics-a37-128-lavender",
+    "productId": "samsung-galaxy-a37-128-lavender",
+    "store": "Euronics",
+    "seller": "Euronics",
+    "old_price": 449.99,
+    "offer_price": 335,
+    "currency": "EUR",
+    "shipping_price": 7.9,
+    "stock": true,
+    "url": "https://www.euronics.it/telefonia/smartphone-e-cellulari/smartphone-dual-sim/samsung---smartphone-galaxy-a37-5g-128gb-awesome-lavender/262003743.html",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 335
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-xiaomi-17t-256-blue",
+    "productId": "xiaomi-17t-256-blue",
+    "store": "Xiaomi",
+    "seller": "Xiaomi",
+    "old_price": 749.9,
+    "offer_price": 549.9,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.mi.com/it/product/xiaomi-17t/",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 549.9
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-euronics-xiaomi17t-256-blue",
+    "productId": "xiaomi-17t-256-blue",
+    "store": "Euronics",
+    "seller": "Euronics",
+    "old_price": null,
+    "offer_price": 524,
+    "currency": "EUR",
+    "shipping_price": 7.9,
+    "stock": true,
+    "url": "https://www.euronics.it/telefonia/smartphone-e-cellulari/smartphone-dual-sim/xiaomi---smartphone-xiaomi-17t-256gb12gb-blue/262005454.html",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 524
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-xiaomi-redminote17pro-5g-256-black",
+    "productId": "xiaomi-redmi-note17-pro-5g-256-black",
+    "store": "Xiaomi",
+    "seller": "Xiaomi",
+    "old_price": 499.9,
+    "offer_price": 399.9,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.mi.com/it/product/redmi-note-17-pro-5g/",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 399.9
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-euronics-redminote17pro-5g-256-black",
+    "productId": "xiaomi-redmi-note17-pro-5g-256-black",
+    "store": "Euronics",
+    "seller": "Euronics",
+    "old_price": 499.9,
+    "offer_price": 399,
+    "currency": "EUR",
+    "shipping_price": 7.9,
+    "stock": true,
+    "url": "https://www.euronics.it/telefonia/smartphone-e-cellulari/smartphone-dual-sim/xiaomi---smartphone-redmi-note-17-pro-5g-6gb-256gb-black/262009515.html",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 399
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-samsung-s26fe-256-graphite",
+    "productId": "samsung-galaxy-s26-fe-256-graphite",
+    "store": "Samsung",
+    "seller": "Samsung",
+    "old_price": null,
+    "offer_price": 919,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.samsung.com/it/smartphones/galaxy-s26-fe/",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 919
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-euronics-s26fe-256-graphite",
+    "productId": "samsung-galaxy-s26-fe-256-graphite",
+    "store": "Euronics",
+    "seller": "Euronics",
+    "old_price": 919,
+    "offer_price": 724,
+    "currency": "EUR",
+    "shipping_price": 7.9,
+    "stock": true,
+    "url": "https://www.euronics.it/telefonia/smartphone-e-cellulari/smartphone-dual-sim/samsung---smartphone-galaxy-s26-fe-8gb256gb-graphite/262009758.html",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 724
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-google-pixel11pro-256-obsidian",
+    "productId": "google-pixel-11-pro-256-obsidian",
+    "store": "Google Store",
+    "seller": "Google Store",
+    "old_price": null,
+    "offer_price": 1199,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://store.google.com/it/product/pixel_11_pro?hl=it",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 1199
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-mediaworld-pixel11pro-256-obsidian",
+    "productId": "google-pixel-11-pro-256-obsidian",
+    "store": "MediaWorld",
+    "seller": "MediaWorld",
+    "old_price": 1199,
+    "offer_price": 999,
+    "currency": "EUR",
+    "shipping_price": 3.99,
+    "stock": true,
+    "url": "https://www.mediaworld.it/it/product/_google-google-pixel-11-pro-256gb-256-gb-596708.html",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 999
+        },
+        {
+          "type": "installment",
+          "installments": 10,
+          "installment_amount": 99.9,
+          "displayed_total": 999,
+          "financing_cost": 0,
+          "tan": 0,
+          "taeg": 0,
+          "provider": null,
+          "note": "Piano a tasso zero mostrato da MediaWorld al momento della verifica."
+        }
+      ]
+    }
   }
 ]
