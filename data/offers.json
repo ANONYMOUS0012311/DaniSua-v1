@@ -2043,5 +2043,238 @@
         }
       ]
     }
+  },
+  {
+    "id": "test-mediaworld-iphone16-128-black",
+    "productId": "apple-iphone-16-128-black",
+    "store": "MediaWorld",
+    "seller": "MediaWorld",
+    "old_price": 1029,
+    "offer_price": 849.49,
+    "currency": "EUR",
+    "shipping_price": 3.99,
+    "stock": true,
+    "url": "https://www.mediaworld.it/it/product/_apple-iphone-16-128gb-nero-387644.html",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 849.49
+        },
+        {
+          "type": "installment",
+          "installments": 10,
+          "installment_amount": 84.95,
+          "displayed_total": 849.49,
+          "financing_cost": 0,
+          "tan": 0,
+          "taeg": 0,
+          "provider": null,
+          "note": "Tasso zero mostrato da MediaWorld al momento della verifica."
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-euronics-s26ultra-256-black",
+    "productId": "samsung-galaxy-s26-ultra-256-black",
+    "store": "Euronics",
+    "seller": "Euronics",
+    "old_price": 1499,
+    "offer_price": 1186,
+    "currency": "EUR",
+    "shipping_price": 7.9,
+    "stock": true,
+    "url": "https://www.euronics.it/telefonia/smartphone-e-cellulari/smartphone-dual-sim/samsung---smartphone-galaxy-s26-ultra-256gb-12gb-black/262001832.html",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 1186
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-unieuro-s26ultra-256-black",
+    "productId": "samsung-galaxy-s26-ultra-256-black",
+    "store": "Unieuro",
+    "seller": "Unieuro",
+    "old_price": 1499,
+    "offer_price": 1299,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.unieuro.it/online/Smartphone/Galaxy-S26-Ultra-Smartphone-AI-256GB-Privacy-Display-integrato-Processore-potente-Assistente-Foto-Camera-200-MP-5000-mAh-Black-pidSAMS26ULTRA256",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "black_friday",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 1299
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-euronics-s26-256-white",
+    "productId": "samsung-galaxy-s26-256-white",
+    "store": "Euronics",
+    "seller": "Euronics",
+    "old_price": 1029,
+    "offer_price": 849,
+    "currency": "EUR",
+    "shipping_price": 7.9,
+    "stock": true,
+    "url": "https://www.euronics.it/telefonia/smartphone-e-cellulari/smartphone-dual-sim/samsung---smartphone-galaxy-s26-256gb-12gb-white/262001843.html",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 849
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-unieuro-s26-256-cobalt-violet",
+    "productId": "samsung-galaxy-s26-256-cobalt-violet",
+    "store": "Unieuro",
+    "seller": "Unieuro",
+    "old_price": 1029,
+    "offer_price": 939,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.unieuro.it/online/Smartphone/Galaxy-S26-Smartphone-AI-256GB-Processore-avanzato-Assistente-Foto-Creative-Studio-Camera-50-MP-4300-mAh-Cobalt-Violet-pidSAMS26256V",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "tech_collection",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 939
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-mediaworld-s26fe-256-graphite",
+    "productId": "samsung-galaxy-s26-fe-256-graphite",
+    "store": "MediaWorld",
+    "seller": "MediaWorld",
+    "old_price": 919,
+    "offer_price": 649.49,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.mediaworld.it/it/brand/samsung/smartphone/galaxy-s",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 649.49
+        },
+        {
+          "type": "installment",
+          "installments": 10,
+          "installment_amount": 64.95,
+          "displayed_total": 649.49,
+          "financing_cost": 0,
+          "tan": 0,
+          "taeg": 0,
+          "provider": null,
+          "note": "Tasso zero mostrato da MediaWorld al momento della verifica."
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-google-pixel11-256-obsidian",
+    "productId": "google-pixel-11-256-obsidian",
+    "store": "Google Store",
+    "seller": "Google Store",
+    "old_price": null,
+    "offer_price": 999,
+    "currency": "EUR",
+    "shipping_price": 0,
+    "stock": true,
+    "url": "https://store.google.com/it/config/pixel_11?hl=it",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 999
+        },
+        {
+          "type": "installment",
+          "installments": 12,
+          "installment_amount": 83.25,
+          "displayed_total": 999,
+          "financing_cost": 0,
+          "tan": null,
+          "taeg": null,
+          "provider": null,
+          "note": "Finanziamento mensile mostrato dal Google Store."
+        }
+      ]
+    }
+  },
+  {
+    "id": "test-euronics-s26plus-256-cobalt-violet",
+    "productId": "samsung-galaxy-s26-plus-256-cobalt-violet",
+    "store": "Euronics",
+    "seller": "Euronics",
+    "old_price": 1289,
+    "offer_price": 1169,
+    "currency": "EUR",
+    "shipping_price": 7.9,
+    "stock": true,
+    "url": "https://www.euronics.it/telefonia/smartphone-e-cellulari/smartphone-dual-sim/samsung---smartphone-galaxy-s26-256gb-12gb-cobalt-violet/262001837.html",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 1169
+        }
+      ]
+    }
   }
 ]

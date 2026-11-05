@@ -1182,5 +1182,74 @@
     },
     "image": null,
     "imageSourcePage": "https://www.unieuro.it/online/Smartphone/A57-5G-pidSAMA575G256B"
+  },
+  {
+    "id": "samsung-galaxy-s26-ultra-256-black",
+    "familyId": "samsung-galaxy-s26-ultra",
+    "familyName": "Galaxy S26 Ultra",
+    "productLineId": "samsung-galaxy-s",
+    "productLineName": "Galaxy S",
+    "category": "smartphone",
+    "brand": "Samsung",
+    "model": "Galaxy S26 Ultra",
+    "storage": "256 GB",
+    "ram": "12 GB",
+    "color": "Black",
+    "condition": "new",
+    "gtin": null,
+    "title": "Samsung Galaxy S26 Ultra 256 GB Black",
+    "attributes": {
+      "storage": "256 GB",
+      "ram": "12 GB",
+      "color": "Black"
+    },
+    "image": null,
+    "imageSourcePage": "https://www.samsung.com/it/smartphones/galaxy-s26-ultra/buy/"
+  },
+  {
+    "id": "samsung-galaxy-s26-256-cobalt-violet",
+    "familyId": "samsung-galaxy-s26",
+    "familyName": "Galaxy S26",
+    "productLineId": "samsung-galaxy-s",
+    "productLineName": "Galaxy S",
+    "category": "smartphone",
+    "brand": "Samsung",
+    "model": "Galaxy S26",
+    "storage": "256 GB",
+    "ram": "12 GB",
+    "color": "Cobalt Violet",
+    "condition": "new",
+    "gtin": null,
+    "title": "Samsung Galaxy S26 256 GB Cobalt Violet",
+    "attributes": {
+      "storage": "256 GB",
+      "ram": "12 GB",
+      "color": "Cobalt Violet"
+    },
+    "image": null,
+    "imageSourcePage": "https://www.samsung.com/it/smartphones/galaxy-s26/buy/"
+  },
+  {
+    "id": "samsung-galaxy-s26-plus-256-cobalt-violet",
+    "familyId": "samsung-galaxy-s26-plus",
+    "familyName": "Galaxy S26+",
+    "productLineId": "samsung-galaxy-s",
+    "productLineName": "Galaxy S",
+    "category": "smartphone",
+    "brand": "Samsung",
+    "model": "Galaxy S26+",
+    "storage": "256 GB",
+    "ram": "12 GB",
+    "color": "Cobalt Violet",
+    "condition": "new",
+    "gtin": null,
+    "title": "Samsung Galaxy S26+ 256 GB Cobalt Violet",
+    "attributes": {
+      "storage": "256 GB",
+      "ram": "12 GB",
+      "color": "Cobalt Violet"
+    },
+    "image": null,
+    "imageSourcePage": "https://www.samsung.com/it/smartphones/galaxy-s26/buy/"
   }
 ]
