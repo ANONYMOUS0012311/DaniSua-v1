@@ -2335,5 +2335,380 @@
         }
       ]
     }
+  },
+  {
+    "id": "real-euronics-iphone18pro-256-black",
+    "productId": "apple-iphone-18-pro-256-black",
+    "store": "Euronics",
+    "seller": "Euronics",
+    "old_price": 1489,
+    "offer_price": 1475,
+    "currency": "EUR",
+    "shipping_price": 0,
+    "stock": true,
+    "url": "https://www.euronics.it/telefonia/smartphone-e-cellulari/iphone/nuovi-iphone/",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 1475
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-unieuro-iphone18pro-256-black",
+    "productId": "apple-iphone-18-pro-256-black",
+    "store": "Unieuro",
+    "seller": "Unieuro",
+    "old_price": 1489,
+    "offer_price": 1489,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.unieuro.it/online/Telefonia-e-Smartphone/Smartphone-e-Cellulari/iPhone",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 1489
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-comet-iphone18pro-256-black",
+    "productId": "apple-iphone-18-pro-256-black",
+    "store": "Comet",
+    "seller": "Comet",
+    "old_price": 1489,
+    "offer_price": 1449,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.comet.it/promozioni/apple-iphone-18-pro-pro-max?p=0",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 1449
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-euronics-iphone-air-256-black",
+    "productId": "apple-iphone-air-256-black",
+    "store": "Euronics",
+    "seller": "Euronics",
+    "old_price": 1239,
+    "offer_price": 1155,
+    "currency": "EUR",
+    "shipping_price": 7.9,
+    "stock": true,
+    "url": "https://www.euronics.it/telefonia/smartphone-e-cellulari/iphone/apple---iphone-air-256gb-nero-siderale/252011553.html",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 1155
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-comet-iphone-air-256-black",
+    "productId": "apple-iphone-air-256-black",
+    "store": "Comet",
+    "seller": "Comet",
+    "old_price": 1339,
+    "offer_price": 929,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.comet.it/smartphone-e-telefonia/apple-iphone",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 929
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-comet-a37-128-charcoal",
+    "productId": "samsung-galaxy-a37-128-charcoal",
+    "store": "Comet",
+    "seller": "Comet",
+    "old_price": 299,
+    "offer_price": 269,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.comet.it/samsung-galaxy-a37-6-128gb-characoal-SAM08587J-prdtt",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 269
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-expert-a37-128-charcoal",
+    "productId": "samsung-galaxy-a37-128-charcoal",
+    "store": "Expert",
+    "seller": "Expert",
+    "old_price": 489.9,
+    "offer_price": 442.9,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.expert.it/it/it/exp/shop/product/exp914745",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 442.9
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-mediaworld-xiaomi17tpro-512-black",
+    "productId": "xiaomi-17t-pro-512-black",
+    "store": "MediaWorld",
+    "seller": "MediaWorld",
+    "old_price": 898,
+    "offer_price": 809.9,
+    "currency": "EUR",
+    "shipping_price": 3.99,
+    "stock": true,
+    "url": "https://www.mediaworld.it/it/product/_xiaomi-xiaomi-17t-pro-512-gb-black-582767.html",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 809.9
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-expert-xiaomi17tpro-512-black",
+    "productId": "xiaomi-17t-pro-512-black",
+    "store": "Expert",
+    "seller": "Expert",
+    "old_price": null,
+    "offer_price": 899.9,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.expert.it/it/it/exp/shop/brand/xiaomi/xiao",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 899.9
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-mediaworld-xiaomi17t-256-violet",
+    "productId": "xiaomi-17t-256-violet",
+    "store": "MediaWorld",
+    "seller": "MediaWorld",
+    "old_price": 609.9,
+    "offer_price": 559.9,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.mediaworld.it/it/brand/xiaomi/smartphone/xiaomi-series",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 559.9
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-expert-xiaomi17t-256-blue",
+    "productId": "xiaomi-17t-256-blue",
+    "store": "Expert",
+    "seller": "Expert",
+    "old_price": null,
+    "offer_price": 649.9,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.expert.it/it/it/exp/shop/brand/xiaomi/xiao",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 649.9
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-mediaworld-redminote17pro-5g-256-black",
+    "productId": "xiaomi-redmi-note17-pro-5g-256-black",
+    "store": "MediaWorld",
+    "seller": "MediaWorld",
+    "old_price": 399,
+    "offer_price": 370.99,
+    "currency": "EUR",
+    "shipping_price": 3.99,
+    "stock": true,
+    "url": "https://www.mediaworld.it/it/product/_xiaomi-redmi-note-17-pro-5g-6256-256-gb-black-598126.html",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 370.99
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-expert-redminote17pro-5g-256-black",
+    "productId": "xiaomi-redmi-note17-pro-5g-256-black",
+    "store": "Expert",
+    "seller": "Expert",
+    "old_price": 422.9,
+    "offer_price": 399.9,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.expert.it/it/it/exp/shop/product/redmi-note-17-pro-5g-black-6g-ram-256g-rom/exp929118",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 399.9
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-euronics-magic8lite-256-midnight-black",
+    "productId": "honor-magic8-lite-256-midnight-black",
+    "store": "Euronics",
+    "seller": "Euronics",
+    "old_price": null,
+    "offer_price": 341,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.euronics.it/telefonia/smartphone-e-cellulari/smartphone-ai/?p=4",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 341
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-expert-magic8lite-256-midnight-black",
+    "productId": "honor-magic8-lite-256-midnight-black",
+    "store": "Expert",
+    "seller": "Expert",
+    "old_price": null,
+    "offer_price": 349.9,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.expert.it/it/it/exp/shop/brand/honor/hono",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 349.9
+        }
+      ]
+    }
   }
 ]
