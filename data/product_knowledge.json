@@ -127,7 +127,7 @@
       "scores": {
         "overall": null,
         "camera": 144,
-        "battery": null,
+        "battery": 30,
         "performance": null,
         "display": null,
         "software": null,
@@ -141,6 +141,16 @@
           "score": 144,
           "protocol": "DXOMARK Camera v5",
           "publishedAt": "2024-01-31"
+        },
+        {
+          "criterion": "battery",
+          "type": "manufacturer_spec",
+          "sourceId": "samsung-s24-ultra-specs-video",
+          "score": 30,
+          "unit": "h",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
         }
       ],
       "sources": [
@@ -151,13 +161,32 @@
           "title": "Samsung Galaxy S24 Ultra Camera test",
           "url": "https://www.dxomark.com/samsung-galaxy-s24-ultra-camera-test/",
           "protocol": "Camera v5"
+        },
+        {
+          "id": "samsung-s24-ultra-specs-video",
+          "name": "Samsung",
+          "type": "manufacturer_specs",
+          "title": "Galaxy S24 Ultra - Specifiche",
+          "url": "https://www.samsung.com/it/business/smartphones/galaxy-s/galaxy-s24-ultra-titanium-green-1tb-sm-s928blgpeue/",
+          "protocol": "Samsung continuous video playback claim (hours)"
         }
       ],
-      "updatedAt": "2026-09-16",
+      "updatedAt": "2026-11-10",
       "scoreMeta": {
         "camera": {
           "sourceId": "dxomark-s24-ultra-camera-v5",
           "protocol": "DXOMARK Camera v5"
+        },
+        "battery": {
+          "sourceId": "samsung-s24-ultra-specs-video",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "capacityMah": 5000,
+          "videoPlaybackHours": 30
         }
       }
     },
@@ -410,7 +439,7 @@
       "scores": {
         "overall": null,
         "camera": null,
-        "battery": 52,
+        "battery": 29,
         "performance": null,
         "display": null,
         "software": null,
@@ -418,8 +447,8 @@
       },
       "scoreMeta": {
         "battery": {
-          "sourceId": "eprel-a57-2526633",
-          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "sourceId": "samsung-a57-specs-video",
+          "protocol": "Samsung continuous video playback claim (hours)",
           "unit": "h"
         }
       },
@@ -454,8 +483,9 @@
         },
         "battery": {
           "euEnduranceHours": 52,
-          "capacityMah": 4905,
-          "cycleLife": 1200
+          "capacityMah": 5000,
+          "cycleLife": 1200,
+          "videoPlaybackHours": 29
         },
         "euEnergyLabel": {
           "energyClass": "A",
@@ -474,6 +504,16 @@
           "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
           "rankingEligible": true,
           "verifiedAt": "2026-11-05"
+        },
+        {
+          "criterion": "battery",
+          "type": "manufacturer_spec",
+          "sourceId": "samsung-a57-specs-video",
+          "score": 29,
+          "unit": "h",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
         }
       ],
       "sources": [
@@ -497,9 +537,17 @@
           "type": "regulatory_product_information",
           "title": "Samsung Galaxy A57 5G - EU product information sheet",
           "url": "https://eprel.ec.europa.eu/qr/2526633"
+        },
+        {
+          "id": "samsung-a57-specs-video",
+          "name": "Samsung",
+          "type": "manufacturer_specs",
+          "title": "Galaxy A57 5G - Specifiche",
+          "url": "https://www.samsung.com/it/smartphones/galaxy-a/galaxy-a57-5g-awesome-icyblue-128gb-sm-a576blbbeue/",
+          "protocol": "Samsung continuous video playback claim (hours)"
         }
       ],
-      "updatedAt": "2026-11-05"
+      "updatedAt": "2026-11-10"
     },
     {
       "productId": "google-pixel-10a-128-obsidian",
@@ -1255,7 +1303,7 @@
       "scores": {
         "overall": null,
         "camera": null,
-        "battery": 52,
+        "battery": 29,
         "performance": null,
         "display": null,
         "software": null,
@@ -1263,8 +1311,8 @@
       },
       "scoreMeta": {
         "battery": {
-          "sourceId": "eprel-a57-2526633",
-          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "sourceId": "samsung-a57-specs-video",
+          "protocol": "Samsung continuous video playback claim (hours)",
           "unit": "h"
         }
       },
@@ -1299,8 +1347,9 @@
         },
         "battery": {
           "euEnduranceHours": 52,
-          "capacityMah": 4905,
-          "cycleLife": 1200
+          "capacityMah": 5000,
+          "cycleLife": 1200,
+          "videoPlaybackHours": 29
         },
         "euEnergyLabel": {
           "energyClass": "A",
@@ -1319,6 +1368,16 @@
           "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
           "rankingEligible": true,
           "verifiedAt": "2026-11-05"
+        },
+        {
+          "criterion": "battery",
+          "type": "manufacturer_spec",
+          "sourceId": "samsung-a57-specs-video",
+          "score": 29,
+          "unit": "h",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
         }
       ],
       "sources": [
@@ -1342,9 +1401,17 @@
           "type": "regulatory_product_information",
           "title": "Samsung Galaxy A57 5G - EU product information sheet",
           "url": "https://eprel.ec.europa.eu/qr/2526633"
+        },
+        {
+          "id": "samsung-a57-specs-video",
+          "name": "Samsung",
+          "type": "manufacturer_specs",
+          "title": "Galaxy A57 5G - Specifiche",
+          "url": "https://www.samsung.com/it/smartphones/galaxy-a/galaxy-a57-5g-awesome-icyblue-128gb-sm-a576blbbeue/",
+          "protocol": "Samsung continuous video playback claim (hours)"
         }
       ],
-      "updatedAt": "2026-11-05"
+      "updatedAt": "2026-11-10"
     },
     {
       "productId": "google-pixel-10a-256-obsidian",
@@ -1715,6 +1782,1084 @@
         }
       ],
       "updatedAt": "2026-11-05"
+    },
+    {
+      "productId": "samsung-galaxy-s26-ultra-256-white",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 31,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "samsung-s26-ultra-compare-video",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "capacityMah": 5000,
+          "videoPlaybackHours": 31
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "manufacturer_spec",
+          "sourceId": "samsung-s26-ultra-compare-video",
+          "score": 31,
+          "unit": "h",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "samsung-s26-ultra-compare-video",
+          "name": "Samsung",
+          "type": "manufacturer_specs",
+          "title": "Confronta Galaxy S26 Ultra",
+          "url": "https://www.samsung.com/it/smartphones/galaxy-s26-ultra/compare/",
+          "protocol": "Samsung continuous video playback claim (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "samsung-galaxy-s26-256-white",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 30,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "samsung-s26-series-compare-video",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "capacityMah": 4300,
+          "videoPlaybackHours": 30
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "manufacturer_spec",
+          "sourceId": "samsung-s26-series-compare-video",
+          "score": 30,
+          "unit": "h",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "samsung-s26-series-compare-video",
+          "name": "Samsung",
+          "type": "manufacturer_specs",
+          "title": "Confronta Galaxy S26+ e Galaxy S26",
+          "url": "https://www.samsung.com/it/smartphones/galaxy-s26/compare/",
+          "protocol": "Samsung continuous video playback claim (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "samsung-galaxy-a37-128-lavender",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 29,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "samsung-a37-specs-video",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "capacityMah": 5000,
+          "videoPlaybackHours": 29
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "manufacturer_spec",
+          "sourceId": "samsung-a37-specs-video",
+          "score": 29,
+          "unit": "h",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "samsung-a37-specs-video",
+          "name": "Samsung",
+          "type": "manufacturer_specs",
+          "title": "Galaxy A37 5G - Specifiche",
+          "url": "https://www.samsung.com/it/smartphones/galaxy-a/galaxy-a37-5g-awesome-graygreen-128gb-sm-a376bdgbeue/",
+          "protocol": "Samsung continuous video playback claim (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "samsung-galaxy-s26-fe-256-graphite",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 29,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "samsung-s26-fe-support-video",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "capacityMah": 4900,
+          "videoPlaybackHours": 29
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "manufacturer_spec",
+          "sourceId": "samsung-s26-fe-support-video",
+          "score": 29,
+          "unit": "h",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "samsung-s26-fe-support-video",
+          "name": "Samsung",
+          "type": "manufacturer_specs",
+          "title": "Galaxy S26 FE vs S25 FE",
+          "url": "https://www.samsung.com/it/support/mobile-devices/what-is-the-difference-between-the-galaxy-s26-fe-and-s25-fe/",
+          "protocol": "Samsung continuous video playback claim (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "samsung-galaxy-s26-plus-256",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 31,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "samsung-s26-series-compare-video",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "capacityMah": 4900,
+          "videoPlaybackHours": 31
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "manufacturer_spec",
+          "sourceId": "samsung-s26-series-compare-video",
+          "score": 31,
+          "unit": "h",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "samsung-s26-series-compare-video",
+          "name": "Samsung",
+          "type": "manufacturer_specs",
+          "title": "Confronta Galaxy S26+ e Galaxy S26",
+          "url": "https://www.samsung.com/it/smartphones/galaxy-s26/compare/",
+          "protocol": "Samsung continuous video playback claim (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "samsung-galaxy-z-fold8-256-graphite",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 26,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "samsung-fold8-buying-guide-video",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "capacityMah": 4800,
+          "videoPlaybackHours": 26
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "manufacturer_spec",
+          "sourceId": "samsung-fold8-buying-guide-video",
+          "score": 26,
+          "unit": "h",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "samsung-fold8-buying-guide-video",
+          "name": "Samsung",
+          "type": "manufacturer_specs",
+          "title": "Galaxy Z Fold8 - guida e confronto",
+          "url": "https://www.samsung.com/it/mobile-phone-buying-guide/galaxy-z-8-series-vs-galaxy-z-7-series/",
+          "protocol": "Samsung continuous video playback claim (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "samsung-galaxy-z-flip8-256-graphite",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 31,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "samsung-flip8-compare-video",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "capacityMah": 4300,
+          "videoPlaybackHours": 31
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "manufacturer_spec",
+          "sourceId": "samsung-flip8-compare-video",
+          "score": 31,
+          "unit": "h",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "samsung-flip8-compare-video",
+          "name": "Samsung",
+          "type": "manufacturer_specs",
+          "title": "Galaxy Z Flip8 - confronto",
+          "url": "https://www.samsung.com/it/smartphones/galaxy-z-flip8/compare/",
+          "protocol": "Samsung continuous video playback claim (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "samsung-galaxy-a57-256-blue",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 29,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "samsung-a57-specs-video",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "capacityMah": 5000,
+          "videoPlaybackHours": 29
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "manufacturer_spec",
+          "sourceId": "samsung-a57-specs-video",
+          "score": 29,
+          "unit": "h",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "samsung-a57-specs-video",
+          "name": "Samsung",
+          "type": "manufacturer_specs",
+          "title": "Galaxy A57 5G - Specifiche",
+          "url": "https://www.samsung.com/it/smartphones/galaxy-a/galaxy-a57-5g-awesome-icyblue-128gb-sm-a576blbbeue/",
+          "protocol": "Samsung continuous video playback claim (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "samsung-galaxy-s26-ultra-256-black",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 31,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "samsung-s26-ultra-compare-video",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "capacityMah": 5000,
+          "videoPlaybackHours": 31
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "manufacturer_spec",
+          "sourceId": "samsung-s26-ultra-compare-video",
+          "score": 31,
+          "unit": "h",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "samsung-s26-ultra-compare-video",
+          "name": "Samsung",
+          "type": "manufacturer_specs",
+          "title": "Confronta Galaxy S26 Ultra",
+          "url": "https://www.samsung.com/it/smartphones/galaxy-s26-ultra/compare/",
+          "protocol": "Samsung continuous video playback claim (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "samsung-galaxy-s26-256-cobalt-violet",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 30,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "samsung-s26-series-compare-video",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "capacityMah": 4300,
+          "videoPlaybackHours": 30
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "manufacturer_spec",
+          "sourceId": "samsung-s26-series-compare-video",
+          "score": 30,
+          "unit": "h",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "samsung-s26-series-compare-video",
+          "name": "Samsung",
+          "type": "manufacturer_specs",
+          "title": "Confronta Galaxy S26+ e Galaxy S26",
+          "url": "https://www.samsung.com/it/smartphones/galaxy-s26/compare/",
+          "protocol": "Samsung continuous video playback claim (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "samsung-galaxy-s26-plus-256-cobalt-violet",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 31,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "samsung-s26-series-compare-video",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "capacityMah": 4900,
+          "videoPlaybackHours": 31
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "manufacturer_spec",
+          "sourceId": "samsung-s26-series-compare-video",
+          "score": 31,
+          "unit": "h",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "samsung-s26-series-compare-video",
+          "name": "Samsung",
+          "type": "manufacturer_specs",
+          "title": "Confronta Galaxy S26+ e Galaxy S26",
+          "url": "https://www.samsung.com/it/smartphones/galaxy-s26/compare/",
+          "protocol": "Samsung continuous video playback claim (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "samsung-galaxy-s26-plus-256-white",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 31,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "samsung-s26-series-compare-video",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "capacityMah": 4900,
+          "videoPlaybackHours": 31
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "manufacturer_spec",
+          "sourceId": "samsung-s26-series-compare-video",
+          "score": 31,
+          "unit": "h",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "samsung-s26-series-compare-video",
+          "name": "Samsung",
+          "type": "manufacturer_specs",
+          "title": "Confronta Galaxy S26+ e Galaxy S26",
+          "url": "https://www.samsung.com/it/smartphones/galaxy-s26/compare/",
+          "protocol": "Samsung continuous video playback claim (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "samsung-galaxy-a37-128-charcoal",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 29,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "samsung-a37-specs-video",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "capacityMah": 5000,
+          "videoPlaybackHours": 29
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "manufacturer_spec",
+          "sourceId": "samsung-a37-specs-video",
+          "score": 29,
+          "unit": "h",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "samsung-a37-specs-video",
+          "name": "Samsung",
+          "type": "manufacturer_specs",
+          "title": "Galaxy A37 5G - Specifiche",
+          "url": "https://www.samsung.com/it/smartphones/galaxy-a/galaxy-a37-5g-awesome-graygreen-128gb-sm-a376bdgbeue/",
+          "protocol": "Samsung continuous video playback claim (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "samsung-galaxy-s26-ultra-512-black",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 31,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "samsung-s26-ultra-compare-video",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "capacityMah": 5000,
+          "videoPlaybackHours": 31
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "manufacturer_spec",
+          "sourceId": "samsung-s26-ultra-compare-video",
+          "score": 31,
+          "unit": "h",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "samsung-s26-ultra-compare-video",
+          "name": "Samsung",
+          "type": "manufacturer_specs",
+          "title": "Confronta Galaxy S26 Ultra",
+          "url": "https://www.samsung.com/it/smartphones/galaxy-s26-ultra/compare/",
+          "protocol": "Samsung continuous video playback claim (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "samsung-galaxy-s26-ultra-1tb-black",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 31,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "samsung-s26-ultra-compare-video",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "capacityMah": 5000,
+          "videoPlaybackHours": 31
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "manufacturer_spec",
+          "sourceId": "samsung-s26-ultra-compare-video",
+          "score": 31,
+          "unit": "h",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "samsung-s26-ultra-compare-video",
+          "name": "Samsung",
+          "type": "manufacturer_specs",
+          "title": "Confronta Galaxy S26 Ultra",
+          "url": "https://www.samsung.com/it/smartphones/galaxy-s26-ultra/compare/",
+          "protocol": "Samsung continuous video playback claim (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "samsung-galaxy-s26-plus-512-black",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 31,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "samsung-s26-series-compare-video",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "capacityMah": 4900,
+          "videoPlaybackHours": 31
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "manufacturer_spec",
+          "sourceId": "samsung-s26-series-compare-video",
+          "score": 31,
+          "unit": "h",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "samsung-s26-series-compare-video",
+          "name": "Samsung",
+          "type": "manufacturer_specs",
+          "title": "Confronta Galaxy S26+ e Galaxy S26",
+          "url": "https://www.samsung.com/it/smartphones/galaxy-s26/compare/",
+          "protocol": "Samsung continuous video playback claim (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "samsung-galaxy-s26-512-black",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 30,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "samsung-s26-series-compare-video",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "capacityMah": 4300,
+          "videoPlaybackHours": 30
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "manufacturer_spec",
+          "sourceId": "samsung-s26-series-compare-video",
+          "score": 30,
+          "unit": "h",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "samsung-s26-series-compare-video",
+          "name": "Samsung",
+          "type": "manufacturer_specs",
+          "title": "Confronta Galaxy S26+ e Galaxy S26",
+          "url": "https://www.samsung.com/it/smartphones/galaxy-s26/compare/",
+          "protocol": "Samsung continuous video playback claim (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "samsung-galaxy-s26-fe-128-graphite",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 29,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "samsung-s26-fe-support-video",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "capacityMah": 4900,
+          "videoPlaybackHours": 29
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "manufacturer_spec",
+          "sourceId": "samsung-s26-fe-support-video",
+          "score": 29,
+          "unit": "h",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "samsung-s26-fe-support-video",
+          "name": "Samsung",
+          "type": "manufacturer_specs",
+          "title": "Galaxy S26 FE vs S25 FE",
+          "url": "https://www.samsung.com/it/support/mobile-devices/what-is-the-difference-between-the-galaxy-s26-fe-and-s25-fe/",
+          "protocol": "Samsung continuous video playback claim (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "samsung-galaxy-a37-256-charcoal",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 29,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "samsung-a37-specs-video",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "capacityMah": 5000,
+          "videoPlaybackHours": 29
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "manufacturer_spec",
+          "sourceId": "samsung-a37-specs-video",
+          "score": 29,
+          "unit": "h",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "samsung-a37-specs-video",
+          "name": "Samsung",
+          "type": "manufacturer_specs",
+          "title": "Galaxy A37 5G - Specifiche",
+          "url": "https://www.samsung.com/it/smartphones/galaxy-a/galaxy-a37-5g-awesome-graygreen-128gb-sm-a376bdgbeue/",
+          "protocol": "Samsung continuous video playback claim (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "samsung-galaxy-z-fold8-512-graphite",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 26,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "samsung-fold8-buying-guide-video",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "capacityMah": 4800,
+          "videoPlaybackHours": 26
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "manufacturer_spec",
+          "sourceId": "samsung-fold8-buying-guide-video",
+          "score": 26,
+          "unit": "h",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "samsung-fold8-buying-guide-video",
+          "name": "Samsung",
+          "type": "manufacturer_specs",
+          "title": "Galaxy Z Fold8 - guida e confronto",
+          "url": "https://www.samsung.com/it/mobile-phone-buying-guide/galaxy-z-8-series-vs-galaxy-z-7-series/",
+          "protocol": "Samsung continuous video playback claim (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "samsung-galaxy-z-fold8-1tb-graphite",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 26,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "samsung-fold8-buying-guide-video",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "capacityMah": 4800,
+          "videoPlaybackHours": 26
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "manufacturer_spec",
+          "sourceId": "samsung-fold8-buying-guide-video",
+          "score": 26,
+          "unit": "h",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "samsung-fold8-buying-guide-video",
+          "name": "Samsung",
+          "type": "manufacturer_specs",
+          "title": "Galaxy Z Fold8 - guida e confronto",
+          "url": "https://www.samsung.com/it/mobile-phone-buying-guide/galaxy-z-8-series-vs-galaxy-z-7-series/",
+          "protocol": "Samsung continuous video playback claim (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "samsung-galaxy-z-flip8-512-graphite",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 31,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "samsung-flip8-compare-video",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "capacityMah": 4300,
+          "videoPlaybackHours": 31
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "manufacturer_spec",
+          "sourceId": "samsung-flip8-compare-video",
+          "score": 31,
+          "unit": "h",
+          "protocol": "Samsung continuous video playback claim (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "samsung-flip8-compare-video",
+          "name": "Samsung",
+          "type": "manufacturer_specs",
+          "title": "Galaxy Z Flip8 - confronto",
+          "url": "https://www.samsung.com/it/smartphones/galaxy-z-flip8/compare/",
+          "protocol": "Samsung continuous video playback claim (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
     }
   ]
 }
