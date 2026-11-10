@@ -65,6 +65,17 @@ const EU_BATTERY_FAMILIES =
     "google-pixel-11",
     "google-pixel-11-pro",
     "google-pixel-11-pro-xl",
+    "xiaomi-17-ultra",
+    "xiaomi-17t-pro",
+    "xiaomi-17t",
+    "redmi-note-17-pro-max-5g",
+    "redmi-note-17-pro-5g",
+    "redmi-note-17-5g",
+    "honor-magic8-pro",
+    "honor-magic8-lite",
+    "honor-600-pro",
+    "oppo-find-x10",
+    "oppo-reno16-pro-5g",
   ]);
 
 const euBatteryProducts =
