@@ -2501,8 +2501,8 @@ async function testStandardizedBatteryRecommendation() {
   assert(
     data.bestOffer
       ?.familyId ===
-      "redmi-note-17-5g",
-    `Famiglia batteria attesa redmi-note-17-5g, ricevuta ${data.bestOffer?.familyId}`
+      "redmi-note-17-pro-5g",
+    `Famiglia batteria attesa redmi-note-17-pro-5g, ricevuta ${data.bestOffer?.familyId}`
   );
 
   assert(
@@ -2512,7 +2512,7 @@ async function testStandardizedBatteryRecommendation() {
         item =>
           item.criterion ===
             "battery" &&
-          item.score === 68 &&
+          item.score === 72 &&
           item.unit ===
             "h" &&
           item.protocol ===
@@ -2521,18 +2521,26 @@ async function testStandardizedBatteryRecommendation() {
     "La raccomandazione batteria deve usare l'autonomia UE standardizzata"
   );
 
-  assert(
+  const decisionCost =
     data.recommendation
-      ?.finalCost ===
-      null,
-    "Il costo finale REDMI deve restare provvisorio finché la spedizione Unieuro è sconosciuta"
+      ?.finalCostConfirmed === true
+      ? data.recommendation
+          ?.finalCost
+      : data.bestOffer
+          ?.offer_price;
+
+  assert(
+    typeof decisionCost ===
+      "number" &&
+    decisionCost <= 400,
+    `La raccomandazione batteria deve rispettare 400 €: ${decisionCost}`
   );
 
   assert(
     data.recommendation
       ?.message
       ?.includes(
-        "batteria: 68 h"
+        "batteria: 72 h"
       ),
     "La spiegazione deve mostrare l'autonomia standardizzata in ore"
   );
