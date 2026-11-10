@@ -254,6 +254,54 @@ const USE_CASE_PROFILES = [
   },
 
   {
+    id: "smartphone_gaming",
+
+    category: "smartphone",
+
+    signals: [
+      "gaming",
+      "giocare",
+      "videogiochi",
+      "giochi",
+      "game",
+    ],
+
+    label:
+      "gaming",
+
+    objectives: [
+      {
+        criterion:
+          "performance",
+
+        weight: 1.5,
+      },
+
+      {
+        criterion:
+          "display",
+
+        weight: 1,
+      },
+
+      {
+        criterion:
+          "battery",
+
+        weight: 0.7,
+      },
+
+      {
+        criterion:
+          "value",
+
+        weight: 0.8,
+      },
+    ],
+  },
+
+
+  {
     id: "smartphone_general",
 
     category: "smartphone",

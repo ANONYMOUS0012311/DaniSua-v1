@@ -185,6 +185,21 @@ function updateAiHint(raw) {
 // NASCONDERE BOX DANISUA
 // ========================================
 
+function setAssistantBoxTitle(
+  title
+) {
+  const label =
+    document.querySelector(
+      ".ai-best-title"
+    );
+
+  if (label) {
+    label.textContent =
+      title || "DaniSua";
+  }
+}
+
+
 function hideBestOffer() {
   const box =
     document.getElementById(
@@ -258,6 +273,16 @@ function getClarificationPrompt(
     };
   }
 
+  if (missing.includes("comparison")) {
+    return {
+      message:
+        clarification?.message ||
+        "Ho capito che vuoi confrontare due modelli. Dimmi quale criterio conta di più oppure cerca un modello alla volta.",
+      placeholder:
+        "Es. fotocamera, batteria o prezzo",
+    };
+  }
+
   return {
     message:
       clarification?.message ||
@@ -275,6 +300,47 @@ function clearPendingClarification() {
     inputRicerca.placeholder =
       SEARCH_PLACEHOLDER_DEFAULT;
   }
+}
+
+
+function renderSearchNotice(
+  message
+) {
+  const box =
+    document.getElementById(
+      "ai-best-offer"
+    );
+
+  const content =
+    document.getElementById(
+      "ai-best-content"
+    );
+
+  if (
+    !box ||
+    !content ||
+    !message
+  ) {
+    return;
+  }
+
+  setAssistantBoxTitle(
+    "Cosa ho trovato"
+  );
+
+  setAssistantBoxTitle(
+    "Mi manca un dettaglio"
+  );
+
+  box.style.display = "block";
+
+  content.innerHTML = `
+    <div class="danisua-clarification">
+      <p>
+        ${escapeHtml(message)}
+      </p>
+    </div>
+  `;
 }
 
 
@@ -626,6 +692,10 @@ function renderBestOffer(
     return;
   }
 
+  setAssistantBoxTitle(
+    "Per te conviene"
+  );
+
   box.style.display = "block";
 
   const title =
@@ -928,6 +998,27 @@ async function runSearchWithNormalize(
     }
 
     clearPendingClarification();
+
+    if (
+      data.canRecommend === false &&
+      data.clarification?.needed !== true &&
+      data.clarification?.message
+    ) {
+      renderSearchNotice(
+        data.clarification.message
+      );
+
+      renderProducts(
+        results,
+        null
+      );
+
+      updateCounter(
+        results.length
+      );
+
+      return;
+    }
 
     // ------------------------------------
     // PRODOTTO IDENTIFICATO
