@@ -3614,10 +3614,413 @@ async function testRemainingSmartphoneVariantDepth() {
 
 
 // ========================================
+// SEARCH UX — REAL USER SCENARIOS
+// ========================================
+
+async function testRealUserSearchScenarios() {
+  const scenarios = [
+    {
+      id: "exact-galaxy-512",
+      query: "Galaxy S26 Ultra 512 GB",
+      check(data) {
+        return (
+          data.canRecommend === true &&
+          data.bestOffer?.familyId ===
+            "samsung-galaxy-s26-ultra" &&
+          data.bestOffer?.storage ===
+            "512 GB"
+        );
+      },
+      expected:
+        "Galaxy S26 Ultra 512 GB exacto",
+    },
+    {
+      id: "iphone17-cheapest",
+      query: "iPhone 17 più economico",
+      check(data) {
+        return (
+          data.canRecommend === true &&
+          data.bestOffer?.familyId ===
+            "apple-iphone-17"
+        );
+      },
+      expected:
+        "iPhone 17 con mejor oferta válida",
+    },
+    {
+      id: "camera-under-600",
+      query:
+        "smartphone per foto sotto 600 euro",
+      check(data) {
+        const objectives =
+          data.context?.objectives || [];
+
+        const budgetOkay =
+          data.recommendation
+            ?.finalCostConfirmed === true
+            ? data.recommendation
+                ?.finalCost <= 600
+            : data.bestOffer
+                ?.offer_price <= 600;
+
+        return (
+          data.canRecommend === true &&
+          objectives.some(
+            item =>
+              item.criterion ===
+                "camera"
+          ) &&
+          budgetOkay
+        );
+      },
+      expected:
+        "recomendación cámara dentro de 600 €",
+    },
+    {
+      id: "camera-battery-under-800",
+      query:
+        "telefono con ottima fotocamera e buona batteria sotto 800 euro",
+      check(data) {
+        const criteria =
+          (data.context?.objectives || [])
+            .map(
+              item =>
+                item.criterion
+            );
+
+        const budgetOkay =
+          data.recommendation
+            ?.finalCostConfirmed === true
+            ? data.recommendation
+                ?.finalCost <= 800
+            : data.bestOffer
+                ?.offer_price <= 800;
+
+        return (
+          data.canRecommend === true &&
+          criteria.includes("camera") &&
+          criteria.includes("battery") &&
+          budgetOkay
+        );
+      },
+      expected:
+        "multi-criterio cámara+batería dentro de 800 €",
+    },
+    {
+      id: "samsung-battery",
+      query:
+        "voglio un Samsung con buona batteria",
+      check(data) {
+        return (
+          data.canRecommend === true &&
+          data.bestOffer?.brand ===
+            "Samsung"
+        );
+      },
+      expected:
+        "recomendación Samsung respetando marca",
+    },
+    {
+      id: "cheap-but-good",
+      query:
+        "telefono economico ma buono",
+      check(data) {
+        return (
+          data.status !==
+            "unsupported_intent" &&
+          (
+            data.canRecommend ===
+              true ||
+            data.clarification
+              ?.needed === true
+          )
+        );
+      },
+      expected:
+        "respuesta útil o aclaración, nunca intención no soportada",
+    },
+    {
+      id: "iphone-space-under-1000",
+      query:
+        "voglio un iPhone con molto spazio sotto 1000 euro",
+      check(data) {
+        if (
+          data.canRecommend !== true
+        ) {
+          return false;
+        }
+
+        const budgetOkay =
+          data.recommendation
+            ?.finalCostConfirmed === true
+            ? data.recommendation
+                ?.finalCost <= 1000
+            : data.bestOffer
+                ?.offer_price <= 1000;
+
+        return (
+          data.bestOffer?.brand ===
+            "Apple" &&
+          budgetOkay
+        );
+      },
+      expected:
+        "iPhone dentro de presupuesto sin perder la intención",
+    },
+    {
+      id: "pixel-vs-galaxy-camera",
+      query:
+        "Pixel 11 o Galaxy S26 per foto",
+      check(data) {
+        return (
+          data.status !==
+            "unsupported_intent" &&
+          (
+            data.canRecommend ===
+              true ||
+            data.clarification
+              ?.needed === true
+          )
+        );
+      },
+      expected:
+        "comparación/interpretación útil de dos familias",
+    },
+    {
+      id: "gaming-under-800",
+      query:
+        "smartphone per gaming sotto 800 euro",
+      check(data) {
+        const objectives =
+          data.context?.objectives || [];
+
+        const budgetOkay =
+          data.recommendation
+            ?.finalCostConfirmed === true
+            ? data.recommendation
+                ?.finalCost <= 800
+            : data.bestOffer
+                ?.offer_price <= 800;
+
+        return (
+          data.canRecommend === true &&
+          objectives.some(
+            item =>
+              item.criterion ===
+                "performance"
+          ) &&
+          budgetOkay
+        );
+      },
+      expected:
+        "gaming → performance dentro de 800 €",
+    },
+    {
+      id: "typo-samsung",
+      query:
+        "samsng con buona baterria sotto 500 euro",
+      check(data) {
+        return (
+          data.status !==
+            "unsupported_intent" &&
+          (
+            data.canRecommend ===
+              true ||
+            data.clarification
+              ?.needed === true ||
+            data.status ===
+              "not_found"
+          )
+        );
+      },
+      expected:
+        "degradación segura ante typo",
+    },
+    {
+      id: "android-not-iphone",
+      query:
+        "non voglio iPhone, voglio Android con buona batteria sotto 700 euro",
+      check(data) {
+        if (
+          data.canRecommend !== true
+        ) {
+          return false;
+        }
+
+        return (
+          data.bestOffer?.brand !==
+            "Apple" &&
+          (
+            data.recommendation
+              ?.finalCostConfirmed ===
+                true
+              ? data.recommendation
+                  ?.finalCost <= 700
+              : data.bestOffer
+                  ?.offer_price <= 700
+          )
+        );
+      },
+      expected:
+        "exclusión iPhone + Android + batería + presupuesto",
+    },
+    {
+      id: "refurbished-iphone",
+      query:
+        "iPhone 15 ricondizionato sotto 500 euro",
+      check(data) {
+        if (
+          data.canRecommend === true
+        ) {
+          return (
+            data.bestOffer
+              ?.condition ===
+              "refurbished"
+          );
+        }
+
+        return (
+          data.status ===
+            "not_found" ||
+          data.clarification
+            ?.needed === true
+        );
+      },
+      expected:
+        "no mezclar nuevo con reacondicionado",
+    },
+  ];
+
+  const failures = [];
+
+  for (const scenario of scenarios) {
+    const data =
+      await search(
+        scenario.query
+      );
+
+    const summary = {
+      id:
+        scenario.id,
+      query:
+        scenario.query,
+      intent:
+        data.intent,
+      status:
+        data.status,
+      canRecommend:
+        data.canRecommend,
+      clarification:
+        data.clarification
+          ?.needed === true,
+      familyId:
+        data.bestOffer
+          ?.familyId ||
+        null,
+      productId:
+        data.bestOffer
+          ?.productId ||
+        null,
+      brand:
+        data.bestOffer
+          ?.brand ||
+        null,
+      model:
+        data.bestOffer
+          ?.model ||
+        null,
+      storage:
+        data.bestOffer
+          ?.storage ||
+        null,
+      condition:
+        data.bestOffer
+          ?.condition ||
+        null,
+      offerPrice:
+        data.bestOffer
+          ?.offer_price ??
+        null,
+      finalCost:
+        data.recommendation
+          ?.finalCost ??
+        null,
+      finalCostConfirmed:
+        data.recommendation
+          ?.finalCostConfirmed ===
+        true,
+      objectives:
+        (
+          data.context
+            ?.objectives ||
+          []
+        )
+          .map(
+            item =>
+              item.criterion
+          ),
+      budget:
+        data.context?.budget ??
+        null,
+      recommendationReason:
+        data.recommendation
+          ?.reason ||
+        null,
+    };
+
+    console.log(
+      "UX_SCENARIO " +
+      JSON.stringify(summary)
+    );
+
+    let passed = false;
+
+    try {
+      passed =
+        scenario.check(data) ===
+        true;
+    } catch {
+      passed = false;
+    }
+
+    if (!passed) {
+      failures.push(
+        {
+          id:
+            scenario.id,
+          expected:
+            scenario.expected,
+          summary,
+        }
+      );
+    }
+  }
+
+  if (failures.length > 0) {
+    throw new Error(
+      "Scenari UX falliti: " +
+      JSON.stringify(
+        failures
+      )
+    );
+  }
+}
+
+
+// ========================================
 // TESTS
 // ========================================
 
 const tests = [
+  {
+    name:
+      "SEARCH UX — real user scenarios",
+
+    run:
+      testRealUserSearchScenarios,
+  },
+
+
   {
     name:
       "REMAINING SMARTPHONES — variant depth complete",
