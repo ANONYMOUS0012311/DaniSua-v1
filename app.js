@@ -283,6 +283,16 @@ function getClarificationPrompt(
     };
   }
 
+  if (missing.includes("value_dimension")) {
+    return {
+      message:
+        clarification?.message ||
+        "Cosa significa “buono” per te? Fotocamera, batteria o prestazioni?",
+      placeholder:
+        "Es. buona batteria",
+    };
+  }
+
   return {
     message:
       clarification?.message ||
