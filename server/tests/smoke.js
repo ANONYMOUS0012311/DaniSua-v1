@@ -3775,26 +3775,20 @@ async function testRealUserSearchScenarios() {
         "telefono economico ma buono",
       check(data) {
         return (
-          data.status !==
-            "unsupported_intent" &&
-          (
-            data.canRecommend ===
-              true ||
-            data.clarification
-              ?.needed === true ||
-            (
-              data.status ===
-                "knowledge_insufficient" &&
-              Array.isArray(
-                data.results
-              ) &&
-              data.results.length > 0
+          data.canRecommend === false &&
+          data.status ===
+            "needs_value_dimension" &&
+          data.clarification
+            ?.needed === true &&
+          data.clarification
+            ?.missing
+            ?.includes(
+              "value_dimension"
             )
-          )
         );
       },
       expected:
-        "respuesta útil; no inventar calidad si faltan datos comparables",
+        "pedir qué significa 'bueno' antes de inventar un score de valor",
     },
     {
       id: "iphone-space-under-1000",
@@ -4361,10 +4355,82 @@ async function testExplicitRecommendationCriteriaCannotDisappear() {
 
 
 // ========================================
+// VALUE — QUALITY + PRICE DIRECTIVE
+// ========================================
+
+async function testValueAsRankingDirective() {
+  const vague =
+    await search(
+      "telefono economico ma buono"
+    );
+
+  assert(
+    vague.status ===
+      "needs_value_dimension" &&
+    vague.canRecommend === false &&
+    vague.clarification
+      ?.needed === true,
+    "Value generico deve chiedere quale qualità conta"
+  );
+
+  const batteryValue =
+    await search(
+      "smartphone economico con buona batteria sotto 700 euro"
+    );
+
+  assert(
+    batteryValue.canRecommend ===
+      true,
+    `Battery+value deve essere raccomandabile: ${batteryValue.status}`
+  );
+
+  assert(
+    batteryValue.recommendation
+      ?.usedCriteria
+      ?.includes(
+        "battery"
+      ),
+    "Battery+value deve usare battery come qualità"
+  );
+
+  assert(
+    batteryValue.ranking
+      ?.mode ===
+      "quality_and_price",
+    `Ranking value inatteso: ${batteryValue.ranking?.mode}`
+  );
+
+  const budgetCost =
+    batteryValue.recommendation
+      ?.finalCostConfirmed === true
+      ? batteryValue.recommendation
+          ?.finalCost
+      : batteryValue.bestOffer
+          ?.offer_price;
+
+  assert(
+    typeof budgetCost ===
+      "number" &&
+    budgetCost <= 700,
+    `Battery+value deve rispettare 700 €: ${budgetCost}`
+  );
+}
+
+
+// ========================================
 // TESTS
 // ========================================
 
 const tests = [
+  {
+    name:
+      "VALUE — quality + price directive",
+
+    run:
+      testValueAsRankingDirective,
+  },
+
+
   {
     name:
       "TRUST — explicit recommendation criteria are mandatory",
