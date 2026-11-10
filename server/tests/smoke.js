@@ -4086,10 +4086,82 @@ async function testSamsungBatteryKnowledge() {
 
 
 // ========================================
+// PRODUCT KNOWLEDGE — EU BATTERY WAVE 2
+// ========================================
+
+async function testEuBatteryKnowledgeWave2() {
+  const iphone =
+    await search(
+      "voglio un iPhone con buona batteria"
+    );
+
+  assert(
+    iphone.canRecommend === true &&
+    iphone.status ===
+      "best_product_ready",
+    `iPhone batteria deve essere raccomandabile: ${iphone.status}`
+  );
+
+  assert(
+    iphone.bestOffer
+      ?.familyId ===
+      "apple-iphone-18-pro-max",
+    `iPhone batteria atteso 18 Pro Max, ricevuto ${iphone.bestOffer?.familyId}`
+  );
+
+  assert(
+    iphone.recommendation
+      ?.usedCriteria
+      ?.includes(
+        "battery"
+      ),
+    "Il ranking iPhone deve usare batteria"
+  );
+
+  const pixel =
+    await search(
+      "voglio un Pixel con buona batteria"
+    );
+
+  assert(
+    pixel.canRecommend === true &&
+    pixel.status ===
+      "best_product_ready",
+    `Pixel batteria deve essere raccomandabile: ${pixel.status}`
+  );
+
+  assert(
+    pixel.bestOffer
+      ?.familyId ===
+      "google-pixel-10a",
+    `Pixel batteria atteso Pixel 10a, ricevuto ${pixel.bestOffer?.familyId}`
+  );
+
+  assert(
+    pixel.recommendation
+      ?.usedCriteria
+      ?.includes(
+        "battery"
+      ),
+    "Il ranking Pixel deve usare batteria"
+  );
+}
+
+
+// ========================================
 // TESTS
 // ========================================
 
 const tests = [
+  {
+    name:
+      "KNOWLEDGE — EU battery Apple + Google",
+
+    run:
+      testEuBatteryKnowledgeWave2,
+  },
+
+
   {
     name:
       "KNOWLEDGE — Samsung battery recommendation",
