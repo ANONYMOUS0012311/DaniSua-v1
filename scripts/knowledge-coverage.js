@@ -18,6 +18,11 @@ function readJson(name) {
 const products =
   readJson("products.json");
 
+const smartphoneTargets =
+  readJson(
+    "catalog_targets.smartphones.json"
+  );
+
 const rawKnowledge =
   readJson(
     "product_knowledge.json"
@@ -65,6 +70,17 @@ const EU_BATTERY_FAMILIES =
     "google-pixel-11",
     "google-pixel-11-pro",
     "google-pixel-11-pro-xl",
+    "xiaomi-17-ultra",
+    "xiaomi-17t-pro",
+    "xiaomi-17t",
+    "redmi-note-17-pro-max-5g",
+    "redmi-note-17-pro-5g",
+    "redmi-note-17-5g",
+    "honor-magic8-pro",
+    "honor-magic8-lite",
+    "honor-600-pro",
+    "oppo-find-x10",
+    "oppo-reno16-pro-5g",
   ]);
 
 const euBatteryProducts =
@@ -73,6 +89,39 @@ const euBatteryProducts =
       EU_BATTERY_FAMILIES
         .has(
           product.familyId
+        )
+  );
+
+const targetFamilyIds =
+  new Set(
+    (
+      smartphoneTargets
+        ?.families ||
+      []
+    ).map(
+      family =>
+        family.familyId
+    )
+  );
+
+const protectedTargetFamilies =
+  [
+    ...EU_BATTERY_FAMILIES,
+  ].filter(
+    familyId =>
+      targetFamilyIds.has(
+        familyId
+      )
+  );
+
+const unprotectedTargetFamilies =
+  [
+    ...targetFamilyIds,
+  ].filter(
+    familyId =>
+      !EU_BATTERY_FAMILIES
+        .has(
+          familyId
         )
   );
 
@@ -223,6 +272,32 @@ const variantsWithScores =
   ).length;
 
 const euBatteryCoverage = {
+  targetFamilies:
+    targetFamilyIds.size,
+
+  protectedFamilies:
+    protectedTargetFamilies.length,
+
+  protectedFamilyPercent:
+    targetFamilyIds.size > 0
+      ? Number(
+          (
+            (
+              protectedTargetFamilies.length /
+              targetFamilyIds.size
+            ) *
+            100
+          ).toFixed(1)
+        )
+      : 0,
+
+  unprotectedTargetFamilies,
+
+  excludedLegacyFamilies: [
+    "apple-iphone-14",
+    "apple-iphone-15",
+  ],
+
   variants:
     euBatteryProducts.length,
 

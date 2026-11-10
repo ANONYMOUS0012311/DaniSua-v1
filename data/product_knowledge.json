@@ -3954,6 +3954,1062 @@
         }
       ],
       "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "xiaomi-17t-256-blue",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 65.67,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "eprel-xiaomi17t-2648677",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 65.67
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "eprel-xiaomi17t-2648677",
+          "score": 65.67,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "eprel-xiaomi17t-2648677",
+          "name": "EU EPREL",
+          "type": "regulatory_product_information",
+          "title": "Xiaomi 17T - EU product information",
+          "url": "https://eprel.ec.europa.eu/api/product/2648677/fiches?language=EN",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "xiaomi-redmi-note17-pro-5g-256-black",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 72,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "eprel-redmi-note17-pro-2753032",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 72
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "eprel-redmi-note17-pro-2753032",
+          "score": 72,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "eprel-redmi-note17-pro-2753032",
+          "name": "EU EPREL",
+          "type": "regulatory_product_information",
+          "title": "REDMI Note 17 Pro 5G - EU product information sheet",
+          "url": "https://eprel.ec.europa.eu/fiches/smartphonestablets20231669/Fiche_2753032_EN.pdf",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "xiaomi-17t-pro-256",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 70.92,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "eprel-xiaomi17tpro-2615556",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 70.92
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "eprel-xiaomi17tpro-2615556",
+          "score": 70.92,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "eprel-xiaomi17tpro-2615556",
+          "name": "EU EPREL",
+          "type": "regulatory_product_information",
+          "title": "Xiaomi 17T Pro - EU product information",
+          "url": "https://eprel.ec.europa.eu/api/product/2615556/fiches?language=EN",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "xiaomi-redmi-note17-pro-max-5g-256-black",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 79.27,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "eprel-redmi-note17-pro-max-2753015",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 79.27
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "eprel-redmi-note17-pro-max-2753015",
+          "score": 79.27,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "eprel-redmi-note17-pro-max-2753015",
+          "name": "EU EPREL",
+          "type": "regulatory_product_information",
+          "title": "REDMI Note 17 Pro Max 5G - EU product information",
+          "url": "https://eprel.ec.europa.eu/qr/2753015",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "xiaomi-17-ultra-512-black",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 63.07,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "eprel-xiaomi17ultra-2537479",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 63.07
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "eprel-xiaomi17ultra-2537479",
+          "score": 63.07,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "eprel-xiaomi17ultra-2537479",
+          "name": "EU EPREL",
+          "type": "regulatory_product_information",
+          "title": "Xiaomi 17 Ultra - EU product information",
+          "url": "https://eprel.ec.europa.eu/qr/2537479",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "honor-magic8-pro-512",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 63,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "eprel-honor-magic8-pro-2509671",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 63
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "eprel-honor-magic8-pro-2509671",
+          "score": 63,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "eprel-honor-magic8-pro-2509671",
+          "name": "EU EPREL",
+          "type": "regulatory_product_information",
+          "title": "HONOR Magic8 Pro - EU product information sheet",
+          "url": "https://eprel.ec.europa.eu/fiches/smartphonestablets20231669/Fiche_2509671_EN.pdf",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "honor-magic8-lite-256-black",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 68,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "eprel-honor-magic8-lite-2515767",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 68
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "eprel-honor-magic8-lite-2515767",
+          "score": 68,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "eprel-honor-magic8-lite-2515767",
+          "name": "EU EPREL",
+          "type": "regulatory_product_information",
+          "title": "HONOR Magic8 Lite - EU product information sheet",
+          "url": "https://eprel.ec.europa.eu/fiches/smartphonestablets20231669/Fiche_2515767_EN.pdf",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "honor-600-pro-512",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 65,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "eprel-honor-600-pro-2654157",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 65
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "eprel-honor-600-pro-2654157",
+          "score": 65,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "eprel-honor-600-pro-2654157",
+          "name": "EU EPREL",
+          "type": "regulatory_product_information",
+          "title": "HONOR 600 Pro - EU product information sheet",
+          "url": "https://eprel.ec.europa.eu/fiches/smartphonestablets20231669/Fiche_2654157_EN.pdf",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "oppo-find-x10-256-mist-grey",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 70.9,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "eprel-oppo-find-x10-2752326",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 70.9
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "eprel-oppo-find-x10-2752326",
+          "score": 70.9,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "eprel-oppo-find-x10-2752326",
+          "name": "EU EPREL",
+          "type": "regulatory_product_information",
+          "title": "OPPO Find X10 - EU product information",
+          "url": "https://eprel.ec.europa.eu/qr/2752326",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "oppo-reno16-pro-512-pop-white",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 62,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "eprel-oppo-reno16-pro-2588501",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 62
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "eprel-oppo-reno16-pro-2588501",
+          "score": 62,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "eprel-oppo-reno16-pro-2588501",
+          "name": "EU EPREL",
+          "type": "regulatory_product_information",
+          "title": "OPPO Reno16 Pro 5G - EU product information sheet",
+          "url": "https://eprel.ec.europa.eu/fiches/smartphonestablets20231669/Fiche_2588501_EN.pdf",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "xiaomi-17t-pro-512-black",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 70.92,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "eprel-xiaomi17tpro-2615556",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 70.92
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "eprel-xiaomi17tpro-2615556",
+          "score": 70.92,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "eprel-xiaomi17tpro-2615556",
+          "name": "EU EPREL",
+          "type": "regulatory_product_information",
+          "title": "Xiaomi 17T Pro - EU product information",
+          "url": "https://eprel.ec.europa.eu/api/product/2615556/fiches?language=EN",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "xiaomi-17t-256-violet",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 65.67,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "eprel-xiaomi17t-2648677",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 65.67
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "eprel-xiaomi17t-2648677",
+          "score": 65.67,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "eprel-xiaomi17t-2648677",
+          "name": "EU EPREL",
+          "type": "regulatory_product_information",
+          "title": "Xiaomi 17T - EU product information",
+          "url": "https://eprel.ec.europa.eu/api/product/2648677/fiches?language=EN",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "honor-magic8-lite-256-midnight-black",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 68,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "eprel-honor-magic8-lite-2515767",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 68
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "eprel-honor-magic8-lite-2515767",
+          "score": 68,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "eprel-honor-magic8-lite-2515767",
+          "name": "EU EPREL",
+          "type": "regulatory_product_information",
+          "title": "HONOR Magic8 Lite - EU product information sheet",
+          "url": "https://eprel.ec.europa.eu/fiches/smartphonestablets20231669/Fiche_2515767_EN.pdf",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "xiaomi-17-ultra-1tb-black",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 63.07,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "eprel-xiaomi17ultra-2537479",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 63.07
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "eprel-xiaomi17ultra-2537479",
+          "score": 63.07,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "eprel-xiaomi17ultra-2537479",
+          "name": "EU EPREL",
+          "type": "regulatory_product_information",
+          "title": "Xiaomi 17 Ultra - EU product information",
+          "url": "https://eprel.ec.europa.eu/qr/2537479",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "xiaomi-17t-pro-1tb-black",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 70.92,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "eprel-xiaomi17tpro-2615556",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 70.92
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "eprel-xiaomi17tpro-2615556",
+          "score": 70.92,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "eprel-xiaomi17tpro-2615556",
+          "name": "EU EPREL",
+          "type": "regulatory_product_information",
+          "title": "Xiaomi 17T Pro - EU product information",
+          "url": "https://eprel.ec.europa.eu/api/product/2615556/fiches?language=EN",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "xiaomi-17t-512-blue",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 65.67,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "eprel-xiaomi17t-2648677",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 65.67
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "eprel-xiaomi17t-2648677",
+          "score": 65.67,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "eprel-xiaomi17t-2648677",
+          "name": "EU EPREL",
+          "type": "regulatory_product_information",
+          "title": "Xiaomi 17T - EU product information",
+          "url": "https://eprel.ec.europa.eu/api/product/2648677/fiches?language=EN",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "xiaomi-redmi-note17-promax-5g-512-black",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 79.27,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "eprel-redmi-note17-pro-max-2753015",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 79.27
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "eprel-redmi-note17-pro-max-2753015",
+          "score": 79.27,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "eprel-redmi-note17-pro-max-2753015",
+          "name": "EU EPREL",
+          "type": "regulatory_product_information",
+          "title": "REDMI Note 17 Pro Max 5G - EU product information",
+          "url": "https://eprel.ec.europa.eu/qr/2753015",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "xiaomi-redmi-note17-pro-5g-256-black-12gb",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 72,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "eprel-redmi-note17-pro-2753032",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 72
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "eprel-redmi-note17-pro-2753032",
+          "score": 72,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "eprel-redmi-note17-pro-2753032",
+          "name": "EU EPREL",
+          "type": "regulatory_product_information",
+          "title": "REDMI Note 17 Pro 5G - EU product information sheet",
+          "url": "https://eprel.ec.europa.eu/fiches/smartphonestablets20231669/Fiche_2753032_EN.pdf",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "xiaomi-redmi-note17-pro-5g-512-black",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 72,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "eprel-redmi-note17-pro-2753032",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 72
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "eprel-redmi-note17-pro-2753032",
+          "score": 72,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "eprel-redmi-note17-pro-2753032",
+          "name": "EU EPREL",
+          "type": "regulatory_product_information",
+          "title": "REDMI Note 17 Pro 5G - EU product information sheet",
+          "url": "https://eprel.ec.europa.eu/fiches/smartphonestablets20231669/Fiche_2753032_EN.pdf",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "honor-magic8-lite-512-black",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 68,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "eprel-honor-magic8-lite-2515767",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 68
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "eprel-honor-magic8-lite-2515767",
+          "score": 68,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "eprel-honor-magic8-lite-2515767",
+          "name": "EU EPREL",
+          "type": "regulatory_product_information",
+          "title": "HONOR Magic8 Lite - EU product information sheet",
+          "url": "https://eprel.ec.europa.eu/fiches/smartphonestablets20231669/Fiche_2515767_EN.pdf",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "xiaomi-17t-512-violet",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 65.67,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "eprel-xiaomi17t-2648677",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 65.67
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "eprel-xiaomi17t-2648677",
+          "score": 65.67,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "eprel-xiaomi17t-2648677",
+          "name": "EU EPREL",
+          "type": "regulatory_product_information",
+          "title": "Xiaomi 17T - EU product information",
+          "url": "https://eprel.ec.europa.eu/api/product/2648677/fiches?language=EN",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "oppo-find-x10-512-mist-grey",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 70.9,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "eprel-oppo-find-x10-2752326",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 70.9
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "eprel-oppo-find-x10-2752326",
+          "score": 70.9,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "eprel-oppo-find-x10-2752326",
+          "name": "EU EPREL",
+          "type": "regulatory_product_information",
+          "title": "OPPO Find X10 - EU product information",
+          "url": "https://eprel.ec.europa.eu/qr/2752326",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
     }
   ]
 }
