@@ -4284,7 +4284,8 @@ async function testExplicitRecommendationCriteriaCannotDisappear() {
 
   assert(
     (
-      camera.dataCoverage
+      camera.context
+        ?.dataCoverage
         ?.requiredExplicitObjectives ||
       []
     ).some(
@@ -4294,7 +4295,8 @@ async function testExplicitRecommendationCriteriaCannotDisappear() {
     ) &&
     (
       (
-        camera.dataCoverage
+        camera.context
+          ?.dataCoverage
           ?.rankingObjectives ||
         []
       ).some(
@@ -4303,7 +4305,8 @@ async function testExplicitRecommendationCriteriaCannotDisappear() {
             "camera"
       ) ||
       (
-        camera.dataCoverage
+        camera.context
+          ?.dataCoverage
           ?.missingExplicitObjectives ||
         []
       ).some(
@@ -4329,7 +4332,8 @@ async function testExplicitRecommendationCriteriaCannotDisappear() {
   );
 
   assert(
-    gaming.dataCoverage
+    gaming.context
+      ?.dataCoverage
       ?.missingExplicitObjectives
       ?.some(
         objective =>
