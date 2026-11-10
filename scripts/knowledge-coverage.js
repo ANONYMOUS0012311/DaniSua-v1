@@ -234,6 +234,14 @@ const variantsWithScores =
   ).length;
 
 const euBatteryCoverage = {
+  protectedFamilies:
+    EU_BATTERY_FAMILIES.size,
+
+  excludedLegacyFamilies: [
+    "apple-iphone-14",
+    "apple-iphone-15",
+  ],
+
   variants:
     euBatteryProducts.length,
 
