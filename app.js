@@ -258,6 +258,16 @@ function getClarificationPrompt(
     };
   }
 
+  if (missing.includes("comparison")) {
+    return {
+      message:
+        clarification?.message ||
+        "Ho capito che vuoi confrontare due modelli. Dimmi quale criterio conta di più oppure cerca un modello alla volta.",
+      placeholder:
+        "Es. fotocamera, batteria o prezzo",
+    };
+  }
+
   return {
     message:
       clarification?.message ||
