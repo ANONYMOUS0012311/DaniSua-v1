@@ -41,6 +41,32 @@ const smartphoneProducts =
       "smartphone"
   );
 
+const SAMSUNG_BATTERY_PROTOCOL =
+  "EU 2023/1669 battery endurance per cycle (hours)";
+
+const SAMSUNG_EU_BATTERY_FAMILIES =
+  new Set([
+    "samsung-galaxy-s26-ultra",
+    "samsung-galaxy-s26-plus",
+    "samsung-galaxy-s26",
+    "samsung-galaxy-s26-fe",
+    "samsung-galaxy-a57",
+    "samsung-galaxy-a37",
+    "samsung-galaxy-z-fold8",
+    "samsung-galaxy-z-flip8",
+  ]);
+
+const samsungSmartphoneProducts =
+  smartphoneProducts.filter(
+    product =>
+      product.brand ===
+        "Samsung" &&
+      SAMSUNG_EU_BATTERY_FAMILIES
+        .has(
+          product.familyId
+        )
+  );
+
 const knowledgeMap =
   new Map(
     knowledgeItems.map(
@@ -187,6 +213,62 @@ const variantsWithScores =
       ).length > 0
   ).length;
 
+const samsungBatteryCoverage = {
+  variants:
+    samsungSmartphoneProducts.length,
+
+  variantsWithBatteryScore:
+    samsungSmartphoneProducts.filter(
+      product => {
+        const item =
+          knowledgeMap.get(
+            product.id
+          );
+
+        return (
+          typeof item
+            ?.scores
+            ?.battery ===
+            "number" &&
+          Number.isFinite(
+            item.scores.battery
+          )
+        );
+      }
+    ).length,
+
+  variantsWithExpectedProtocol:
+    samsungSmartphoneProducts.filter(
+      product => {
+        const item =
+          knowledgeMap.get(
+            product.id
+          );
+
+        return (
+          item
+            ?.scoreMeta
+            ?.battery
+            ?.protocol ===
+          SAMSUNG_BATTERY_PROTOCOL
+        );
+      }
+    ).length,
+};
+
+samsungBatteryCoverage.complete =
+  samsungBatteryCoverage
+    .variants > 0 &&
+  samsungBatteryCoverage
+    .variantsWithBatteryScore ===
+    samsungBatteryCoverage
+      .variants &&
+  samsungBatteryCoverage
+    .variantsWithExpectedProtocol ===
+    samsungBatteryCoverage
+      .variants;
+
+
 const summary = {
   smartphoneVariants:
     smartphoneProducts.length,
@@ -220,6 +302,7 @@ const summary = {
           ).toFixed(1)
         )
       : 0,
+  samsungBatteryCoverage,
 };
 
 console.log(
@@ -232,3 +315,18 @@ console.log(
     2
   )
 );
+
+
+if (
+  !samsungBatteryCoverage.complete
+) {
+  console.error(
+    "Samsung battery knowledge incomplete: " +
+    samsungBatteryCoverage
+      .variantsWithExpectedProtocol +
+    "/" +
+    samsungBatteryCoverage.variants
+  );
+
+  process.exitCode = 1;
+}
