@@ -3660,59 +3660,83 @@ async function testRealUserSearchScenarios() {
       query:
         "smartphone per foto sotto 600 euro",
       check(data) {
-        const objectives =
-          data.context?.objectives || [];
+        if (
+          data.canRecommend === true
+        ) {
+          const budgetOkay =
+            data.recommendation
+              ?.finalCostConfirmed === true
+              ? data.recommendation
+                  ?.finalCost <= 600
+              : data.bestOffer
+                  ?.offer_price <= 600;
 
-        const budgetOkay =
-          data.recommendation
-            ?.finalCostConfirmed === true
-            ? data.recommendation
-                ?.finalCost <= 600
-            : data.bestOffer
-                ?.offer_price <= 600;
+          return (
+            data.recommendation
+              ?.usedCriteria
+              ?.includes(
+                "camera"
+              ) &&
+            data.recommendation
+              ?.rankingEvidence
+              ?.some(
+                item =>
+                  item.criterion ===
+                    "camera"
+              ) &&
+            budgetOkay
+          );
+        }
 
         return (
-          data.canRecommend === true &&
-          objectives.some(
-            item =>
-              item.criterion ===
-                "camera"
-          ) &&
-          budgetOkay
+          data.status ===
+            "knowledge_insufficient" &&
+          data.bestOffer === null
         );
       },
       expected:
-        "recomendación cámara dentro de 600 €",
+        "usar cámara explícitamente o declarar conocimiento insuficiente",
     },
     {
       id: "camera-battery-under-800",
       query:
         "telefono con ottima fotocamera e buona batteria sotto 800 euro",
       check(data) {
-        const criteria =
-          (data.context?.objectives || [])
-            .map(
-              item =>
-                item.criterion
-            );
+        if (
+          data.canRecommend === true
+        ) {
+          const used =
+            data.recommendation
+              ?.usedCriteria ||
+            [];
 
-        const budgetOkay =
-          data.recommendation
-            ?.finalCostConfirmed === true
-            ? data.recommendation
-                ?.finalCost <= 800
-            : data.bestOffer
-                ?.offer_price <= 800;
+          const budgetOkay =
+            data.recommendation
+              ?.finalCostConfirmed === true
+              ? data.recommendation
+                  ?.finalCost <= 800
+              : data.bestOffer
+                  ?.offer_price <= 800;
+
+          return (
+            used.includes(
+              "camera"
+            ) &&
+            used.includes(
+              "battery"
+            ) &&
+            budgetOkay
+          );
+        }
 
         return (
-          data.canRecommend === true &&
-          criteria.includes("camera") &&
-          criteria.includes("battery") &&
-          budgetOkay
+          data.status ===
+            "knowledge_insufficient" &&
+          data.bestOffer === null
         );
       },
       expected:
-        "multi-criterio cámara+batería dentro de 800 €",
+        "usar cámara+batería explícitas o declarar conocimiento insuficiente",
     },
     {
       id: "samsung-battery",
@@ -3815,29 +3839,35 @@ async function testRealUserSearchScenarios() {
       query:
         "smartphone per gaming sotto 800 euro",
       check(data) {
-        const objectives =
-          data.context?.objectives || [];
+        if (
+          data.canRecommend === true
+        ) {
+          const budgetOkay =
+            data.recommendation
+              ?.finalCostConfirmed === true
+              ? data.recommendation
+                  ?.finalCost <= 800
+              : data.bestOffer
+                  ?.offer_price <= 800;
 
-        const budgetOkay =
-          data.recommendation
-            ?.finalCostConfirmed === true
-            ? data.recommendation
-                ?.finalCost <= 800
-            : data.bestOffer
-                ?.offer_price <= 800;
+          return (
+            data.recommendation
+              ?.usedCriteria
+              ?.includes(
+                "performance"
+              ) &&
+            budgetOkay
+          );
+        }
 
         return (
-          data.canRecommend === true &&
-          objectives.some(
-            item =>
-              item.criterion ===
-                "performance"
-          ) &&
-          budgetOkay
+          data.status ===
+            "knowledge_insufficient" &&
+          data.bestOffer === null
         );
       },
       expected:
-        "gaming → performance dentro de 800 €",
+        "usar rendimiento para gaming o declarar conocimiento insuficiente",
     },
     {
       id: "typo-samsung",
@@ -4235,10 +4265,89 @@ async function testEuBatteryKnowledgeWave3() {
 
 
 // ========================================
+// TRUST — EXPLICIT RECOMMENDATION CRITERIA
+// ========================================
+
+async function testExplicitRecommendationCriteriaCannotDisappear() {
+  const camera =
+    await search(
+      "smartphone per foto sotto 600 euro"
+    );
+
+  assert(
+    camera.status ===
+      "knowledge_insufficient" &&
+    camera.canRecommend === false &&
+    camera.bestOffer === null,
+    "Senza dati camera comparabili sotto 600 €, DaniSua non deve ripiegare sulla batteria"
+  );
+
+  assert(
+    camera.dataCoverage
+      ?.missingExplicitObjectives
+      ?.some(
+        objective =>
+          objective.criterion ===
+            "camera"
+      ),
+    "Il criterio camera esplicito deve risultare mancante"
+  );
+
+  const gaming =
+    await search(
+      "smartphone per gaming sotto 800 euro"
+    );
+
+  assert(
+    gaming.status ===
+      "knowledge_insufficient" &&
+    gaming.canRecommend === false &&
+    gaming.bestOffer === null,
+    "Senza benchmark performance comparabili, DaniSua non deve inventare una raccomandazione gaming"
+  );
+
+  assert(
+    gaming.dataCoverage
+      ?.missingExplicitObjectives
+      ?.some(
+        objective =>
+          objective.criterion ===
+            "performance"
+      ),
+    "Il criterio performance esplicito deve risultare mancante"
+  );
+
+  const battery =
+    await search(
+      "smartphone con buona batteria sotto 400 euro"
+    );
+
+  assert(
+    battery.canRecommend === true &&
+    battery.recommendation
+      ?.usedCriteria
+      ?.includes(
+        "battery"
+      ),
+    "Un criterio esplicito con dati comparabili deve continuare a raccomandare"
+  );
+}
+
+
+// ========================================
 // TESTS
 // ========================================
 
 const tests = [
+  {
+    name:
+      "TRUST — explicit recommendation criteria are mandatory",
+
+    run:
+      testExplicitRecommendationCriteriaCannotDisappear,
+  },
+
+
   {
     name:
       "KNOWLEDGE — EU battery Xiaomi + HONOR + OPPO",
