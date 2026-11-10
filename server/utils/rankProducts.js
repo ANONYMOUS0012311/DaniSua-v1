@@ -1538,6 +1538,139 @@ function rankQualityAndPrice(
 
 
 // ========================================
+// MULTI-CRITERIA QUALITY + PRICE
+// ========================================
+
+function rankObjectivesAndPrice(
+  entities,
+  objectives,
+  {
+    qualityWeight = 0.7,
+    priceWeight = 0.3,
+  } = {}
+) {
+  const qualityRanked =
+    rankByObjectives(
+      entities,
+      objectives
+    );
+
+  if (qualityRanked.length === 0) {
+    return [];
+  }
+
+  const qualityScoreMap =
+    new Map(
+      qualityRanked.map(
+        entity => [
+          getEntityKey(entity),
+          entity.ranking?.score,
+        ]
+      )
+    );
+
+  const priceScores =
+    calculatePriceScores(
+      entities
+    );
+
+  return entities
+    .map(entity => {
+      const key =
+        getEntityKey(
+          entity
+        );
+
+      const qualityScore =
+        qualityScoreMap.get(
+          key
+        );
+
+      const priceScore =
+        priceScores.get(
+          key
+        );
+
+      if (
+        !isFiniteNumber(
+          qualityScore
+        ) ||
+        !isFiniteNumber(
+          priceScore
+        )
+      ) {
+        return null;
+      }
+
+      const finalScore =
+        qualityScore *
+          qualityWeight +
+        priceScore *
+          priceWeight;
+
+      return {
+        ...entity,
+
+        ranking: {
+          criterion:
+            "multi+price",
+
+          score:
+            Number(
+              finalScore.toFixed(2)
+            ),
+
+          qualityScore,
+          priceScore,
+          qualityWeight,
+          priceWeight,
+          objectives:
+            objectives.map(
+              objective => ({
+                criterion:
+                  objective.criterion,
+                weight:
+                  objective.weight || 1,
+              })
+            ),
+        },
+      };
+    })
+    .filter(Boolean)
+    .sort(
+      (a, b) => {
+        const difference =
+          b.ranking.score -
+          a.ranking.score;
+
+        if (difference !== 0) {
+          return difference;
+        }
+
+        const aOffer =
+          getLowestOffer(a);
+
+        const bOffer =
+          getLowestOffer(b);
+
+        if (!aOffer || !bOffer) {
+          return 0;
+        }
+
+        return (
+          getOfferDecisionCost(
+            aOffer
+          ) -
+          getOfferDecisionCost(
+            bOffer
+          )
+        );
+      }
+    );
+}
+
+
+// ========================================
 // EXPORTS
 // ========================================
 
@@ -1579,4 +1712,6 @@ module.exports = {
   calculatePriceScores,
 
   rankQualityAndPrice,
+
+  rankObjectivesAndPrice,
 };

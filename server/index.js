@@ -22,6 +22,7 @@ const {
   rankByCriterion,
   rankByObjectives,
   rankQualityAndPrice,
+  rankObjectivesAndPrice,
 } = require("./utils/rankProducts");
 
 const {
@@ -2574,6 +2575,7 @@ function analyzeBestProduct(
     budget = null,
     objectives = [],
     priceObjective = false,
+    valueRequested = false,
   } = {}
 ) {
   if (
@@ -2643,7 +2645,10 @@ function analyzeBestProduct(
   let mode = null;
 
   if (
-    priceObjective &&
+    (
+      priceObjective ||
+      valueRequested
+    ) &&
     objectives.length === 1
   ) {
     mode =
@@ -2656,6 +2661,26 @@ function analyzeBestProduct(
           criterion:
             objectives[0]
               .criterion,
+          qualityWeight:
+            0.7,
+          priceWeight:
+            0.3,
+        }
+      );
+  }
+
+  else if (
+    valueRequested &&
+    objectives.length > 1
+  ) {
+    mode =
+      "multi_criteria_and_price";
+
+    ranked =
+      rankObjectivesAndPrice(
+        families,
+        objectives,
+        {
           qualityWeight:
             0.7,
           priceWeight:
@@ -3088,10 +3113,56 @@ function analyzeRecommendation(
       need.objectives
     );
 
-  const requiredExplicitObjectives =
+  const explicitObjectivesForRanking =
     need.objectives.filter(
       isExplicitRecommendationObjective
     );
+
+  const valueRequested =
+    explicitObjectivesForRanking.some(
+      objective =>
+        objective.criterion ===
+        "value"
+    );
+
+  const requiredExplicitObjectives =
+    explicitObjectivesForRanking
+      .filter(
+        objective =>
+          objective.criterion !==
+          "value"
+      );
+
+  if (
+    valueRequested &&
+    requiredExplicitObjectives.length === 0
+  ) {
+    return {
+      status:
+        "needs_value_dimension",
+      canRecommend: false,
+      message:
+        "Per trovare un telefono economico ma buono, dimmi cosa conta di più per te: fotocamera, batteria o prestazioni.",
+      need,
+      dataCoverage: {
+        families:
+          families.length,
+        supportedObjectives: [],
+        unsupportedObjectives: [],
+        rankingObjectives: [],
+        requiredExplicitObjectives: [],
+        missingExplicitObjectives: [],
+        valueRequested: true,
+      },
+      selectedOffers:
+        eligibleOffers,
+      compatibleOffers:
+        eligibleOffers,
+      winner: null,
+      bestOffer: null,
+      ranking: null,
+    };
+  }
 
   const supportedCriteria =
     new Set(
@@ -3146,6 +3217,7 @@ function analyzeRecommendation(
     rankingObjectives,
     requiredExplicitObjectives,
     missingExplicitObjectives,
+    valueRequested,
     rankableFamilies:
       rankableFamilies.length,
     excludedFamilies:
@@ -3246,6 +3318,7 @@ function analyzeRecommendation(
           rankingObjectives,
         priceObjective:
           false,
+        valueRequested,
       }
     );
 
@@ -4626,8 +4699,12 @@ app.get(
             : null;
 
         const needsClarification =
-          analysis.status ===
-            "needs_category";
+          [
+            "needs_category",
+            "needs_value_dimension",
+          ].includes(
+            analysis.status
+          );
 
         return res.json({
           query:
@@ -4667,13 +4744,31 @@ app.get(
               analysis.message,
 
             missing:
-              needsClarification
+              analysis.status ===
+                "needs_category"
                 ? [
                     "category"
                   ]
-                : [],
+                : (
+                    analysis.status ===
+                      "needs_value_dimension"
+                      ? [
+                          "value_dimension"
+                        ]
+                      : []
+                  ),
 
-            options: {},
+            options:
+              analysis.status ===
+                "needs_value_dimension"
+                ? {
+                    criteria: [
+                      "camera",
+                      "battery",
+                      "performance",
+                    ],
+                  }
+                : {},
           },
 
           count:
