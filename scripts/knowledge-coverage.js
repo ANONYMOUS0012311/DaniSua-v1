@@ -41,6 +41,16 @@ const smartphoneProducts =
       "smartphone"
   );
 
+const SAMSUNG_BATTERY_PROTOCOL =
+  "Samsung continuous video playback claim (hours)";
+
+const samsungSmartphoneProducts =
+  smartphoneProducts.filter(
+    product =>
+      product.brand ===
+      "Samsung"
+  );
+
 const knowledgeMap =
   new Map(
     knowledgeItems.map(
@@ -187,6 +197,62 @@ const variantsWithScores =
       ).length > 0
   ).length;
 
+const samsungBatteryCoverage = {
+  variants:
+    samsungSmartphoneProducts.length,
+
+  variantsWithBatteryScore:
+    samsungSmartphoneProducts.filter(
+      product => {
+        const item =
+          knowledgeMap.get(
+            product.id
+          );
+
+        return (
+          typeof item
+            ?.scores
+            ?.battery ===
+            "number" &&
+          Number.isFinite(
+            item.scores.battery
+          )
+        );
+      }
+    ).length,
+
+  variantsWithExpectedProtocol:
+    samsungSmartphoneProducts.filter(
+      product => {
+        const item =
+          knowledgeMap.get(
+            product.id
+          );
+
+        return (
+          item
+            ?.scoreMeta
+            ?.battery
+            ?.protocol ===
+          SAMSUNG_BATTERY_PROTOCOL
+        );
+      }
+    ).length,
+};
+
+samsungBatteryCoverage.complete =
+  samsungBatteryCoverage
+    .variants > 0 &&
+  samsungBatteryCoverage
+    .variantsWithBatteryScore ===
+    samsungBatteryCoverage
+      .variants &&
+  samsungBatteryCoverage
+    .variantsWithExpectedProtocol ===
+    samsungBatteryCoverage
+      .variants;
+
+
 const summary = {
   smartphoneVariants:
     smartphoneProducts.length,
@@ -220,6 +286,7 @@ const summary = {
           ).toFixed(1)
         )
       : 0,
+  samsungBatteryCoverage,
 };
 
 console.log(
@@ -232,3 +299,18 @@ console.log(
     2
   )
 );
+
+
+if (
+  !samsungBatteryCoverage.complete
+) {
+  console.error(
+    "Samsung battery knowledge incomplete: " +
+    samsungBatteryCoverage
+      .variantsWithExpectedProtocol +
+    "/" +
+    samsungBatteryCoverage.variants
+  );
+
+  process.exitCode = 1;
+}
