@@ -185,6 +185,21 @@ function updateAiHint(raw) {
 // NASCONDERE BOX DANISUA
 // ========================================
 
+function setAssistantBoxTitle(
+  title
+) {
+  const label =
+    document.querySelector(
+      ".ai-best-title"
+    );
+
+  if (label) {
+    label.textContent =
+      title || "DaniSua";
+  }
+}
+
+
 function hideBestOffer() {
   const box =
     document.getElementById(
@@ -285,6 +300,47 @@ function clearPendingClarification() {
     inputRicerca.placeholder =
       SEARCH_PLACEHOLDER_DEFAULT;
   }
+}
+
+
+function renderSearchNotice(
+  message
+) {
+  const box =
+    document.getElementById(
+      "ai-best-offer"
+    );
+
+  const content =
+    document.getElementById(
+      "ai-best-content"
+    );
+
+  if (
+    !box ||
+    !content ||
+    !message
+  ) {
+    return;
+  }
+
+  setAssistantBoxTitle(
+    "Cosa ho trovato"
+  );
+
+  setAssistantBoxTitle(
+    "Mi manca un dettaglio"
+  );
+
+  box.style.display = "block";
+
+  content.innerHTML = `
+    <div class="danisua-clarification">
+      <p>
+        ${escapeHtml(message)}
+      </p>
+    </div>
+  `;
 }
 
 
@@ -636,6 +692,10 @@ function renderBestOffer(
     return;
   }
 
+  setAssistantBoxTitle(
+    "Per te conviene"
+  );
+
   box.style.display = "block";
 
   const title =
@@ -938,6 +998,27 @@ async function runSearchWithNormalize(
     }
 
     clearPendingClarification();
+
+    if (
+      data.canRecommend === false &&
+      data.clarification?.needed !== true &&
+      data.clarification?.message
+    ) {
+      renderSearchNotice(
+        data.clarification.message
+      );
+
+      renderProducts(
+        results,
+        null
+      );
+
+      updateCounter(
+        results.length
+      );
+
+      return;
+    }
 
     // ------------------------------------
     // PRODOTTO IDENTIFICATO
