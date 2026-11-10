@@ -4149,10 +4149,97 @@ async function testEuBatteryKnowledgeWave2() {
 
 
 // ========================================
+// PRODUCT KNOWLEDGE — EU BATTERY WAVE 3
+// ========================================
+
+async function testEuBatteryKnowledgeWave3() {
+  const xiaomi =
+    await search(
+      "voglio uno Xiaomi con buona batteria"
+    );
+
+  assert(
+    xiaomi.canRecommend === true &&
+    xiaomi.status ===
+      "best_product_ready",
+    `Xiaomi batteria deve essere raccomandabile: ${xiaomi.status}`
+  );
+
+  assert(
+    xiaomi.bestOffer
+      ?.familyId ===
+      "redmi-note-17-pro-max-5g",
+    `Xiaomi batteria atteso REDMI Note 17 Pro Max 5G, ricevuto ${xiaomi.bestOffer?.familyId}`
+  );
+
+  const honor =
+    await search(
+      "voglio un HONOR con buona batteria"
+    );
+
+  assert(
+    honor.canRecommend === true &&
+    honor.bestOffer
+      ?.familyId ===
+      "honor-magic8-lite",
+    `HONOR batteria atteso Magic8 Lite, ricevuto ${honor.bestOffer?.familyId}`
+  );
+
+  const oppo =
+    await search(
+      "voglio un OPPO con buona batteria"
+    );
+
+  assert(
+    oppo.canRecommend === true &&
+    oppo.bestOffer
+      ?.familyId ===
+      "oppo-find-x10",
+    `OPPO batteria atteso Find X10, ricevuto ${oppo.bestOffer?.familyId}`
+  );
+
+  const allBrands =
+    await search(
+      "smartphone con buona batteria"
+    );
+
+  assert(
+    allBrands.canRecommend === true &&
+    allBrands.bestOffer
+      ?.familyId ===
+      "redmi-note-17-pro-max-5g",
+    `Ranking batteria cross-brand inatteso: ${allBrands.bestOffer?.familyId}`
+  );
+
+  assert(
+    allBrands.recommendation
+      ?.rankingEvidence
+      ?.some(
+        item =>
+          item.criterion ===
+            "battery" &&
+          item.protocol ===
+            "EU 2023/1669 battery endurance per cycle (hours)"
+      ),
+    "Il ranking cross-brand deve usare solo il protocollo UE"
+  );
+}
+
+
+// ========================================
 // TESTS
 // ========================================
 
 const tests = [
+  {
+    name:
+      "KNOWLEDGE — EU battery Xiaomi + HONOR + OPPO",
+
+    run:
+      testEuBatteryKnowledgeWave3,
+  },
+
+
   {
     name:
       "KNOWLEDGE — EU battery Apple + Google",
