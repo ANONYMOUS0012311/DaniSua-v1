@@ -647,3 +647,279 @@ body {
     height: 180px;
   }
 }
+
+/* ========================================
+   SEARCH UX V2
+======================================== */
+
+.search-examples {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: -4px 0 14px;
+}
+
+.search-examples-label {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.search-example {
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.86);
+  color: var(--secondary);
+  border-radius: 999px;
+  padding: 7px 11px;
+  font-size: 12px;
+  line-height: 1.2;
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease,
+    transform 0.15s ease;
+}
+
+.search-example:hover {
+  border-color: rgba(230, 57, 70, 0.45);
+  background: #fff;
+}
+
+.search-example:active {
+  transform: scale(0.98);
+}
+
+.ai-hint {
+  min-height: 18px;
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.ai-best-offer {
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid #E5E5E7;
+  border-left: none;
+  border-radius: 18px;
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.06);
+}
+
+.ai-best-header {
+  gap: 7px;
+  margin: 0;
+  padding: 14px 18px 12px;
+  border-bottom: 1px solid #EFEFF1;
+  background: #FCFCFD;
+}
+
+.ai-best-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(230, 57, 70, 0.08);
+  color: var(--primary);
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: 0.02em;
+}
+
+.ai-best-title {
+  color: var(--secondary);
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.ai-best-content {
+  padding: 18px;
+}
+
+.ai-best-content strong {
+  display: initial;
+  margin: 0;
+}
+
+.danisua-recommendation {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.danisua-main-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.danisua-product-name {
+  display: block !important;
+  font-size: 20px !important;
+  line-height: 1.25;
+  letter-spacing: -0.35px;
+}
+
+.danisua-variant {
+  margin-top: 7px;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.danisua-price-block {
+  min-width: 170px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+}
+
+.danisua-price-label {
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.danisua-price {
+  display: block !important;
+  margin-top: 2px !important;
+  color: var(--primary) !important;
+  font-size: 24px !important;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+}
+
+.danisua-store {
+  margin-top: 4px;
+  color: var(--secondary);
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.danisua-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.danisua-chip {
+  padding: 6px 9px;
+  border: 1px solid #E8E8EA;
+  border-radius: 999px;
+  background: #F8F8FA;
+  color: #5F5F64;
+  font-size: 11px;
+  line-height: 1.2;
+}
+
+.danisua-why,
+.danisua-transparency {
+  padding-top: 14px;
+  border-top: 1px solid #EFEFF1;
+}
+
+.danisua-section-label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 750;
+  text-transform: uppercase;
+  letter-spacing: 0.055em;
+}
+
+.danisua-why p,
+.danisua-transparency p {
+  margin: 0;
+  color: var(--secondary);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.danisua-transparency p + p {
+  margin-top: 7px;
+}
+
+.danisua-saving {
+  margin: -4px 0 0;
+  padding: 10px 12px;
+  border-radius: 11px;
+  background: #F7F7F8;
+  color: var(--secondary);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.danisua-clarification {
+  padding: 2px 0;
+}
+
+.danisua-clarification > strong {
+  display: block !important;
+  margin-bottom: 6px !important;
+  font-size: 17px !important;
+}
+
+.danisua-clarification p {
+  margin-top: 6px;
+  line-height: 1.5;
+}
+
+.results-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 22px;
+  margin-bottom: 12px;
+}
+
+.results-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--secondary);
+}
+
+@media (max-width: 600px) {
+  .search-examples {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 3px;
+    scrollbar-width: none;
+  }
+
+  .search-examples::-webkit-scrollbar {
+    display: none;
+  }
+
+  .search-examples-label {
+    flex: 0 0 auto;
+  }
+
+  .search-example {
+    flex: 0 0 auto;
+  }
+
+  .ai-best-content {
+    padding: 16px;
+  }
+
+  .danisua-main-row {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .danisua-price-block {
+    min-width: 0;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .danisua-product-name {
+    font-size: 18px !important;
+  }
+
+  .danisua-price {
+    font-size: 22px !important;
+  }
+}
