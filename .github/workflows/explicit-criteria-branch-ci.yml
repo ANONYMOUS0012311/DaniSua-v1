@@ -1,0 +1,38 @@
+name: Explicit Criteria Branch CI
+
+on:
+  push:
+    branches:
+      - fix/explicit-recommendation-criteria
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Check frontend syntax
+        run: |
+          node --check app.js
+          node --check normalize.js
+      - name: Run smoke tests
+        run: npm test
+      - name: Check offer freshness
+        run: npm run check:freshness
+      - name: Check smartphone catalog coverage
+        run: npm run catalog:coverage
+      - name: Check product knowledge coverage
+        run: npm run knowledge:coverage
+      - name: Audit production dependencies
+        run: npm audit --audit-level=moderate
