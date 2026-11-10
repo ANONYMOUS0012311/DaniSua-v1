@@ -18,6 +18,11 @@ function readJson(name) {
 const products =
   readJson("products.json");
 
+const smartphoneTargets =
+  readJson(
+    "catalog_targets.smartphones.json"
+  );
+
 const rawKnowledge =
   readJson(
     "product_knowledge.json"
@@ -84,6 +89,39 @@ const euBatteryProducts =
       EU_BATTERY_FAMILIES
         .has(
           product.familyId
+        )
+  );
+
+const targetFamilyIds =
+  new Set(
+    (
+      smartphoneTargets
+        ?.families ||
+      []
+    ).map(
+      family =>
+        family.familyId
+    )
+  );
+
+const protectedTargetFamilies =
+  [
+    ...EU_BATTERY_FAMILIES,
+  ].filter(
+    familyId =>
+      targetFamilyIds.has(
+        familyId
+      )
+  );
+
+const unprotectedTargetFamilies =
+  [
+    ...targetFamilyIds,
+  ].filter(
+    familyId =>
+      !EU_BATTERY_FAMILIES
+        .has(
+          familyId
         )
   );
 
@@ -234,8 +272,26 @@ const variantsWithScores =
   ).length;
 
 const euBatteryCoverage = {
+  targetFamilies:
+    targetFamilyIds.size,
+
   protectedFamilies:
-    EU_BATTERY_FAMILIES.size,
+    protectedTargetFamilies.length,
+
+  protectedFamilyPercent:
+    targetFamilyIds.size > 0
+      ? Number(
+          (
+            (
+              protectedTargetFamilies.length /
+              targetFamilyIds.size
+            ) *
+            100
+          ).toFixed(1)
+        )
+      : 0,
+
+  unprotectedTargetFamilies,
 
   excludedLegacyFamilies: [
     "apple-iphone-14",
