@@ -3897,6 +3897,9 @@ async function testRealUserSearchScenarios() {
         scenario.query,
       intent:
         data.intent,
+      productQuery:
+        data.productQuery ||
+        null,
       status:
         data.status,
       canRecommend:
