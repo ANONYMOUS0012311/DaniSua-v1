@@ -917,7 +917,11 @@ function detectIntent(query) {
   }
 
   if (
-    qualityObjectives.length > 0 &&
+    qualityObjectives.some(
+      objective =>
+        objective.criterion !==
+        "anc"
+    ) &&
     category
   ) {
     return "RECOMMENDATION";
