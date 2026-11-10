@@ -3711,14 +3711,31 @@ async function testRealUserSearchScenarios() {
       query:
         "voglio un Samsung con buona batteria",
       check(data) {
+        if (
+          data.canRecommend === true
+        ) {
+          return (
+            data.bestOffer?.brand ===
+              "Samsung"
+          );
+        }
+
         return (
-          data.canRecommend === true &&
-          data.bestOffer?.brand ===
-            "Samsung"
+          data.status ===
+            "knowledge_insufficient" &&
+          Array.isArray(
+            data.results
+          ) &&
+          data.results.length > 0 &&
+          data.results.every(
+            offer =>
+              offer.brand ===
+                "Samsung"
+          )
         );
       },
       expected:
-        "recomendación Samsung respetando marca",
+        "Samsung respetado; recomendación si hay datos o aviso honesto si faltan",
     },
     {
       id: "cheap-but-good",
@@ -3732,12 +3749,20 @@ async function testRealUserSearchScenarios() {
             data.canRecommend ===
               true ||
             data.clarification
-              ?.needed === true
+              ?.needed === true ||
+            (
+              data.status ===
+                "knowledge_insufficient" &&
+              Array.isArray(
+                data.results
+              ) &&
+              data.results.length > 0
+            )
           )
         );
       },
       expected:
-        "respuesta útil o aclaración, nunca intención no soportada",
+        "respuesta útil; no inventar calidad si faltan datos comparables",
     },
     {
       id: "iphone-space-under-1000",
