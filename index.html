@@ -45,11 +45,11 @@
       <!-- TITOLO -->
 
       <h1>
-        Dimmi cosa vuoi comprare. DaniSua cerca dove conviene.
+        Trova il prodotto giusto, al prezzo che conviene.
       </h1>
 
       <p class="subtitle">
-        Confronta prezzi tra negozi verificati senza cercare sito per sito.
+        Scrivi come parleresti: un modello preciso, il tuo budget oppure semplicemente cosa ti serve.
       </p>
 
 
@@ -62,14 +62,48 @@
         <input
           id="buscador-input"
           type="text"
-          placeholder="Es.: smartphone per foto sotto 800 €, oppure iPhone 17 256 GB"
+          placeholder="Es. voglio un telefono con ottima fotocamera sotto 700 €"
           autocomplete="off"
         />
 
         <button id="buscador-btn">
-          Cerca con DaniSua IA
+          Cerca
         </button>
 
+      </div>
+
+      <div
+        id="search-examples"
+        class="search-examples"
+        aria-label="Esempi di ricerca"
+      >
+        <span class="search-examples-label">
+          Prova:
+        </span>
+
+        <button
+          type="button"
+          class="search-example"
+          data-query="iPhone 17 più economico"
+        >
+          iPhone 17 più economico
+        </button>
+
+        <button
+          type="button"
+          class="search-example"
+          data-query="smartphone per foto sotto 800 euro"
+        >
+          smartphone per foto sotto 800 €
+        </button>
+
+        <button
+          type="button"
+          class="search-example"
+          data-query="Galaxy S26 Ultra 512 GB"
+        >
+          Galaxy S26 Ultra 512 GB
+        </button>
       </div>
 
 
@@ -95,12 +129,12 @@
 
         <div class="ai-best-header">
 
-          <span class="ai-best-icon">
-            ✨
+          <span class="ai-best-eyebrow">
+            DaniSua
           </span>
 
           <span class="ai-best-title">
-            DaniSua IA consiglia
+            Per te conviene
           </span>
 
         </div>
@@ -118,6 +152,10 @@
       ========================================= -->
 
       <div class="results-head">
+
+        <span class="results-label">
+          Offerte confrontate
+        </span>
 
         <div
           id="resultados-contador"
