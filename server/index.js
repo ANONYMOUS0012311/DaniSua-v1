@@ -852,9 +852,17 @@ function detectIntent(query) {
       category
     );
 
+  const nonValueQualityObjectives =
+    qualityObjectives.filter(
+      objective =>
+        objective.criterion !==
+        "value"
+    );
+
   if (
     priceObjective &&
-    qualityObjectives.length > 0
+    nonValueQualityObjectives.length >
+      0
   ) {
     return "BEST_PRODUCT";
   }
