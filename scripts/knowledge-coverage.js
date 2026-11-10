@@ -42,13 +42,29 @@ const smartphoneProducts =
   );
 
 const SAMSUNG_BATTERY_PROTOCOL =
-  "Samsung continuous video playback claim (hours)";
+  "EU 2023/1669 battery endurance per cycle (hours)";
+
+const SAMSUNG_EU_BATTERY_FAMILIES =
+  new Set([
+    "samsung-galaxy-s26-ultra",
+    "samsung-galaxy-s26-plus",
+    "samsung-galaxy-s26",
+    "samsung-galaxy-s26-fe",
+    "samsung-galaxy-a57",
+    "samsung-galaxy-a37",
+    "samsung-galaxy-z-fold8",
+    "samsung-galaxy-z-flip8",
+  ]);
 
 const samsungSmartphoneProducts =
   smartphoneProducts.filter(
     product =>
       product.brand ===
-      "Samsung"
+        "Samsung" &&
+      SAMSUNG_EU_BATTERY_FAMILIES
+        .has(
+          product.familyId
+        )
   );
 
 const knowledgeMap =
