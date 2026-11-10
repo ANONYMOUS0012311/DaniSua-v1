@@ -4027,10 +4027,78 @@ async function testRealUserSearchScenarios() {
 
 
 // ========================================
+// PRODUCT KNOWLEDGE — SAMSUNG BATTERY
+// ========================================
+
+async function testSamsungBatteryKnowledge() {
+  const data =
+    await search(
+      "voglio un Samsung con buona batteria"
+    );
+
+  assert(
+    data.intent ===
+      "RECOMMENDATION",
+    `RECOMMENDATION atteso, ricevuto ${data.intent}`
+  );
+
+  assert(
+    data.canRecommend === true &&
+    data.status ===
+      "best_product_ready",
+    `Samsung batteria deve essere raccomandabile: ${data.status}`
+  );
+
+  assert(
+    data.bestOffer
+      ?.brand ===
+      "Samsung",
+    "La raccomandazione batteria deve restare Samsung"
+  );
+
+  assert(
+    data.recommendation
+      ?.usedCriteria
+      ?.includes(
+        "battery"
+      ),
+    "Il criterio batteria deve guidare la raccomandazione"
+  );
+
+  assert(
+    data.ranking
+      ?.ranked
+      ?.length > 0,
+    "Ranking Samsung batteria mancante"
+  );
+
+  const topScore =
+    data.ranking
+      ?.ranked?.[0]
+      ?.score;
+
+  assert(
+    typeof topScore ===
+      "number",
+    "Score batteria Samsung mancante"
+  );
+}
+
+
+// ========================================
 // TESTS
 // ========================================
 
 const tests = [
+  {
+    name:
+      "KNOWLEDGE — Samsung battery recommendation",
+
+    run:
+      testSamsungBatteryKnowledge,
+  },
+
+
   {
     name:
       "SEARCH UX — real user scenarios",
