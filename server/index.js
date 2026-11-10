@@ -855,8 +855,12 @@ function detectIntent(query) {
   const nonValueQualityObjectives =
     qualityObjectives.filter(
       objective =>
-        objective.criterion !==
-        "value"
+        ![
+          "value",
+          "anc",
+        ].includes(
+          objective.criterion
+        )
     );
 
   if (
@@ -1173,6 +1177,7 @@ function cleanProductQuery(query) {
       "ottimo",
       "ma",
       "non",
+      "e",
     ]);
 
   return q
