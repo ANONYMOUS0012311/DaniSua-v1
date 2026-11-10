@@ -4283,14 +4283,36 @@ async function testExplicitRecommendationCriteriaCannotDisappear() {
   );
 
   assert(
-    camera.dataCoverage
-      ?.missingExplicitObjectives
-      ?.some(
+    (
+      camera.dataCoverage
+        ?.requiredExplicitObjectives ||
+      []
+    ).some(
+      objective =>
+        objective.criterion ===
+          "camera"
+    ) &&
+    (
+      (
+        camera.dataCoverage
+          ?.rankingObjectives ||
+        []
+      ).some(
         objective =>
           objective.criterion ===
             "camera"
-      ),
-    "Il criterio camera esplicito deve risultare mancante"
+      ) ||
+      (
+        camera.dataCoverage
+          ?.missingExplicitObjectives ||
+        []
+      ).some(
+        objective =>
+          objective.criterion ===
+            "camera"
+      )
+    ),
+    "Il criterio camera esplicito deve restare obbligatorio e non essere sostituito"
   );
 
   const gaming =
