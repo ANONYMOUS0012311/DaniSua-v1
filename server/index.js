@@ -1054,6 +1054,11 @@ function cleanProductQuery(query) {
   const needPhrases = [
     "fare foto",
     "fare video",
+    "fotocamera",
+    "fotocamere",
+    "telecamera",
+    "telecamere",
+    "camera",
     "foto",
     "fotografia",
     "fotografie",
