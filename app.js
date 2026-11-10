@@ -18,6 +18,11 @@ const contatoreRisultati =
 const aiHint =
   document.getElementById("ai-hint");
 
+const searchExamples =
+  document.querySelectorAll(
+    ".search-example"
+  );
+
 const BTN_TEXT_DEFAULT =
   btnRicerca
     ? btnRicerca.textContent
@@ -164,55 +169,17 @@ function getDiscountPercent(product) {
 function updateAiHint(raw) {
   if (!aiHint) return;
 
-  if (
-    typeof window.normalizeQuery !==
-    "function"
-  ) {
+  const clean =
+    (raw || "").trim();
+
+  if (!clean) {
     aiHint.textContent = "";
     return;
   }
 
-  if (
-    !raw ||
-    raw.trim().length === 0
-  ) {
-    aiHint.textContent = "";
-    return;
-  }
-
-  const info =
-    window.normalizeQuery(raw);
-
-  const brand =
-    info.brand_guess
-      ? escapeHtml(
-          info.brand_guess
-        )
-      : "—";
-
-  const category =
-    info.category_guess
-      ? escapeHtml(
-          info.category_guess
-        )
-      : "—";
-
-  const intentLabel =
-    info.filters?.intent === "deal"
-      ? " · cerca il prezzo migliore"
-      : "";
-
-  aiHint.innerHTML = `
-    <strong>Capito:</strong>
-    ${brand} · ${category}${intentLabel}
-    <br>
-    <strong>Ricerca:</strong>
-    ${escapeHtml(
-      info.normalized_query || raw
-    )}
-  `;
+  aiHint.textContent =
+    "Cercherò prodotti e offerte compatibili con quello che hai scritto.";
 }
-
 
 // ========================================
 // NASCONDERE BOX DANISUA
@@ -346,7 +313,7 @@ function renderClarification(
     <div class="danisua-clarification">
 
       <strong>
-        Dimmi una cosa in più
+        Mi manca solo un dettaglio
       </strong>
 
       <p>
@@ -354,8 +321,7 @@ function renderClarification(
       </p>
 
       <p class="danisua-rule-note">
-        Aggiungi il dettaglio alla ricerca
-        e premi Invio.
+        Scrivilo nella barra qui sopra e premi Invio.
       </p>
 
     </div>
@@ -393,7 +359,7 @@ function renderClarification(
 
   if (aiHint) {
     aiHint.textContent =
-      "DaniSua sta aspettando la tua risposta.";
+      "Aggiungi il dettaglio e continuo da lì.";
   }
 }
 
@@ -461,13 +427,185 @@ function resolveConversationQuery(
 }
 
 
+const CRITERION_LABELS_UI = {
+  camera: "fotocamera",
+  battery: "batteria",
+  performance: "prestazioni",
+  display: "display",
+  software: "software",
+  value: "rapporto qualità/prezzo",
+  sound: "audio",
+  anc: "cancellazione del rumore",
+  comfort: "comfort",
+  portability: "portabilità",
+  overall: "qualità generale",
+};
+
+
+function getVariantLabel(product) {
+  return [
+    product?.ram,
+    product?.storage,
+    product?.condition &&
+    product.condition !== "new"
+      ? product.condition
+      : null,
+  ]
+    .filter(Boolean)
+    .join(" · ");
+}
+
+
+function getUserFacingReason(
+  recommendation,
+  context
+) {
+  const reason =
+    recommendation?.reason;
+
+  if (
+    reason ===
+    "needs_based_recommendation"
+  ) {
+    const useCase =
+      recommendation
+        ?.useCase
+        ?.label ||
+      context
+        ?.recommendationNeed
+        ?.useCase
+        ?.label ||
+      "quello che ti serve";
+
+    const criteria =
+      (
+        recommendation
+          ?.usedCriteria ||
+        []
+      )
+        .map(
+          item =>
+            CRITERION_LABELS_UI[item] ||
+            item
+        )
+        .filter(Boolean);
+
+    const criteriaText =
+      criteria.length > 0
+        ? ` Ho considerato soprattutto ${criteria.join(", ")}.`
+        : "";
+
+    return (
+      `Per ${useCase}, questo è il modello che risulta più adatto tra quelli con dati comparabili.` +
+      criteriaText +
+      " Poi ho cercato l'offerta più conveniente per quella scelta."
+    );
+  }
+
+  if (
+    reason === "best_product"
+  ) {
+    const criteria =
+      (
+        recommendation
+          ?.criteria ||
+        []
+      )
+        .map(
+          item =>
+            CRITERION_LABELS_UI[item] ||
+            item
+        )
+        .filter(Boolean);
+
+    return criteria.length > 0
+      ? `Tra i modelli compatibili, questo è quello che combina meglio ${criteria.join(", ")}; poi ho scelto la sua offerta più conveniente.`
+      : "Tra i modelli compatibili, questo risulta il più adatto; poi ho scelto la sua offerta più conveniente.";
+  }
+
+  if (
+    reason ===
+    "generic_price_first"
+  ) {
+    return "Non hai indicato una configurazione precisa: ho confrontato le varianti compatibili e scelto quella che oggi conviene di più.";
+  }
+
+  if (
+    reason ===
+      "lowest_price_equivalent_offers" ||
+    reason ===
+      "lowest_price_requested"
+  ) {
+    return "Hai indicato un prodotto preciso: ho confrontato le offerte equivalenti e questa è quella che conviene di più.";
+  }
+
+  return "Ho confrontato le opzioni compatibili e scelto quella con il miglior equilibrio tra richiesta e prezzo disponibile.";
+}
+
+
+function getCoverageNote(recommendation) {
+  const coverage =
+    recommendation?.variantCoverage;
+
+  if (!coverage) {
+    return "";
+  }
+
+  if (
+    coverage.comparisonComplete ===
+      true
+  ) {
+    return "Tutte le configurazioni monitorate hanno un prezzo standard comparabile.";
+  }
+
+  if (
+    coverage.marketComplete === true
+  ) {
+    const missing =
+      coverage
+        .missingConfigurationLabels ||
+      [];
+
+    return missing.length > 0
+      ? `Conosco tutte le configurazioni del modello; per ${missing.join(", ")} oggi manca un prezzo standard comparabile.`
+      : "Conosco lo stato di tutte le configurazioni monitorate.";
+  }
+
+  return "";
+}
+
+
+function getMissingCriteriaNote(
+  recommendation
+) {
+  const missing =
+    recommendation
+      ?.missingCriteria ||
+    [];
+
+  if (missing.length === 0) {
+    return "";
+  }
+
+  const labels =
+    missing.map(
+      item =>
+        CRITERION_LABELS_UI[item] ||
+        item
+    );
+
+  return `Non ho ancora dati comparabili sufficienti per: ${labels.join(", ")}.`;
+}
+
+
 // ========================================
 // MIGLIORE OFFERTA
 // ========================================
 
 function renderBestOffer(
   product,
-  recommendation
+  recommendation,
+  context = null
 ) {
   const box =
     document.getElementById(
@@ -501,6 +639,9 @@ function renderBestOffer(
       product.store || ""
     );
 
+  const variantLabel =
+    getVariantLabel(product);
+
   const finalCostConfirmed =
     recommendation
       ?.finalCostConfirmed ===
@@ -526,120 +667,185 @@ function renderBestOffer(
       : "Prezzo";
 
   const comparedOffers =
-    recommendation?.comparedOffers || 1;
+    recommendation?.comparedOffers ||
+    1;
 
-  const savings =
-    recommendation?.savingsVsNextOffer;
+  const reasonText =
+    getUserFacingReason(
+      recommendation,
+      context
+    );
 
-  let savingsText = "";
+  const coverageNote =
+    getCoverageNote(
+      recommendation
+    );
 
-  if (
-    typeof savings === "number" &&
-    savings > 0
-  ) {
-    savingsText = `
-      <p class="danisua-saving">
-        Risparmi
-        <strong>
-          ${formatPrice(
-            savings,
-            product.currency || "EUR"
-          )}
-        </strong>
-        rispetto alla seconda offerta più economica.
-      </p>
-    `;
-  }
-
-  const explanation =
-    recommendation?.message
-      ? escapeHtml(
-          recommendation.message
-        )
-      : "";
+  const missingCriteriaNote =
+    getMissingCriteriaNote(
+      recommendation
+    );
 
   const shippingText =
     typeof product
       .shipping_price ===
       "number"
       ? (
-          product.shipping_price ===
-            0
+          product.shipping_price === 0
             ? "Spedizione inclusa"
-            : `Spedizione: ${formatPrice(
+            : `Spedizione ${formatPrice(
                 product.shipping_price,
-                product.currency || "EUR"
+                product.currency ||
+                "EUR"
               )}`
         )
       : "Spedizione da verificare";
 
-  const isGenericPriceFirst =
-    recommendation?.reason ===
-      "generic_price_first";
+  const verifiedText =
+    formatVerified(
+      product.verifiedAt,
+      product.updatedAt,
+      product.freshness
+    );
 
-  const comparisonLabel =
-    isGenericPriceFirst
-      ? "opzioni compatibili"
-      : "prezzi dello stesso prodotto";
+  const confidenceLabel =
+    recommendation
+      ?.confidence === "high"
+      ? "Dati completi"
+      : (
+          recommendation
+            ?.confidence ===
+            "medium"
+            ? "Dati parziali"
+            : ""
+        );
 
-  const ruleNote =
-    finalCostConfirmed
-      ? "DaniSuai ha potuto confrontare il costo finale del vincitore includendo la spedizione."
-      : "Il prezzo indicato è utile per il confronto, ma il costo finale non è ancora confermato perché manca almeno un dato di spedizione.";
+  const savings =
+    recommendation
+      ?.savingsVsNextOffer;
+
+  const savingsText =
+    typeof savings === "number" &&
+    savings > 0
+      ? `Risparmi ${formatPrice(
+          savings,
+          product.currency || "EUR"
+        )} rispetto alla seconda offerta comparabile.`
+      : "";
 
   content.innerHTML = `
     <div class="danisua-recommendation">
 
-      <strong class="danisua-product-name">
-        ${title}
-      </strong>
+      <div class="danisua-main-row">
+        <div>
+          <strong class="danisua-product-name">
+            ${title}
+          </strong>
 
-      <p>
-        ${escapeHtml(priceLabel)}:
-        <strong>
-          ${price}
-        </strong>
-        · ${store}
-      </p>
+          ${
+            variantLabel
+              ? `
+                <div class="danisua-variant">
+                  ${escapeHtml(variantLabel)}
+                </div>
+              `
+              : ""
+          }
+        </div>
 
-      <p class="danisua-rule-note">
-        ${escapeHtml(shippingText)}
-      </p>
+        <div class="danisua-price-block">
+          <span class="danisua-price-label">
+            ${escapeHtml(priceLabel)}
+          </span>
+
+          <strong class="danisua-price">
+            ${price}
+          </strong>
+
+          <span class="danisua-store">
+            ${store}
+          </span>
+        </div>
+      </div>
+
+      <div class="danisua-chips">
+        <span class="danisua-chip">
+          ${escapeHtml(shippingText)}
+        </span>
+
+        <span class="danisua-chip">
+          ${escapeHtml(verifiedText)}
+        </span>
+
+        ${
+          comparedOffers > 1
+            ? `
+              <span class="danisua-chip">
+                ${comparedOffers} offerte confrontate
+              </span>
+            `
+            : ""
+        }
+
+        ${
+          confidenceLabel
+            ? `
+              <span class="danisua-chip">
+                ${escapeHtml(confidenceLabel)}
+              </span>
+            `
+            : ""
+        }
+      </div>
+
+      <div class="danisua-why">
+        <span class="danisua-section-label">
+          Perché
+        </span>
+
+        <p>
+          ${escapeHtml(reasonText)}
+        </p>
+      </div>
 
       ${
-        explanation
+        savingsText
           ? `
-            <p>
-              ${explanation}
+            <p class="danisua-saving">
+              ${escapeHtml(savingsText)}
             </p>
           `
           : ""
       }
 
       ${
-        comparedOffers > 1
+        coverageNote ||
+        missingCriteriaNote
           ? `
-            <p>
-              Ho confrontato
-              <strong>
-                ${comparedOffers}
-              </strong>
-              ${escapeHtml(comparisonLabel)}.
-            </p>
+            <div class="danisua-transparency">
+              <span class="danisua-section-label">
+                Trasparenza
+              </span>
+
+              ${
+                coverageNote
+                  ? `<p>${escapeHtml(coverageNote)}</p>`
+                  : ""
+              }
+
+              ${
+                missingCriteriaNote
+                  ? `<p>${escapeHtml(missingCriteriaNote)}</p>`
+                  : ""
+              }
+            </div>
           `
           : ""
       }
-
-      ${savingsText}
-
-      <p class="danisua-rule-note">
-        ${escapeHtml(ruleNote)}
-      </p>
 
     </div>
   `;
 }
-
 
 // ========================================
 // RICERCA PRINCIPALE
@@ -733,7 +939,8 @@ async function runSearchWithNormalize(
     ) {
       renderBestOffer(
         data.bestOffer,
-        data.recommendation
+        data.recommendation,
+        data.context || null
       );
     } else {
       hideBestOffer();
@@ -1341,8 +1548,8 @@ if (inputRicerca) {
         if (aiHint) {
           aiHint.textContent =
             raw.trim()
-              ? "Premi Invio per continuare con DaniSua."
-              : "DaniSua sta aspettando la tua risposta.";
+              ? "Premi Invio e continuo con questo dettaglio."
+              : "Aggiungi il dettaglio che manca.";
         }
 
         return;
@@ -1417,6 +1624,40 @@ if (btnRicerca) {
     }
   );
 }
+
+
+searchExamples.forEach(
+  button => {
+    button.addEventListener(
+      "click",
+      () => {
+        const query =
+          button.dataset.query || "";
+
+        if (!query) {
+          return;
+        }
+
+        clearPendingClarification();
+
+        if (inputRicerca) {
+          inputRicerca.value =
+            query;
+        }
+
+        updateAiHint(query);
+
+        runSearchWithNormalize(
+          query,
+          {
+            showLoadingIfSlow:
+              true,
+          }
+        );
+      }
+    );
+  }
+);
 
 
 // ========================================
