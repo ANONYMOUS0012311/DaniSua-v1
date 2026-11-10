@@ -2875,6 +2875,9 @@ function analyzeRecommendationCoverage(
         criterion,
         weight:
           objective.weight || 1,
+        source:
+          objective.source ||
+          null,
       });
 
       if (
@@ -2899,6 +2902,18 @@ function analyzeRecommendationCoverage(
     unsupportedObjectives,
     partialObjectives,
   };
+}
+
+
+function isExplicitRecommendationObjective(
+  objective
+) {
+  return (
+    objective?.source ===
+      "explicit" ||
+    objective?.source ===
+      "use_case+explicit"
+  );
 }
 
 
@@ -2972,6 +2987,9 @@ function analyzeRecommendation(
         families: 0,
         supportedObjectives: [],
         unsupportedObjectives: [],
+        rankingObjectives: [],
+        requiredExplicitObjectives: [],
+        missingExplicitObjectives: [],
       },
       selectedOffers: [],
       winner: null,
@@ -2994,6 +3012,9 @@ function analyzeRecommendation(
         families: 0,
         supportedObjectives: [],
         unsupportedObjectives: [],
+        rankingObjectives: [],
+        requiredExplicitObjectives: [],
+        missingExplicitObjectives: [],
       },
       selectedOffers: [],
       winner: null,
@@ -3029,6 +3050,13 @@ function analyzeRecommendation(
         families: 0,
         supportedObjectives: [],
         unsupportedObjectives: [],
+        rankingObjectives: [],
+        requiredExplicitObjectives:
+          need.objectives
+            .filter(
+              isExplicitRecommendationObjective
+            ),
+        missingExplicitObjectives: [],
       },
       selectedOffers: [],
       winner: null,
@@ -3060,11 +3088,51 @@ function analyzeRecommendation(
       need.objectives
     );
 
+  const requiredExplicitObjectives =
+    need.objectives.filter(
+      isExplicitRecommendationObjective
+    );
+
+  const supportedCriteria =
+    new Set(
+      dataCoverage
+        .supportedObjectives
+        .map(
+          objective =>
+            objective.criterion
+        )
+    );
+
+  const missingExplicitObjectives =
+    requiredExplicitObjectives
+      .filter(
+        objective =>
+          !supportedCriteria.has(
+            objective.criterion
+          )
+      );
+
+  // Regola di fiducia:
+  // se l'utente nomina un criterio (camera,
+  // batteria, performance, ecc.), quel criterio
+  // non può essere sostituito da criteri secondari
+  // inferiti dal caso d'uso.
+  const rankingObjectives =
+    requiredExplicitObjectives.length > 0
+      ? requiredExplicitObjectives
+          .filter(
+            objective =>
+              supportedCriteria.has(
+                objective.criterion
+              )
+          )
+      : dataCoverage
+          .supportedObjectives;
+
   const rankableFamilies =
     getRankableFamiliesForObjectives(
       families,
-      dataCoverage
-        .supportedObjectives
+      rankingObjectives
     );
 
   const rankableOffers =
@@ -3075,6 +3143,9 @@ function analyzeRecommendation(
 
   const enrichedCoverage = {
     ...dataCoverage,
+    rankingObjectives,
+    requiredExplicitObjectives,
+    missingExplicitObjectives,
     rankableFamilies:
       rankableFamilies.length,
     excludedFamilies:
@@ -3086,9 +3157,53 @@ function analyzeRecommendation(
   };
 
   if (
-    enrichedCoverage
-      .supportedObjectives
-      .length === 0 ||
+    missingExplicitObjectives
+      .length > 0
+  ) {
+    const missing =
+      missingExplicitObjectives
+        .map(
+          objective =>
+            objective.criterion
+        )
+        .join(", ");
+
+    return {
+      status:
+        "knowledge_insufficient",
+      canRecommend: false,
+      message:
+        "Ho trovato prodotti compatibili, ma non ho ancora dati comparabili verificati sufficienti per il criterio che hai indicato: " +
+        missing +
+        ". Non userò criteri secondari al suo posto.",
+      need,
+      dataCoverage:
+        enrichedCoverage,
+      selectedOffers:
+        eligibleOffers,
+      compatibleOffers:
+        eligibleOffers,
+      winner: null,
+      bestOffer: null,
+      ranking: {
+        level: "family",
+        mode:
+          "recommendation",
+        criteria:
+          requiredExplicitObjectives
+            .map(
+              item =>
+                item.criterion
+            ),
+        candidates:
+          families.length,
+        ranked: [],
+      },
+    };
+  }
+
+  if (
+    rankingObjectives.length === 0 ||
     rankableFamilies.length === 0
   ) {
     return {
@@ -3111,7 +3226,7 @@ function analyzeRecommendation(
         mode:
           "recommendation",
         criteria:
-          need.objectives.map(
+          rankingObjectives.map(
             item =>
               item.criterion
           ),
@@ -3128,8 +3243,7 @@ function analyzeRecommendation(
       {
         budget: null,
         objectives:
-          enrichedCoverage
-            .supportedObjectives,
+          rankingObjectives,
         priceObjective:
           false,
       }
@@ -3144,7 +3258,6 @@ function analyzeRecommendation(
       enrichedCoverage,
   };
 }
-
 
 // ========================================
 // PREZZO PIÙ BASSO
@@ -3761,13 +3874,19 @@ function buildNeedRecommendation(
   }
 
   const usedCriteria =
-    analysis
-      ?.dataCoverage
-      ?.supportedObjectives
-      ?.map(
+    (
+      analysis
+        ?.dataCoverage
+        ?.rankingObjectives ||
+      analysis
+        ?.dataCoverage
+        ?.supportedObjectives ||
+      []
+    )
+      .map(
         item =>
           item.criterion
-      ) || [];
+      );
 
   const missingCriteria =
     analysis
