@@ -41,10 +41,10 @@ const smartphoneProducts =
       "smartphone"
   );
 
-const SAMSUNG_BATTERY_PROTOCOL =
+const EU_BATTERY_PROTOCOL =
   "EU 2023/1669 battery endurance per cycle (hours)";
 
-const SAMSUNG_EU_BATTERY_FAMILIES =
+const EU_BATTERY_FAMILIES =
   new Set([
     "samsung-galaxy-s26-ultra",
     "samsung-galaxy-s26-plus",
@@ -54,14 +54,23 @@ const SAMSUNG_EU_BATTERY_FAMILIES =
     "samsung-galaxy-a37",
     "samsung-galaxy-z-fold8",
     "samsung-galaxy-z-flip8",
+    "apple-iphone-16",
+    "apple-iphone-17",
+    "apple-iphone-17e",
+    "apple-iphone-air",
+    "apple-iphone-duo",
+    "apple-iphone-18-pro",
+    "apple-iphone-18-pro-max",
+    "google-pixel-10a",
+    "google-pixel-11",
+    "google-pixel-11-pro",
+    "google-pixel-11-pro-xl",
   ]);
 
-const samsungSmartphoneProducts =
+const euBatteryProducts =
   smartphoneProducts.filter(
     product =>
-      product.brand ===
-        "Samsung" &&
-      SAMSUNG_EU_BATTERY_FAMILIES
+      EU_BATTERY_FAMILIES
         .has(
           product.familyId
         )
@@ -213,12 +222,12 @@ const variantsWithScores =
       ).length > 0
   ).length;
 
-const samsungBatteryCoverage = {
+const euBatteryCoverage = {
   variants:
-    samsungSmartphoneProducts.length,
+    euBatteryProducts.length,
 
   variantsWithBatteryScore:
-    samsungSmartphoneProducts.filter(
+    euBatteryProducts.filter(
       product => {
         const item =
           knowledgeMap.get(
@@ -238,7 +247,7 @@ const samsungBatteryCoverage = {
     ).length,
 
   variantsWithExpectedProtocol:
-    samsungSmartphoneProducts.filter(
+    euBatteryProducts.filter(
       product => {
         const item =
           knowledgeMap.get(
@@ -250,22 +259,22 @@ const samsungBatteryCoverage = {
             ?.scoreMeta
             ?.battery
             ?.protocol ===
-          SAMSUNG_BATTERY_PROTOCOL
+          EU_BATTERY_PROTOCOL
         );
       }
     ).length,
 };
 
-samsungBatteryCoverage.complete =
-  samsungBatteryCoverage
+euBatteryCoverage.complete =
+  euBatteryCoverage
     .variants > 0 &&
-  samsungBatteryCoverage
+  euBatteryCoverage
     .variantsWithBatteryScore ===
-    samsungBatteryCoverage
+    euBatteryCoverage
       .variants &&
-  samsungBatteryCoverage
+  euBatteryCoverage
     .variantsWithExpectedProtocol ===
-    samsungBatteryCoverage
+    euBatteryCoverage
       .variants;
 
 
@@ -302,7 +311,7 @@ const summary = {
           ).toFixed(1)
         )
       : 0,
-  samsungBatteryCoverage,
+  euBatteryCoverage,
 };
 
 console.log(
@@ -318,14 +327,14 @@ console.log(
 
 
 if (
-  !samsungBatteryCoverage.complete
+  !euBatteryCoverage.complete
 ) {
   console.error(
-    "Samsung battery knowledge incomplete: " +
-    samsungBatteryCoverage
+    "EU battery knowledge incomplete: " +
+    euBatteryCoverage
       .variantsWithExpectedProtocol +
     "/" +
-    samsungBatteryCoverage.variants
+    euBatteryCoverage.variants
   );
 
   process.exitCode = 1;

@@ -278,7 +278,7 @@
           "unit": "h",
           "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
           "rankingEligible": true,
-          "verifiedAt": "2026-11-05"
+          "verifiedAt": "2026-11-10"
         }
       ],
       "sources": [
@@ -300,11 +300,12 @@
           "id": "apple-iphone17e-eu-energy",
           "name": "Apple",
           "type": "regulatory_product_information",
-          "title": "iPhone 17e - Etichetta energetica UE",
-          "url": "https://www.apple.com/es/iphone-17e/specs/"
+          "title": "iPhone 17e - EU Energy Information",
+          "url": "https://www.apple.com/ie/iphone-17e/",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
         }
       ],
-      "updatedAt": "2026-11-05"
+      "updatedAt": "2026-11-10"
     },
     {
       "productId": "apple-iphone-16-128-black",
@@ -1695,7 +1696,7 @@
           "unit": "h",
           "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
           "rankingEligible": true,
-          "verifiedAt": "2026-11-05"
+          "verifiedAt": "2026-11-10"
         }
       ],
       "sources": [
@@ -1717,11 +1718,12 @@
           "id": "apple-iphone17e-eu-energy",
           "name": "Apple",
           "type": "regulatory_product_information",
-          "title": "iPhone 17e - Etichetta energetica UE",
-          "url": "https://www.apple.com/es/iphone-17e/specs/"
+          "title": "iPhone 17e - EU Energy Information",
+          "url": "https://www.apple.com/ie/iphone-17e/",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
         }
       ],
-      "updatedAt": "2026-11-05"
+      "updatedAt": "2026-11-10"
     },
     {
       "productId": "samsung-galaxy-s26-ultra-256-white",
@@ -2796,6 +2798,1158 @@
           "type": "regulatory_product_information",
           "title": "Samsung Galaxy Z Flip8 - EU product information sheet",
           "url": "https://eprel.ec.europa.eu/qr/2610204",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "apple-iphone-18-pro-256-black",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 52,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "apple-iphone18pro-eu-energy",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 52
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "apple-iphone18pro-eu-energy",
+          "score": 52,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "apple-iphone18pro-eu-energy",
+          "name": "Apple",
+          "type": "regulatory_product_information",
+          "title": "iPhone 18 Pro - EU Energy Information",
+          "url": "https://images.apple.com/ie/iphone-18-pro/specs/",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "google-pixel-11-256-obsidian",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 48,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "eprel-pixel11-2647668",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 48
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "eprel-pixel11-2647668",
+          "score": 48,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "eprel-pixel11-2647668",
+          "name": "EU EPREL",
+          "type": "regulatory_product_information",
+          "title": "Google Pixel 11 - EU product information sheet",
+          "url": "https://eprel.ec.europa.eu/fiches/smartphonestablets20231669/Fiche_2647668_EN.pdf",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "google-pixel-11-pro-256-obsidian",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 47,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "eprel-pixel11pro-2647669",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 47
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "eprel-pixel11pro-2647669",
+          "score": 47,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "eprel-pixel11pro-2647669",
+          "name": "EU EPREL",
+          "type": "regulatory_product_information",
+          "title": "Google Pixel 11 Pro - EU product information sheet",
+          "url": "https://eprel.ec.europa.eu/fiches/smartphonestablets20231669/Fiche_2647669_EN.pdf",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "apple-iphone-air-256-black",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 40,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "apple-iphone-air-eu-energy",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 40
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "apple-iphone-air-eu-energy",
+          "score": 40,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "apple-iphone-air-eu-energy",
+          "name": "Apple",
+          "type": "regulatory_product_information",
+          "title": "iPhone Air - EU Energy Information",
+          "url": "https://www.apple.com/me/iphone-air/specs/",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "google-pixel-11-pro-xl-256-obsidian",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 50,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "eprel-pixel11proxl-2647670",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 50
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "eprel-pixel11proxl-2647670",
+          "score": 50,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "eprel-pixel11proxl-2647670",
+          "name": "EU EPREL",
+          "type": "regulatory_product_information",
+          "title": "Google Pixel 11 Pro XL - EU product information sheet",
+          "url": "https://eprel.ec.europa.eu/fiches/smartphonestablets20231669/Fiche_2647670_EN.pdf",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "apple-iphone-18-pro-max-256-black",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 62,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "apple-iphone18promax-eu-energy",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 62
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "apple-iphone18promax-eu-energy",
+          "score": 62,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "apple-iphone18promax-eu-energy",
+          "name": "Apple",
+          "type": "regulatory_product_information",
+          "title": "iPhone 18 Pro Max - EU Energy Information",
+          "url": "https://images.apple.com/ie/iphone-18-pro/specs/",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "apple-iphone-duo-256-starlight",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 51.5,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "eprel-iphone-duo-2774825",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 51.5
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "eprel-iphone-duo-2774825",
+          "score": 51.5,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "eprel-iphone-duo-2774825",
+          "name": "EU EPREL",
+          "type": "regulatory_product_information",
+          "title": "Apple iPhone Duo A3720 - EU product information",
+          "url": "https://eprel.ec.europa.eu/screen/product/smartphonestablets20231669/2774825",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "apple-iphone-17e-256-soft-pink",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 45,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "apple-iphone17e-eu-energy",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 45
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "apple-iphone17e-eu-energy",
+          "score": 45,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "apple-iphone17e-eu-energy",
+          "name": "Apple",
+          "type": "regulatory_product_information",
+          "title": "iPhone 17e - EU Energy Information",
+          "url": "https://www.apple.com/ie/iphone-17e/",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "google-pixel-11-512-obsidian",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 48,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "eprel-pixel11-2647668",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 48
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "eprel-pixel11-2647668",
+          "score": 48,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "eprel-pixel11-2647668",
+          "name": "EU EPREL",
+          "type": "regulatory_product_information",
+          "title": "Google Pixel 11 - EU product information sheet",
+          "url": "https://eprel.ec.europa.eu/fiches/smartphonestablets20231669/Fiche_2647668_EN.pdf",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "google-pixel-11-pro-512-obsidian",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 47,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "eprel-pixel11pro-2647669",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 47
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "eprel-pixel11pro-2647669",
+          "score": 47,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "eprel-pixel11pro-2647669",
+          "name": "EU EPREL",
+          "type": "regulatory_product_information",
+          "title": "Google Pixel 11 Pro - EU product information sheet",
+          "url": "https://eprel.ec.europa.eu/fiches/smartphonestablets20231669/Fiche_2647669_EN.pdf",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "google-pixel-11-pro-1tb-obsidian",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 47,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "eprel-pixel11pro-2647669",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 47
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "eprel-pixel11pro-2647669",
+          "score": 47,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "eprel-pixel11pro-2647669",
+          "name": "EU EPREL",
+          "type": "regulatory_product_information",
+          "title": "Google Pixel 11 Pro - EU product information sheet",
+          "url": "https://eprel.ec.europa.eu/fiches/smartphonestablets20231669/Fiche_2647669_EN.pdf",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "google-pixel-11-pro-xl-512-obsidian",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 50,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "eprel-pixel11proxl-2647670",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 50
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "eprel-pixel11proxl-2647670",
+          "score": 50,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "eprel-pixel11proxl-2647670",
+          "name": "EU EPREL",
+          "type": "regulatory_product_information",
+          "title": "Google Pixel 11 Pro XL - EU product information sheet",
+          "url": "https://eprel.ec.europa.eu/fiches/smartphonestablets20231669/Fiche_2647670_EN.pdf",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "google-pixel-11-pro-xl-1tb-obsidian",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 50,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "eprel-pixel11proxl-2647670",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 50
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "eprel-pixel11proxl-2647670",
+          "score": 50,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "eprel-pixel11proxl-2647670",
+          "name": "EU EPREL",
+          "type": "regulatory_product_information",
+          "title": "Google Pixel 11 Pro XL - EU product information sheet",
+          "url": "https://eprel.ec.europa.eu/fiches/smartphonestablets20231669/Fiche_2647670_EN.pdf",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "apple-iphone-18-pro-512-black",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 52,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "apple-iphone18pro-eu-energy",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 52
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "apple-iphone18pro-eu-energy",
+          "score": 52,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "apple-iphone18pro-eu-energy",
+          "name": "Apple",
+          "type": "regulatory_product_information",
+          "title": "iPhone 18 Pro - EU Energy Information",
+          "url": "https://images.apple.com/ie/iphone-18-pro/specs/",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "apple-iphone-18-pro-1tb-black",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 52,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "apple-iphone18pro-eu-energy",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 52
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "apple-iphone18pro-eu-energy",
+          "score": 52,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "apple-iphone18pro-eu-energy",
+          "name": "Apple",
+          "type": "regulatory_product_information",
+          "title": "iPhone 18 Pro - EU Energy Information",
+          "url": "https://images.apple.com/ie/iphone-18-pro/specs/",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "apple-iphone-18-pro-2tb-black",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 52,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "apple-iphone18pro-eu-energy",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 52
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "apple-iphone18pro-eu-energy",
+          "score": 52,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "apple-iphone18pro-eu-energy",
+          "name": "Apple",
+          "type": "regulatory_product_information",
+          "title": "iPhone 18 Pro - EU Energy Information",
+          "url": "https://images.apple.com/ie/iphone-18-pro/specs/",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "apple-iphone-18-pro-max-512-black",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 62,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "apple-iphone18promax-eu-energy",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 62
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "apple-iphone18promax-eu-energy",
+          "score": 62,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "apple-iphone18promax-eu-energy",
+          "name": "Apple",
+          "type": "regulatory_product_information",
+          "title": "iPhone 18 Pro Max - EU Energy Information",
+          "url": "https://images.apple.com/ie/iphone-18-pro/specs/",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "apple-iphone-18-pro-max-1tb-black",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 62,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "apple-iphone18promax-eu-energy",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 62
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "apple-iphone18promax-eu-energy",
+          "score": 62,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "apple-iphone18promax-eu-energy",
+          "name": "Apple",
+          "type": "regulatory_product_information",
+          "title": "iPhone 18 Pro Max - EU Energy Information",
+          "url": "https://images.apple.com/ie/iphone-18-pro/specs/",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "apple-iphone-18-pro-max-2tb-black",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 62,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "apple-iphone18promax-eu-energy",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 62
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "apple-iphone18promax-eu-energy",
+          "score": 62,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "apple-iphone18promax-eu-energy",
+          "name": "Apple",
+          "type": "regulatory_product_information",
+          "title": "iPhone 18 Pro Max - EU Energy Information",
+          "url": "https://images.apple.com/ie/iphone-18-pro/specs/",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "apple-iphone-duo-512-starlight",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 51.5,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "eprel-iphone-duo-2774825",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 51.5
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "eprel-iphone-duo-2774825",
+          "score": 51.5,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "eprel-iphone-duo-2774825",
+          "name": "EU EPREL",
+          "type": "regulatory_product_information",
+          "title": "Apple iPhone Duo A3720 - EU product information",
+          "url": "https://eprel.ec.europa.eu/screen/product/smartphonestablets20231669/2774825",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "apple-iphone-duo-1tb-starlight",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 51.5,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "eprel-iphone-duo-2774825",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 51.5
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "eprel-iphone-duo-2774825",
+          "score": 51.5,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "eprel-iphone-duo-2774825",
+          "name": "EU EPREL",
+          "type": "regulatory_product_information",
+          "title": "Apple iPhone Duo A3720 - EU product information",
+          "url": "https://eprel.ec.europa.eu/screen/product/smartphonestablets20231669/2774825",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "apple-iphone-duo-2tb-starlight",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 51.5,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "eprel-iphone-duo-2774825",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 51.5
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "eprel-iphone-duo-2774825",
+          "score": 51.5,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "eprel-iphone-duo-2774825",
+          "name": "EU EPREL",
+          "type": "regulatory_product_information",
+          "title": "Apple iPhone Duo A3720 - EU product information",
+          "url": "https://eprel.ec.europa.eu/screen/product/smartphonestablets20231669/2774825",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "apple-iphone-air-512-black",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 40,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "apple-iphone-air-eu-energy",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 40
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "apple-iphone-air-eu-energy",
+          "score": 40,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "apple-iphone-air-eu-energy",
+          "name": "Apple",
+          "type": "regulatory_product_information",
+          "title": "iPhone Air - EU Energy Information",
+          "url": "https://www.apple.com/me/iphone-air/specs/",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
+        }
+      ],
+      "updatedAt": "2026-11-10"
+    },
+    {
+      "productId": "apple-iphone-air-1tb-black",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 40,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "apple-iphone-air-eu-energy",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 40
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "apple-iphone-air-eu-energy",
+          "score": 40,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-10"
+        }
+      ],
+      "sources": [
+        {
+          "id": "apple-iphone-air-eu-energy",
+          "name": "Apple",
+          "type": "regulatory_product_information",
+          "title": "iPhone Air - EU Energy Information",
+          "url": "https://www.apple.com/me/iphone-air/specs/",
           "protocol": "EU 2023/1669 battery endurance per cycle (hours)"
         }
       ],
