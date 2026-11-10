@@ -3744,28 +3744,19 @@ async function testRealUserSearchScenarios() {
       query:
         "voglio un iPhone con molto spazio sotto 1000 euro",
       check(data) {
-        if (
-          data.canRecommend !== true
-        ) {
-          return false;
-        }
-
-        const budgetOkay =
-          data.recommendation
-            ?.finalCostConfirmed === true
-            ? data.recommendation
-                ?.finalCost <= 1000
-            : data.bestOffer
-                ?.offer_price <= 1000;
-
         return (
-          data.bestOffer?.brand ===
-            "Apple" &&
-          budgetOkay
+          data.canRecommend === false &&
+          data.clarification
+            ?.needed === true &&
+          data.clarification
+            ?.missing
+            ?.includes(
+              "storage"
+            )
         );
       },
       expected:
-        "iPhone dentro de presupuesto sin perder la intención",
+        "aclaración de capacidad antes de adivinar cuánto es 'mucho espacio'",
     },
     {
       id: "pixel-vs-galaxy-camera",
@@ -3773,18 +3764,18 @@ async function testRealUserSearchScenarios() {
         "Pixel 11 o Galaxy S26 per foto",
       check(data) {
         return (
-          data.status !==
-            "unsupported_intent" &&
-          (
-            data.canRecommend ===
-              true ||
-            data.clarification
-              ?.needed === true
-          )
+          data.canRecommend === false &&
+          data.clarification
+            ?.needed === true &&
+          data.clarification
+            ?.missing
+            ?.includes(
+              "comparison"
+            )
         );
       },
       expected:
-        "comparación/interpretación útil de dos familias",
+        "manejo explícito y seguro de comparación entre dos familias",
     },
     {
       id: "gaming-under-800",
