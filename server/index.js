@@ -423,6 +423,14 @@ function detectCategory(query) {
         "cellulari",
         "iphone",
         "galaxy",
+        "samsung",
+        "pixel",
+        "google pixel",
+        "xiaomi",
+        "redmi",
+        "honor",
+        "oppo",
+        "android",
       ],
     },
 
@@ -625,6 +633,10 @@ function detectQualityObjectives(query) {
         "potenza",
         "veloce",
         "velocita",
+        "gaming",
+        "giocare",
+        "videogiochi",
+        "giochi",
       ],
     },
 
@@ -687,6 +699,9 @@ function detectQualityObjectives(query) {
       signals: [
         "qualita prezzo",
         "rapporto qualita prezzo",
+        "economico",
+        "economica",
+        "conveniente",
       ],
     },
   ];
@@ -744,6 +759,22 @@ function detectHardRequirements(query) {
     requirements.anc = true;
   }
 
+  if (
+    containsNormalizedSignal(
+      q,
+      "android"
+    ) ||
+    q.includes(
+      "non voglio iphone"
+    ) ||
+    q.includes(
+      "senza iphone"
+    )
+  ) {
+    requirements.platform =
+      "android";
+  }
+
   return requirements;
 }
 
@@ -761,6 +792,16 @@ function filterOffersByHardRequirements(
       if (
         hardRequirements?.anc === true &&
         offer?.attributes?.anc !== true
+      ) {
+        return false;
+      }
+
+      if (
+        hardRequirements?.platform ===
+          "android" &&
+        normalizeText(
+          offer?.brand
+        ) === "apple"
       ) {
         return false;
       }
@@ -860,6 +901,13 @@ function detectIntent(query) {
     );
 
   if (explicitRecommendation) {
+    return "RECOMMENDATION";
+  }
+
+  if (
+    qualityObjectives.length > 0 &&
+    category
+  ) {
     return "RECOMMENDATION";
   }
 
@@ -1055,6 +1103,18 @@ function cleanProductQuery(query) {
     "peso",
     "aggiornamenti",
     "software",
+    "economico",
+    "economica",
+    "conveniente",
+    "qualita prezzo",
+    "rapporto qualita prezzo",
+    "molto spazio",
+    "tanto spazio",
+    "molta memoria",
+    "tanta memoria",
+    "android",
+    "non voglio iphone",
+    "senza iphone",
   ];
 
   for (const phrase of needPhrases) {
@@ -1098,6 +1158,8 @@ function cleanProductQuery(query) {
       "buono",
       "ottima",
       "ottimo",
+      "ma",
+      "non",
     ]);
 
   return q
@@ -1109,6 +1171,37 @@ function cleanProductQuery(query) {
     .join(" ")
     .replace(/\s+/g, " ")
     .trim();
+}
+
+
+function hasVagueStoragePreference(
+  query
+) {
+  const q =
+    normalizeText(query);
+
+  return [
+    "molto spazio",
+    "tanto spazio",
+    "molta memoria",
+    "tanta memoria",
+  ].some(
+    signal =>
+      q.includes(signal)
+  );
+}
+
+
+function hasDirectComparisonRequest(
+  query
+) {
+  const q =
+    normalizeText(query);
+
+  return (
+    /\b(?:vs|versus)\b/.test(q) ||
+    /\b(?:pixel|iphone|galaxy|redmi|xiaomi|honor|oppo)\b.*\bo\b.*\b(?:pixel|iphone|galaxy|redmi|xiaomi|honor|oppo)\b/.test(q)
+  );
 }
 
 
@@ -3937,6 +4030,98 @@ app.get(
 
       const sourceDiagnostics =
         sourceSearch.diagnostics;
+
+      if (
+        hasVagueStoragePreference(
+          rawQuery
+        )
+      ) {
+        const storages =
+          [
+            ...new Set(
+              results
+                .map(
+                  offer =>
+                    offer.storage
+                )
+                .filter(Boolean)
+            ),
+          ];
+
+        if (storages.length > 1) {
+          return res.json({
+            query:
+              rawQuery,
+            productQuery,
+            intent,
+            context: {
+              budget,
+              category,
+              objectives,
+              priceObjective,
+              hardRequirements,
+            },
+            status:
+              "needs_clarification",
+            canRecommend: false,
+            clarification: {
+              needed: true,
+              message:
+                "Hai chiesto molto spazio. Dimmi la capacità minima che vuoi, così non scelgo io al posto tuo.",
+              missing: [
+                "storage"
+              ],
+              options: {
+                storages,
+              },
+            },
+            count:
+              results.length,
+            bestOffer: null,
+            recommendation: null,
+            ranking: null,
+            results,
+          });
+        }
+      }
+
+      if (
+        hasDirectComparisonRequest(
+          rawQuery
+        )
+      ) {
+        return res.json({
+          query:
+            rawQuery,
+          productQuery,
+          intent,
+          context: {
+            budget,
+            category,
+            objectives,
+            priceObjective,
+            hardRequirements,
+          },
+          status:
+            "needs_clarification",
+          canRecommend: false,
+          clarification: {
+            needed: true,
+            message:
+              "Ho capito che vuoi confrontare due modelli. La comparazione diretta tra due famiglie è il prossimo passo del motore; per ora indicami quale criterio conta di più oppure cerca un modello alla volta.",
+            missing: [
+              "comparison"
+            ],
+            options: {},
+          },
+          count:
+            results.length,
+          bestOffer: null,
+          recommendation: null,
+          ranking: null,
+          results,
+        });
+      }
 
 
       // ==================================
