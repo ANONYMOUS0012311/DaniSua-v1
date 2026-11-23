@@ -1957,13 +1957,13 @@
     "store": "Euronics",
     "seller": "Euronics",
     "old_price": null,
-    "offer_price": 1050,
+    "offer_price": 999,
     "currency": "EUR",
-    "shipping_price": 7.9,
+    "shipping_price": null,
     "stock": true,
     "url": "https://www.euronics.it/telefonia/smartphone-e-cellulari/iphone/apple---iphone-17-256gb-nero/252011565.html",
     "updatedAt": null,
-    "verifiedAt": "2026-11-05",
+    "verifiedAt": "2026-11-23T20:03:20Z",
     "pricing": {
       "type": "standard",
       "conditional": false,
@@ -1971,7 +1971,7 @@
       "paymentOptions": [
         {
           "type": "one_time",
-          "total_price": 1050
+          "total_price": 999
         }
       ]
     }
@@ -2766,14 +2766,14 @@
     "productId": "apple-iphone-17-512-white",
     "store": "Unieuro",
     "seller": "Unieuro",
-    "old_price": 1379,
+    "old_price": null,
     "offer_price": 1299,
     "currency": "EUR",
     "shipping_price": null,
-    "stock": true,
+    "stock": null,
     "url": "https://www.unieuro.it/online/products?q=0195950644302",
     "updatedAt": null,
-    "verifiedAt": "2026-11-05",
+    "verifiedAt": "2026-11-23T20:03:20Z",
     "pricing": {
       "type": "standard",
       "conditional": false,
