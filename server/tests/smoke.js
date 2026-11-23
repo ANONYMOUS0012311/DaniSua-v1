@@ -1772,6 +1772,79 @@ async function testFreshnessGuard() {
 
 
 // ========================================
+// FRESHNESS — POLICY CENTRALIZZATA
+// ========================================
+
+function testCentralizedFreshnessPolicy() {
+  const evaluated =
+    sourceRegistry
+      .applyFreshnessPolicy([
+        {
+          id:
+            "db-stale-offer",
+          verifiedAt:
+            "2000-01-01T00:00:00Z",
+          offer_price:
+            10,
+          shipping_price:
+            0,
+          stock:
+            true,
+        },
+        {
+          id:
+            "db-unknown-date",
+          verifiedAt:
+            null,
+          offer_price:
+            20,
+          shipping_price:
+            0,
+          stock:
+            true,
+        },
+      ]);
+
+  assert(
+    evaluated.length === 2,
+    "La policy centralizzata deve preservare le offerte"
+  );
+
+  assert(
+    evaluated[0]
+      .freshness
+      ?.status ===
+      "stale" &&
+    evaluated[0]
+      .freshness
+      ?.eligibleForRecommendation ===
+      false,
+    "Una offerta DB vecchia deve ricevere freshness stale"
+  );
+
+  assert(
+    evaluated[0]
+      .reliability
+      ?.status ===
+      "stale",
+    "Ogni offerta deve ricevere anche la reliability 2h/6h"
+  );
+
+  assert(
+    evaluated[1]
+      .freshness
+      ?.status ===
+      "unknown" &&
+    evaluated[1]
+      .freshness
+      ?.eligibleForRecommendation ===
+      false,
+    "Una offerta senza timestamp non deve aggirare il freshness guard"
+  );
+}
+
+
+// ========================================
 // FRESHNESS — SOURCE OBSERVABILITY
 // ========================================
 
@@ -4889,6 +4962,14 @@ const tests = [
 
     run:
       testFreshnessGuard,
+  },
+
+  {
+    name:
+      "FRESHNESS — policy centralizzata",
+
+    run:
+      testCentralizedFreshnessPolicy,
   },
 
   {
