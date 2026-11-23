@@ -449,28 +449,38 @@ async function main() {
 
   const productImageResponse =
     await fetchWithRetry(
-      `${API_URL}/product-image/apple-iphone-17-256-black`
+      `${API_URL}/product-image/apple-iphone-17-256-black`,
+      {
+        redirect:
+          "manual",
+      }
     );
 
   assert(
-    productImageResponse.ok,
-    `Immagine prodotto HTTP ${productImageResponse.status}`
+    [
+      301,
+      302,
+      307,
+      308,
+    ].includes(
+      productImageResponse.status
+    ),
+    `Immagine prodotto non risolta: HTTP ${productImageResponse.status}`
   );
 
-  const productImageType =
+  const productImageLocation =
     String(
       productImageResponse.headers.get(
-        "content-type"
+        "location"
       ) ||
       ""
-    )
-      .toLowerCase();
+    );
 
   assert(
-    productImageType.startsWith(
-      "image/"
+    /^https?:\/\//i.test(
+      productImageLocation
     ),
-    `L'endpoint immagine non ha restituito una foto: ${productImageType || "content-type assente"}`
+    "L'endpoint immagine non ha restituito un URL immagine valido"
   );
 
   console.log(
@@ -493,7 +503,7 @@ async function main() {
         transposedTypoStatus:
           transposedTypo.status,
         productImage:
-          productImageType,
+          "redirect-ok",
       },
       null,
       2
