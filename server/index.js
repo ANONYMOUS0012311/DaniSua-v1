@@ -4437,9 +4437,9 @@ app.get(
             sourceDiagnostics
               ?.returned ??
             0,
-          freshness:
+          reliability:
             sourceDiagnostics
-              ?.freshness ||
+              ?.reliability ||
             null,
         }
       );
