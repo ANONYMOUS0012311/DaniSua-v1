@@ -569,6 +569,18 @@ body {
   background: var(--primary-dark);
 }
 
+.producto-btn-ver:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.producto-btn-ver:disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
 .producto-btn-ver:active {
   transform: scale(0.98);
 }
