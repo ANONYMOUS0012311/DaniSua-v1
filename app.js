@@ -1096,6 +1096,84 @@ async function runSearchWithNormalize(
 
 
 // ========================================
+// AZIONE OFFERTA
+// ========================================
+
+function getOfferActionState(
+  product
+) {
+  if (
+    product?.stock ===
+      false
+  ) {
+    return {
+      enabled: false,
+      label:
+        "Non disponibile",
+      reason:
+        "out_of_stock",
+    };
+  }
+
+  if (
+    product
+      ?.freshness
+      ?.eligibleForRecommendation ===
+      false
+  ) {
+    return {
+      enabled: false,
+      label:
+        "Prezzo da ricontrollare",
+      reason:
+        "freshness_blocked",
+    };
+  }
+
+  const rawUrl =
+    String(
+      product?.url ||
+      ""
+    )
+      .trim();
+
+  try {
+    const parsed =
+      new URL(
+        rawUrl
+      );
+
+    if (
+      parsed.protocol !==
+        "http:" &&
+      parsed.protocol !==
+        "https:"
+    ) {
+      throw new Error(
+        "unsupported protocol"
+      );
+    }
+  } catch {
+    return {
+      enabled: false,
+      label:
+        "Link non disponibile",
+      reason:
+        "invalid_url",
+    };
+  }
+
+  return {
+    enabled: true,
+    label:
+      "Vedi offerta →",
+    reason:
+      "actionable",
+  };
+}
+
+
+// ========================================
 // PRODOTTI
 // ========================================
 
@@ -1233,9 +1311,21 @@ function renderProducts(
             imgFallback
           );
 
+        const action =
+          getOfferActionState(
+            product
+          );
+
         const url =
           escapeHtml(
-            product.url || "#"
+            action.enabled
+              ? product.url
+              : ""
+          );
+
+        const actionLabel =
+          escapeHtml(
+            action.label
           );
 
         return `
@@ -1376,8 +1466,10 @@ function renderProducts(
               <button
                 class="producto-btn-ver"
                 data-url="${url}"
+                data-action-reason="${escapeHtml(action.reason)}"
+                ${action.enabled ? "" : "disabled aria-disabled=\"true\""}
               >
-                Vedi offerta →
+                ${actionLabel}
               </button>
 
             </div>
