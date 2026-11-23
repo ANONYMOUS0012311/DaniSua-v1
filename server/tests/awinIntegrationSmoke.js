@@ -408,6 +408,43 @@ async function main() {
   );
 
 
+  const accessoryCsv = [
+    "product_id,product_name,brand_name,price,currency,delivery_cost,in_stock,deep_link,merchant_category",
+    "SKU-CASE,Apple Custodia MagSafe per iPhone 17,Apple,59.00,EUR,0,1,https://www.unieuro.it/online/test-case,Accessori Smartphone",
+  ].join("\n");
+
+  const accessory =
+    importAwinProductFeed({
+      content:
+        accessoryCsv,
+      advertiserId:
+        "1001",
+      advertiserName:
+        "Unieuro",
+      observedAt:
+        "2026-11-23T20:00:00Z",
+      betaOnly: true,
+    });
+
+  assert(
+    accessory.ready.length ===
+      0 &&
+    accessory
+      .needsReview
+      .length === 0 &&
+    accessory
+      .rejected
+      ?.matching
+      ?.length === 1 &&
+    accessory
+      .rejected
+      .matching[0]
+      ?.reason ===
+      "accessory_not_catalog_product",
+    "Un accessorio evidente non deve riempire la review queue del prodotto principale"
+  );
+
+
   console.log(
     "✅ AWIN — config, allowlist, feed planning e mapping"
   );
