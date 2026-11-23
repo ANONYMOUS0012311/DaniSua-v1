@@ -197,10 +197,32 @@ async function main() {
     "Il frontend pubblicato non punta al backend Render atteso"
   );
 
-  const health =
-    await fetchJson(
-      "/health"
+  const corsHealthResponse =
+    await fetchWithRetry(
+      API_URL + "/health",
+      {
+        headers: {
+          Origin:
+            WEB_URL,
+        },
+      }
     );
+
+  assert(
+    corsHealthResponse.ok,
+    `CORS /health HTTP ${corsHealthResponse.status}`
+  );
+
+  assert(
+    corsHealthResponse.headers.get(
+      "access-control-allow-origin"
+    ) === WEB_URL,
+    "Il backend non autorizza esplicitamente l'origine Netlify di produzione"
+  );
+
+  const health =
+    await corsHealthResponse
+      .json();
 
   assert(
     health.ok === true,
@@ -309,6 +331,12 @@ async function main() {
       Array.isArray(
         exact.results
       ) &&
+      exact.results.length >
+        0,
+      "La ricerca esatta è raccomandabile ma non restituisce risultati per le card"
+    );
+
+    assert(
       exact.results
         .every(
           offer =>
@@ -316,6 +344,31 @@ async function main() {
             "256 GB"
         ),
       "La ricerca esatta include capacità diverse da 256 GB"
+    );
+
+    assert(
+      exact.results
+        .every(
+          offer =>
+            typeof offer
+              ?.store ===
+              "string" &&
+            offer.store.length >
+              0 &&
+            Number.isFinite(
+              Number(
+                offer
+                  ?.offer_price
+              )
+            ) &&
+            typeof offer
+              ?.url ===
+              "string" &&
+            offer.url.startsWith(
+              "http"
+            )
+        ),
+      "Una o più offerte raccomandabili non hanno i campi minimi necessari per renderizzare le card"
     );
   }
 
