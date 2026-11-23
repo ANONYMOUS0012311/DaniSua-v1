@@ -179,6 +179,104 @@ function isConditionCompatible(
 }
 
 
+function containsNormalizedPhrase(
+  text,
+  phrase
+) {
+  const normalizedText =
+    normalizeText(
+      text
+    );
+
+  const normalizedPhrase =
+    normalizeText(
+      phrase
+    );
+
+  if (
+    !normalizedText ||
+    !normalizedPhrase
+  ) {
+    return false;
+  }
+
+  return (
+    ` ${normalizedText} `
+      .includes(
+        ` ${normalizedPhrase} `
+      )
+  );
+}
+
+
+function looksLikeAccessoryCandidate(
+  candidate
+) {
+  const category =
+    normalizeText(
+      candidate
+        ?.merchantCategory
+    );
+
+  if (
+    category &&
+    [
+      "accessori",
+      "accessories",
+      "accessorio",
+      "accessory",
+    ].some(
+      signal =>
+        category.includes(
+          signal
+        )
+    )
+  ) {
+    return true;
+  }
+
+  const text =
+    normalizeText(
+      [
+        candidate?.title,
+        candidate?.merchantCategory,
+      ]
+        .filter(Boolean)
+        .join(" ")
+    );
+
+  const signals = [
+    "cover",
+    "custodia",
+    "case",
+    "pellicola",
+    "vetro temperato",
+    "screen protector",
+    "proteggi schermo",
+    "caricatore",
+    "charger",
+    "cavo",
+    "cable",
+    "adattatore",
+    "adapter",
+    "supporto",
+    "stand",
+    "mount",
+    "bumper",
+    "cinturino",
+    "strap",
+  ];
+
+  return signals.some(
+    signal =>
+      containsNormalizedPhrase(
+        text,
+        signal
+      )
+  );
+}
+
+
 function unique(values) {
   return Array.from(
     new Set(
@@ -1088,6 +1186,45 @@ function matchProduct(
 
 
   // ====================================
+  // ACCESSORI FUORI CATALOGO
+  //
+  // Un titolo come "custodia per iPhone 17"
+  // non deve generare review di variante solo
+  // perché contiene il modello del dispositivo.
+  // Product ID / GTIN esatti hanno già avuto
+  // precedenza sopra.
+  // ====================================
+
+  if (
+    looksLikeAccessoryCandidate(
+      candidate
+    )
+  ) {
+    return {
+      status:
+        "unmatched",
+
+      decision:
+        "NO_MATCH",
+
+      confidence:
+        0,
+
+      productId:
+        null,
+
+      familyId:
+        null,
+
+      reason:
+        "accessory_not_catalog_product",
+
+      candidates: [],
+    };
+  }
+
+
+  // ====================================
   // 3. FAMILY CANDIDATES
   // ====================================
 
@@ -1429,6 +1566,8 @@ module.exports = {
   normalizeText,
   normalizeCondition,
   isConditionCompatible,
+  containsNormalizedPhrase,
+  looksLikeAccessoryCandidate,
   getCandidateText,
   getProductAttributes,
   groupByFamily,
