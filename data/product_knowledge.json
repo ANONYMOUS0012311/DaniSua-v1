@@ -863,6 +863,60 @@
       "updatedAt": "2026-11-05"
     },
     {
+      "productId": "apple-iphone-17-256-white",
+      "category": "smartphone",
+      "scores": {
+        "overall": null,
+        "camera": null,
+        "battery": 41,
+        "performance": null,
+        "display": null,
+        "software": null,
+        "value": null
+      },
+      "scoreMeta": {
+        "battery": {
+          "sourceId": "apple-iphone17-eu-energy",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "unit": "h"
+        }
+      },
+      "facts": {
+        "battery": {
+          "euEnduranceHours": 41,
+          "cycleLife": 1000
+        },
+        "euEnergyLabel": {
+          "energyClass": "A",
+          "reliabilityClass": "B",
+          "repairabilityClass": "C",
+          "regulation": "EU 2023/1669"
+        }
+      },
+      "evidence": [
+        {
+          "criterion": "battery",
+          "type": "regulatory_standard",
+          "sourceId": "apple-iphone17-eu-energy",
+          "score": 41,
+          "unit": "h",
+          "protocol": "EU 2023/1669 battery endurance per cycle (hours)",
+          "rankingEligible": true,
+          "verifiedAt": "2026-11-05"
+        }
+      ],
+      "sources": [
+        {
+          "id": "apple-iphone17-eu-energy",
+          "name": "Apple",
+          "type": "regulatory_product_information",
+          "title": "iPhone 17 - Informazioni sul consumo energetico UE",
+          "url": "https://www.apple.com/it/iphone/"
+        }
+      ],
+      "updatedAt": "2026-11-05"
+    },
+    {
       "productId": "apple-iphone-17-256-sage",
       "category": "smartphone",
       "scores": {
