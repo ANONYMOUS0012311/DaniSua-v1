@@ -137,6 +137,43 @@ async function fetchSearch(query) {
 }
 
 
+function sendClientEvent(
+  payload
+) {
+  if (
+    !payload ||
+    typeof payload !==
+      "object"
+  ) {
+    return;
+  }
+
+  fetch(
+    `${API_BASE}/events`,
+    {
+      method:
+        "POST",
+      headers: {
+        "Content-Type":
+          "application/json",
+      },
+      body:
+        JSON.stringify(
+          payload
+        ),
+      keepalive:
+        true,
+    }
+  )
+    .catch(
+      () => {
+        // Le metriche non devono mai
+        // interrompere l'esperienza.
+      }
+    );
+}
+
+
 // ========================================
 // SCONTO
 // ========================================
@@ -1263,7 +1300,7 @@ function renderProducts(
 
   containerProdotti.innerHTML =
     list
-      .map(product => {
+      .map((product, index) => {
         const hasDiscount =
           typeof product.old_price ===
             "number" &&
@@ -1526,6 +1563,10 @@ function renderProducts(
                 class="producto-btn-ver"
                 data-url="${url}"
                 data-action-reason="${escapeHtml(action.reason)}"
+                data-offer-id="${escapeHtml(product.id || "")}"
+                data-family-id="${escapeHtml(product.familyId || "")}"
+                data-store="${escapeHtml(product.store || "")}"
+                data-position="${index}"
                 ${action.enabled ? "" : "disabled aria-disabled=\"true\""}
               >
                 ${actionLabel}
@@ -1553,6 +1594,39 @@ function renderProducts(
             url &&
             url !== "#"
           ) {
+            const position =
+              Number(
+                button
+                  .dataset
+                  .position
+              );
+
+            sendClientEvent({
+              type:
+                "offer_click",
+              offerId:
+                button
+                  .dataset
+                  .offerId ||
+                null,
+              familyId:
+                button
+                  .dataset
+                  .familyId ||
+                null,
+              store:
+                button
+                  .dataset
+                  .store ||
+                null,
+              position:
+                Number.isInteger(
+                  position
+                )
+                  ? position
+                  : null,
+            });
+
             window.open(
               url,
               "_blank",
