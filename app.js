@@ -979,6 +979,11 @@ async function runSearchWithNormalize(
         ? data.results
         : [];
 
+    const displayResults =
+      selectDisplayResults(
+        results
+      );
+
     // ------------------------------------
     // IL BACKEND CHIEDE UN CHIARIMENTO
     // ------------------------------------
@@ -993,12 +998,12 @@ async function runSearchWithNormalize(
       );
 
       renderProducts(
-        results,
+        displayResults,
         null
       );
 
       updateCounter(
-        results.length
+        displayResults.length
       );
 
       return;
@@ -1016,12 +1021,12 @@ async function runSearchWithNormalize(
       );
 
       renderProducts(
-        results,
+        displayResults,
         null
       );
 
       updateCounter(
-        results.length
+        displayResults.length
       );
 
       return;
@@ -1045,12 +1050,12 @@ async function runSearchWithNormalize(
     }
 
     renderProducts(
-      results,
+      displayResults,
       data.bestOffer || null
     );
 
     updateCounter(
-      results.length
+      displayResults.length
     );
 
   } catch (err) {
@@ -1092,6 +1097,39 @@ async function runSearchWithNormalize(
       setLoading(false);
     }
   }
+}
+
+
+// ========================================
+// RISULTATI VISIBILI
+//
+// Se esistono offerte utilizzabili,
+// nascondiamo dalla griglia principale
+// quelle stale / non disponibili / senza
+// link valido. Se nessuna è utilizzabile,
+// manteniamo il fallback completo così
+// DaniSua può spiegare cosa va ricontrollato.
+// ========================================
+
+function selectDisplayResults(
+  list
+) {
+  const source =
+    Array.isArray(list)
+      ? list
+      : [];
+
+  const actionable =
+    source.filter(
+      product =>
+        getOfferActionState(
+          product
+        ).enabled
+    );
+
+  return actionable.length > 0
+    ? actionable
+    : source;
 }
 
 
