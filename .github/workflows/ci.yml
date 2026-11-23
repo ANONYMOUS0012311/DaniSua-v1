@@ -52,6 +52,9 @@ jobs:
       - name: Run Awin end-to-end sync tests
         run: npm run test:awin-sync
 
+      - name: Run Awin runtime scheduler tests
+        run: npm run test:awin-scheduler
+
       - name: Run reliability queue tests
         run: npm run test:reliability
 
