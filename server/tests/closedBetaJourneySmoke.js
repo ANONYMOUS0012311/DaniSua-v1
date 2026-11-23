@@ -124,6 +124,8 @@ async function search(query) {
 
 function buildOffer({
   id,
+  productId =
+    "apple-iphone-17-256-black",
   store,
   price,
   shipping,
@@ -131,8 +133,7 @@ function buildOffer({
 }) {
   return {
     id,
-    productId:
-      "apple-iphone-17-256-black",
+    productId,
     store,
     seller:
       store,
@@ -223,6 +224,19 @@ async function main() {
         7.9,
       verifiedAt,
     }),
+    buildOffer({
+      id:
+        "closed-apple-iphone17-512",
+      productId:
+        "apple-iphone-17-512-white",
+      store:
+        "Apple",
+      price:
+        899,
+      shipping:
+        0,
+      verifiedAt,
+    }),
   ];
 
   fs.writeFileSync(
@@ -305,8 +319,8 @@ async function main() {
     assert(
       cheapest.bestOffer
         ?.id ===
-        "closed-mediaworld-iphone17",
-      `Price-first deve scegliere il costo finale più basso: ${cheapest.bestOffer?.id}`
+        "closed-apple-iphone17-512",
+      `Price-first senza capacità deve poter scegliere la variante più economica: ${cheapest.bestOffer?.id}`
     );
 
     const generic =
@@ -339,19 +353,30 @@ async function main() {
     assert(
       exact.canRecommend ===
         true &&
-      exact
-        .recommendation
-        ?.selectedVariant
+      exact.bestOffer
         ?.storage ===
         "256 GB",
-      "La capacità esplicita deve essere rispettata"
+      `La capacità esplicita deve essere rispettata: ${exact.bestOffer?.storage}`
+    );
+
+    assert(
+      Array.isArray(
+        exact.results
+      ) &&
+      exact.results
+        .every(
+          offer =>
+            offer.storage ===
+            "256 GB"
+        ),
+      "La ricerca 256 GB non deve includere offerte 512 GB"
     );
 
     assert(
       exact.bestOffer
         ?.id ===
         "closed-mediaworld-iphone17",
-      "La ricerca esatta deve mantenere la migliore offerta valida"
+      "La ricerca esatta deve mantenere la migliore offerta valida tra le 256 GB"
     );
 
     console.log(
