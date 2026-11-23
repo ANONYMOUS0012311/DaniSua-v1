@@ -4440,21 +4440,37 @@ async function testRealUserSearchScenarios() {
       query:
         "samsng con buona baterria sotto 500 euro",
       check(data) {
+        const objectives =
+          Array.isArray(
+            data.context
+              ?.objectives
+          )
+            ? data.context
+                .objectives
+            : [];
+
         return (
           data.status !==
             "unsupported_intent" &&
-          (
-            data.canRecommend ===
-              true ||
-            data.clarification
-              ?.needed === true ||
-            data.status ===
-              "not_found"
+          data.status !==
+            "not_found" &&
+          String(
+            data.productQuery ||
+            ""
+          )
+            .includes(
+              "samsung"
+            ) &&
+          objectives.some(
+            objective =>
+              objective
+                ?.criterion ===
+              "battery"
           )
         );
       },
       expected:
-        "degradación segura ante typo",
+        "corregir typo de Samsung/batteria y mantener el objetivo batería",
     },
     {
       id: "android-not-iphone",
