@@ -7,6 +7,10 @@ const {
   closeDatabase,
 } = require("../db/database");
 
+const {
+  evaluateOfferFreshness,
+} = require("../utils/freshness");
+
 
 // ========================================
 // DANISUA — DATABASE SOURCE
@@ -125,7 +129,7 @@ function matchesQuery(
 function toSourceOffer(
   row
 ) {
-  return {
+  const baseOffer = {
     ...(row.payload || {}),
 
     id:
@@ -177,6 +181,19 @@ function toSourceOffer(
       decision:
         "AUTO_MATCH",
     },
+
+    lastSeenAt:
+      row.lastSeenAt ||
+      null,
+  };
+
+  return {
+    ...baseOffer,
+
+    freshness:
+      evaluateOfferFreshness(
+        baseOffer
+      ),
   };
 }
 
