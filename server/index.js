@@ -12,6 +12,10 @@ const {
 } = require("./utils/logger");
 
 const {
+  startAwinRuntimeScheduler,
+} = require("./integrations/awinScheduler");
+
+const {
   getUniqueFamilies,
   getLowestOffer,
   isDefaultComparableOffer,
@@ -5034,6 +5038,11 @@ app.listen(
           process.version,
       }
     );
+
+    startAwinRuntimeScheduler({
+      env:
+        process.env,
+    });
   }
 );
 
