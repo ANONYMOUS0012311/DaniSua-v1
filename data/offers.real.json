@@ -164,8 +164,8 @@
     "shipping_price": 0,
     "stock": true,
     "url": "https://www.apple.com/it/shop/buy-iphone/iphone-18-pro",
-    "updatedAt": null,
-    "verifiedAt": "2026-11-05",
+    "updatedAt": "2026-11-23T21:40:48Z",
+    "verifiedAt": "2026-11-23T21:40:48Z",
     "pricing": {
       "type": "standard",
       "conditional": false,
@@ -176,7 +176,8 @@
           "total_price": 1489
         }
       ]
-    }
+    },
+    "price_note": "Apple Store Italia mostra iPhone 18 Pro 256 GB a 1.489 €. La consegna standard Apple è gratuita."
   },
   {
     "id": "real-apple-iphone17-256-black",
@@ -2356,13 +2357,13 @@
     "store": "Euronics",
     "seller": "Euronics",
     "old_price": 1489,
-    "offer_price": 1475,
+    "offer_price": 1449,
     "currency": "EUR",
     "shipping_price": 0,
     "stock": true,
     "url": "https://www.euronics.it/telefonia/smartphone-e-cellulari/iphone/nuovi-iphone/",
-    "updatedAt": null,
-    "verifiedAt": "2026-11-05",
+    "updatedAt": "2026-11-23T21:40:48Z",
+    "verifiedAt": "2026-11-23T21:40:48Z",
     "pricing": {
       "type": "standard",
       "conditional": false,
@@ -2370,10 +2371,11 @@
       "paymentOptions": [
         {
           "type": "one_time",
-          "total_price": 1475
+          "total_price": 1449
         }
       ]
-    }
+    },
+    "price_note": "Euronics mostra iPhone 18 Pro 256 GB Nero a 1.449 € con consegna gratuita e acquisto online disponibile."
   },
   {
     "id": "real-unieuro-iphone18pro-256-black",
@@ -2381,13 +2383,13 @@
     "store": "Unieuro",
     "seller": "Unieuro",
     "old_price": 1489,
-    "offer_price": 1489,
+    "offer_price": 1439,
     "currency": "EUR",
-    "shipping_price": null,
+    "shipping_price": 0,
     "stock": true,
-    "url": "https://www.unieuro.it/online/Telefonia-e-Smartphone/Smartphone-e-Cellulari/iPhone",
-    "updatedAt": null,
-    "verifiedAt": "2026-11-05",
+    "url": "https://www.unieuro.it/online/iphone-18-pro",
+    "updatedAt": "2026-11-23T21:40:48Z",
+    "verifiedAt": "2026-11-23T21:40:48Z",
     "pricing": {
       "type": "standard",
       "conditional": false,
@@ -2395,10 +2397,11 @@
       "paymentOptions": [
         {
           "type": "one_time",
-          "total_price": 1489
+          "total_price": 1439
         }
       ]
-    }
+    },
+    "price_note": "Unieuro mostra iPhone 18 Pro 256 GB Nero a 1.439 € con consegna gratuita e disponibilità online."
   },
   {
     "id": "real-comet-iphone18pro-256-black",
@@ -3916,6 +3919,43 @@
         {
           "type": "one_time",
           "total_price": 799
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-mediaworld-iphone18pro-256-black",
+    "productId": "apple-iphone-18-pro-256-black",
+    "store": "MediaWorld",
+    "seller": "MediaWorld",
+    "old_price": 1489,
+    "offer_price": 1449.49,
+    "currency": "EUR",
+    "shipping_price": 0,
+    "stock": true,
+    "url": "https://www.mediaworld.it/it/brand/apple/iphone?displayMode=grid",
+    "updatedAt": "2026-11-23T21:40:48Z",
+    "verifiedAt": "2026-11-23T21:40:48Z",
+    "price_note": "La pagina iPhone MediaWorld mostra l'offerta diretta iPhone 18 Pro 256 GB Nero a 1.449,49 € con consegna gratis. Le offerte marketplace di terzi restano separate.",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 1449.49
+        },
+        {
+          "type": "installment",
+          "installments": 24,
+          "installment_amount": 69.3,
+          "displayed_total": 1663.2,
+          "financing_cost": 213.71,
+          "tan": 13.56,
+          "taeg": 14.44,
+          "provider": null,
+          "note": "Piano rateale mostrato da MediaWorld; il ranking standard usa il prezzo one-time."
         }
       ]
     }
