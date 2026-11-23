@@ -396,7 +396,13 @@ function joinProductData(
         : null,
 
     stock:
-      offer.stock !== false,
+      offer.stock === true
+        ? true
+        : (
+            offer.stock === false
+              ? false
+              : null
+          ),
 
     url:
       offer.url ||
