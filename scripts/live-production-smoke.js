@@ -409,6 +409,70 @@ async function main() {
     "Il typo batteria non ha mantenuto l'obiettivo battery"
   );
 
+  const transposedTypo =
+    await fetchJson(
+      "/search?q=" +
+      encodeURIComponent(
+        "iphnoe 17 piu economcio"
+      )
+    );
+
+  assert(
+    transposedTypo
+      .clarification
+      ?.needed !==
+      true,
+    "Il typo con lettere trasposte non deve chiedere chiarimenti"
+  );
+
+  assert(
+    String(
+      transposedTypo
+        .productQuery ||
+      ""
+    )
+      .includes(
+        "iphone 17"
+      ),
+    `Il typo iPhone non è stato normalizzato: ${transposedTypo.productQuery}`
+  );
+
+  assert(
+    ![
+      "unsupported_intent",
+      "not_found",
+    ].includes(
+      transposedTypo.status
+    ),
+    `Il typo con trasposizione non è stato recuperato: ${transposedTypo.status}`
+  );
+
+  const productImageResponse =
+    await fetchWithRetry(
+      `${API_URL}/product-image/apple-iphone-17-256-black`
+    );
+
+  assert(
+    productImageResponse.ok,
+    `Immagine prodotto HTTP ${productImageResponse.status}`
+  );
+
+  const productImageType =
+    String(
+      productImageResponse.headers.get(
+        "content-type"
+      ) ||
+      ""
+    )
+      .toLowerCase();
+
+  assert(
+    productImageType.startsWith(
+      "image/"
+    ),
+    `L'endpoint immagine non ha restituito una foto: ${productImageType || "content-type assente"}`
+  );
+
   console.log(
     JSON.stringify(
       {
@@ -426,6 +490,10 @@ async function main() {
           exact.status,
         typoStatus:
           typo.status,
+        transposedTypoStatus:
+          transposedTypo.status,
+        productImage:
+          productImageType,
       },
       null,
       2
