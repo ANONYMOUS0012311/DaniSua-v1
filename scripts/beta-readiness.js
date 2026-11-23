@@ -28,6 +28,11 @@ const strict =
     "--strict"
   );
 
+const closedStrict =
+  process.argv.includes(
+    "--closed-strict"
+  );
+
 const result =
   buildBetaReadiness({
     offers:
@@ -65,6 +70,15 @@ if (
   strict &&
   result
     .readyForPublicBeta !==
+    true
+) {
+  process.exitCode = 1;
+}
+
+if (
+  closedStrict &&
+  result
+    .readyForClosedBeta !==
     true
 ) {
   process.exitCode = 1;
