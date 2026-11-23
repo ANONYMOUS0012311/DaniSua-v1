@@ -325,12 +325,10 @@ async function main() {
     );
 
     assert(
-      generic
-        .recommendation
-        ?.selectedVariant
-        ?.storage ===
-        "256 GB",
-      `La variante disponibile deve essere selezionata automaticamente: ${generic.recommendation?.selectedVariant?.storage}`
+      generic.bestOffer
+        ?.familyId ===
+        "apple-iphone-17",
+      `La ricerca generica deve restare nella famiglia iPhone 17: ${generic.bestOffer?.familyId}`
     );
 
     const exact =
