@@ -328,6 +328,22 @@ function applyFreshnessPolicy(
     return [];
   }
 
+  const reliabilityOptions = {
+    ...options,
+
+    // I fixture locali storici non hanno
+    // timestamp. Manteniamo la possibilità
+    // di testarli fuori produzione senza
+    // indebolire la policy reale.
+    allowUnknownForRecommendation:
+      options
+        .allowUnknownForRecommendation ??
+      (
+        process.env.NODE_ENV !==
+        "production"
+      ),
+  };
+
   return offers
     .filter(Boolean)
     .map(
@@ -343,7 +359,7 @@ function applyFreshnessPolicy(
         reliability:
           evaluateOfferReliability(
             offer,
-            options
+            reliabilityOptions
           ),
       })
     );

@@ -18,6 +18,7 @@ const {
 
 const {
   evaluateOfferFreshness,
+  evaluateOfferReliability,
 } = require("../utils/freshness");
 
 const sourceRegistry =
@@ -1721,6 +1722,165 @@ async function testFreshnessGuard() {
     selection.bestOffer?.id ===
       "fresh-expensive",
     `L'offerta stale non deve vincere: ${selection.bestOffer?.id}`
+  );
+
+
+  const legacyFreshButHourlyStale =
+    evaluateOfferFreshness(
+      {
+        verifiedAt:
+          "2026-11-04T04:00:00Z",
+      },
+      {
+        now,
+        maxAgeHours: 72,
+        allowUnknown: false,
+      }
+    );
+
+  const hourlyStale =
+    evaluateOfferReliability(
+      {
+        verifiedAt:
+          "2026-11-04T04:00:00Z",
+      },
+      {
+        now,
+        freshHours: 2,
+        reviewHours: 6,
+      }
+    );
+
+  const hourlyFresh =
+    evaluateOfferReliability(
+      {
+        verifiedAt:
+          "2026-11-04T11:00:00Z",
+      },
+      {
+        now,
+        freshHours: 2,
+        reviewHours: 6,
+      }
+    );
+
+  const hourlySelection =
+    getOfferSelection([
+      {
+        id:
+          "legacy-72h-cheap",
+        offer_price:
+          40,
+        shipping_price:
+          0,
+        stock:
+          true,
+        pricing: {
+          conditional:
+            false,
+        },
+        freshness:
+          legacyFreshButHourlyStale,
+        reliability:
+          hourlyStale,
+      },
+      {
+        id:
+          "hourly-fresh-expensive",
+        offer_price:
+          60,
+        shipping_price:
+          0,
+        stock:
+          true,
+        pricing: {
+          conditional:
+            false,
+        },
+        freshness:
+          fresh,
+        reliability:
+          hourlyFresh,
+      },
+    ]);
+
+  assert(
+    legacyFreshButHourlyStale
+      .eligibleForRecommendation ===
+      true &&
+    hourlyStale
+      .eligibleForHourlyPolicy ===
+      false &&
+    hourlySelection
+      .bestOffer
+      ?.id ===
+      "hourly-fresh-expensive",
+    "La policy 2h/6h deve prevalere sul vecchio guard 72h"
+  );
+
+
+  const reviewReliability =
+    evaluateOfferReliability(
+      {
+        verifiedAt:
+          "2026-11-04T08:00:00Z",
+      },
+      {
+        now,
+        freshHours: 2,
+        reviewHours: 6,
+      }
+    );
+
+  const reviewSelection =
+    getOfferSelection([
+      {
+        id:
+          "review-cheap",
+        offer_price:
+          30,
+        shipping_price:
+          0,
+        stock:
+          true,
+        pricing: {
+          conditional:
+            false,
+        },
+        freshness:
+          fresh,
+        reliability:
+          reviewReliability,
+      },
+      {
+        id:
+          "fresh-valid",
+        offer_price:
+          60,
+        shipping_price:
+          0,
+        stock:
+          true,
+        pricing: {
+          conditional:
+            false,
+        },
+        freshness:
+          fresh,
+        reliability:
+          hourlyFresh,
+      },
+    ]);
+
+  assert(
+    reviewReliability
+      .status ===
+      "review" &&
+    reviewSelection
+      .bestOffer
+      ?.id ===
+      "fresh-valid",
+    "Un'offerta in review non deve vincere il ranking standard"
   );
 
 

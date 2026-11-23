@@ -86,6 +86,8 @@ function evaluateOfferReliability(
       DEFAULT_FRESH_HOURS,
     reviewHours =
       DEFAULT_REVIEW_HOURS,
+    allowUnknownForRecommendation =
+      false,
   } = {}
 ) {
   const safeFreshHours =
@@ -152,7 +154,9 @@ function evaluateOfferReliability(
       requiresRefresh:
         true,
       eligibleForHourlyPolicy:
-        false,
+        Boolean(
+          allowUnknownForRecommendation
+        ),
     };
   }
 
