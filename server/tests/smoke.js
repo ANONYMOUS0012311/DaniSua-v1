@@ -2052,6 +2052,31 @@ async function testFreshnessDiagnostics() {
     ),
     "La diagnostica freshness deve esporre conteggi strutturati"
   );
+
+  const reliability =
+    result.diagnostics
+      ?.reliability;
+
+  assert(
+    reliability &&
+    reliability.total ===
+      result.diagnostics
+        ?.totalAfterTrust &&
+    [
+      "fresh",
+      "review",
+      "stale",
+      "unknown",
+      "invalid",
+      "future",
+    ].every(
+      key =>
+        Number.isInteger(
+          reliability[key]
+        )
+    ),
+    "La diagnostica reliability 2h/6h deve esporre solo conteggi aggregati"
+  );
 }
 
 
