@@ -9,6 +9,10 @@ const {
   validateOffers,
 } = require("../utils/offerContract");
 
+const {
+  summarizeOfferFreshness,
+} = require("../utils/freshness");
+
 
 // ========================================
 // DANISUA — SOURCE REGISTRY
@@ -605,6 +609,23 @@ async function searchAll(
 
 
   // ====================================
+  // FRESHNESS OBSERVABILITY
+  //
+  // Misuriamo senza filtrare qui. Il
+  // ranking continua a decidere usando la
+  // freshness già presente nelle offerte.
+  // ====================================
+
+  const freshnessSummary =
+    summarizeOfferFreshness(
+      trustedResults,
+      {
+        allowUnknown: false,
+      }
+    );
+
+
+  // ====================================
   // DEDUPLICAZIONE
   // ====================================
 
@@ -659,6 +680,9 @@ async function searchAll(
 
       totalRejectedByTrust:
         rejectedByTrust,
+
+      freshness:
+        freshnessSummary,
 
       totalAfterDeduplication:
         deduplicated.length,
