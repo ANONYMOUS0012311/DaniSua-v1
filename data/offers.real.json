@@ -185,13 +185,13 @@
     "store": "Apple",
     "seller": "Apple",
     "old_price": null,
-    "offer_price": 1129,
+    "offer_price": 979,
     "currency": "EUR",
     "shipping_price": 0,
     "stock": true,
     "url": "https://www.apple.com/it/shop/buy-iphone/iphone-17",
-    "updatedAt": null,
-    "verifiedAt": "2026-11-04",
+    "updatedAt": "2026-11-23T21:48:07Z",
+    "verifiedAt": "2026-11-23T21:48:07Z",
     "pricing": {
       "type": "standard",
       "conditional": false,
@@ -199,11 +199,11 @@
       "paymentOptions": [
         {
           "type": "one_time",
-          "total_price": 1129
+          "total_price": 979
         }
       ]
     },
-    "price_note": "Ultima verifica esatta disponibile del 04/11/2026. Non viene marcata fresh senza una verifica corrente."
+    "price_note": "Apple Store Italia mostra iPhone 17 256 GB Nero a 979 €. La consegna standard Apple per gli ordini online è gratuita."
   },
   {
     "id": "real-mediaworld-iphone17-256-black",
