@@ -86,6 +86,99 @@ function compactText(value) {
 }
 
 
+function normalizeCondition(
+  value
+) {
+  const text =
+    normalizeText(
+      value
+    );
+
+  if (!text) {
+    return null;
+  }
+
+  const groups = {
+    new: [
+      "new",
+      "nuovo",
+      "nuova",
+      "brand new",
+    ],
+
+    used: [
+      "used",
+      "usato",
+      "usata",
+      "preowned",
+      "pre owned",
+      "second hand",
+    ],
+
+    refurbished: [
+      "refurbished",
+      "ricondizionato",
+      "ricondizionata",
+      "reconditioned",
+      "renewed",
+    ],
+  };
+
+  for (
+    const [
+      canonical,
+      aliases,
+    ] of Object.entries(
+      groups
+    )
+  ) {
+    if (
+      aliases.includes(
+        text
+      )
+    ) {
+      return canonical;
+    }
+  }
+
+  return text;
+}
+
+
+function isConditionCompatible(
+  candidate,
+  product
+) {
+  const candidateCondition =
+    normalizeCondition(
+      candidate
+        ?.condition
+    );
+
+  if (!candidateCondition) {
+    return true;
+  }
+
+  const productCondition =
+    normalizeCondition(
+      product
+        ?.condition ??
+      product
+        ?.attributes
+        ?.condition
+    );
+
+  if (!productCondition) {
+    return false;
+  }
+
+  return (
+    candidateCondition ===
+    productCondition
+  );
+}
+
+
 function unique(values) {
   return Array.from(
     new Set(
@@ -860,6 +953,40 @@ function matchProduct(
 
 
   if (exactProduct) {
+    if (
+      !isConditionCompatible(
+        candidate,
+        exactProduct
+      )
+    ) {
+      return {
+        status:
+          "needs_review",
+
+        decision:
+          "NEEDS_REVIEW",
+
+        confidence:
+          0.95,
+
+        productId:
+          null,
+
+        familyId:
+          exactProduct.familyId ||
+          exactProduct.productId ||
+          exactProduct.id,
+
+        reason:
+          "condition_mismatch",
+
+        candidates: [
+          exactProduct.productId ||
+          exactProduct.id,
+        ],
+      };
+    }
+
     return {
       status:
         "matched",
@@ -899,6 +1026,40 @@ function matchProduct(
 
 
   if (gtinProduct) {
+    if (
+      !isConditionCompatible(
+        candidate,
+        gtinProduct
+      )
+    ) {
+      return {
+        status:
+          "needs_review",
+
+        decision:
+          "NEEDS_REVIEW",
+
+        confidence:
+          0.95,
+
+        productId:
+          null,
+
+        familyId:
+          gtinProduct.familyId ||
+          gtinProduct.productId ||
+          gtinProduct.id,
+
+        reason:
+          "condition_mismatch",
+
+        candidates: [
+          gtinProduct.productId ||
+          gtinProduct.id,
+        ],
+      };
+    }
+
     return {
       status:
         "matched",
@@ -1077,6 +1238,61 @@ function matchProduct(
     bestFamilies[0];
 
 
+  const condition =
+    normalizeCondition(
+      candidate
+        ?.condition
+    );
+
+  const compatibleVariants =
+    condition
+      ? family
+          .variants
+          .filter(
+            variant =>
+              isConditionCompatible(
+                candidate,
+                variant
+              )
+          )
+      : family
+          .variants;
+
+
+  if (
+    condition &&
+    compatibleVariants.length ===
+      0
+  ) {
+    return {
+      status:
+        "needs_review",
+
+      decision:
+        "NEEDS_REVIEW",
+
+      confidence:
+        0.9,
+
+      productId:
+        null,
+
+      familyId:
+        family.familyId,
+
+      reason:
+        "condition_mismatch",
+
+      candidates:
+        family.variants.map(
+          variant =>
+            variant.productId ||
+            variant.id
+        ),
+    };
+  }
+
+
   // ====================================
   // 5. VARIANT MATCH
   // ====================================
@@ -1084,7 +1300,7 @@ function matchProduct(
   const variantResult =
     resolveVariant(
       candidate,
-      family.variants
+      compatibleVariants
     );
 
 
@@ -1211,6 +1427,8 @@ function attachProductMatch(
 module.exports = {
   loadProducts,
   normalizeText,
+  normalizeCondition,
+  isConditionCompatible,
   getCandidateText,
   getProductAttributes,
   groupByFamily,
