@@ -24,7 +24,9 @@
     "beta:readiness": "node scripts/beta-readiness.js",
     "test:beta-readiness": "node server/tests/betaReadinessSmoke.js",
     "test:offer-outcome": "node server/tests/offerOutcomeSmoke.js",
-    "test:production-reliability": "node server/tests/productionReliabilitySmoke.js"
+    "test:production-reliability": "node server/tests/productionReliabilitySmoke.js",
+    "beta:closed-check": "node scripts/beta-readiness.js --closed-strict",
+    "beta:public-check": "node scripts/beta-readiness.js --strict"
   },
   "keywords": [],
   "author": "",
