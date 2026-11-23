@@ -4295,6 +4295,31 @@ app.get(
       const sourceDiagnostics =
         sourceSearch.diagnostics;
 
+      logInfo(
+        "search_source_diagnostics",
+        {
+          requestId:
+            req.requestId ||
+            null,
+          totalRaw:
+            sourceDiagnostics
+              ?.totalRaw ??
+            0,
+          totalAfterTrust:
+            sourceDiagnostics
+              ?.totalAfterTrust ??
+            0,
+          returned:
+            sourceDiagnostics
+              ?.returned ??
+            0,
+          freshness:
+            sourceDiagnostics
+              ?.freshness ||
+            null,
+        }
+      );
+
       if (
         hasVagueStoragePreference(
           rawQuery
