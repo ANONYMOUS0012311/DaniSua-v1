@@ -892,11 +892,11 @@
     "old_price": null,
     "offer_price": 1029,
     "currency": "EUR",
-    "shipping_price": 0,
+    "shipping_price": null,
     "stock": true,
     "url": "https://www.apple.com/it/shop/buy-iphone/iphone-16",
-    "updatedAt": null,
-    "verifiedAt": "2026-11-05T10:40:00Z",
+    "updatedAt": "2026-11-23T21:18:55Z",
+    "verifiedAt": "2026-11-23T21:18:55Z",
     "pricing": {
       "type": "standard",
       "conditional": false,
@@ -907,7 +907,8 @@
           "total_price": 1029
         }
       ]
-    }
+    },
+    "price_note": "Prezzo corrente verificato oggi su Apple Store Italia: iPhone 16 128 GB Nero €1.029. Il costo di spedizione non viene inferito dal contenuto acquisito e resta sconosciuto."
   },
   {
     "id": "real-euronics-iphone16-128-black",
@@ -915,13 +916,13 @@
     "store": "Euronics",
     "seller": "Euronics",
     "old_price": null,
-    "offer_price": 967,
+    "offer_price": 922,
     "currency": "EUR",
-    "shipping_price": 7.9,
+    "shipping_price": null,
     "stock": true,
     "url": "https://www.euronics.it/telefonia/smartphone-e-cellulari/iphone/apple---iphone-16-128gb-nero/242014570.html",
-    "updatedAt": null,
-    "verifiedAt": "2026-11-05T10:40:00Z",
+    "updatedAt": "2026-11-23T21:18:55Z",
+    "verifiedAt": "2026-11-23T21:18:55Z",
     "pricing": {
       "type": "standard",
       "conditional": false,
@@ -929,10 +930,11 @@
       "paymentOptions": [
         {
           "type": "one_time",
-          "total_price": 967
+          "total_price": 922
         }
       ]
-    }
+    },
+    "price_note": "Prezzo corrente verificato oggi su Euronics per iPhone 16 128GB Nero; acquisto online disponibile. Il costo di spedizione non è esposto nel contenuto corrente e resta sconosciuto."
   },
   {
     "id": "real-samsung-a57-256-gray",
