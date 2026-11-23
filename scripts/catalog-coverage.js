@@ -1,6 +1,12 @@
 const fs = require("fs");
 const path = require("path");
 
+const {
+  evaluateOfferReliability,
+  DEFAULT_FRESH_HOURS,
+  DEFAULT_REVIEW_HOURS,
+} = require("../server/utils/freshness");
+
 function readJson(name) {
   return JSON.parse(
     fs.readFileSync(
@@ -231,6 +237,83 @@ const rows =
               ?.conditional ===
             true
         );
+
+      const reliabilityRows =
+        verifiedOffers.map(
+          offer => ({
+            offer,
+            reliability:
+              evaluateOfferReliability(
+                offer,
+                {
+                  freshHours:
+                    DEFAULT_FRESH_HOURS,
+                  reviewHours:
+                    DEFAULT_REVIEW_HOURS,
+                }
+              ),
+          })
+        );
+
+      const freshOffers =
+        reliabilityRows
+          .filter(
+            row =>
+              row.reliability
+                ?.status ===
+              "fresh"
+          )
+          .map(
+            row =>
+              row.offer
+          );
+
+      const reviewOffers =
+        reliabilityRows
+          .filter(
+            row =>
+              row.reliability
+                ?.status ===
+              "review"
+          )
+          .map(
+            row =>
+              row.offer
+          );
+
+      const staleOrBlockedOffers =
+        reliabilityRows
+          .filter(
+            row =>
+              row.reliability
+                ?.status !==
+              "fresh" &&
+              row.reliability
+                ?.status !==
+              "review"
+          )
+          .map(
+            row =>
+              row.offer
+          );
+
+      const freshStores =
+        [
+          ...new Set(
+            freshOffers
+              .filter(
+                offer =>
+                  offer.pricing
+                    ?.conditional !==
+                  true
+              )
+              .map(
+                offer =>
+                  offer.store
+              )
+              .filter(Boolean)
+          ),
+        ].sort();
 
       const stores =
         [
@@ -610,6 +693,40 @@ const rows =
         storeCount:
           stores.length,
         conditionalStores,
+        reliability: {
+          policy: {
+            freshHours:
+              DEFAULT_FRESH_HOURS,
+            reviewHours:
+              DEFAULT_REVIEW_HOURS,
+          },
+          freshOffers:
+            freshOffers.length,
+          reviewOffers:
+            reviewOffers.length,
+          staleOrBlockedOffers:
+            staleOrBlockedOffers
+              .length,
+          freshStores,
+          freshStoreCount:
+            freshStores.length,
+          storeCoverageReady:
+            freshStores.length >=
+            target.minimumStores,
+          status:
+            freshOffers.length === 0
+              ? (
+                  familyOffers.length > 0
+                    ? "no_fresh_offer"
+                    : "no_offer"
+                )
+              : (
+                  freshStores.length >=
+                    target.minimumStores
+                    ? "fresh_ready"
+                    : "fresh_thin"
+                ),
+        },
         variantDepth: {
           tracked:
             variantDepthTracked,
@@ -734,6 +851,33 @@ const variantMarketReady =
         "ready"
   );
 
+const freshReadyFamilies =
+  rows.filter(
+    row =>
+      row.reliability
+        ?.status ===
+      "fresh_ready"
+  );
+
+const familiesWithFreshOffer =
+  rows.filter(
+    row =>
+      (
+        row.reliability
+          ?.freshOffers ||
+        0
+      ) > 0
+  );
+
+const noFreshOfferFamilies =
+  rows.filter(
+    row =>
+      row.reliability
+        ?.status ===
+      "no_fresh_offer"
+  );
+
+
 const summary = {
   market:
     targets.market,
@@ -751,6 +895,128 @@ const summary = {
     count("cataloged_no_price"),
   missingFamilies:
     count("missing"),
+  reliability: {
+    policy: {
+      freshHours:
+        DEFAULT_FRESH_HOURS,
+      reviewHours:
+        DEFAULT_REVIEW_HOURS,
+    },
+    familiesWithFreshOffer:
+      familiesWithFreshOffer
+        .length,
+    familiesFreshStoreReady:
+      freshReadyFamilies
+        .length,
+    familiesWithoutFreshOffer:
+      noFreshOfferFamilies
+        .length,
+    totalFreshOffers:
+      rows.reduce(
+        (
+          total,
+          row
+        ) =>
+          total +
+          (
+            row.reliability
+              ?.freshOffers ||
+            0
+          ),
+        0
+      ),
+    totalReviewOffers:
+      rows.reduce(
+        (
+          total,
+          row
+        ) =>
+          total +
+          (
+            row.reliability
+              ?.reviewOffers ||
+            0
+          ),
+        0
+      ),
+    priorityFamilies:
+      rows
+        .filter(
+          row =>
+            row.reliability
+              ?.status !==
+            "fresh_ready"
+        )
+        .sort(
+          (
+            a,
+            b
+          ) => {
+            const priorityRank = {
+              P0: 0,
+              P1: 1,
+              P2: 2,
+            };
+
+            const pa =
+              priorityRank[
+                a.priority
+              ] ??
+              9;
+
+            const pb =
+              priorityRank[
+                b.priority
+              ] ??
+              9;
+
+            if (pa !== pb) {
+              return pa - pb;
+            }
+
+            return (
+              (
+                a.reliability
+                  ?.freshStoreCount ||
+                0
+              ) -
+              (
+                b.reliability
+                  ?.freshStoreCount ||
+                0
+              )
+            );
+          }
+        )
+        .slice(
+          0,
+          15
+        )
+        .map(
+          row => ({
+            familyId:
+              row.familyId,
+            familyName:
+              row.familyName,
+            priority:
+              row.priority,
+            minimumStores:
+              row.minimumStores,
+            freshStoreCount:
+              row.reliability
+                ?.freshStoreCount ||
+              0,
+            freshOffers:
+              row.reliability
+                ?.freshOffers ||
+              0,
+            status:
+              row.reliability
+                ?.status ||
+              "unknown",
+          })
+        ),
+  },
   p0: {
     target:
       p0.length,
