@@ -1778,32 +1778,38 @@ async function testFreshnessGuard() {
 function testCentralizedFreshnessPolicy() {
   const evaluated =
     sourceRegistry
-      .applyFreshnessPolicy([
+      .applyFreshnessPolicy(
+        [
+          {
+            id:
+              "db-stale-offer",
+            verifiedAt:
+              "2000-01-01T00:00:00Z",
+            offer_price:
+              10,
+            shipping_price:
+              0,
+            stock:
+              true,
+          },
+          {
+            id:
+              "db-unknown-date",
+            verifiedAt:
+              null,
+            offer_price:
+              20,
+            shipping_price:
+              0,
+            stock:
+              true,
+          },
+        ],
         {
-          id:
-            "db-stale-offer",
-          verifiedAt:
-            "2000-01-01T00:00:00Z",
-          offer_price:
-            10,
-          shipping_price:
-            0,
-          stock:
-            true,
-        },
-        {
-          id:
-            "db-unknown-date",
-          verifiedAt:
-            null,
-          offer_price:
-            20,
-          shipping_price:
-            0,
-          stock:
-            true,
-        },
-      ]);
+          allowUnknown:
+            false,
+        }
+      );
 
   assert(
     evaluated.length === 2,
