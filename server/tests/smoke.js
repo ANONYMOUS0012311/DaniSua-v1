@@ -4473,6 +4473,38 @@ async function testRealUserSearchScenarios() {
         "corregir typo de Samsung/batteria y mantener el objetivo batería",
     },
     {
+      id: "typo-transposition-iphone",
+      query:
+        "iphnoe 17 piu economcio",
+      check(data) {
+        return (
+          data.status !==
+            "unsupported_intent" &&
+          data.status !==
+            "not_found" &&
+          String(
+            data.productQuery ||
+            ""
+          )
+            .includes(
+              "iphone 17"
+            ) &&
+          data.clarification
+            ?.needed !==
+            true &&
+          (
+            data.bestOffer
+              ?.familyId ===
+              "apple-iphone-17" ||
+            data.status ===
+              "offers_need_refresh"
+          )
+        );
+      },
+      expected:
+        "corregir letras transpuestas en iPhone/economico sin pedir aclaraciones innecesarias",
+    },
+    {
       id: "android-not-iphone",
       query:
         "non voglio iPhone, voglio Android con buona batteria sotto 700 euro",
