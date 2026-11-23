@@ -36,6 +36,77 @@ const {
 
 const app = express();
 
+let awinRuntimeScheduler =
+  null;
+
+
+function getAwinHealthStatus() {
+  const state =
+    awinRuntimeScheduler
+      ?.getState
+      ?.();
+
+  const config =
+    state
+      ?.config ||
+    null;
+
+  return {
+    enabled:
+      Boolean(
+        config
+          ?.enabled
+      ),
+
+    ready:
+      Boolean(
+        config
+          ?.ready
+      ),
+
+    reason:
+      config
+        ?.reason ||
+      (
+        awinRuntimeScheduler
+          ? null
+          : "not_started"
+      ),
+
+    intervalMinutes:
+      config
+        ?.intervalMinutes ??
+      null,
+
+    advertiserCount:
+      config
+        ?.advertiserCount ??
+      0,
+
+    running:
+      Boolean(
+        state
+          ?.running
+      ),
+
+    scheduled:
+      Boolean(
+        state
+          ?.scheduled
+      ),
+
+    lastRunAt:
+      state
+        ?.lastRunAt ||
+      null,
+
+    lastResult:
+      state
+        ?.lastResult ||
+      null,
+  };
+}
+
 
 // ========================================
 // RUNTIME CONFIG
@@ -4200,6 +4271,10 @@ app.get(
       sources:
         sourceRegistry
           .getSourcesStatus(),
+      integrations: {
+        awin:
+          getAwinHealthStatus(),
+      },
       runtime: {
         node:
           process.version,
@@ -5039,10 +5114,11 @@ app.listen(
       }
     );
 
-    startAwinRuntimeScheduler({
-      env:
-        process.env,
-    });
+    awinRuntimeScheduler =
+      startAwinRuntimeScheduler({
+        env:
+          process.env,
+      });
   }
 );
 

@@ -2051,6 +2051,37 @@ async function testRequestTracing() {
       "number",
     "Runtime health mancante"
   );
+
+  assert(
+    typeof data.integrations
+      ?.awin
+      ?.enabled ===
+      "boolean" &&
+    typeof data.integrations
+      ?.awin
+      ?.ready ===
+      "boolean",
+    "Stato Awin mancante da /health"
+  );
+
+  const healthText =
+    JSON.stringify(
+      data.integrations
+        ?.awin
+    );
+
+  assert(
+    !healthText.includes(
+      "publisherId"
+    ) &&
+    !healthText.includes(
+      "datafeedKey"
+    ) &&
+    !healthText.includes(
+      "AWIN_DATAFEED_KEY"
+    ),
+    "/health non deve esporre credenziali Awin"
+  );
 }
 
 
