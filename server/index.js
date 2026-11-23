@@ -4262,7 +4262,30 @@ app.get(
 
 app.get(
   "/health",
-  (req, res) => {
+  async (
+    req,
+    res
+  ) => {
+    let reliability = {
+      available: false,
+    };
+
+    try {
+      reliability =
+        await sourceRegistry
+          .getReliabilityHealthSnapshot();
+    } catch (error) {
+      logError(
+        "health_reliability_error",
+        error,
+        {
+          requestId:
+            req.requestId ||
+            null,
+        }
+      );
+    }
+
     res.json({
       ok: true,
       requestId:
@@ -4274,6 +4297,10 @@ app.get(
       integrations: {
         awin:
           getAwinHealthStatus(),
+      },
+      reliability: {
+        catalog:
+          reliability,
       },
       runtime: {
         node:
