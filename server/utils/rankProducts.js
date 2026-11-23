@@ -305,6 +305,16 @@ function isDefaultComparableOffer(offer) {
   }
 
   if (
+    offer.reliability &&
+    offer.reliability
+      .eligibleForHourlyPolicy ===
+      false
+  ) {
+    return false;
+  }
+
+  if (
+    !offer.reliability &&
     offer.freshness &&
     offer.freshness
       .eligibleForRecommendation ===
