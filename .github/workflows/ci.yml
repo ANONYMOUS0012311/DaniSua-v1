@@ -40,6 +40,9 @@ jobs:
       - name: Run database reliability tests
         run: npm run test:database
 
+      - name: Run persistent import tests
+        run: npm run test:persistent-import
+
       - name: Run reliability queue tests
         run: npm run test:reliability
 
