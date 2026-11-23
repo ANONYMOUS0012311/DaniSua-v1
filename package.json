@@ -12,7 +12,9 @@
     "knowledge:coverage": "node scripts/knowledge-coverage.js",
     "test:database": "node server/tests/databaseSmoke.js && node server/tests/databaseSourceSmoke.js && node server/tests/databaseEndToEndSmoke.js && node server/tests/persistenceSmoke.js && node server/tests/reviewResolutionSmoke.js",
     "reliability:queue": "node scripts/reliability-queue.js",
-    "test:reliability": "node server/tests/reliabilityQueueSmoke.js"
+    "test:reliability": "node server/tests/reliabilityQueueSmoke.js",
+    "import:offers:db": "node scripts/persist-offers.js",
+    "test:persistent-import": "node server/tests/persistentImportCliSmoke.js"
   },
   "keywords": [],
   "author": "",
