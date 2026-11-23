@@ -1,6 +1,7 @@
 const {
-  evaluateOfferFreshness,
-  resolveMaxAgeHours,
+  evaluateOfferReliability,
+  DEFAULT_FRESH_HOURS,
+  DEFAULT_REVIEW_HOURS,
 } = require("./freshness");
 
 
@@ -20,20 +21,19 @@ function getReliabilityPriority(
   offer,
   {
     now = Date.now(),
-    maxAgeHours =
-      resolveMaxAgeHours(
-        process.env
-          .DANISUA_OFFER_MAX_AGE_HOURS
-      ),
+    freshHours =
+      DEFAULT_FRESH_HOURS,
+    reviewHours =
+      DEFAULT_REVIEW_HOURS,
   } = {}
 ) {
-  const freshness =
-    evaluateOfferFreshness(
+  const reliability =
+    evaluateOfferReliability(
       offer,
       {
         now,
-        maxAgeHours,
-        allowUnknown: false,
+        freshHours,
+        reviewHours,
       }
     );
 
@@ -41,37 +41,56 @@ function getReliabilityPriority(
   let score = 0;
 
   if (
-    freshness.status === "invalid" ||
-    freshness.status === "future"
+    reliability.status === "invalid" ||
+    reliability.status === "future"
   ) {
     score += 300;
     reasons.push(
-      `freshness_${freshness.status}`
+      `freshness_${reliability.status}`
     );
   } else if (
-    freshness.status === "unknown"
+    reliability.status === "unknown"
   ) {
     score += 250;
     reasons.push(
       "freshness_unknown"
     );
   } else if (
-    freshness.status === "stale"
+    reliability.status === "stale"
   ) {
     score += 200;
     reasons.push(
       "freshness_stale"
     );
+  } else if (
+    reliability.status === "review"
+  ) {
+    score += 100;
+    reasons.push(
+      "freshness_review"
+    );
+  }
+
+  if (
+    reliability.timestamp &&
+    reliability
+      .timestampPrecision !==
+      "datetime"
+  ) {
+    score += 60;
+    reasons.push(
+      "timestamp_imprecise"
+    );
   }
 
   if (
     isFiniteNumber(
-      freshness.ageHours
+      reliability.ageHours
     )
   ) {
     score += Math.min(
       30,
-      freshness.ageHours / 24
+      reliability.ageHours / 24
     );
   }
 
@@ -114,7 +133,7 @@ function getReliabilityPriority(
         score.toFixed(2)
       ),
     reasons,
-    freshness,
+    reliability,
     shippingKnown,
   };
 }
@@ -124,11 +143,10 @@ function buildReliabilityQueue(
   offers,
   {
     now = Date.now(),
-    maxAgeHours =
-      resolveMaxAgeHours(
-        process.env
-          .DANISUA_OFFER_MAX_AGE_HOURS
-      ),
+    freshHours =
+      DEFAULT_FRESH_HOURS,
+    reviewHours =
+      DEFAULT_REVIEW_HOURS,
     limit = null,
   } = {}
 ) {
@@ -147,7 +165,8 @@ function buildReliabilityQueue(
               offer,
               {
                 now,
-                maxAgeHours,
+                freshHours,
+                reviewHours,
               }
             );
 
@@ -206,8 +225,8 @@ function buildReliabilityQueue(
             reasons:
               priority.reasons,
 
-            freshness:
-              priority.freshness,
+            reliability:
+              priority.reliability,
 
             shippingKnown:
               priority.shippingKnown,
@@ -234,12 +253,12 @@ function buildReliabilityQueue(
           }
 
           const ageA =
-            a.freshness
+            a.reliability
               ?.ageHours ??
             -1;
 
           const ageB =
-            b.freshness
+            b.reliability
               ?.ageHours ??
             -1;
 
