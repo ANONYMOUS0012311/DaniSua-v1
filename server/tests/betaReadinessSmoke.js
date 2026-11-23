@@ -1,5 +1,6 @@
 const {
   buildBetaReadiness,
+  buildBetaHealthSnapshot,
 } = require("../utils/betaReadiness");
 
 
@@ -213,6 +214,46 @@ function main() {
       .ready ===
       false,
     "Offerte stale e automazione spenta devono bloccare la beta"
+  );
+
+  const health =
+    buildBetaHealthSnapshot(
+      missingShipping
+    );
+
+  assert(
+    health
+      .readyForPublicBeta ===
+      false &&
+    health
+      .summary
+      .p0Blocked ===
+      1 &&
+    health
+      .blockers[0]
+      ?.familyId ===
+      "phone-family" &&
+    health
+      .blockers[0]
+      ?.missingFinalCostStores ===
+      1,
+    "Snapshot health deve esporre blocker beta senza dati sensibili"
+  );
+
+  assert(
+    !Object.prototype
+      .hasOwnProperty
+      .call(
+        health,
+        "families"
+      ) &&
+    !Object.prototype
+      .hasOwnProperty
+      .call(
+        health,
+        "automation"
+      ),
+    "Snapshot health deve restare compatto e non esporre configurazione completa"
   );
 
   console.log(
