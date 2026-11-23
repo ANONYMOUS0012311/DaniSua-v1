@@ -545,77 +545,33 @@ app.use(
 // NORMALIZZAZIONE
 // ========================================
 
-function normalizeCanonicalTermSource(
-  value
-) {
-  return String(
-    value || ""
-  )
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[^a-z0-9]+/g, " ")
-    .split(" ")
-    .map(
-      token =>
-        token.trim()
-    )
-    .filter(
-      token =>
-        token.length >= 4 &&
-        !/^\d+$/.test(
-          token
-        )
-    );
-}
-
-
 const QUERY_CANONICAL_TERMS = [
-  ...new Set([
-    "batteria",
-    "fotocamera",
-    "camera",
-    "prezzo",
-    "economico",
-    "economica",
-    "migliore",
-    "miglior",
-    "android",
-    "smartphone",
-    "telefono",
-    "cuffie",
-    "auricolari",
-    "console",
-    "laptop",
-    "notebook",
-    "gaming",
-    "universita",
-    "lavoro",
-    "prestazioni",
-    "display",
-    "schermo",
-    "memoria",
-    "spazio",
-    "ricondizionato",
-    "ricondizionata",
-    "nuovo",
-    "nuova",
-    "usato",
-    "usata",
-    ...productsCatalog
-      .flatMap(
-        product => [
-          product?.brand,
-          product?.model,
-          product?.familyName,
-          product?.productLineName,
-          product?.category,
-        ]
-      )
-      .flatMap(
-        normalizeCanonicalTermSource
-      ),
-  ]),
+  "apple",
+  "iphone",
+  "samsung",
+  "galaxy",
+  "google",
+  "pixel",
+  "xiaomi",
+  "redmi",
+  "honor",
+  "oppo",
+  "airpods",
+  "sony",
+  "nintendo",
+  "switch",
+  "playstation",
+  "macbook",
+  "batteria",
+  "fotocamera",
+  "economico",
+  "economica",
+  "migliore",
+  "miglior",
+  "android",
+  "smartphone",
+  "ricondizionato",
+  "ricondizionata",
 ];
 
 
