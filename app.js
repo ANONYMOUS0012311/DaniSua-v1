@@ -781,7 +781,8 @@ function renderBestOffer(
     formatVerified(
       product.verifiedAt,
       product.updatedAt,
-      product.freshness
+      product.freshness,
+      product.reliability
     );
 
   const confidenceLabel =
@@ -1284,7 +1285,8 @@ function renderProducts(
                 ${formatVerified(
                   product.verifiedAt,
                   product.updatedAt,
-                  product.freshness
+                  product.freshness,
+                  product.reliability
                 )}
               </p>
 
@@ -1437,17 +1439,21 @@ function updateCounter(n) {
 function formatVerified(
   verifiedAt,
   updatedAt,
-  freshness = null
+  freshness = null,
+  reliability = null
 ) {
   const value =
     verifiedAt ||
     updatedAt;
 
+  const status =
+    reliability?.status ||
+    freshness?.status ||
+    null;
+
   if (
-    freshness?.status ===
-      "future" ||
-    freshness?.status ===
-      "invalid"
+    status === "future" ||
+    status === "invalid"
   ) {
     return "Data di verifica non affidabile";
   }
@@ -1469,9 +1475,37 @@ function formatVerified(
     ).toLocaleDateString("it-IT")}`;
 
   if (
-    freshness?.status ===
-      "stale"
+    reliability
+      ?.timestampPrecision ===
+      "date"
   ) {
+    return (
+      base +
+      " · orario non registrato · da ricontrollare"
+    );
+  }
+
+  const relative =
+    formatUpdated(
+      value
+    )
+      .replace(
+        /^Aggiornato/,
+        "Verificato"
+      );
+
+  if (status === "fresh") {
+    return relative;
+  }
+
+  if (status === "review") {
+    return (
+      relative +
+      " · da ricontrollare"
+    );
+  }
+
+  if (status === "stale") {
     return (
       base +
       " · da ricontrollare"
