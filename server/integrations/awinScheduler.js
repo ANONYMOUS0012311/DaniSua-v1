@@ -142,7 +142,8 @@ function getJitterMs(
 
   const unit =
     Math.min(
-      1,
+      1 -
+        Number.EPSILON,
       Math.max(
         0,
         Number(
