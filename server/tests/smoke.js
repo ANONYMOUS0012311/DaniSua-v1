@@ -23,6 +23,9 @@ const {
 const sourceRegistry =
   require("../sources/registry");
 
+const databaseSource =
+  require("../sources/database");
+
 const {
   importFeedContent,
 } = require("../ingestion/feedImporter");
@@ -1846,6 +1849,72 @@ function testCentralizedFreshnessPolicy() {
       ?.eligibleForRecommendation ===
       false,
     "Una offerta senza timestamp non deve aggirare il freshness guard"
+  );
+}
+
+
+// ========================================
+// FRESHNESS — DATABASE SOURCE
+// ========================================
+
+async function testDatabaseSourceAttachesFreshness() {
+  const row = {
+    id:
+      "db-freshness-test",
+    source:
+      "test",
+    store:
+      "Apple",
+    productId:
+      "apple-iphone-17-256-black",
+    familyId:
+      "apple-iphone-17",
+    title:
+      "Apple iPhone 17 256 GB",
+    offer_price:
+      999,
+    currency:
+      "EUR",
+    old_price:
+      null,
+    shipping_price:
+      0,
+    stock:
+      true,
+    url:
+      "https://example.com/iphone-17",
+    updatedAt:
+      "2026-11-05T10:00:00Z",
+    trustTier:
+      "A",
+    matchConfidence:
+      1,
+    matchReason:
+      "exact_variant",
+    lastSeenAt:
+      "2026-11-05T10:00:00Z",
+    payload: {
+      verifiedAt:
+        "2026-11-05T10:00:00Z",
+    },
+  };
+
+  const offer =
+    databaseSource.toSourceOffer(
+      row
+    );
+
+  assert(
+    offer.freshness &&
+    typeof offer.freshness.status ===
+      "string",
+    "Le offerte SQLite devono includere freshness come le offerte locali"
+  );
+
+  assert(
+    offer.lastSeenAt ===
+      row.lastSeenAt,
+    "Le offerte SQLite devono preservare lastSeenAt"
   );
 }
 
@@ -5007,6 +5076,14 @@ const tests = [
 
     run:
       testCentralizedFreshnessPolicy,
+  },
+
+  {
+    name:
+      "FRESHNESS — database source",
+
+    run:
+      testDatabaseSourceAttachesFreshness,
   },
 
   {
