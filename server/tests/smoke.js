@@ -1722,6 +1722,52 @@ async function testFreshnessGuard() {
       "fresh-expensive",
     `L'offerta stale non deve vincere: ${selection.bestOffer?.id}`
   );
+
+
+  const stockSelection =
+    getOfferSelection([
+      {
+        id:
+          "out-of-stock-cheap",
+        offer_price:
+          10,
+        shipping_price:
+          0,
+        stock:
+          false,
+        pricing: {
+          conditional:
+            false,
+        },
+        freshness:
+          fresh,
+      },
+      {
+        id:
+          "in-stock-expensive",
+        offer_price:
+          20,
+        shipping_price:
+          0,
+        stock:
+          true,
+        pricing: {
+          conditional:
+            false,
+        },
+        freshness:
+          fresh,
+      },
+    ]);
+
+
+  assert(
+    stockSelection
+      .bestOffer
+      ?.id ===
+      "in-stock-expensive",
+    "Un'offerta esplicitamente esaurita non deve vincere il ranking"
+  );
 }
 
 
