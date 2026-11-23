@@ -3959,5 +3959,164 @@
         }
       ]
     }
+  },
+  {
+    "id": "real-samsung-s26-256-cobalt-violet",
+    "productId": "samsung-galaxy-s26-256-cobalt-violet",
+    "store": "Samsung",
+    "seller": "Samsung",
+    "old_price": null,
+    "offer_price": 1029,
+    "currency": "EUR",
+    "shipping_price": 0,
+    "stock": true,
+    "url": "https://www.samsung.com/it/smartphones/galaxy-s26/buy/?modelCode=SM-S942BZVGEUE",
+    "updatedAt": "2026-11-23T21:42:06Z",
+    "verifiedAt": "2026-11-23T21:42:06Z",
+    "price_note": "Samsung Shop Italia mostra Galaxy S26 256 GB / 12 GB Cobalt Violet a 1.029 €. La consegna smartphone Samsung Shop è gratuita. Lo sconto Samsung Pay del 5% è condizionato e non sostituisce il prezzo standard.",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [
+        {
+          "type": "payment_method_discount",
+          "description": "5% di sconto al checkout con Samsung Pay fino al 24/11 ore 9:00.",
+          "affects_price": true,
+          "conditional_offer_price": 977.55
+        }
+      ],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 1029
+        },
+        {
+          "type": "installment",
+          "installments": 30,
+          "installment_amount": 34.3,
+          "displayed_total": 1029,
+          "financing_cost": 0,
+          "tan": 0,
+          "taeg": 0,
+          "provider": null,
+          "note": "Samsung mostra 30 rate da 34,30 €; il ranking standard usa il prezzo one-time."
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-euronics-s26-256-cobalt-violet",
+    "productId": "samsung-galaxy-s26-256-cobalt-violet",
+    "store": "Euronics",
+    "seller": "Euronics",
+    "old_price": 1029,
+    "offer_price": 758,
+    "currency": "EUR",
+    "shipping_price": 7.9,
+    "stock": true,
+    "url": "https://www.euronics.it/cds/cds-samsung/",
+    "updatedAt": "2026-11-23T21:42:06Z",
+    "verifiedAt": "2026-11-23T21:42:06Z",
+    "price_note": "Euronics mostra Galaxy S26 256 GB / 12 GB Cobalt Violet a 758 € con acquisto online disponibile. La pagina prodotto espone consegna a 7,90 €.",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 758
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-mediaworld-s26-256-cobalt-violet",
+    "productId": "samsung-galaxy-s26-256-cobalt-violet",
+    "store": "MediaWorld",
+    "seller": "MediaWorld",
+    "old_price": null,
+    "offer_price": 1099,
+    "currency": "EUR",
+    "shipping_price": 3.99,
+    "stock": true,
+    "url": "https://www.mediaworld.it/it/product/_samsung-galaxy-m1-256gb-1024-gb-titanium-jetblack-564051.html",
+    "updatedAt": "2026-11-23T21:42:06Z",
+    "verifiedAt": "2026-11-23T21:42:06Z",
+    "price_note": "MediaWorld mostra la variante Cobalt Violet 256 GB a 1.099 € con spedizione 3,99 €. Le offerte marketplace/ricondizionate restano separate.",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 1099
+        },
+        {
+          "type": "installment",
+          "installments": 10,
+          "installment_amount": 109.9,
+          "displayed_total": 1099,
+          "financing_cost": 0,
+          "tan": 0,
+          "taeg": 0,
+          "provider": null,
+          "note": "MediaWorld mostra 10 rate a tasso zero; il ranking usa il prezzo one-time."
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-comet-s26-256-cobalt-violet",
+    "productId": "samsung-galaxy-s26-256-cobalt-violet",
+    "store": "Comet",
+    "seller": "Comet",
+    "old_price": 1029,
+    "offer_price": 699,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.comet.it/promozioni/samsung-galaxy-s26-listing",
+    "updatedAt": "2026-11-23T21:42:06Z",
+    "verifiedAt": "2026-11-23T21:42:06Z",
+    "price_note": "Comet mostra Galaxy S26 12/256 GB Cobalt Violet a 699 € con aggiunta al carrello disponibile. Il costo di spedizione non è esposto nella pagina acquisita e resta sconosciuto.",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 699
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-expert-s26-256-cobalt-violet",
+    "productId": "samsung-galaxy-s26-256-cobalt-violet",
+    "store": "Expert",
+    "seller": "Expert",
+    "old_price": null,
+    "offer_price": 871.9,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.expert.it/it/it/exp/shop/attribute/samsung-galaxy-s26-family/zv60",
+    "updatedAt": "2026-11-23T21:42:06Z",
+    "verifiedAt": "2026-11-23T21:42:06Z",
+    "price_note": "Expert mostra Galaxy S26 256 GB / 12 GB Cobalt Violet a 871,90 € per consegna a casa. Il costo di spedizione non è esplicitato e resta sconosciuto.",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 871.9
+        }
+      ]
+    }
   }
 ]
