@@ -1155,6 +1155,27 @@ function getOfferActionState(
 
   if (
     product
+      ?.reliability
+      ?.eligibleForHourlyPolicy ===
+      false
+  ) {
+    return {
+      enabled: false,
+      label:
+        product
+          ?.reliability
+          ?.status ===
+          "review"
+          ? "Verifica in corso"
+          : "Prezzo da ricontrollare",
+      reason:
+        "reliability_blocked",
+    };
+  }
+
+  if (
+    !product?.reliability &&
+    product
       ?.freshness
       ?.eligibleForRecommendation ===
       false
