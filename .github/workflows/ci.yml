@@ -58,6 +58,9 @@ jobs:
       - name: Run reliability queue tests
         run: npm run test:reliability
 
+      - name: Run beta readiness tests
+        run: npm run test:beta-readiness
+
       - name: Check offer freshness
         run: npm run check:freshness
 
