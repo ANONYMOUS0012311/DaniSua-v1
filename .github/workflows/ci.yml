@@ -61,6 +61,9 @@ jobs:
       - name: Run beta readiness tests
         run: npm run test:beta-readiness
 
+      - name: Run offer outcome tests
+        run: npm run test:offer-outcome
+
       - name: Check offer freshness
         run: npm run check:freshness
 

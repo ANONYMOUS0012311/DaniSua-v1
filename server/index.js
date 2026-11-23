@@ -34,6 +34,10 @@ const {
   detectUseCase,
 } = require("./utils/recommendationEngine");
 
+const {
+  finalizeOfferOutcome,
+} = require("./utils/offerOutcome");
+
 const app = express();
 
 let awinRuntimeScheduler =
@@ -2890,13 +2894,27 @@ function analyzeBestProduct(
       winner
     );
 
+  const offerOutcome =
+    finalizeOfferOutcome({
+      status:
+        "best_product_ready",
+      canRecommend:
+        true,
+      message:
+        "Ho confrontato i modelli utilizzando i criteri disponibili e ho poi cercato la variante con l'offerta più conveniente.",
+      bestOffer,
+      resultCount:
+        selectedOffers.length,
+    });
+
   return {
     status:
-      "best_product_ready",
+      offerOutcome.status,
     canRecommend:
-      Boolean(bestOffer),
+      offerOutcome
+        .canRecommend,
     message:
-      "Ho confrontato i modelli utilizzando i criteri disponibili e ho poi cercato la variante con l'offerta più conveniente.",
+      offerOutcome.message,
     selectedOffers,
     winner,
     bestOffer,
@@ -4593,6 +4611,29 @@ app.get(
             variantCoverage
           );
 
+        const offerOutcome =
+          finalizeOfferOutcome({
+            status:
+              analysis.status,
+            canRecommend:
+              analysis
+                .canRecommend,
+            message:
+              analysis.message,
+            bestOffer,
+            resultCount:
+              comparableResults
+                .length,
+          });
+
+        if (
+          !offerOutcome
+            .canRecommend
+        ) {
+          recommendation =
+            null;
+        }
+
 
         return res.json({
           query:
@@ -4611,18 +4652,19 @@ app.get(
           },
 
           status:
-            analysis.status,
+            offerOutcome.status,
 
           canRecommend:
-            analysis.canRecommend,
+            offerOutcome
+              .canRecommend,
 
           clarification: {
             needed:
-              analysis.status ===
+              offerOutcome.status ===
                 "needs_clarification",
 
             message:
-              analysis.message,
+              offerOutcome.message,
 
             missing:
               analysis.missing ||
@@ -4713,6 +4755,29 @@ app.get(
             variantCoverage
           );
 
+        const offerOutcome =
+          finalizeOfferOutcome({
+            status:
+              analysis.status,
+            canRecommend:
+              analysis
+                .canRecommend,
+            message:
+              analysis.message,
+            bestOffer,
+            resultCount:
+              comparableResults
+                .length,
+          });
+
+        if (
+          !offerOutcome
+            .canRecommend
+        ) {
+          recommendation =
+            null;
+        }
+
 
         return res.json({
           query:
@@ -4731,18 +4796,19 @@ app.get(
           },
 
           status:
-            analysis.status,
+            offerOutcome.status,
 
           canRecommend:
-            analysis.canRecommend,
+            offerOutcome
+              .canRecommend,
 
           clarification: {
             needed:
-              analysis.status ===
+              offerOutcome.status ===
                 "needs_clarification",
 
             message:
-              analysis.message,
+              offerOutcome.message,
 
             missing:
               analysis.missing ||
