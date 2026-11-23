@@ -373,10 +373,88 @@ function buildBetaReadiness(
 }
 
 
+function buildBetaHealthSnapshot(
+  readiness
+) {
+  const safe =
+    readiness &&
+    typeof readiness === "object"
+      ? readiness
+      : {};
+
+  const blockers =
+    Array.isArray(
+      safe.blockers
+    )
+      ? safe.blockers
+      : [];
+
+  return {
+    readyForPublicBeta:
+      safe
+        .readyForPublicBeta ===
+      true,
+    dataReady:
+      safe.dataReady ===
+      true,
+    automationReady:
+      safe
+        .automation
+        ?.ready ===
+      true,
+    summary: {
+      p0Families:
+        Number(
+          safe
+            .summary
+            ?.p0Families ||
+          0
+        ),
+      p0Ready:
+        Number(
+          safe
+            .summary
+            ?.p0Ready ||
+          0
+        ),
+      p0Blocked:
+        Number(
+          safe
+            .summary
+            ?.p0Blocked ||
+          0
+        ),
+    },
+    blockers:
+      blockers.map(
+        blocker => ({
+          familyId:
+            blocker
+              ?.familyId ||
+            null,
+          missingFreshStores:
+            Number(
+              blocker
+                ?.missingFreshStores ||
+              0
+            ),
+          missingFinalCostStores:
+            Number(
+              blocker
+                ?.missingFinalCostStores ||
+              0
+            ),
+        })
+      ),
+  };
+}
+
+
 module.exports = {
   isKnownShipping,
   isStandardOffer,
   uniqueStores,
   readAutomationState,
   buildBetaReadiness,
+  buildBetaHealthSnapshot,
 };
