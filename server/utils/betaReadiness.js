@@ -5,6 +5,13 @@ const {
 } = require("./freshness");
 
 
+const DEFAULT_CLOSED_BETA_MIN_READY_FAMILIES =
+  3;
+
+const DEFAULT_CLOSED_BETA_MIN_FINAL_COST_STORES =
+  2;
+
+
 function isKnownShipping(
   offer
 ) {
@@ -253,6 +260,10 @@ function buildBetaReadiness(
             missingFinalCostStores ===
               0;
 
+          const closedBetaReady =
+            finalCostStores.length >=
+            DEFAULT_CLOSED_BETA_MIN_FINAL_COST_STORES;
+
           return {
             familyId:
               target.familyId,
@@ -281,6 +292,7 @@ function buildBetaReadiness(
             missingFreshStores,
             missingFinalCostStores,
             ready,
+            closedBetaReady,
           };
         }
       );
@@ -299,6 +311,24 @@ function buildBetaReadiness(
         row =>
           row.ready
       );
+
+  const closedBetaReadyFamilies =
+    p0
+      .filter(
+        row =>
+          row.closedBetaReady
+      );
+
+  const closedBetaMinimumFamilies =
+    Math.min(
+      DEFAULT_CLOSED_BETA_MIN_READY_FAMILIES,
+      p0.length
+    );
+
+  const closedBetaDataReady =
+    closedBetaMinimumFamilies > 0 &&
+    closedBetaReadyFamilies.length >=
+      closedBetaMinimumFamilies;
 
   const blockers =
     p0
@@ -331,6 +361,11 @@ function buildBetaReadiness(
     );
 
   return {
+    readyForClosedBeta:
+      closedBetaDataReady,
+
+    closedBetaDataReady,
+
     readyForPublicBeta:
       p0.length > 0 &&
       p0Ready.length ===
@@ -351,6 +386,14 @@ function buildBetaReadiness(
         "EUR",
       finalCostRequiresKnownShipping:
         true,
+      closedBeta: {
+        minimumReadyFamilies:
+          DEFAULT_CLOSED_BETA_MIN_READY_FAMILIES,
+        minimumFinalCostStoresPerFamily:
+          DEFAULT_CLOSED_BETA_MIN_FINAL_COST_STORES,
+        automationRequired:
+          false,
+      },
     },
 
     summary: {
@@ -362,6 +405,10 @@ function buildBetaReadiness(
         p0Ready.length,
       p0Blocked:
         blockers.length,
+      closedBetaMinimumFamilies,
+      closedBetaFamiliesReady:
+        closedBetaReadyFamilies
+          .length,
       automationReady:
         automation.ready,
     },
@@ -390,6 +437,14 @@ function buildBetaHealthSnapshot(
       : [];
 
   return {
+    readyForClosedBeta:
+      safe
+        .readyForClosedBeta ===
+      true,
+    closedBetaDataReady:
+      safe
+        .closedBetaDataReady ===
+      true,
     readyForPublicBeta:
       safe
         .readyForPublicBeta ===
@@ -424,6 +479,20 @@ function buildBetaHealthSnapshot(
             ?.p0Blocked ||
           0
         ),
+      closedBetaMinimumFamilies:
+        Number(
+          safe
+            .summary
+            ?.closedBetaMinimumFamilies ||
+          0
+        ),
+      closedBetaFamiliesReady:
+        Number(
+          safe
+            .summary
+            ?.closedBetaFamiliesReady ||
+          0
+        ),
     },
     blockers:
       blockers.map(
@@ -451,6 +520,8 @@ function buildBetaHealthSnapshot(
 
 
 module.exports = {
+  DEFAULT_CLOSED_BETA_MIN_READY_FAMILIES,
+  DEFAULT_CLOSED_BETA_MIN_FINAL_COST_STORES,
   isKnownShipping,
   isStandardOffer,
   uniqueStores,
