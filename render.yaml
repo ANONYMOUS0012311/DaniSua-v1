@@ -28,3 +28,20 @@ services:
 
       - key: NODE_VERSION
         value: 24.21.0
+
+      # Awin sync resta opt-in.
+      # Credenziali e advertiser allowlist NON vanno nel repository.
+      - key: AWIN_SYNC_ENABLED
+        value: "false"
+
+      - key: AWIN_SYNC_INTERVAL_MINUTES
+        value: "60"
+
+      - key: AWIN_SYNC_JITTER_MAX_SECONDS
+        value: "120"
+
+      - key: AWIN_PRIMARY_REGION
+        value: IT
+
+      - key: AWIN_ALLOW_SOFT_MEMBERSHIP
+        value: "false"
