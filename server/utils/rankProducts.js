@@ -313,6 +313,13 @@ function isDefaultComparableOffer(offer) {
     return false;
   }
 
+  if (
+    offer.stock ===
+      false
+  ) {
+    return false;
+  }
+
   return isFiniteNumber(
     offer.offer_price
   );
