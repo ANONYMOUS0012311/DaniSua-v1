@@ -26,7 +26,10 @@
     "test:offer-outcome": "node server/tests/offerOutcomeSmoke.js",
     "test:production-reliability": "node server/tests/productionReliabilitySmoke.js",
     "beta:closed-check": "node scripts/beta-readiness.js --closed-strict",
-    "beta:public-check": "node scripts/beta-readiness.js --strict"
+    "beta:public-check": "node scripts/beta-readiness.js --strict",
+    "awin:preflight": "node scripts/awin-preflight.js",
+    "awin:preflight:strict": "node scripts/awin-preflight.js --strict",
+    "test:awin-preflight": "node server/tests/awinPreflightSmoke.js"
   },
   "keywords": [],
   "author": "",
