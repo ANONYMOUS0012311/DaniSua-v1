@@ -525,19 +525,203 @@ app.use(
 // NORMALIZZAZIONE
 // ========================================
 
+const QUERY_CANONICAL_TERMS = [
+  "samsung",
+  "batteria",
+  "fotocamera",
+  "iphone",
+  "pixel",
+  "xiaomi",
+  "redmi",
+  "economico",
+  "economica",
+  "migliore",
+  "miglior",
+  "android",
+  "smartphone",
+];
+
+
+function editDistance(
+  left,
+  right
+) {
+  const a =
+    String(
+      left || ""
+    );
+
+  const b =
+    String(
+      right || ""
+    );
+
+  const previous =
+    Array.from(
+      {
+        length:
+          b.length + 1,
+      },
+      (
+        _,
+        index
+      ) =>
+        index
+    );
+
+  for (
+    let i = 1;
+    i <= a.length;
+    i += 1
+  ) {
+    const current = [
+      i,
+    ];
+
+    for (
+      let j = 1;
+      j <= b.length;
+      j += 1
+    ) {
+      const substitutionCost =
+        a[i - 1] ===
+        b[j - 1]
+          ? 0
+          : 1;
+
+      current[j] =
+        Math.min(
+          current[
+            j - 1
+          ] + 1,
+          previous[j] + 1,
+          previous[
+            j - 1
+          ] +
+            substitutionCost
+        );
+    }
+
+    previous.splice(
+      0,
+      previous.length,
+      ...current
+    );
+  }
+
+  return previous[
+    b.length
+  ];
+}
+
+
+function normalizeKnownQueryTypos(
+  value
+) {
+  return String(
+    value || ""
+  )
+    .split(" ")
+    .map(
+      token => {
+        if (
+          token.length < 5 ||
+          QUERY_CANONICAL_TERMS
+            .includes(
+              token
+            )
+        ) {
+          return token;
+        }
+
+        let bestTerm =
+          null;
+        let bestDistance =
+          Infinity;
+        let tied =
+          false;
+
+        for (
+          const term of
+          QUERY_CANONICAL_TERMS
+        ) {
+          const threshold =
+            term.length >= 7
+              ? 2
+              : 1;
+
+          if (
+            Math.abs(
+              token.length -
+                term.length
+            ) >
+            threshold
+          ) {
+            continue;
+          }
+
+          const distance =
+            editDistance(
+              token,
+              term
+            );
+
+          if (
+            distance <
+            bestDistance
+          ) {
+            bestDistance =
+              distance;
+            bestTerm =
+              term;
+            tied =
+              false;
+          } else if (
+            distance ===
+              bestDistance
+          ) {
+            tied =
+              true;
+          }
+        }
+
+        if (
+          !bestTerm ||
+          tied
+        ) {
+          return token;
+        }
+
+        const threshold =
+          bestTerm.length >= 7
+            ? 2
+            : 1;
+
+        return bestDistance <=
+          threshold
+          ? bestTerm
+          : token;
+      }
+    )
+    .join(" ");
+}
+
+
 function normalizeText(value) {
-  return String(value || "")
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/€/g, " euro ")
-    .replace(/\+/g, " plus ")
-    .replace(/[^a-z0-9]+/g, " ")
-    .replace(/\s+/g, " ")
-    .trim()
-    .replace(/\bmiglore\b/g, "migliore")
-    .replace(/\bmigliroe\b/g, "migliore")
-    .replace(/\bmiglor\b/g, "miglior");
+  const normalized =
+    String(value || "")
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/€/g, " euro ")
+      .replace(/\+/g, " plus ")
+      .replace(/[^a-z0-9]+/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+
+  return normalizeKnownQueryTypos(
+    normalized
+  );
 }
 
 
