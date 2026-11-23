@@ -2,6 +2,10 @@ const {
   buildReliabilityQueue,
 } = require("../utils/reliabilityQueue");
 
+const {
+  evaluateOfferReliability,
+} = require("../utils/freshness");
+
 
 function assert(
   condition,
@@ -60,7 +64,8 @@ function main() {
       offers,
       {
         now,
-        maxAgeHours: 6,
+        freshHours: 2,
+        reviewHours: 6,
       }
     );
 
@@ -106,6 +111,55 @@ function main() {
     ),
     "Offerta fresh e completa non deve entrare in coda"
   );
+
+
+  const review =
+    evaluateOfferReliability(
+      {
+        verifiedAt:
+          "2026-11-23T16:00:00Z",
+      },
+      {
+        now,
+        freshHours: 2,
+        reviewHours: 6,
+      }
+    );
+
+
+  assert(
+    review.status ===
+      "review" &&
+    review.requiresRefresh ===
+      true,
+    "Tra 2 e 6 ore l'offerta deve entrare in review"
+  );
+
+
+  const dateOnly =
+    evaluateOfferReliability(
+      {
+        verifiedAt:
+          "2026-11-23",
+      },
+      {
+        now,
+        freshHours: 2,
+        reviewHours: 6,
+      }
+    );
+
+
+  assert(
+    dateOnly
+      .timestampPrecision ===
+      "date" &&
+    dateOnly
+      .eligibleForHourlyPolicy ===
+      false,
+    "Una data senza ora non è sufficiente per una policy oraria"
+  );
+
 
   console.log(
     "✅ RELIABILITY QUEUE — priorità refresh"

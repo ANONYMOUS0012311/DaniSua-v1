@@ -6,7 +6,8 @@ const {
 } = require("../server/utils/reliabilityQueue");
 
 const {
-  resolveMaxAgeHours,
+  DEFAULT_FRESH_HOURS,
+  DEFAULT_REVIEW_HOURS,
 } = require("../server/utils/freshness");
 
 
@@ -70,11 +71,24 @@ const limit =
     ? limitRaw
     : 30;
 
-const maxAgeHours =
-  resolveMaxAgeHours(
-    getArg("--max-hours") ||
+const freshHours =
+  Number(
+    getArg(
+      "--fresh-hours"
+    ) ||
     process.env
-      .DANISUA_OFFER_MAX_AGE_HOURS
+      .DANISUA_OFFER_FRESH_HOURS ||
+    DEFAULT_FRESH_HOURS
+  );
+
+const reviewHours =
+  Number(
+    getArg(
+      "--review-hours"
+    ) ||
+    process.env
+      .DANISUA_OFFER_REVIEW_HOURS ||
+    DEFAULT_REVIEW_HOURS
   );
 
 const offers =
@@ -89,7 +103,8 @@ const result =
   buildReliabilityQueue(
     offers,
     {
-      maxAgeHours,
+      freshHours,
+      reviewHours,
       limit,
     }
   );
@@ -102,7 +117,8 @@ console.log(
           .toISOString(),
 
       file,
-      maxAgeHours,
+      freshHours,
+      reviewHours,
 
       ...result,
     },
