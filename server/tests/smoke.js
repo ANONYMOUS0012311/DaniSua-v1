@@ -2064,6 +2064,41 @@ async function testRequestTracing() {
     "Stato Awin mancante da /health"
   );
 
+  assert(
+    typeof data.reliability
+      ?.catalog
+      ?.available ===
+      "boolean",
+    "Stato reliability mancante da /health"
+  );
+
+  if (
+    data.reliability
+      ?.catalog
+      ?.available ===
+    true
+  ) {
+    assert(
+      typeof data.reliability
+        .catalog
+        .total ===
+        "number" &&
+      typeof data.reliability
+        .catalog
+        .fresh ===
+        "number" &&
+      typeof data.reliability
+        .catalog
+        .stale ===
+        "number" &&
+      typeof data.reliability
+        .catalog
+        .requiresRefresh ===
+        "number",
+      "Conteggi reliability incompleti in /health"
+    );
+  }
+
   const healthText =
     JSON.stringify(
       data.integrations
