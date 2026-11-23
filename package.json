@@ -17,7 +17,9 @@
     "test:persistent-import": "node server/tests/persistentImportCliSmoke.js",
     "test:awin": "node server/tests/awinIntegrationSmoke.js",
     "awin:plan": "node scripts/awin-plan.js",
-    "test:awin-state": "node server/tests/awinStateSmoke.js"
+    "test:awin-state": "node server/tests/awinStateSmoke.js",
+    "awin:sync": "node scripts/awin-sync.js",
+    "test:awin-sync": "node server/tests/awinSyncSmoke.js"
   },
   "keywords": [],
   "author": "",
