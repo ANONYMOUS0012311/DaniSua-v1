@@ -2448,6 +2448,93 @@ async function testSafeCorsError() {
 
 
 // ========================================
+// BETA METRICS — OFFER CLICK
+// ========================================
+
+async function testClientEventEndpoint() {
+  const origin =
+    "https://danisua.netlify.app";
+
+  const response =
+    await fetch(
+      `${BASE_URL}/events`,
+      {
+        method:
+          "POST",
+        headers: {
+          "Content-Type":
+            "application/json",
+          Origin:
+            origin,
+        },
+        body:
+          JSON.stringify({
+            type:
+              "offer_click",
+            offerId:
+              "test-offer",
+            familyId:
+              "test-family",
+            store:
+              "Test Store",
+            position:
+              1,
+            query:
+              "QUESTO CAMPO NON DEVE ESSERE LOGGATO",
+          }),
+      }
+    );
+
+  assert(
+    response.status ===
+      202,
+    `Evento click dovrebbe restituire 202, ricevuto ${response.status}`
+  );
+
+  const requestId =
+    response.headers.get(
+      "x-request-id"
+    );
+
+  const data =
+    await response.json();
+
+  assert(
+    data.ok === true &&
+    data.requestId ===
+      requestId,
+    "Evento click deve confermare ricezione con requestId"
+  );
+
+  const invalid =
+    await fetch(
+      `${BASE_URL}/events`,
+      {
+        method:
+          "POST",
+        headers: {
+          "Content-Type":
+            "application/json",
+          Origin:
+            origin,
+        },
+        body:
+          JSON.stringify({
+            type:
+              "raw_query_event",
+          }),
+      }
+    );
+
+  assert(
+    invalid.status ===
+      400,
+    "Eventi non allowlisted devono essere rifiutati"
+  );
+}
+
+
+// ========================================
 // SEARCH V2 — INTENTO NATURALE
 // ========================================
 
@@ -5275,6 +5362,14 @@ const tests = [
 
     run:
       testSafeCorsError,
+  },
+
+  {
+    name:
+      "BETA METRICS — offer click privacy-safe",
+
+    run:
+      testClientEventEndpoint,
   },
 
   {
