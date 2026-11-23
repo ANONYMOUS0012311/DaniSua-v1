@@ -3,8 +3,15 @@ const cors = require("cors");
 const crypto = require("crypto");
 const smartphoneCatalogTargets = require("../data/catalog_targets.smartphones.json");
 const smartphoneVariantMarketState = require("../data/variant_market_status.smartphones.json");
+const productionOffers = require("../data/offers.real.json");
+const productsCatalog = require("../data/products.json");
 
 const sourceRegistry = require("./sources/registry");
+
+const {
+  buildBetaReadiness,
+  buildBetaHealthSnapshot,
+} = require("./utils/betaReadiness");
 
 const {
   logInfo,
@@ -4304,6 +4311,20 @@ app.get(
       );
     }
 
+    const beta =
+      buildBetaHealthSnapshot(
+        buildBetaReadiness({
+          offers:
+            productionOffers,
+          products:
+            productsCatalog,
+          targets:
+            smartphoneCatalogTargets,
+          env:
+            process.env,
+        })
+      );
+
     res.json({
       ok: true,
       requestId:
@@ -4320,6 +4341,7 @@ app.get(
         catalog:
           reliability,
       },
+      beta,
       runtime: {
         node:
           process.version,
