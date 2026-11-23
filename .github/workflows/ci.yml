@@ -37,6 +37,12 @@ jobs:
       - name: Run smoke tests
         run: npm test
 
+      - name: Run ingestion core tests
+        run: npm run test:ingestion-core
+
+      - name: Run production config tests
+        run: npm run test:production-config
+
       - name: Run database reliability tests
         run: npm run test:database
 

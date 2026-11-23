@@ -11,6 +11,8 @@
     "catalog:coverage": "node scripts/catalog-coverage.js",
     "knowledge:coverage": "node scripts/knowledge-coverage.js",
     "test:database": "node server/tests/databaseSmoke.js && node server/tests/databaseSourceSmoke.js && node server/tests/databaseEndToEndSmoke.js && node server/tests/persistenceSmoke.js && node server/tests/reviewResolutionSmoke.js",
+    "test:ingestion-core": "node server/tests/normalizersSmoke.js && node server/tests/productMatcherSmoke.js && node server/tests/ingestionSmoke.js",
+    "test:production-config": "node server/tests/productionConfigSmoke.js",
     "reliability:queue": "node scripts/reliability-queue.js",
     "test:reliability": "node server/tests/reliabilityQueueSmoke.js",
     "import:offers:db": "node scripts/persist-offers.js",
