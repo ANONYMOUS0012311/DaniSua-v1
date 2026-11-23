@@ -43,6 +43,9 @@ jobs:
       - name: Run persistent import tests
         run: npm run test:persistent-import
 
+      - name: Run Awin integration tests
+        run: npm run test:awin
+
       - name: Run reliability queue tests
         run: npm run test:reliability
 
