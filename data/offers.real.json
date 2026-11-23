@@ -611,13 +611,13 @@
     "store": "MediaWorld",
     "seller": "MediaWorld",
     "old_price": 499.99,
-    "offer_price": 499,
+    "offer_price": 498,
     "currency": "EUR",
-    "shipping_price": null,
+    "shipping_price": 0,
     "stock": true,
-    "url": "https://www.mediaworld.it/it/product/_nintendo-switch-2-eur-osm-nero-rossa-598288.html",
-    "updatedAt": null,
-    "verifiedAt": "2026-11-04",
+    "url": "https://www.mediaworld.it/it/brand/nintendo/console/nintendo-switch2",
+    "updatedAt": "2026-11-23T20:31:44Z",
+    "verifiedAt": "2026-11-23T20:31:44Z",
     "pricing": {
       "type": "standard",
       "conditional": false,
@@ -625,21 +625,22 @@
       "paymentOptions": [
         {
           "type": "one_time",
-          "total_price": 499
+          "total_price": 498
         },
         {
           "type": "installment",
-          "installments": 10,
-          "installment_amount": 49.9,
-          "displayed_total": 499,
-          "financing_cost": 0,
-          "tan": 0,
-          "taeg": 0,
+          "installments": 24,
+          "installment_amount": 23.5,
+          "displayed_total": 564,
+          "financing_cost": 66,
+          "tan": 12.24,
+          "taeg": 12.95,
           "provider": null,
-          "note": "Piano rateale mostrato da MediaWorld al momento della verifica."
+          "note": "MediaWorld mostra 24 rate da 23,50 € per un totale dovuto di 564 €. Il ranking standard usa il prezzo one-time di 498 €."
         }
       ]
-    }
+    },
+    "price_note": "Prezzo diretto MediaWorld verificato sulla pagina Nintendo Switch 2. Le offerte marketplace di terzi restano separate e non vengono trattate come vendita diretta MediaWorld."
   },
   {
     "id": "real-mediaworld-switch2-mario-kart",
@@ -3756,6 +3757,84 @@
         {
           "type": "one_time",
           "total_price": 1599.99
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-expert-switch2-base",
+    "productId": "nintendo-switch-2-256",
+    "store": "Expert",
+    "seller": "Expert",
+    "old_price": 499.99,
+    "offer_price": 498.9,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.expert.it/it/it/exp/shop/product/switch-2/exp929627",
+    "updatedAt": "2026-11-23T20:31:44Z",
+    "verifiedAt": "2026-11-23T20:31:44Z",
+    "price_note": "Prezzo per consegna a domicilio mostrato da Expert. Il costo di spedizione non è esplicitato nella pagina acquisita e resta quindi sconosciuto.",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 498.9
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-unieuro-switch2-base",
+    "productId": "nintendo-switch-2-256",
+    "store": "Unieuro",
+    "seller": "Unieuro",
+    "old_price": 499.9,
+    "offer_price": 499.9,
+    "currency": "EUR",
+    "shipping_price": 0,
+    "stock": true,
+    "url": "https://www.unieuro.it/online/Console/Nintendo-Switch-2/Console-Nintendo-Switch-2",
+    "updatedAt": "2026-11-23T20:31:44Z",
+    "verifiedAt": "2026-11-23T20:31:44Z",
+    "price_note": "Unieuro mostra la console base a 499,90 € con consegna gratuita e disponibilità online.",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 499.9
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-euronics-switch2-base",
+    "productId": "nintendo-switch-2-256",
+    "store": "Euronics",
+    "seller": "Euronics",
+    "old_price": 499,
+    "offer_price": 499,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.euronics.it/product/nintendo-switch/",
+    "updatedAt": "2026-11-23T20:31:44Z",
+    "verifiedAt": "2026-11-23T20:31:44Z",
+    "price_note": "Euronics mostra Nintendo Switch 2 256 GB a 499,00 € con acquisto online disponibile. Il costo di spedizione non è esplicitato e resta sconosciuto.",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 499
         }
       ]
     }
