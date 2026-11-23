@@ -1,6 +1,8 @@
 // DANISUA — OFFER FRESHNESS
 
 const DEFAULT_MAX_AGE_HOURS = 72;
+const DEFAULT_FRESH_HOURS = 2;
+const DEFAULT_REVIEW_HOURS = 6;
 const FUTURE_TOLERANCE_MS = 5 * 60 * 1000;
 
 function resolveMaxAgeHours(value) {
@@ -25,6 +27,251 @@ function getOfferFreshnessTimestamp(offer) {
     null
   );
 }
+
+function getTimestampPrecision(
+  value
+) {
+  if (
+    value === null ||
+    value === undefined ||
+    value === ""
+  ) {
+    return "unknown";
+  }
+
+  if (
+    typeof value !== "string"
+  ) {
+    return "invalid";
+  }
+
+  if (
+    /^\d{4}-\d{2}-\d{2}$/
+      .test(
+        value
+      )
+  ) {
+    return "date";
+  }
+
+  if (
+    Number.isFinite(
+      Date.parse(
+        value
+      )
+    ) &&
+    /T\d{2}:\d{2}/
+      .test(
+        value
+      )
+  ) {
+    return "datetime";
+  }
+
+  return Number.isFinite(
+    Date.parse(
+      value
+    )
+  )
+    ? "other"
+    : "invalid";
+}
+
+
+function evaluateOfferReliability(
+  offer,
+  {
+    now = Date.now(),
+    freshHours =
+      DEFAULT_FRESH_HOURS,
+    reviewHours =
+      DEFAULT_REVIEW_HOURS,
+  } = {}
+) {
+  const safeFreshHours =
+    Number.isFinite(
+      Number(
+        freshHours
+      )
+    ) &&
+    Number(
+      freshHours
+    ) > 0
+      ? Number(
+          freshHours
+        )
+      : DEFAULT_FRESH_HOURS;
+
+  const safeReviewHours =
+    Number.isFinite(
+      Number(
+        reviewHours
+      )
+    ) &&
+    Number(
+      reviewHours
+    ) >=
+      safeFreshHours
+      ? Number(
+          reviewHours
+        )
+      : Math.max(
+          DEFAULT_REVIEW_HOURS,
+          safeFreshHours
+        );
+
+  const timestamp =
+    getOfferFreshnessTimestamp(
+      offer
+    );
+
+  const precision =
+    getTimestampPrecision(
+      timestamp
+    );
+
+  const checkedAt =
+    new Date(
+      now
+    )
+      .toISOString();
+
+  if (!timestamp) {
+    return {
+      status:
+        "unknown",
+      timestamp: null,
+      timestampPrecision:
+        precision,
+      checkedAt,
+      ageHours: null,
+      freshHours:
+        safeFreshHours,
+      reviewHours:
+        safeReviewHours,
+      requiresRefresh:
+        true,
+      eligibleForHourlyPolicy:
+        false,
+    };
+  }
+
+  const time =
+    Date.parse(
+      timestamp
+    );
+
+  if (
+    !Number.isFinite(
+      time
+    )
+  ) {
+    return {
+      status:
+        "invalid",
+      timestamp,
+      timestampPrecision:
+        precision,
+      checkedAt,
+      ageHours: null,
+      freshHours:
+        safeFreshHours,
+      reviewHours:
+        safeReviewHours,
+      requiresRefresh:
+        true,
+      eligibleForHourlyPolicy:
+        false,
+    };
+  }
+
+  if (
+    time >
+    now +
+      FUTURE_TOLERANCE_MS
+  ) {
+    return {
+      status:
+        "future",
+      timestamp,
+      timestampPrecision:
+        precision,
+      checkedAt,
+      ageHours: null,
+      freshHours:
+        safeFreshHours,
+      reviewHours:
+        safeReviewHours,
+      requiresRefresh:
+        true,
+      eligibleForHourlyPolicy:
+        false,
+    };
+  }
+
+  const ageHours =
+    Math.max(
+      0,
+      (
+        now -
+        time
+      ) /
+      (
+        60 *
+        60 *
+        1000
+      )
+    );
+
+  let status =
+    "stale";
+
+  if (
+    ageHours <=
+    safeFreshHours
+  ) {
+    status =
+      "fresh";
+  } else if (
+    ageHours <=
+    safeReviewHours
+  ) {
+    status =
+      "review";
+  }
+
+  const precise =
+    precision ===
+      "datetime";
+
+  return {
+    status,
+    timestamp,
+    timestampPrecision:
+      precision,
+    checkedAt,
+    ageHours:
+      Number(
+        ageHours
+          .toFixed(
+            2
+          )
+      ),
+    freshHours:
+      safeFreshHours,
+    reviewHours:
+      safeReviewHours,
+    requiresRefresh:
+      status !==
+        "fresh" ||
+      !precise,
+    eligibleForHourlyPolicy:
+      status ===
+        "fresh" &&
+      precise,
+  };
+}
+
 
 function evaluateOfferFreshness(
   offer,
@@ -180,8 +427,12 @@ function summarizeOfferFreshness(
 
 module.exports = {
   DEFAULT_MAX_AGE_HOURS,
+  DEFAULT_FRESH_HOURS,
+  DEFAULT_REVIEW_HOURS,
   resolveMaxAgeHours,
   getOfferFreshnessTimestamp,
+  getTimestampPrecision,
+  evaluateOfferReliability,
   evaluateOfferFreshness,
   summarizeOfferFreshness,
 };
