@@ -250,11 +250,11 @@
     "old_price": 1129,
     "offer_price": 949.49,
     "currency": "EUR",
-    "shipping_price": null,
+    "shipping_price": 0,
     "stock": true,
-    "url": "https://www.mediaworld.it/it/product/_apple-iphone-17-256gb-salvia-389199.html",
-    "updatedAt": "2026-11-23T21:15:16Z",
-    "verifiedAt": "2026-11-23T21:15:16Z",
+    "url": "https://www.mediaworld.it/it/brand/apple/iphone/iphone-17",
+    "updatedAt": "2026-11-23T21:47:38Z",
+    "verifiedAt": "2026-11-23T21:47:38Z",
     "pricing": {
       "type": "standard",
       "conditional": false,
@@ -266,18 +266,18 @@
         },
         {
           "type": "installment",
-          "installments": 10,
-          "installment_amount": 94.95,
-          "displayed_total": 949.49,
-          "financing_cost": 0,
-          "tan": 0,
-          "taeg": 0,
+          "installments": 24,
+          "installment_amount": 45.4,
+          "displayed_total": 1089.6,
+          "financing_cost": 140.11,
+          "tan": 13.58,
+          "taeg": 14.45,
           "provider": null,
-          "note": "MediaWorld mostra 10 rate a tasso zero; il ranking standard usa il prezzo one-time."
+          "note": "Finanziamento separato; il ranking standard usa il prezzo one-time."
         }
       ]
     },
-    "price_note": "Prezzo corrente verificato oggi su MediaWorld per iPhone 17 256GB Salvia. La pagina corrente conferma spedizione disponibile ma non il relativo costo, quindi resta sconosciuto."
+    "price_note": "MediaWorld mostra iPhone 17 256 GB Salvia a 949,49 € con consegna gratuita e spedizione disponibile. Le offerte nuove/ricondizionate di seller terzi restano separate."
   },
   {
     "id": "real-samsung-s26ultra-256-white",
@@ -1958,11 +1958,11 @@
     "old_price": 999,
     "offer_price": 969,
     "currency": "EUR",
-    "shipping_price": null,
+    "shipping_price": 0,
     "stock": true,
-    "url": "https://www.unieuro.it/online/iPhone/iPhone-17-256GB-Nero-pidAPLIPHONE17256",
-    "updatedAt": "2026-11-23T21:15:16Z",
-    "verifiedAt": "2026-11-23T21:15:16Z",
+    "url": "https://www.unieuro.it/online/apple-iphone17",
+    "updatedAt": "2026-11-23T21:47:38Z",
+    "verifiedAt": "2026-11-23T21:47:38Z",
     "pricing": {
       "type": "standard",
       "conditional": false,
@@ -1974,7 +1974,7 @@
         }
       ]
     },
-    "price_note": "Prezzo corrente verificato oggi sulla categoria iPhone Unieuro per iPhone 17 256GB Nero. Il costo di spedizione non è confermato dal contenuto corrente e resta sconosciuto."
+    "price_note": "Unieuro mostra iPhone 17 256 GB Nero a 969 € con consegna gratuita e disponibilità."
   },
   {
     "id": "real-euronics-iphone17-256-black",
@@ -1984,11 +1984,11 @@
     "old_price": 999,
     "offer_price": 999,
     "currency": "EUR",
-    "shipping_price": null,
+    "shipping_price": 7.9,
     "stock": true,
-    "url": "https://www.euronics.it/telefonia/smartphone-e-cellulari/iphone/apple---iphone-17-256gb-nero/252011565.html",
-    "updatedAt": "2026-11-23T21:15:16Z",
-    "verifiedAt": "2026-11-23T21:15:16Z",
+    "url": "https://www.euronics.it/telefonia/smartphone-e-cellulari/iphone/apple---iphone-17-256gb-nero/252011565.html?showAvailability=true",
+    "updatedAt": "2026-11-23T21:47:38Z",
+    "verifiedAt": "2026-11-23T21:47:38Z",
     "pricing": {
       "type": "standard",
       "conditional": false,
@@ -2000,7 +2000,7 @@
         }
       ]
     },
-    "price_note": "Prezzo corrente verificato oggi sulla pagina iPhone 17 Euronics. Il costo di spedizione non è esposto nel contenuto corrente e resta sconosciuto."
+    "price_note": "Euronics mostra iPhone 17 256 GB Nero a 999 € con acquisto online e consegna a 7,90 €. Prezzo valido dal 12 al 30 novembre 2026 salvo esaurimento."
   },
   {
     "id": "real-euronics-pixel11pro-256-obsidian",
