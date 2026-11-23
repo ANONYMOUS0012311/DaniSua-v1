@@ -30,6 +30,7 @@
     "test:closed-beta-journey": "node server/tests/closedBetaJourneySmoke.js",
     "test:closed-beta-load": "node server/tests/loadSmoke.js",
     "test:live-production": "node scripts/live-production-smoke.js",
+    "test:product-image": "node server/tests/productImageSmoke.js",
     "beta:closed-check": "node scripts/beta-readiness.js --closed-strict",
     "beta:public-check": "node scripts/beta-readiness.js --strict",
     "awin:preflight": "node scripts/awin-preflight.js",
