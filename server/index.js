@@ -457,9 +457,25 @@ app.use(
 
     res.json =
       payload => {
-        if (
+        const responsePayload =
           payload &&
           typeof payload ===
+            "object" &&
+          !Array.isArray(
+            payload
+          )
+            ? {
+                ...payload,
+                requestId:
+                  payload.requestId ||
+                  req.requestId ||
+                  null,
+              }
+            : payload;
+
+        if (
+          responsePayload &&
+          typeof responsePayload ===
             "object"
         ) {
           logInfo(
@@ -470,40 +486,40 @@ app.use(
                 null,
               intent:
                 safeMetricText(
-                  payload.intent,
+                  responsePayload.intent,
                   40
                 ),
               status:
                 safeMetricText(
-                  payload.status ||
+                  responsePayload.status ||
                   (
-                    payload.error
+                    responsePayload.error
                       ? "error"
                       : null
                   ),
                   60
                 ),
               canRecommend:
-                payload
+                responsePayload
                   .canRecommend ===
                 true,
               count:
                 Number.isFinite(
                   Number(
-                    payload.count
+                    responsePayload.count
                   )
                 )
                   ? Number(
-                      payload.count
+                      responsePayload.count
                     )
                   : 0,
               hasBestOffer:
                 Boolean(
-                  payload
+                  responsePayload
                     .bestOffer
                 ),
               clarificationNeeded:
-                payload
+                responsePayload
                   .clarification
                   ?.needed ===
                 true,
@@ -512,7 +528,7 @@ app.use(
         }
 
         return originalJson(
-          payload
+          responsePayload
         );
       };
 
@@ -4658,6 +4674,12 @@ app.post(
           safeMetricText(
             req.body
               ?.store,
+            80
+          ),
+        searchRequestId:
+          safeMetricText(
+            req.body
+              ?.searchRequestId,
             80
           ),
         position:

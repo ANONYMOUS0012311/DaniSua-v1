@@ -1036,7 +1036,8 @@ async function runSearchWithNormalize(
 
       renderProducts(
         displayResults,
-        null
+        null,
+        data.requestId || null
       );
 
       updateCounter(
@@ -1059,7 +1060,8 @@ async function runSearchWithNormalize(
 
       renderProducts(
         displayResults,
-        null
+        null,
+        data.requestId || null
       );
 
       updateCounter(
@@ -1088,7 +1090,8 @@ async function runSearchWithNormalize(
 
     renderProducts(
       displayResults,
-      data.bestOffer || null
+      data.bestOffer || null,
+      data.requestId || null
     );
 
     updateCounter(
@@ -1275,7 +1278,8 @@ function getOfferActionState(
 
 function renderProducts(
   list,
-  bestOffer = null
+  bestOffer = null,
+  searchRequestId = null
 ) {
   if (!containerProdotti) {
     return;
@@ -1619,6 +1623,7 @@ function renderProducts(
                   .dataset
                   .store ||
                 null,
+              searchRequestId,
               position:
                 Number.isInteger(
                   position
