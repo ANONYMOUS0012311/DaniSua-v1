@@ -79,6 +79,9 @@ jobs:
       - name: Run closed beta journey regression test
         run: npm run test:closed-beta-journey
 
+      - name: Run closed beta concurrency smoke test
+        run: npm run test:closed-beta-load
+
       - name: Check offer freshness
         run: npm run check:freshness
 
