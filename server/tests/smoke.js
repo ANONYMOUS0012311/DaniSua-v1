@@ -1935,6 +1935,50 @@ async function testSafeNotFound() {
 // ========================================
 
 async function testSafeCorsError() {
+  const productionOrigin =
+    "https://danisua.netlify.app";
+
+  const productionResponse =
+    await fetch(
+      `${BASE_URL}/health`,
+      {
+        headers: {
+          Origin:
+            productionOrigin,
+        },
+      }
+    );
+
+  assert(
+    productionResponse.status === 200 &&
+    productionResponse.headers.get(
+      "access-control-allow-origin"
+    ) === productionOrigin,
+    "CORS deve consentire il dominio Netlify di produzione"
+  );
+
+  const previewOrigin =
+    "https://deploy-preview-45--danisua.netlify.app";
+
+  const previewResponse =
+    await fetch(
+      `${BASE_URL}/health`,
+      {
+        headers: {
+          Origin:
+            previewOrigin,
+        },
+      }
+    );
+
+  assert(
+    previewResponse.status === 200 &&
+    previewResponse.headers.get(
+      "access-control-allow-origin"
+    ) === previewOrigin,
+    "CORS deve consentire solo i preview del sito DaniSua"
+  );
+
   const response =
     await fetch(
       `${BASE_URL}/health`,

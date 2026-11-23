@@ -188,6 +188,30 @@ function isLocalDevelopmentOrigin(
 }
 
 
+function isDaniSuaNetlifyPreviewOrigin(
+  origin
+) {
+  if (!origin) {
+    return false;
+  }
+
+  try {
+    const url =
+      new URL(origin);
+
+    return (
+      url.protocol === "https:" &&
+      /^[a-z0-9-]+--danisua\.netlify\.app$/
+        .test(
+          url.hostname
+        )
+    );
+  } catch {
+    return false;
+  }
+}
+
+
 function isAllowedOrigin(
   origin
 ) {
@@ -198,6 +222,15 @@ function isAllowedOrigin(
 
   if (
     ALLOWED_ORIGINS.has(
+      origin
+    )
+  ) {
+    return true;
+  }
+
+
+  if (
+    isDaniSuaNetlifyPreviewOrigin(
       origin
     )
   ) {
