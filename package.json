@@ -22,7 +22,8 @@
     "test:awin-sync": "node server/tests/awinSyncSmoke.js",
     "test:awin-scheduler": "node server/tests/awinSchedulerSmoke.js",
     "beta:readiness": "node scripts/beta-readiness.js",
-    "test:beta-readiness": "node server/tests/betaReadinessSmoke.js"
+    "test:beta-readiness": "node server/tests/betaReadinessSmoke.js",
+    "test:offer-outcome": "node server/tests/offerOutcomeSmoke.js"
   },
   "keywords": [],
   "author": "",
