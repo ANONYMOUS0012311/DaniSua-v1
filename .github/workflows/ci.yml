@@ -55,6 +55,9 @@ jobs:
       - name: Run Awin runtime scheduler tests
         run: npm run test:awin-scheduler
 
+      - name: Run Awin preflight tests
+        run: npm run test:awin-preflight
+
       - name: Run reliability queue tests
         run: npm run test:reliability
 
