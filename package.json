@@ -15,7 +15,9 @@
     "test:reliability": "node server/tests/reliabilityQueueSmoke.js",
     "import:offers:db": "node scripts/persist-offers.js",
     "test:persistent-import": "node server/tests/persistentImportCliSmoke.js",
-    "test:awin": "node server/tests/awinIntegrationSmoke.js"
+    "test:awin": "node server/tests/awinIntegrationSmoke.js",
+    "awin:plan": "node scripts/awin-plan.js",
+    "test:awin-state": "node server/tests/awinStateSmoke.js"
   },
   "keywords": [],
   "author": "",
