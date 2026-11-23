@@ -338,10 +338,6 @@ function renderSearchNotice(
     "Cosa ho trovato"
   );
 
-  setAssistantBoxTitle(
-    "Mi manca un dettaglio"
-  );
-
   box.style.display = "block";
 
   content.innerHTML = `
