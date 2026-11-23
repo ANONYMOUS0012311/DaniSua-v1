@@ -6,6 +6,7 @@ const {
   upsertOffer,
   getOfferById,
   listOffers,
+  listOfferPriceHistory,
   enqueueReview,
   listPendingReviews,
   closeDatabase,
@@ -103,6 +104,9 @@ function main() {
       updatedAt:
         null,
 
+      verifiedAt:
+        "2026-11-23T18:00:00Z",
+
       productId:
         "apple-iphone-15-pro-128",
 
@@ -171,18 +175,41 @@ function main() {
     );
 
 
+    const initialHistory =
+      listOfferPriceHistory(
+        db,
+        offer.id
+      );
+
+
+    assert(
+      initialHistory.length === 1 &&
+      initialHistory[0].offer_price ===
+        1099.99 &&
+      initialHistory[0].verifiedAt ===
+        "2026-11-23T18:00:00Z",
+      "La prima osservazione di prezzo non è stata registrata"
+    );
+
+
     // ====================================
     // UPSERT
     // ====================================
 
+    const changedOffer = {
+      ...offer,
+
+      offer_price:
+        999.99,
+
+      verifiedAt:
+        "2026-11-23T19:00:00Z",
+    };
+
+
     upsertOffer(
       db,
-      {
-        ...offer,
-
-        offer_price:
-          999.99,
-      }
+      changedOffer
     );
 
 
@@ -206,6 +233,73 @@ function main() {
       ).length ===
         1,
       "UPSERT ha duplicato l'offerta"
+    );
+
+
+    const changedHistory =
+      listOfferPriceHistory(
+        db,
+        offer.id
+      );
+
+
+    assert(
+      changedHistory.length === 2 &&
+      changedHistory[0].offer_price ===
+        1099.99 &&
+      changedHistory[1].offer_price ===
+        999.99,
+      "Lo storico deve conservare prezzi realmente osservati"
+    );
+
+
+    assert(
+      updated.old_price === null,
+      "old_price non deve essere usato come storico osservato"
+    );
+
+
+    upsertOffer(
+      db,
+      changedOffer
+    );
+
+
+    assert(
+      listOfferPriceHistory(
+        db,
+        offer.id
+      ).length === 2,
+      "Un UPSERT identico non deve duplicare l'osservazione"
+    );
+
+
+    upsertOffer(
+      db,
+      {
+        ...changedOffer,
+
+        shipping_price:
+          0,
+
+        verifiedAt:
+          "2026-11-23T20:00:00Z",
+      }
+    );
+
+
+    const shippingHistory =
+      listOfferPriceHistory(
+        db,
+        offer.id
+      );
+
+
+    assert(
+      shippingHistory.length === 3 &&
+      shippingHistory[2].shipping_price ===
+        0,
+      "Una variazione del costo di spedizione deve creare una nuova osservazione"
     );
 
 

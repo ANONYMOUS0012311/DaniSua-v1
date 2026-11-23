@@ -89,6 +89,24 @@ function initializeDatabase(
     );
 
 
+    CREATE TABLE IF NOT EXISTS offer_price_history (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+      offer_id TEXT NOT NULL,
+
+      observed_at TEXT NOT NULL,
+      verified_at TEXT,
+
+      offer_price REAL NOT NULL,
+      shipping_price REAL,
+      stock INTEGER,
+
+      FOREIGN KEY (offer_id)
+        REFERENCES offers(id)
+        ON DELETE CASCADE
+    );
+
+
     CREATE TABLE IF NOT EXISTS review_queue (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
 
@@ -130,6 +148,16 @@ function initializeDatabase(
     CREATE INDEX IF NOT EXISTS
       idx_offers_store
       ON offers(store);
+
+
+    CREATE INDEX IF NOT EXISTS
+      idx_offer_price_history_offer_id
+      ON offer_price_history(offer_id);
+
+
+    CREATE INDEX IF NOT EXISTS
+      idx_offer_price_history_observed_at
+      ON offer_price_history(observed_at);
 
 
     CREATE INDEX IF NOT EXISTS
@@ -285,6 +313,97 @@ function parseJson(
 
 
 // ========================================
+// PRICE OBSERVATION HELPERS
+//
+// old_price è un dato commerciale del
+// negozio. NON è il nostro storico.
+// Lo storico DaniSua registra solamente
+// valori che abbiamo realmente osservato.
+// ========================================
+
+function getOfferVerifiedAt(
+  offer
+) {
+  return (
+    offer?.verifiedAt ??
+    offer?.payload?.verifiedAt ??
+    offer?.updatedAt ??
+    null
+  );
+}
+
+
+function hasObservationChanged(
+  previous,
+  nextOffer
+) {
+  if (!previous) {
+    return true;
+  }
+
+  return (
+    previous.offer_price !==
+      nextOffer.offer_price ||
+    previous.shipping_price !==
+      (
+        nextOffer.shipping_price ??
+        null
+      ) ||
+    previous.stock !==
+      (
+        nextOffer.stock ??
+        null
+      ) ||
+    getOfferVerifiedAt(
+      previous
+    ) !==
+      getOfferVerifiedAt(
+        nextOffer
+      )
+  );
+}
+
+
+function insertOfferObservation(
+  db,
+  offer,
+  observedAt
+) {
+  db.prepare(`
+    INSERT INTO offer_price_history (
+      offer_id,
+      observed_at,
+      verified_at,
+      offer_price,
+      shipping_price,
+      stock
+    )
+    VALUES (
+      ?,
+      ?,
+      ?,
+      ?,
+      ?,
+      ?
+    )
+  `)
+    .run(
+      offer.id,
+      observedAt,
+      getOfferVerifiedAt(
+        offer
+      ),
+      offer.offer_price,
+      offer.shipping_price ??
+        null,
+      nullableStock(
+        offer.stock
+      )
+    );
+}
+
+
+// ========================================
 // UPSERT READY OFFER
 // ========================================
 
@@ -323,8 +442,22 @@ function upsertOffer(
   }
 
 
+  const previous =
+    getOfferById(
+      db,
+      offer.id
+    );
+
+
   const timestamp =
     nowIso();
+
+
+  const shouldRecordObservation =
+    hasObservationChanged(
+      previous,
+      offer
+    );
 
 
   const statement =
@@ -463,10 +596,76 @@ function upsertOffer(
   );
 
 
+  if (
+    shouldRecordObservation
+  ) {
+    insertOfferObservation(
+      db,
+      offer,
+      timestamp
+    );
+  }
+
+
   return getOfferById(
     db,
     offer.id
   );
+}
+
+
+// ========================================
+// PRICE HISTORY
+// ========================================
+
+function listOfferPriceHistory(
+  db,
+  offerId
+) {
+  return db.prepare(`
+    SELECT
+      id,
+      offer_id,
+      observed_at,
+      verified_at,
+      offer_price,
+      shipping_price,
+      stock
+    FROM offer_price_history
+    WHERE offer_id = ?
+    ORDER BY observed_at, id
+  `)
+    .all(
+      offerId
+    )
+    .map(
+      row => ({
+        id:
+          Number(
+            row.id
+          ),
+
+        offerId:
+          row.offer_id,
+
+        observedAt:
+          row.observed_at,
+
+        verifiedAt:
+          row.verified_at,
+
+        offer_price:
+          row.offer_price,
+
+        shipping_price:
+          row.shipping_price,
+
+        stock:
+          parseStock(
+            row.stock
+          ),
+      })
+    );
 }
 
 
@@ -905,6 +1104,7 @@ module.exports = {
   upsertOffer,
   getOfferById,
   listOffers,
+  listOfferPriceHistory,
 
   enqueueReview,
   getReviewById,
