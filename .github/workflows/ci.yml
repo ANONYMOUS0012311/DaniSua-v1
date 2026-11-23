@@ -64,6 +64,9 @@ jobs:
       - name: Run offer outcome tests
         run: npm run test:offer-outcome
 
+      - name: Run production reliability end-to-end test
+        run: npm run test:production-reliability
+
       - name: Check offer freshness
         run: npm run check:freshness
 
