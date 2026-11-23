@@ -2787,6 +2787,31 @@
     }
   },
   {
+    "id": "real-unieuro-iphone17-256-white",
+    "productId": "apple-iphone-17-256-white",
+    "store": "Unieuro",
+    "seller": "Unieuro",
+    "old_price": 999,
+    "offer_price": 969,
+    "currency": "EUR",
+    "shipping_price": 0,
+    "stock": true,
+    "url": "https://www.unieuro.it/online/iPhone/iPhone-17-256GB-Bianco-pidAPLIPHONE17256W",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-23T19:59:42Z",
+    "pricing": {
+      "type": "standard",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 969
+        }
+      ]
+    }
+  },
+  {
     "id": "real-samsung-s26ultra-512-black",
     "productId": "samsung-galaxy-s26-ultra-512-black",
     "store": "Samsung",
