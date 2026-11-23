@@ -70,6 +70,9 @@ jobs:
       - name: Run production reliability end-to-end test
         run: npm run test:production-reliability
 
+      - name: Run closed beta journey regression test
+        run: npm run test:closed-beta-journey
+
       - name: Check offer freshness
         run: npm run check:freshness
 
