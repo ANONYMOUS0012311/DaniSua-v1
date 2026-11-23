@@ -317,7 +317,8 @@ function applyTrustPolicy(
 // ========================================
 
 function applyFreshnessPolicy(
-  offers
+  offers,
+  options = {}
 ) {
   if (!Array.isArray(offers)) {
     return [];
@@ -332,15 +333,13 @@ function applyFreshnessPolicy(
         freshness:
           evaluateOfferFreshness(
             offer,
-            {
-              allowUnknown:
-                false,
-            }
+            options
           ),
 
         reliability:
           evaluateOfferReliability(
-            offer
+            offer,
+            options
           ),
       })
     );
