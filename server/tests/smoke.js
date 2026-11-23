@@ -20,6 +20,9 @@ const {
   evaluateOfferFreshness,
 } = require("../utils/freshness");
 
+const sourceRegistry =
+  require("../sources/registry");
+
 const {
   importFeedContent,
 } = require("../ingestion/feedImporter");
@@ -1718,6 +1721,51 @@ async function testFreshnessGuard() {
     selection.bestOffer?.id ===
       "fresh-expensive",
     `L'offerta stale non deve vincere: ${selection.bestOffer?.id}`
+  );
+}
+
+
+// ========================================
+// FRESHNESS — SOURCE OBSERVABILITY
+// ========================================
+
+async function testFreshnessDiagnostics() {
+  const result =
+    await sourceRegistry.searchAll(
+      "iPhone 17",
+      {
+        limitPerSource: 100,
+        totalLimit: 300,
+        betaOnly: true,
+      }
+    );
+
+  const freshness =
+    result.diagnostics
+      ?.freshness;
+
+  assert(
+    freshness &&
+    freshness.total ===
+      result.diagnostics
+        ?.totalAfterTrust,
+    "La diagnostica freshness deve coprire tutte le offerte trusted"
+  );
+
+  assert(
+    [
+      "fresh",
+      "stale",
+      "unknown",
+      "invalid",
+      "future",
+    ].every(
+      key =>
+        Number.isInteger(
+          freshness[key]
+        )
+    ),
+    "La diagnostica freshness deve esporre conteggi strutturati"
   );
 }
 
@@ -4795,6 +4843,14 @@ const tests = [
 
     run:
       testFreshnessGuard,
+  },
+
+  {
+    name:
+      "FRESHNESS — source observability",
+
+    run:
+      testFreshnessDiagnostics,
   },
 
   {
