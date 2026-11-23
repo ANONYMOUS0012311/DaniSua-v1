@@ -309,6 +309,16 @@ async function main() {
     );
 
     assert(
+      typeof cheapest
+        .requestId ===
+        "string" &&
+      cheapest
+        .requestId
+        .length > 0,
+      "La risposta /search deve esporre requestId per correlare metriche senza salvare la query"
+    );
+
+    assert(
       cheapest
         .clarification
         ?.needed !==
@@ -377,6 +387,43 @@ async function main() {
         ?.id ===
         "closed-mediaworld-iphone17",
       "La ricerca esatta deve mantenere la migliore offerta valida tra le 256 GB"
+    );
+
+    const eventResponse =
+      await fetch(
+        `${BASE_URL}/events`,
+        {
+          method:
+            "POST",
+          headers: {
+            "Content-Type":
+              "application/json",
+          },
+          body:
+            JSON.stringify({
+              type:
+                "offer_click",
+              offerId:
+                exact.bestOffer
+                  .id,
+              familyId:
+                exact.bestOffer
+                  .familyId,
+              store:
+                exact.bestOffer
+                  .store,
+              position:
+                0,
+              searchRequestId:
+                exact.requestId,
+            }),
+        }
+      );
+
+    assert(
+      eventResponse.status ===
+        202,
+      `Evento click correlato deve essere accettato: ${eventResponse.status}`
     );
 
     console.log(
