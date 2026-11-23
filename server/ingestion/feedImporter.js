@@ -566,6 +566,19 @@ function mapNormalizedFeedItem(
         )
       ),
 
+    merchantCategory:
+      toNullableString(
+        firstValue(
+          item,
+          [
+            "merchantCategory",
+            "merchant_category",
+            "category",
+            "product_type",
+          ]
+        )
+      ),
+
     url:
       normalizeUrl(
         firstValue(
