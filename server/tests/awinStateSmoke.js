@@ -125,8 +125,9 @@ function main() {
       fs.existsSync(
         statePath
       ) &&
-      saved.feeds
-        .["5001"]
+      saved.feeds[
+        "5001"
+      ]
         .lastImported ===
         "2026-11-23 18:00:00",
       "State processato non salvato"
