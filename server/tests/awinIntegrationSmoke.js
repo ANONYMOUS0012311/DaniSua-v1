@@ -375,6 +375,39 @@ async function main() {
   );
 
 
+  const refurbishedCsv = [
+    "product_id,product_name,brand_name,price,currency,delivery_cost,in_stock,deep_link,condition",
+    "SKU-REFURB,Apple iPhone 17 256 GB Nero,Apple,699.00,EUR,0,1,https://www.unieuro.it/online/test-refurb,refurbished",
+  ].join("\n");
+
+  const refurbished =
+    importAwinProductFeed({
+      content:
+        refurbishedCsv,
+      advertiserId:
+        "1001",
+      advertiserName:
+        "Unieuro",
+      observedAt:
+        "2026-11-23T20:00:00Z",
+      betaOnly: true,
+    });
+
+  assert(
+    refurbished.ready.length ===
+      0 &&
+    refurbished
+      .needsReview
+      .length === 1 &&
+    refurbished
+      .needsReview[0]
+      ?.match
+      ?.reason ===
+      "condition_mismatch",
+    "Una offerta refurbished non deve auto-matchare un prodotto new"
+  );
+
+
   console.log(
     "✅ AWIN — config, allowlist, feed planning e mapping"
   );

@@ -555,6 +555,17 @@ function mapNormalizedFeedItem(
         )
       ),
 
+    condition:
+      toNullableString(
+        firstValue(
+          item,
+          [
+            "condition",
+            "item_condition",
+          ]
+        )
+      ),
+
     url:
       normalizeUrl(
         firstValue(
