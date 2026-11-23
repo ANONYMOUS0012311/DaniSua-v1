@@ -3168,6 +3168,23 @@ async function testPriceShapingVariantDepth() {
       })
   );
 
+  const iphone17NoStorage =
+    await search(
+      "iPhone 17"
+    );
+
+  assert(
+    iphone17NoStorage.canRecommend === true &&
+    iphone17NoStorage
+      .clarification
+      ?.needed !== true &&
+    iphone17NoStorage
+      .bestOffer
+      ?.familyId ===
+        "apple-iphone-17",
+    "iPhone 17 senza capacità non deve chiedere chiarimenti: deve mostrare le varianti disponibili"
+  );
+
   const iphone17_512 =
     await search(
       "iPhone 17 512 GB più economico"
