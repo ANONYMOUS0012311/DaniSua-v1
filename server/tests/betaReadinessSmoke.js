@@ -109,8 +109,11 @@ function main() {
   assert(
     ready
       .readyForPublicBeta ===
+      true &&
+    ready
+      .readyForClosedBeta ===
       true,
-    "Due store fresh con costo finale e automazione pronta devono risultare ready"
+    "Due store fresh con costo finale devono rendere ready il fixture minimo e, con automazione, anche la beta pubblica"
   );
 
   const missingShipping =
@@ -216,6 +219,131 @@ function main() {
     "Offerte stale e automazione spenta devono bloccare la beta"
   );
 
+  const closedBetaTargets = {
+    families: [
+      {
+        familyId:
+          "family-a",
+        priority:
+          "P0",
+        minimumStores:
+          4,
+      },
+      {
+        familyId:
+          "family-b",
+        priority:
+          "P0",
+        minimumStores:
+          4,
+      },
+      {
+        familyId:
+          "family-c",
+        priority:
+          "P0",
+        minimumStores:
+          4,
+      },
+      {
+        familyId:
+          "family-d",
+        priority:
+          "P0",
+        minimumStores:
+          4,
+      },
+    ],
+  };
+
+  const closedBetaProducts =
+    closedBetaTargets
+      .families
+      .map(
+        family => ({
+          id:
+            family.familyId +
+            "-256",
+          familyId:
+            family.familyId,
+        })
+      );
+
+  const closedBetaOffers = [];
+
+  for (
+    const familyId of
+    [
+      "family-a",
+      "family-b",
+      "family-c",
+    ]
+  ) {
+    for (
+      const [
+        index,
+        store,
+      ] of
+      [
+        "Store A",
+        "Store B",
+      ]
+        .entries()
+    ) {
+      closedBetaOffers.push({
+        ...baseOffer,
+        id:
+          familyId +
+          "-" +
+          index,
+        productId:
+          familyId +
+          "-256",
+        store,
+        offer_price:
+          900 +
+          index,
+        shipping_price:
+          index,
+      });
+    }
+  }
+
+  const closedBeta =
+    buildBetaReadiness(
+      {
+        products:
+          closedBetaProducts,
+        targets:
+          closedBetaTargets,
+        offers:
+          closedBetaOffers,
+        env: {},
+      },
+      {
+        now,
+      }
+    );
+
+  assert(
+    closedBeta
+      .readyForClosedBeta ===
+      true &&
+    closedBeta
+      .readyForPublicBeta ===
+      false &&
+    closedBeta
+      .summary
+      .closedBetaFamiliesReady ===
+      3 &&
+    closedBeta
+      .summary
+      .closedBetaMinimumFamilies ===
+      3,
+    "Tre famiglie P0 con due store fresh e costo finale devono bastare per la beta chiusa, non per quella pubblica"
+  );
+
+
   const health =
     buildBetaHealthSnapshot(
       missingShipping
@@ -224,6 +352,9 @@ function main() {
   assert(
     health
       .readyForPublicBeta ===
+      false &&
+    health
+      .readyForClosedBeta ===
       false &&
     health
       .summary
