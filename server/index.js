@@ -397,6 +397,131 @@ app.use(
 
 
 // ========================================
+// BETA METRICS — PRIVACY SAFE
+//
+// Non logghiamo la query dell'utente.
+// Solo esiti aggregabili e click offerta.
+// ========================================
+
+function safeMetricText(
+  value,
+  maxLength = 120
+) {
+  if (
+    value === null ||
+    value === undefined
+  ) {
+    return null;
+  }
+
+  const text =
+    String(value)
+      .replace(
+        /[\u0000-\u001F\u007F]/g,
+        " "
+      )
+      .replace(
+        /\s+/g,
+        " "
+      )
+      .trim();
+
+  if (!text) {
+    return null;
+  }
+
+  return text.slice(
+    0,
+    maxLength
+  );
+}
+
+
+app.use(
+  (
+    req,
+    res,
+    next
+  ) => {
+    if (
+      req.method !== "GET" ||
+      req.path !== "/search"
+    ) {
+      return next();
+    }
+
+    const originalJson =
+      res.json.bind(
+        res
+      );
+
+    res.json =
+      payload => {
+        if (
+          payload &&
+          typeof payload ===
+            "object"
+        ) {
+          logInfo(
+            "search_outcome",
+            {
+              requestId:
+                req.requestId ||
+                null,
+              intent:
+                safeMetricText(
+                  payload.intent,
+                  40
+                ),
+              status:
+                safeMetricText(
+                  payload.status ||
+                  (
+                    payload.error
+                      ? "error"
+                      : null
+                  ),
+                  60
+                ),
+              canRecommend:
+                payload
+                  .canRecommend ===
+                true,
+              count:
+                Number.isFinite(
+                  Number(
+                    payload.count
+                  )
+                )
+                  ? Number(
+                      payload.count
+                    )
+                  : 0,
+              hasBestOffer:
+                Boolean(
+                  payload
+                    .bestOffer
+                ),
+              clarificationNeeded:
+                payload
+                  .clarification
+                  ?.needed ===
+                true,
+            }
+          );
+        }
+
+        return originalJson(
+          payload
+        );
+      };
+
+    return next();
+  }
+);
+
+
+// ========================================
 // NORMALIZZAZIONE
 // ========================================
 
@@ -4277,6 +4402,101 @@ app.get(
     res.send(
       "Servidor DaniSua funcionando"
     );
+  }
+);
+
+
+// ========================================
+// BETA EVENTI CLIENT
+// ========================================
+
+app.post(
+  "/events",
+  (
+    req,
+    res
+  ) => {
+    const eventType =
+      safeMetricText(
+        req.body
+          ?.type,
+        40
+      );
+
+    if (
+      eventType !==
+      "offer_click"
+    ) {
+      return res
+        .status(
+          400
+        )
+        .json({
+          ok: false,
+          error:
+            "Evento non valido.",
+          requestId:
+            req.requestId ||
+            null,
+        });
+    }
+
+    const rawPosition =
+      req.body
+        ?.position;
+
+    const position =
+      typeof rawPosition ===
+        "number"
+        ? rawPosition
+        : Number.NaN;
+
+    logInfo(
+      "client_event",
+      {
+        requestId:
+          req.requestId ||
+          null,
+        eventType,
+        offerId:
+          safeMetricText(
+            req.body
+              ?.offerId,
+            120
+          ),
+        familyId:
+          safeMetricText(
+            req.body
+              ?.familyId,
+            120
+          ),
+        store:
+          safeMetricText(
+            req.body
+              ?.store,
+            80
+          ),
+        position:
+          Number.isInteger(
+            position
+          ) &&
+          position >= 0 &&
+          position <= 100
+            ? position
+            : null,
+      }
+    );
+
+    return res
+      .status(
+        202
+      )
+      .json({
+        ok: true,
+        requestId:
+          req.requestId ||
+          null,
+      });
   }
 );
 
