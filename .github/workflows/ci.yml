@@ -40,6 +40,9 @@ jobs:
       - name: Run database reliability tests
         run: npm run test:database
 
+      - name: Run reliability queue tests
+        run: npm run test:reliability
+
       - name: Check offer freshness
         run: npm run check:freshness
 
