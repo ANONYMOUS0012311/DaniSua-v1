@@ -37,6 +37,9 @@ jobs:
       - name: Run smoke tests
         run: npm test
 
+      - name: Run database reliability tests
+        run: npm run test:database
+
       - name: Check offer freshness
         run: npm run check:freshness
 
