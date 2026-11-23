@@ -38,6 +38,8 @@ Prima di invitare gli utenti:
 
 ## Come testare
 
+Registrare gli esiti in `docs/CLOSED_BETA_RESULTS_TEMPLATE.md`, usando solo identificatori anonimi T1–T5.
+
 Non insegnare agli utenti la sintassi di DaniSua. Devono scrivere come scriverebbero normalmente.
 
 Per ogni utente chiedere di completare tre compiti:
