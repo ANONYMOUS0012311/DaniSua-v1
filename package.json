@@ -14,7 +14,8 @@
     "reliability:queue": "node scripts/reliability-queue.js",
     "test:reliability": "node server/tests/reliabilityQueueSmoke.js",
     "import:offers:db": "node scripts/persist-offers.js",
-    "test:persistent-import": "node server/tests/persistentImportCliSmoke.js"
+    "test:persistent-import": "node server/tests/persistentImportCliSmoke.js",
+    "test:awin": "node server/tests/awinIntegrationSmoke.js"
   },
   "keywords": [],
   "author": "",
