@@ -184,13 +184,13 @@
     "store": "Apple",
     "seller": "Apple",
     "old_price": null,
-    "offer_price": 979,
+    "offer_price": 1129,
     "currency": "EUR",
     "shipping_price": 0,
     "stock": true,
     "url": "https://www.apple.com/it/shop/buy-iphone/iphone-17",
-    "updatedAt": "2026-11-23T21:05:00Z",
-    "verifiedAt": "2026-11-23T21:05:00Z",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-04",
     "pricing": {
       "type": "standard",
       "conditional": false,
@@ -198,25 +198,25 @@
       "paymentOptions": [
         {
           "type": "one_time",
-          "total_price": 979
+          "total_price": 1129
         }
       ]
     },
-    "price_note": "Prezzo Apple Store Italia verificato per iPhone 17 256 GB Nero. La consegna standard Apple è gratuita per gli ordini online."
+    "price_note": "Ultima verifica esatta disponibile del 04/11/2026. Non viene marcata fresh senza una verifica corrente."
   },
   {
     "id": "real-mediaworld-iphone17-256-black",
     "productId": "apple-iphone-17-256-black",
     "store": "MediaWorld",
     "seller": "MediaWorld",
-    "old_price": 979,
-    "offer_price": 899.49,
+    "old_price": 1129,
+    "offer_price": 989.49,
     "currency": "EUR",
     "shipping_price": 3.99,
     "stock": true,
     "url": "https://www.mediaworld.it/it/product/_apple-iphone-17-256gb-nero-389194.html",
-    "updatedAt": "2026-11-23T21:05:00Z",
-    "verifiedAt": "2026-11-23T21:05:00Z",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-04",
     "pricing": {
       "type": "standard",
       "conditional": false,
@@ -224,36 +224,36 @@
       "paymentOptions": [
         {
           "type": "one_time",
-          "total_price": 899.49
+          "total_price": 989.49
         },
         {
           "type": "installment",
-          "installments": 24,
-          "installment_amount": 42.4,
-          "displayed_total": 1017.6,
-          "financing_cost": 118.11,
-          "tan": 12.13,
-          "taeg": 12.83,
+          "installments": 10,
+          "installment_amount": 98.95,
+          "displayed_total": 989.49,
+          "financing_cost": 0,
+          "tan": 0,
+          "taeg": 0,
           "provider": null,
-          "note": "MediaWorld mostra un esempio di finanziamento separato dal prezzo one-time; il ranking standard usa 899,49 €."
+          "note": "Piano rateale dell'ultima verifica esatta; dati stale finché non riconfermati."
         }
       ]
     },
-    "price_note": "Prezzo nuovo diretto MediaWorld verificato. Le offerte ricondizionate/marketplace restano separate e non vincono come MediaWorld diretto."
+    "price_note": "Ultima verifica esatta disponibile del 04/11/2026. Richiede nuova verifica prima di essere considerata fresh."
   },
   {
     "id": "real-mediaworld-iphone17-256-sage",
     "productId": "apple-iphone-17-256-sage",
     "store": "MediaWorld",
     "seller": "MediaWorld",
-    "old_price": 979,
-    "offer_price": 899.49,
+    "old_price": 1129,
+    "offer_price": 949.49,
     "currency": "EUR",
-    "shipping_price": 3.99,
+    "shipping_price": null,
     "stock": true,
     "url": "https://www.mediaworld.it/it/product/_apple-iphone-17-256gb-salvia-389199.html",
-    "updatedAt": "2026-11-23T21:05:00Z",
-    "verifiedAt": "2026-11-23T21:05:00Z",
+    "updatedAt": "2026-11-23T21:15:16Z",
+    "verifiedAt": "2026-11-23T21:15:16Z",
     "pricing": {
       "type": "standard",
       "conditional": false,
@@ -261,22 +261,22 @@
       "paymentOptions": [
         {
           "type": "one_time",
-          "total_price": 899.49
+          "total_price": 949.49
         },
         {
           "type": "installment",
-          "installments": 24,
-          "installment_amount": 42.4,
-          "displayed_total": 1017.6,
-          "financing_cost": 118.11,
-          "tan": 12.13,
-          "taeg": 12.83,
+          "installments": 10,
+          "installment_amount": 94.95,
+          "displayed_total": 949.49,
+          "financing_cost": 0,
+          "tan": 0,
+          "taeg": 0,
           "provider": null,
-          "note": "Finanziamento mostrato separatamente dal prezzo one-time."
+          "note": "MediaWorld mostra 10 rate a tasso zero; il ranking standard usa il prezzo one-time."
         }
       ]
     },
-    "price_note": "Prezzo nuovo diretto MediaWorld verificato per la variante Salvia."
+    "price_note": "Prezzo corrente verificato oggi su MediaWorld per iPhone 17 256GB Salvia. La pagina corrente conferma spedizione disponibile ma non il relativo costo, quindi resta sconosciuto."
   },
   {
     "id": "real-samsung-s26ultra-256-white",
@@ -308,14 +308,14 @@
     "productId": "samsung-galaxy-s26-ultra-256-white",
     "store": "MediaWorld",
     "seller": "MediaWorld",
-    "old_price": 1499,
-    "offer_price": 1249.99,
+    "old_price": 1599,
+    "offer_price": 1199.49,
     "currency": "EUR",
     "shipping_price": 3.99,
     "stock": true,
     "url": "https://www.mediaworld.it/it/product/_samsung-galaxy-m3-256gb-1024-gb-titanium-jetblack-564017.html",
-    "updatedAt": "2026-11-23T21:12:00Z",
-    "verifiedAt": "2026-11-23T21:12:00Z",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-04",
     "pricing": {
       "type": "standard",
       "conditional": false,
@@ -323,22 +323,22 @@
       "paymentOptions": [
         {
           "type": "one_time",
-          "total_price": 1249.99
+          "total_price": 1199.49
         },
         {
           "type": "installment",
-          "installments": 24,
-          "installment_amount": 58.9,
-          "displayed_total": 1413.6,
-          "financing_cost": 163.61,
-          "tan": 12.1,
-          "taeg": 12.79,
+          "installments": 10,
+          "installment_amount": 119.95,
+          "displayed_total": 1199.49,
+          "financing_cost": 0,
+          "tan": 0,
+          "taeg": 0,
           "provider": null,
-          "note": "Esempio di finanziamento MediaWorld separato dal prezzo one-time."
+          "note": "Piano rateale dell'ultima verifica esatta; dati stale finché non riconfermati."
         }
       ]
     },
-    "price_note": "Prezzo MediaWorld diretto verificato per Galaxy S26 Ultra 256 GB White; consegna 3,99 €."
+    "price_note": "Ultima osservazione esatta di produzione del 04/11/2026; il contenuto prodotto indicizzato più recente non è sufficiente per marcarla fresh."
   },
   {
     "id": "real-apple-mba13-m5-midnight",
@@ -1939,14 +1939,14 @@
     "productId": "apple-iphone-17-256-black",
     "store": "Unieuro",
     "seller": "Unieuro",
-    "old_price": 979,
-    "offer_price": 899,
+    "old_price": 999,
+    "offer_price": 969,
     "currency": "EUR",
     "shipping_price": null,
     "stock": true,
     "url": "https://www.unieuro.it/online/iPhone/iPhone-17-256GB-Nero-pidAPLIPHONE17256",
-    "updatedAt": "2026-11-23T21:05:00Z",
-    "verifiedAt": "2026-11-23T21:05:00Z",
+    "updatedAt": "2026-11-23T21:15:16Z",
+    "verifiedAt": "2026-11-23T21:15:16Z",
     "pricing": {
       "type": "standard",
       "conditional": false,
@@ -1954,25 +1954,25 @@
       "paymentOptions": [
         {
           "type": "one_time",
-          "total_price": 899
+          "total_price": 969
         }
       ]
     },
-    "price_note": "Prezzo Unieuro verificato sulla pagina prodotto. La pagina acquisita non espone con certezza il costo di spedizione, quindi resta sconosciuto."
+    "price_note": "Prezzo corrente verificato oggi sulla categoria iPhone Unieuro per iPhone 17 256GB Nero. Il costo di spedizione non è confermato dal contenuto corrente e resta sconosciuto."
   },
   {
     "id": "real-euronics-iphone17-256-black",
     "productId": "apple-iphone-17-256-black",
     "store": "Euronics",
     "seller": "Euronics",
-    "old_price": 979,
-    "offer_price": 905,
+    "old_price": 999,
+    "offer_price": 999,
     "currency": "EUR",
-    "shipping_price": 7.9,
+    "shipping_price": null,
     "stock": true,
     "url": "https://www.euronics.it/telefonia/smartphone-e-cellulari/iphone/apple---iphone-17-256gb-nero/252011565.html",
-    "updatedAt": "2026-11-23T21:05:00Z",
-    "verifiedAt": "2026-11-23T21:05:00Z",
+    "updatedAt": "2026-11-23T21:15:16Z",
+    "verifiedAt": "2026-11-23T21:15:16Z",
     "pricing": {
       "type": "standard",
       "conditional": false,
@@ -1980,11 +1980,11 @@
       "paymentOptions": [
         {
           "type": "one_time",
-          "total_price": 905
+          "total_price": 999
         }
       ]
     },
-    "price_note": "Prezzo Euronics verificato sulla pagina prodotto; consegna online 7,90 €."
+    "price_note": "Prezzo corrente verificato oggi sulla pagina iPhone 17 Euronics. Il costo di spedizione non è esposto nel contenuto corrente e resta sconosciuto."
   },
   {
     "id": "real-euronics-pixel11pro-256-obsidian",
@@ -2078,13 +2078,13 @@
     "store": "Euronics",
     "seller": "Euronics",
     "old_price": 1499,
-    "offer_price": 1299,
+    "offer_price": 1149,
     "currency": "EUR",
-    "shipping_price": 7.9,
+    "shipping_price": null,
     "stock": true,
     "url": "https://www.euronics.it/telefonia/smartphone-e-cellulari/smartphone-dual-sim/samsung---smartphone-galaxy-s26-ultra-256gb-12gb-black/262001832.html",
-    "updatedAt": "2026-11-23T21:12:00Z",
-    "verifiedAt": "2026-11-23T21:12:00Z",
+    "updatedAt": "2026-11-23T21:15:16Z",
+    "verifiedAt": "2026-11-23T21:15:16Z",
     "pricing": {
       "type": "standard",
       "conditional": false,
@@ -2092,11 +2092,11 @@
       "paymentOptions": [
         {
           "type": "one_time",
-          "total_price": 1299
+          "total_price": 1149
         }
       ]
     },
-    "price_note": "Prezzo Euronics verificato per Galaxy S26 Ultra 256 GB Black; consegna 7,90 €."
+    "price_note": "Prezzo corrente verificato oggi su Euronics per Galaxy S26 Ultra 256GB/12GB Black. Il costo di spedizione non è esposto nel contenuto corrente e resta sconosciuto."
   },
   {
     "id": "real-unieuro-s26ultra-256-black",
@@ -2109,8 +2109,8 @@
     "shipping_price": null,
     "stock": true,
     "url": "https://www.unieuro.it/online/Smartphone/Galaxy-S26-Ultra-Smartphone-AI-256GB-Privacy-Display-integrato-Processore-potente-Assistente-Foto-Camera-200-MP-5000-mAh-Black-pidSAMS26ULTRA256",
-    "updatedAt": "2026-11-23T21:12:00Z",
-    "verifiedAt": "2026-11-23T21:12:00Z",
+    "updatedAt": null,
+    "verifiedAt": "2026-11-05",
     "pricing": {
       "type": "standard",
       "conditional": false,
@@ -2122,7 +2122,7 @@
         }
       ]
     },
-    "price_note": "Prezzo Unieuro verificato per Galaxy S26 Ultra 256 GB Black. La pagina conferma stock online ma non espone un costo di spedizione affidabile nel contenuto acquisito."
+    "price_note": "La categoria Unieuro mostra oggi un prezzo più basso per Galaxy S26 Ultra, ma senza una prova corrente sufficientemente precisa della stessa variante Black manteniamo l'ultima osservazione esatta come stale."
   },
   {
     "id": "real-euronics-s26-256-white",
@@ -3858,9 +3858,9 @@
     "shipping_price": 0,
     "stock": true,
     "url": "https://www.samsung.com/it/smartphones/galaxy-s26-ultra/buy/?modelCode=SM-S948BZKDEUE",
-    "updatedAt": "2026-11-23T21:12:00Z",
-    "verifiedAt": "2026-11-23T21:12:00Z",
-    "price_note": "Prezzo Samsung Shop verificato per Galaxy S26 Ultra 256 GB Black. Consegna gratuita. Eventuale 5% Samsung Pay è condizionato e non viene usato nel ranking standard.",
+    "updatedAt": null,
+    "verifiedAt": null,
+    "price_note": "Offerta Samsung Shop conservata come candidata, ma senza timestamp corrente sufficientemente verificato: reliability=unknown finché non viene riconfermata.",
     "pricing": {
       "type": "standard",
       "conditional": false,
