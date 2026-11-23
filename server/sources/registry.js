@@ -775,6 +775,153 @@ async function searchAll(
 
 
 // ========================================
+// RELIABILITY HEALTH SNAPSHOT
+//
+// Cache breve: /health viene chiamato spesso
+// da Render. Evitiamo di rileggere tutte le
+// fonti a ogni health check.
+// ========================================
+
+const RELIABILITY_HEALTH_CACHE_MS =
+  60 * 1000;
+
+let reliabilityHealthCache = {
+  expiresAt: 0,
+  value: null,
+};
+
+
+function summarizeReliabilityStates(
+  offers
+) {
+  const summary = {
+    total: 0,
+    fresh: 0,
+    review: 0,
+    stale: 0,
+    unknown: 0,
+    invalid: 0,
+    future: 0,
+  };
+
+  for (
+    const offer of
+    Array.isArray(offers)
+      ? offers
+      : []
+  ) {
+    const status =
+      offer
+        ?.reliability
+        ?.status ||
+      "unknown";
+
+    summary.total += 1;
+
+    if (
+      Object.prototype
+        .hasOwnProperty
+        .call(
+          summary,
+          status
+        )
+    ) {
+      summary[
+        status
+      ] += 1;
+    } else {
+      summary.unknown += 1;
+    }
+  }
+
+  return summary;
+}
+
+
+async function getReliabilityHealthSnapshot({
+  now = Date.now(),
+  force = false,
+} = {}) {
+  if (
+    !force &&
+    reliabilityHealthCache
+      .value &&
+    now <
+      reliabilityHealthCache
+        .expiresAt
+  ) {
+    return reliabilityHealthCache
+      .value;
+  }
+
+  const search =
+    await searchAll(
+      "",
+      {
+        limitPerSource: 1000,
+        totalLimit: 2000,
+        betaOnly: true,
+      }
+    );
+
+  const summary =
+    summarizeReliabilityStates(
+      search.results
+    );
+
+  const value = {
+    available: true,
+
+    ...summary,
+
+    freshRatio:
+      summary.total > 0
+        ? Number(
+            (
+              summary.fresh /
+              summary.total
+            )
+              .toFixed(
+                4
+              )
+          )
+        : null,
+
+    requiresRefresh:
+      summary.total -
+      summary.fresh,
+
+    sourceFailures:
+      Array.isArray(
+        search
+          .diagnostics
+          ?.sourcesFailed
+      )
+        ? search
+            .diagnostics
+            .sourcesFailed
+            .length
+        : 0,
+
+    generatedAt:
+      new Date(
+        now
+      )
+        .toISOString(),
+  };
+
+  reliabilityHealthCache = {
+    expiresAt:
+      now +
+      RELIABILITY_HEALTH_CACHE_MS,
+    value,
+  };
+
+  return value;
+}
+
+
+// ========================================
 // EXPORTS
 // ========================================
 
@@ -791,5 +938,7 @@ module.exports = {
   filterTrustedBetaOffers,
 
   deduplicateOffers,
+  summarizeReliabilityStates,
+  getReliabilityHealthSnapshot,
   searchAll,
 };
