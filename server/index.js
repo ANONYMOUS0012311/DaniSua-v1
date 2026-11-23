@@ -4434,11 +4434,15 @@ app.post(
         });
     }
 
+    const rawPosition =
+      req.body
+        ?.position;
+
     const position =
-      Number(
-        req.body
-          ?.position
-      );
+      typeof rawPosition ===
+        "number"
+        ? rawPosition
+        : Number.NaN;
 
     logInfo(
       "client_event",
