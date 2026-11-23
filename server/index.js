@@ -14,6 +14,10 @@ const {
 } = require("./utils/betaReadiness");
 
 const {
+  fetchProductImageUrl,
+} = require("./utils/productImage");
+
+const {
   logInfo,
   logError,
 } = require("./utils/logger");
@@ -541,21 +545,84 @@ app.use(
 // NORMALIZZAZIONE
 // ========================================
 
+function normalizeCanonicalTermSource(
+  value
+) {
+  return String(
+    value || ""
+  )
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, " ")
+    .split(" ")
+    .map(
+      token =>
+        token.trim()
+    )
+    .filter(
+      token =>
+        token.length >= 4 &&
+        !/^\d+$/.test(
+          token
+        )
+    );
+}
+
+
 const QUERY_CANONICAL_TERMS = [
-  "samsung",
-  "batteria",
-  "fotocamera",
-  "iphone",
-  "pixel",
-  "xiaomi",
-  "redmi",
-  "economico",
-  "economica",
-  "migliore",
-  "miglior",
-  "android",
-  "smartphone",
+  ...new Set([
+    "batteria",
+    "fotocamera",
+    "camera",
+    "prezzo",
+    "economico",
+    "economica",
+    "migliore",
+    "miglior",
+    "android",
+    "smartphone",
+    "telefono",
+    "cuffie",
+    "auricolari",
+    "console",
+    "laptop",
+    "notebook",
+    "gaming",
+    "universita",
+    "lavoro",
+    "prestazioni",
+    "display",
+    "schermo",
+    "memoria",
+    "spazio",
+    "ricondizionato",
+    "ricondizionata",
+    "nuovo",
+    "nuova",
+    "usato",
+    "usata",
+    ...productsCatalog
+      .flatMap(
+        product => [
+          product?.brand,
+          product?.model,
+          product?.familyName,
+          product?.productLineName,
+          product?.category,
+        ]
+      )
+      .flatMap(
+        normalizeCanonicalTermSource
+      ),
+  ]),
 ];
+
+
+const QUERY_CANONICAL_TERM_SET =
+  new Set(
+    QUERY_CANONICAL_TERMS
+  );
 
 
 function editDistance(
@@ -572,28 +639,42 @@ function editDistance(
       right || ""
     );
 
-  const previous =
+  const matrix =
     Array.from(
       {
         length:
-          b.length + 1,
+          a.length + 1,
       },
-      (
-        _,
-        index
-      ) =>
-        index
+      () =>
+        Array(
+          b.length + 1
+        )
+          .fill(0)
     );
+
+  for (
+    let i = 0;
+    i <= a.length;
+    i += 1
+  ) {
+    matrix[i][0] =
+      i;
+  }
+
+  for (
+    let j = 0;
+    j <= b.length;
+    j += 1
+  ) {
+    matrix[0][j] =
+      j;
+  }
 
   for (
     let i = 1;
     i <= a.length;
     i += 1
   ) {
-    const current = [
-      i,
-    ];
-
     for (
       let j = 1;
       j <= b.length;
@@ -605,27 +686,37 @@ function editDistance(
           ? 0
           : 1;
 
-      current[j] =
+      matrix[i][j] =
         Math.min(
-          current[
-            j - 1
-          ] + 1,
-          previous[j] + 1,
-          previous[
-            j - 1
-          ] +
+          matrix[i - 1][j] +
+            1,
+          matrix[i][j - 1] +
+            1,
+          matrix[i - 1][j - 1] +
             substitutionCost
         );
-    }
 
-    previous.splice(
-      0,
-      previous.length,
-      ...current
-    );
+      if (
+        i > 1 &&
+        j > 1 &&
+        a[i - 1] ===
+          b[j - 2] &&
+        a[i - 2] ===
+          b[j - 1]
+      ) {
+        matrix[i][j] =
+          Math.min(
+            matrix[i][j],
+            matrix[i - 2][j - 2] +
+              1
+          );
+      }
+    }
   }
 
-  return previous[
+  return matrix[
+    a.length
+  ][
     b.length
   ];
 }
@@ -642,8 +733,8 @@ function normalizeKnownQueryTypos(
       token => {
         if (
           token.length < 5 ||
-          QUERY_CANONICAL_TERMS
-            .includes(
+          QUERY_CANONICAL_TERM_SET
+            .has(
               token
             )
         ) {
@@ -4703,6 +4794,60 @@ app.post(
           req.requestId ||
           null,
       });
+  }
+);
+
+
+// ========================================
+// IMMAGINE PRODOTTO
+//
+// Risolve una foto da una pagina sorgente
+// già presente nel catalogo. Non accetta
+// URL arbitrari dall'utente.
+// ========================================
+
+app.get(
+  "/product-image/:productId",
+  async (
+    req,
+    res
+  ) => {
+    const productId =
+      String(
+        req.params
+          ?.productId ||
+        ""
+      )
+        .trim();
+
+    if (!productId) {
+      return res
+        .status(404)
+        .end();
+    }
+
+    const imageUrl =
+      await fetchProductImageUrl({
+        products:
+          productsCatalog,
+        productId,
+      });
+
+    if (!imageUrl) {
+      return res
+        .status(404)
+        .end();
+    }
+
+    res.set(
+      "Cache-Control",
+      "public, max-age=21600"
+    );
+
+    return res.redirect(
+      302,
+      imageUrl
+    );
   }
 );
 
