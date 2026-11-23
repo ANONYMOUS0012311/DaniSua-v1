@@ -34,9 +34,14 @@ jobs:
           node --check app.js
           node --check normalize.js
           node --check scripts/live-production-smoke.js
+          node --check server/utils/productImage.js
+          node --check server/tests/productImageSmoke.js
 
       - name: Run smoke tests
         run: npm test
+
+      - name: Run product image resolver tests
+        run: npm run test:product-image
 
       - name: Run ingestion core tests
         run: npm run test:ingestion-core
