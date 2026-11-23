@@ -708,6 +708,11 @@ async function searchAll(
       }
     );
 
+  const reliabilitySummary =
+    summarizeReliabilityStates(
+      evaluatedResults
+    );
+
 
   // ====================================
   // DEDUPLICAZIONE
@@ -777,6 +782,9 @@ async function searchAll(
 
       freshness:
         freshnessSummary,
+
+      reliability:
+        reliabilitySummary,
 
       totalAfterDeduplication:
         deduplicated.length,
