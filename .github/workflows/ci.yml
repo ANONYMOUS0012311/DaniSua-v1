@@ -49,6 +49,9 @@ jobs:
       - name: Run Awin feed-state tests
         run: npm run test:awin-state
 
+      - name: Run Awin end-to-end sync tests
+        run: npm run test:awin-sync
+
       - name: Run reliability queue tests
         run: npm run test:reliability
 
