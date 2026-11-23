@@ -10,6 +10,10 @@ const {
 } = require("../utils/offerContract");
 
 const {
+  filterOffersByMarketCurrency,
+} = require("../utils/marketPolicy");
+
+const {
   evaluateOfferFreshness,
   evaluateOfferReliability,
   summarizeOfferFreshness,
@@ -621,6 +625,26 @@ async function searchAll(
 
 
   // ====================================
+  // MARKET POLICY
+  //
+  // Italia beta: non confrontiamo valori
+  // numerici appartenenti a valute diverse.
+  // Il default è EUR ed è configurabile.
+  // ====================================
+
+  const marketValidation =
+    filterOffersByMarketCurrency(
+      validResults
+    );
+
+  const marketResults =
+    marketValidation.accepted;
+
+  const rejectedByMarketCurrency =
+    marketValidation.rejected;
+
+
+  // ====================================
   // TRUST POLICY
   //
   // Anche qui rivalutiamo la trust policy
@@ -629,7 +653,7 @@ async function searchAll(
 
   const withTrust =
     applyTrustPolicy(
-      validResults
+      marketResults
     );
 
 
@@ -718,6 +742,16 @@ async function searchAll(
         rejectedByContract.length,
 
       contractErrors,
+
+      marketCurrency:
+        marketValidation
+          .marketCurrency,
+
+      totalAfterMarket:
+        marketResults.length,
+
+      totalRejectedByMarketCurrency:
+        rejectedByMarketCurrency.length,
 
       totalAfterTrust:
         trustedResults.length,

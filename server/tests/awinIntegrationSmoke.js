@@ -445,6 +445,40 @@ async function main() {
   );
 
 
+  const gbpCsv = [
+    "product_id,product_name,brand_name,price,currency,delivery_cost,in_stock,deep_link",
+    "SKU-GBP,Apple iPhone 17 256 GB Nero,Apple,799.00,GBP,0,1,https://www.unieuro.it/online/test-gbp",
+  ].join("\n");
+
+  const gbp =
+    importAwinProductFeed({
+      content:
+        gbpCsv,
+      advertiserId:
+        "1001",
+      advertiserName:
+        "Unieuro",
+      observedAt:
+        "2026-11-23T20:00:00Z",
+      betaOnly: true,
+    });
+
+  assert(
+    gbp.ready.length ===
+      0 &&
+    gbp
+      .rejected
+      ?.market
+      ?.length === 1 &&
+    gbp
+      .rejected
+      .market[0]
+      ?.reason ===
+      "market_currency_mismatch",
+    "La beta Italia non deve confrontare una offerta GBP come se fosse EUR"
+  );
+
+
   console.log(
     "✅ AWIN — config, allowlist, feed planning e mapping"
   );
