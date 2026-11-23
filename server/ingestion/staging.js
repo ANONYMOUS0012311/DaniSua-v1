@@ -10,6 +10,10 @@ const {
   attachProductMatch,
 } = require("./productMatcher");
 
+const {
+  evaluateOfferMarket,
+} = require("../utils/marketPolicy");
+
 
 // ========================================
 // DANISUA — INGESTION STAGING
@@ -19,6 +23,8 @@ const {
 // mapper
 //      ↓
 // offer contract
+//      ↓
+// market policy
 //      ↓
 // trust policy
 //      ↓
@@ -96,11 +102,15 @@ function stageSourceBatch({
 
   const rejectedByContract = [];
 
+  const rejectedByMarket = [];
+
   const rejectedByTrust = [];
 
   const rejectedByMatching = [];
 
   const needsReview = [];
+
+  const marketEligibleOffers = [];
 
   const betaEligibleOffers = [];
 
@@ -212,14 +222,56 @@ function stageSourceBatch({
 
 
   // ====================================
-  // 3. TRUST POLICY
+  // 3. MARKET POLICY
+  // ====================================
+
+  for (
+    const item of contractValid
+  ) {
+    const market =
+      evaluateOfferMarket(
+        item.offer
+      );
+
+    if (
+      !market.eligible
+    ) {
+      rejectedByMarket.push({
+        index:
+          item.index,
+
+        id:
+          item.offer?.id ||
+          null,
+
+        reason:
+          market.reason,
+
+        currency:
+          market.currency,
+
+        marketCurrency:
+          market.marketCurrency,
+      });
+
+      continue;
+    }
+
+    marketEligibleOffers.push(
+      item
+    );
+  }
+
+
+  // ====================================
+  // 4. TRUST POLICY
   // ====================================
 
   const trustEvaluated = [];
 
 
   for (
-    const item of contractValid
+    const item of marketEligibleOffers
   ) {
     const offerWithTrust =
       attachTrust(
@@ -255,7 +307,7 @@ function stageSourceBatch({
 
 
   // ====================================
-  // 4. BETA FILTER
+  // 5. BETA FILTER
   // ====================================
 
   for (
@@ -298,7 +350,7 @@ function stageSourceBatch({
 
 
   // ====================================
-  // 5. PRODUCT MATCHING
+  // 6. PRODUCT MATCHING
   // ====================================
 
   for (
@@ -374,7 +426,7 @@ function stageSourceBatch({
 
 
   // ====================================
-  // 6. RESULT
+  // 7. RESULT
   // ====================================
 
   return {
@@ -388,6 +440,9 @@ function stageSourceBatch({
 
       contract:
         rejectedByContract,
+
+      market:
+        rejectedByMarket,
 
       trust:
         rejectedByTrust,
@@ -416,6 +471,12 @@ function stageSourceBatch({
 
       totalRejectedByContract:
         rejectedByContract.length,
+
+      totalMarketEligible:
+        marketEligibleOffers.length,
+
+      totalRejectedByMarket:
+        rejectedByMarket.length,
 
       totalTrustEvaluated:
         trustEvaluated.length,
