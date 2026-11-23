@@ -25,6 +25,7 @@
     "test:beta-readiness": "node server/tests/betaReadinessSmoke.js",
     "test:offer-outcome": "node server/tests/offerOutcomeSmoke.js",
     "test:production-reliability": "node server/tests/productionReliabilitySmoke.js",
+    "test:closed-beta-journey": "node server/tests/closedBetaJourneySmoke.js",
     "beta:closed-check": "node scripts/beta-readiness.js --closed-strict",
     "beta:public-check": "node scripts/beta-readiness.js --strict",
     "awin:preflight": "node scripts/awin-preflight.js",
