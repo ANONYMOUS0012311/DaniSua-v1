@@ -10,6 +10,8 @@ const {
 } = require("../utils/offerContract");
 
 const {
+  evaluateOfferFreshness,
+  evaluateOfferReliability,
   summarizeOfferFreshness,
 } = require("../utils/freshness");
 
@@ -301,6 +303,47 @@ function applyTrustPolicy(
         )
     )
     .filter(Boolean);
+}
+
+
+// ========================================
+// FRESHNESS / RELIABILITY POLICY
+//
+// Ogni fonte attraversa qui la stessa
+// valutazione. In questo modo una offerta
+// dal database non può aggirare il guard
+// solo perché il source non aveva già
+// allegato freshness.
+// ========================================
+
+function applyFreshnessPolicy(
+  offers
+) {
+  if (!Array.isArray(offers)) {
+    return [];
+  }
+
+  return offers
+    .filter(Boolean)
+    .map(
+      offer => ({
+        ...offer,
+
+        freshness:
+          evaluateOfferFreshness(
+            offer,
+            {
+              allowUnknown:
+                false,
+            }
+          ),
+
+        reliability:
+          evaluateOfferReliability(
+            offer
+          ),
+      })
+    );
 }
 
 
@@ -609,16 +652,18 @@ async function searchAll(
 
 
   // ====================================
-  // FRESHNESS OBSERVABILITY
-  //
-  // Misuriamo senza filtrare qui. Il
-  // ranking continua a decidere usando la
-  // freshness già presente nelle offerte.
+  // FRESHNESS / RELIABILITY
   // ====================================
+
+  const evaluatedResults =
+    applyFreshnessPolicy(
+      trustedResults
+    );
+
 
   const freshnessSummary =
     summarizeOfferFreshness(
-      trustedResults,
+      evaluatedResults,
       {
         allowUnknown: false,
       }
@@ -631,7 +676,7 @@ async function searchAll(
 
   const deduplicated =
     deduplicateOffers(
-      trustedResults
+      evaluatedResults
     );
 
 
@@ -709,6 +754,7 @@ module.exports = {
   summarizeContractErrors,
 
   applyTrustPolicy,
+  applyFreshnessPolicy,
   filterTrustedBetaOffers,
 
   deduplicateOffers,
