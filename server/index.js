@@ -2266,6 +2266,23 @@ function analyzeProductSearch(
     if (
       matchingStorages.length !== 1
     ) {
+      // DANISUA_CONVERSATIONAL_DEFAULTS
+      // Se l'utente indica un modello/famiglia ma non specifica
+      // la capacità, non interrompiamo la ricerca con una domanda:
+      // confrontiamo le varianti disponibili e privilegiamo il prezzo.
+      // Le preferenze esplicitamente vaghe (es. "molto spazio")
+      // vengono gestite prima in /search e possono ancora richiedere
+      // un chiarimento.
+      if (
+        hasSingleFamily(
+          modelProducts
+        )
+      ) {
+        return buildFamilyPriceReady(
+          modelProducts
+        );
+      }
+
       return {
         status:
           "needs_clarification",
