@@ -3893,5 +3893,31 @@
         }
       ]
     }
+  },
+  {
+    "id": "real-unieuro-iphone17e-256-black",
+    "productId": "apple-iphone-17e-256-black",
+    "store": "Unieuro",
+    "seller": "Unieuro",
+    "old_price": 839,
+    "offer_price": 799,
+    "currency": "EUR",
+    "shipping_price": null,
+    "stock": true,
+    "url": "https://www.unieuro.it/online/iPhone/iPhone-17e-256GB-Nero-pidAPLIPHONE17E256",
+    "updatedAt": "2026-11-23T21:20:53Z",
+    "verifiedAt": "2026-11-23T21:20:53Z",
+    "price_note": "Prezzo corrente verificato oggi nella categoria iPhone Unieuro per iPhone 17e 256GB Nero. L'identità della variante e l'URL prodotto sono verificati; il costo di spedizione corrente non è esposto e resta sconosciuto.",
+    "pricing": {
+      "type": "black_friday",
+      "conditional": false,
+      "conditions": [],
+      "paymentOptions": [
+        {
+          "type": "one_time",
+          "total_price": 799
+        }
+      ]
+    }
   }
 ]
