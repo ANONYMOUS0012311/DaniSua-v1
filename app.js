@@ -605,9 +605,9 @@ function getUserFacingReason(
         : "";
 
     return (
-      `Per ${useCase}, questo è il modello che risulta più adatto tra quelli con dati comparabili.` +
+      `Per ${useCase}, questa è l'opzione che risponde meglio a quello che hai chiesto.` +
       criteriaText +
-      " Poi ho cercato l'offerta più conveniente per quella scelta."
+      " Poi ho confrontato i negozi per trovare il prezzo più conveniente."
     );
   }
 
@@ -628,15 +628,15 @@ function getUserFacingReason(
         .filter(Boolean);
 
     return criteria.length > 0
-      ? `Tra i modelli compatibili, questo è quello che combina meglio ${criteria.join(", ")}; poi ho scelto la sua offerta più conveniente.`
-      : "Tra i modelli compatibili, questo risulta il più adatto; poi ho scelto la sua offerta più conveniente.";
+      ? `Tra le opzioni che rispettano la tua richiesta, questa combina meglio ${criteria.join(", ")}. Poi ho cercato il prezzo più conveniente.`
+      : "Tra le opzioni che rispettano la tua richiesta, questa è quella che sceglierei. Poi ho cercato il prezzo più conveniente.";
   }
 
   if (
     reason ===
     "generic_price_first"
   ) {
-    return "Non hai indicato una configurazione precisa: ho confrontato le varianti compatibili e scelto quella che oggi conviene di più.";
+    return "Non hai specificato memoria o versione: ho controllato le varianti disponibili e ho messo davanti quella che oggi costa meno.";
   }
 
   if (
@@ -645,10 +645,10 @@ function getUserFacingReason(
     reason ===
       "lowest_price_requested"
   ) {
-    return "Hai indicato un prodotto preciso: ho confrontato le offerte equivalenti e questa è quella che conviene di più.";
+    return "Ho confrontato i negozi che hanno questa stessa versione e questa è l'offerta più conveniente adesso.";
   }
 
-  return "Ho confrontato le opzioni compatibili e scelto quella con il miglior equilibrio tra richiesta e prezzo disponibile.";
+  return "Ho confrontato le opzioni che rispettano la tua richiesta e ho messo davanti quella che conviene di più.";
 }
 
 
@@ -664,7 +664,7 @@ function getCoverageNote(recommendation) {
     coverage.comparisonComplete ===
       true
   ) {
-    return "Tutte le configurazioni monitorate hanno un prezzo standard comparabile.";
+    return "Ho potuto confrontare tutte le versioni che conosco per questo modello.";
   }
 
   if (
@@ -676,8 +676,8 @@ function getCoverageNote(recommendation) {
       [];
 
     return missing.length > 0
-      ? `Conosco tutte le configurazioni del modello; per ${missing.join(", ")} oggi manca un prezzo standard comparabile.`
-      : "Conosco lo stato di tutte le configurazioni monitorate.";
+      ? `Conosco anche le altre versioni del modello, ma per ${missing.join(", ")} oggi non ho ancora un prezzo abbastanza affidabile da confrontare.`
+      : "Ho controllato anche le altre versioni disponibili del modello.";
   }
 
   return "";
@@ -703,7 +703,7 @@ function getMissingCriteriaNote(
         item
     );
 
-  return `Non ho ancora dati comparabili sufficienti per: ${labels.join(", ")}.`;
+  return `Per ${labels.join(", ")} mi mancano ancora dati abbastanza affidabili, quindi non li ho usati per decidere.`;
 }
 
 
@@ -1273,6 +1273,151 @@ function getOfferActionState(
 
 
 // ========================================
+// ORDINE OFFERTE VISIBILI
+// ========================================
+
+function getDisplayOfferCost(
+  product
+) {
+  const price =
+    Number(
+      product
+        ?.offer_price
+    );
+
+  if (
+    !Number.isFinite(
+      price
+    )
+  ) {
+    return Infinity;
+  }
+
+  const shipping =
+    product
+      ?.shipping_price;
+
+  return (
+    typeof shipping ===
+      "number" &&
+    Number.isFinite(
+      shipping
+    ) &&
+    shipping >= 0
+  )
+    ? price +
+      shipping
+    : price;
+}
+
+
+function orderProductsForDisplay(
+  list,
+  bestOffer
+) {
+  const source =
+    Array.isArray(
+      list
+    )
+      ? [
+          ...list,
+        ]
+      : [];
+
+  const bestId =
+    bestOffer
+      ?.id != null
+      ? String(
+          bestOffer.id
+        )
+      : null;
+
+  return source.sort(
+    (
+      left,
+      right
+    ) => {
+      const leftBest =
+        bestId &&
+        String(
+          left?.id
+        ) ===
+          bestId;
+
+      const rightBest =
+        bestId &&
+        String(
+          right?.id
+        ) ===
+          bestId;
+
+      if (
+        leftBest !==
+        rightBest
+      ) {
+        return leftBest
+          ? -1
+          : 1;
+      }
+
+      const leftAction =
+        getOfferActionState(
+          left
+        ).enabled;
+
+      const rightAction =
+        getOfferActionState(
+          right
+        ).enabled;
+
+      if (
+        leftAction !==
+        rightAction
+      ) {
+        return leftAction
+          ? -1
+          : 1;
+      }
+
+      const leftShippingKnown =
+        typeof left
+          ?.shipping_price ===
+          "number" &&
+        Number.isFinite(
+          left.shipping_price
+        );
+
+      const rightShippingKnown =
+        typeof right
+          ?.shipping_price ===
+          "number" &&
+        Number.isFinite(
+          right.shipping_price
+        );
+
+      if (
+        leftShippingKnown !==
+        rightShippingKnown
+      ) {
+        return leftShippingKnown
+          ? -1
+          : 1;
+      }
+
+      return (
+        getDisplayOfferCost(
+          left
+        ) -
+        getDisplayOfferCost(
+          right
+        )
+      );
+    }
+  );
+}
+
+
+// ========================================
 // PRODOTTI
 // ========================================
 
@@ -1302,8 +1447,14 @@ function renderProducts(
   const imgFallback =
     "data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%23f3f4f6'/%3E%3Ctext x='300' y='190' text-anchor='middle' font-family='Arial,sans-serif' font-size='24' fill='%236b7280'%3EFoto non disponibile%3C/text%3E%3Ctext x='300' y='225' text-anchor='middle' font-family='Arial,sans-serif' font-size='16' fill='%239ca3af'%3EDaniSuai mostrerà solo immagini verificate%3C/text%3E%3C/svg%3E";
 
+  const orderedList =
+    orderProductsForDisplay(
+      list,
+      bestOffer
+    );
+
   containerProdotti.innerHTML =
-    list
+    orderedList
       .map((product, index) => {
         const hasDiscount =
           typeof product.old_price ===
@@ -1408,7 +1559,13 @@ function renderProducts(
         const image =
           escapeHtml(
             product.image ||
-            imgFallback
+            (
+              product.productId
+                ? `${API_BASE}/product-image/${encodeURIComponent(
+                    product.productId
+                  )}`
+                : imgFallback
+            )
           );
 
         const action =
@@ -1448,6 +1605,8 @@ function renderProducts(
               <img
                 src="${image}"
                 alt="${title}"
+                loading="lazy"
+                onerror="this.onerror=null;this.src='${imgFallback}'"
               >
 
             </div>
