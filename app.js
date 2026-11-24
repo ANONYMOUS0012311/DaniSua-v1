@@ -1159,16 +1159,24 @@ function selectDisplayResults(
       ? list
       : [];
 
-  const actionable =
+  // Se abbiamo almeno una offerta con prezzo
+  // abbastanza affidabile per il ranking,
+  // mostriamo solo quelle nella griglia principale.
+  //
+  // Se invece tutte le offerte hanno il prezzo
+  // da ricontrollare, NON blocchiamo la navigazione:
+  // lasciamo visibili le schede, ma il prezzo resta
+  // escluso dalla raccomandazione.
+  const priceReliable =
     source.filter(
       product =>
         getOfferActionState(
           product
-        ).enabled
+        ).priceReliable
     );
 
-  return actionable.length > 0
-    ? actionable
+  return priceReliable.length > 0
+    ? priceReliable
     : source;
 }
 
@@ -1180,61 +1188,15 @@ function selectDisplayResults(
 function getOfferActionState(
   product
 ) {
-  if (
-    product?.stock ===
-      false
-  ) {
-    return {
-      enabled: false,
-      label:
-        "Non disponibile",
-      reason:
-        "out_of_stock",
-    };
-  }
-
-  if (
-    product
-      ?.reliability
-      ?.eligibleForHourlyPolicy ===
-      false
-  ) {
-    return {
-      enabled: false,
-      label:
-        product
-          ?.reliability
-          ?.status ===
-          "review"
-          ? "Verifica in corso"
-          : "Prezzo da ricontrollare",
-      reason:
-        "reliability_blocked",
-    };
-  }
-
-  if (
-    !product?.reliability &&
-    product
-      ?.freshness
-      ?.eligibleForRecommendation ===
-      false
-  ) {
-    return {
-      enabled: false,
-      label:
-        "Prezzo da ricontrollare",
-      reason:
-        "freshness_blocked",
-    };
-  }
-
   const rawUrl =
     String(
       product?.url ||
       ""
     )
       .trim();
+
+  let hasValidUrl =
+    true;
 
   try {
     const parsed =
@@ -1253,8 +1215,68 @@ function getOfferActionState(
       );
     }
   } catch {
+    hasValidUrl =
+      false;
+  }
+
+  if (
+    product?.stock ===
+      false
+  ) {
+    return {
+      enabled:
+        hasValidUrl,
+      priceReliable:
+        false,
+      label:
+        hasValidUrl
+          ? "Vedi pagina prodotto →"
+          : "Non disponibile",
+      reason:
+        "out_of_stock",
+    };
+  }
+
+  const reliabilityBlocked =
+    product
+      ?.reliability
+      ?.eligibleForHourlyPolicy ===
+      false;
+
+  const freshnessBlocked =
+    !product?.reliability &&
+    product
+      ?.freshness
+      ?.eligibleForRecommendation ===
+      false;
+
+  if (
+    reliabilityBlocked ||
+    freshnessBlocked
+  ) {
+    return {
+      // Un prezzo non affidabile NON deve
+      // bloccare il link del negozio.
+      enabled:
+        hasValidUrl,
+      priceReliable:
+        false,
+      label:
+        hasValidUrl
+          ? "Controlla prezzo sul sito →"
+          : "Prezzo temporaneamente non disponibile",
+      reason:
+        reliabilityBlocked
+          ? "reliability_blocked"
+          : "freshness_blocked",
+    };
+  }
+
+  if (!hasValidUrl) {
     return {
       enabled: false,
+      priceReliable:
+        true,
       label:
         "Link non disponibile",
       reason:
@@ -1264,6 +1286,8 @@ function getOfferActionState(
 
   return {
     enabled: true,
+    priceReliable:
+      true,
     label:
       "Vedi offerta →",
     reason:
@@ -1360,21 +1384,34 @@ function orderProductsForDisplay(
           : 1;
       }
 
-      const leftAction =
+      const leftState =
         getOfferActionState(
           left
-        ).enabled;
+        );
 
-      const rightAction =
+      const rightState =
         getOfferActionState(
           right
-        ).enabled;
+        );
+
+      // Prima vengono sempre le offerte il cui
+      // prezzo è abbastanza affidabile da essere
+      // confrontato. Un link valido da solo non
+      // rende il prezzo raccomandabile.
+      if (
+        leftState.priceReliable !==
+        rightState.priceReliable
+      ) {
+        return leftState.priceReliable
+          ? -1
+          : 1;
+      }
 
       if (
-        leftAction !==
-        rightAction
+        leftState.enabled !==
+        rightState.enabled
       ) {
-        return leftAction
+        return leftState.enabled
           ? -1
           : 1;
       }
