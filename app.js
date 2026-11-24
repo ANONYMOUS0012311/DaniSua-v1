@@ -115,7 +115,25 @@ function showInlineLoading(rawQuery) {
 // BACKEND
 // ========================================
 
-async function fetchSearch(query) {
+function sleep(ms) {
+  return new Promise(
+    resolve =>
+      setTimeout(
+        resolve,
+        ms
+      )
+  );
+}
+
+
+async function fetchSearch(
+  query,
+  {
+    attempts = 3,
+    timeoutMs = 10000,
+    retryDelayMs = 700,
+  } = {}
+) {
   const url =
     `${API_BASE}/search?q=${encodeURIComponent(query || "")}`;
 
@@ -124,16 +142,91 @@ async function fetchSearch(query) {
     url
   );
 
-  const res =
-    await fetch(url);
+  let lastError =
+    null;
 
-  if (!res.ok) {
-    throw new Error(
-      `Errore backend /search (${res.status})`
-    );
+  for (
+    let attempt = 1;
+    attempt <= attempts;
+    attempt += 1
+  ) {
+    const controller =
+      new AbortController();
+
+    const timer =
+      setTimeout(
+        () =>
+          controller.abort(),
+        timeoutMs
+      );
+
+    try {
+      const res =
+        await fetch(
+          url,
+          {
+            signal:
+              controller.signal,
+            cache:
+              "no-store",
+          }
+        );
+
+      clearTimeout(
+        timer
+      );
+
+      if (
+        !res.ok
+      ) {
+        const error =
+          new Error(
+            `Errore backend /search (${res.status})`
+          );
+
+        error.status =
+          res.status;
+
+        throw error;
+      }
+
+      return await res.json();
+
+    } catch (error) {
+      clearTimeout(
+        timer
+      );
+
+      lastError =
+        error;
+
+      const retryable =
+        error?.name ===
+          "AbortError" ||
+        typeof error?.status !==
+          "number" ||
+        error.status >=
+          500;
+
+      if (
+        !retryable ||
+        attempt >= attempts
+      ) {
+        break;
+      }
+
+      await sleep(
+        retryDelayMs * attempt
+      );
+    }
   }
 
-  return res.json();
+  throw (
+    lastError ||
+    new Error(
+      "Ricerca non disponibile"
+    )
+  );
 }
 
 
@@ -1115,9 +1208,8 @@ async function runSearchWithNormalize(
     if (containerProdotti) {
       containerProdotti.innerHTML = `
         <p class="error">
-          Impossibile completare la ricerca.
-          Controlla che il backend sia attivo su
-          ${escapeHtml(API_BASE)}.
+          La ricerca non è disponibile in questo momento.
+          Riprova tra qualche secondo.
         </p>
       `;
     }
