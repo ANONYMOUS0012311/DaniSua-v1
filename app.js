@@ -1355,7 +1355,7 @@ function getOfferActionState(
         false,
       label:
         hasValidUrl
-          ? "Controlla prezzo sul sito →"
+          ? "Vedi offerta →"
           : "Prezzo temporaneamente non disponibile",
       reason:
         reliabilityBlocked
