@@ -168,8 +168,9 @@ function getCatalogProduct(
 }
 
 
-function getProductImageSourcePage(
+function getProductImageSourcePages(
   products,
+  offers,
   productId
 ) {
   const product =
@@ -178,7 +179,9 @@ function getProductImageSourcePage(
       productId
     );
 
-  const sourcePage =
+  const candidates = [];
+
+  const primary =
     String(
       product
         ?.imageSourcePage ||
@@ -186,17 +189,73 @@ function getProductImageSourcePage(
     )
       .trim();
 
-  return isHttpUrl(
-    sourcePage
-  )
-    ? sourcePage
-    : null;
+  if (
+    isHttpUrl(
+      primary
+    )
+  ) {
+    candidates.push(
+      primary
+    );
+  }
+
+  for (
+    const offer of
+    Array.isArray(offers)
+      ? offers
+      : []
+  ) {
+    if (
+      String(
+        offer?.productId ||
+        ""
+      ) !==
+      String(
+        productId ||
+        ""
+      )
+    ) {
+      continue;
+    }
+
+    const url =
+      String(
+        offer?.url ||
+        ""
+      )
+        .trim();
+
+    if (
+      isHttpUrl(url) &&
+      !candidates.includes(url)
+    ) {
+      candidates.push(url);
+    }
+  }
+
+  return candidates;
+}
+
+
+function getProductImageSourcePage(
+  products,
+  productId
+) {
+  return (
+    getProductImageSourcePages(
+      products,
+      [],
+      productId
+    )[0] ||
+    null
+  );
 }
 
 
 async function fetchProductImageUrl(
   {
     products,
+    offers = [],
     productId,
     fetchImpl = fetch,
     now = Date.now(),
@@ -226,86 +285,94 @@ async function fetchProductImageUrl(
     return cached.url;
   }
 
-  const sourcePage =
-    getProductImageSourcePage(
+  const sourcePages =
+    getProductImageSourcePages(
       products,
+      offers,
       productId
     );
 
   if (
-    !sourcePage
+    sourcePages.length === 0
   ) {
     return null;
   }
 
-  const controller =
-    new AbortController();
+  for (
+    const sourcePage of
+    sourcePages
+  ) {
+    const controller =
+      new AbortController();
 
-  const timer =
-    setTimeout(
-      () =>
-        controller.abort(),
-      7000
-    );
+    const timer =
+      setTimeout(
+        () =>
+          controller.abort(),
+        7000
+      );
 
-  try {
-    const response =
-      await fetchImpl(
-        sourcePage,
+    try {
+      const response =
+        await fetchImpl(
+          sourcePage,
+          {
+            redirect:
+              "follow",
+            signal:
+              controller.signal,
+            headers: {
+              "User-Agent":
+                "DaniSua-Product-Image/1.0",
+              Accept:
+                "text/html,application/xhtml+xml",
+            },
+          }
+        );
+
+      if (
+        !response.ok
+      ) {
+        continue;
+      }
+
+      const html =
+        await response.text();
+
+      const imageUrl =
+        extractProductImageUrl(
+          html,
+          sourcePage
+        );
+
+      if (
+        !imageUrl
+      ) {
+        continue;
+      }
+
+      imageCache.set(
+        cacheKey,
         {
-          redirect:
-            "follow",
-          signal:
-            controller.signal,
-          headers: {
-            "User-Agent":
-              "DaniSua-Product-Image/1.0",
-            Accept:
-              "text/html,application/xhtml+xml",
-          },
+          url:
+            imageUrl,
+          expiresAt:
+            now +
+            cacheTtlMs,
         }
       );
 
-    if (
-      !response.ok
-    ) {
-      return null;
-    }
-
-    const html =
-      await response.text();
-
-    const imageUrl =
-      extractProductImageUrl(
-        html,
-        sourcePage
+      return imageUrl;
+    } catch {
+      // Prova la prossima pagina sorgente.
+    } finally {
+      clearTimeout(
+        timer
       );
-
-    if (
-      !imageUrl
-    ) {
-      return null;
     }
-
-    imageCache.set(
-      cacheKey,
-      {
-        url:
-          imageUrl,
-        expiresAt:
-          now +
-          cacheTtlMs,
-      }
-    );
-
-    return imageUrl;
-  } catch {
-    return null;
-  } finally {
-    clearTimeout(
-      timer
-    );
   }
+
+  return null;
 }
 
 
@@ -319,6 +386,7 @@ module.exports = {
   isHttpUrl,
   extractProductImageUrl,
   getProductImageSourcePage,
+  getProductImageSourcePages,
   fetchProductImageUrl,
   clearProductImageCache,
 };
