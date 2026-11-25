@@ -1,3 +1,7 @@
+const {
+  evaluateVariantUrlIdentity,
+} = require("./variantIdentity");
+
 const DEFAULT_CACHE_TTL_MS =
   6 * 60 * 60 * 1000;
 
@@ -440,7 +444,15 @@ function getProductImageSourcePages(
       )
         .trim();
 
+    const identity =
+      evaluateVariantUrlIdentity(
+        product,
+        url
+      );
+
     if (
+      identity.status !==
+        "mismatch" &&
       isHttpUrl(url) &&
       sourceLooksVariantSpecific(
         url,
