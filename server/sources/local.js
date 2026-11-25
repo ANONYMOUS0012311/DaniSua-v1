@@ -5,6 +5,10 @@ const {
   evaluateOfferFreshness,
 } = require("../utils/freshness");
 
+const {
+  evaluateVariantUrlIdentity,
+} = require("../utils/variantIdentity");
+
 
 // ========================================
 // CACHE JSON
@@ -515,10 +519,39 @@ module.exports = {
 
     const matchedOffers =
       offers.filter(
-        offer =>
-          matchedProductIds.has(
-            offer.productId
-          )
+        offer => {
+          if (
+            !matchedProductIds.has(
+              offer.productId
+            )
+          ) {
+            return false;
+          }
+
+          const product =
+            matchedProducts.find(
+              item =>
+                item.id ===
+                offer.productId
+            );
+
+          if (!product) {
+            return false;
+          }
+
+          const identity =
+            evaluateVariantUrlIdentity(
+              product,
+              offer.url
+            );
+
+          // Contraddizione esplicita tra variante
+          // e URL: l'offerta non entra nel motore.
+          return (
+            identity.status !==
+            "mismatch"
+          );
+        }
       );
 
 
