@@ -4786,6 +4786,8 @@ app.get(
       await fetchProductImageUrl({
         products:
           productsCatalog,
+        offers:
+          productionOffers,
         productId,
       });
 
