@@ -138,6 +138,115 @@ function extractProductImageUrl(
     }
   }
 
+  // Fallback per siti che espongono la foto solo
+  // nei dati strutturati Product JSON-LD.
+  const scripts =
+    String(
+      html || ""
+    )
+      .match(
+        /<script\b[^>]*type=["']application\/ld\+json["'][^>]*>[\s\S]*?<\/script>/gi
+      ) ||
+    [];
+
+  for (
+    const script of
+    scripts
+  ) {
+    const body =
+      script
+        .replace(
+          /^<script\b[^>]*>/i,
+          ""
+        )
+        .replace(
+          /<\/script>$/i,
+          ""
+        )
+        .trim();
+
+    try {
+      const parsed =
+        JSON.parse(
+          decodeHtmlEntities(
+            body
+          )
+        );
+
+      const stack =
+        Array.isArray(parsed)
+          ? [...parsed]
+          : [parsed];
+
+      while (
+        stack.length > 0
+      ) {
+        const item =
+          stack.shift();
+
+        if (
+          !item ||
+          typeof item !==
+            "object"
+        ) {
+          continue;
+        }
+
+        if (
+          Array.isArray(
+            item["@graph"]
+          )
+        ) {
+          stack.push(
+            ...item["@graph"]
+          );
+        }
+
+        const image =
+          item.image;
+
+        const candidates =
+          Array.isArray(image)
+            ? image
+            : (
+                typeof image ===
+                  "string"
+                  ? [image]
+                  : (
+                      image?.url
+                        ? [image.url]
+                        : []
+                    )
+              );
+
+        for (
+          const candidate of
+          candidates
+        ) {
+          try {
+            const resolved =
+              new URL(
+                candidate,
+                sourcePage
+              );
+
+            if (
+              isHttpUrl(
+                resolved.href
+              )
+            ) {
+              return resolved.href;
+            }
+          } catch {
+            // Prova la prossima immagine.
+          }
+        }
+      }
+    } catch {
+      // JSON-LD non valido: prova il prossimo script.
+    }
+  }
+
   return null;
 }
 
@@ -165,6 +274,112 @@ function getCatalogProduct(
         )
     ) ||
     null;
+}
+
+
+function normalizeComparableText(
+  value
+) {
+  return String(
+    value || ""
+  )
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(
+      /[\u0300-\u036f]/g,
+      ""
+    )
+    .replace(
+      /[^a-z0-9]+/g,
+      " "
+    )
+    .trim();
+}
+
+
+function sourceLooksVariantSpecific(
+  url,
+  product
+) {
+  if (!isHttpUrl(url)) {
+    return false;
+  }
+
+  const normalizedUrl =
+    normalizeComparableText(
+      decodeURIComponent(
+        String(url)
+      )
+    );
+
+  const model =
+    normalizeComparableText(
+      product?.model ||
+      product?.title ||
+      ""
+    );
+
+  const color =
+    normalizeComparableText(
+      product?.color ||
+      ""
+    );
+
+  const modelTokens =
+    model
+      .split(" ")
+      .filter(
+        token =>
+          token.length >= 2 &&
+          ![
+            "samsung",
+            "galaxy",
+            "gb",
+          ].includes(token)
+      );
+
+  const modelMatch =
+    modelTokens.length === 0 ||
+    modelTokens.some(
+      token =>
+        normalizedUrl.includes(
+          token
+        )
+    );
+
+  // Se la variante ha un colore esplicito,
+  // preferiamo una URL che lo codifichi oppure
+  // una URL con modelCode/SKU specifico.
+  const hasSpecificCode =
+    /modelcode|pid|\/product\//i
+      .test(
+        String(url)
+      );
+
+  const colorTokens =
+    color
+      .split(" ")
+      .filter(
+        token =>
+          token.length >= 3
+      );
+
+  const colorMatch =
+    colorTokens.length === 0 ||
+    colorTokens.some(
+      token =>
+        normalizedUrl.includes(
+          token
+        )
+    );
+
+  return (
+    modelMatch &&
+    (
+      colorMatch ||
+      hasSpecificCode
+    )
+  );
 }
 
 
@@ -227,6 +442,10 @@ function getProductImageSourcePages(
 
     if (
       isHttpUrl(url) &&
+      sourceLooksVariantSpecific(
+        url,
+        product
+      ) &&
       !candidates.includes(url)
     ) {
       candidates.push(url);
